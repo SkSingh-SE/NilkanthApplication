@@ -69,6 +69,29 @@ namespace NilkanthApplication
 
         private void btnSave_Click(object sender, EventArgs e)
         {
+            // GST Validation (Blank OR <= 15)
+            if (!string.IsNullOrWhiteSpace(textBoxGSTNo.Text) && textBoxGSTNo.Text.Trim().Length > 15)
+            {
+                MessageBox.Show("GST No should not exceed 15 characters.");
+                textBoxGSTNo.Focus();
+                return;
+            }
+
+            // PAN Validation (Blank OR <= 10)
+            if (!string.IsNullOrWhiteSpace(textBoxPANNo.Text) && textBoxPANNo.Text.Trim().Length > 10)
+            {
+                MessageBox.Show("PAN No should not exceed 10 characters.");
+                textBoxPANNo.Focus();
+                return;
+            }
+
+            // Mobile Validation (Blank OR <= 14)
+            if (!string.IsNullOrWhiteSpace(txtMobileNo.Text) && txtMobileNo.Text.Trim().Length > 14)
+            {
+                MessageBox.Show("Mobile No should not exceed 14 characters.");
+                txtMobileNo.Focus();
+                return;
+            }
             try
             {
                 SQLHelper._objCmd = new SqlCommand();
