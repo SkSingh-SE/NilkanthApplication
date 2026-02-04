@@ -1,0 +1,147 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|c:\\sk-singh\\project\\nilkanth_all_project\\nilkanth\\nilkanthapplication\\nilkanthapplication\\nilkanthapplication\\tripreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|solutionrelative:nilkanthapplication\\tripreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\nilkanthapplication\\tripreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|solutionrelative:nilkanthapplication\\tripreport.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\nilkanthapplication\\tripreport.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|solutionrelative:nilkanthapplication\\tripreport.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\nilkanthapplication\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|solutionrelative:nilkanthapplication\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\nilkanthapplication\\classes\\encryptdecryptclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|solutionrelative:nilkanthapplication\\classes\\encryptdecryptclass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\nilkanthapplication\\login.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|solutionrelative:nilkanthapplication\\login.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\nilkanthapplication\\actualfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|solutionrelative:nilkanthapplication\\actualfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\nilkanthapplication\\actualfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{0EAED291-C305-4B6E-9EE7-C95FF7E35898}|NilkanthApplication\\NilkanthApplication.csproj|solutionrelative:nilkanthapplication\\actualfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "TripReport.cs",
+              "DocumentMoniker": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\TripReport.cs",
+              "RelativeDocumentMoniker": "NilkanthApplication\\TripReport.cs",
+              "ToolTip": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\TripReport.cs",
+              "RelativeToolTip": "NilkanthApplication\\TripReport.cs",
+              "ViewState": "AgIAAPQBAAAAAAAAAAAcwP4BAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T05:58:55.731Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "TripReport.cs [Design]",
+              "DocumentMoniker": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\TripReport.cs",
+              "RelativeDocumentMoniker": "NilkanthApplication\\TripReport.cs",
+              "ToolTip": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\TripReport.cs [Design]",
+              "RelativeToolTip": "NilkanthApplication\\TripReport.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T05:58:56.533Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TripReport.Designer.cs",
+              "DocumentMoniker": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\TripReport.Designer.cs",
+              "RelativeDocumentMoniker": "NilkanthApplication\\TripReport.Designer.cs",
+              "ToolTip": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\TripReport.Designer.cs",
+              "RelativeToolTip": "NilkanthApplication\\TripReport.Designer.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T05:58:56.534Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "EncryptDecryptClass.cs",
+              "DocumentMoniker": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\Classes\\EncryptDecryptClass.cs",
+              "RelativeDocumentMoniker": "NilkanthApplication\\Classes\\EncryptDecryptClass.cs",
+              "ToolTip": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\Classes\\EncryptDecryptClass.cs",
+              "RelativeToolTip": "NilkanthApplication\\Classes\\EncryptDecryptClass.cs",
+              "ViewState": "AQIAAOUAAAAAAAAAAAAUwPoAAAAkAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-14T05:58:56.535Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Login.cs",
+              "DocumentMoniker": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\Login.cs",
+              "RelativeDocumentMoniker": "NilkanthApplication\\Login.cs",
+              "ToolTip": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\Login.cs",
+              "RelativeToolTip": "NilkanthApplication\\Login.cs",
+              "ViewState": "AQIAADcAAAAAAAAAAAAAAEwAAAARAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2025-10-14T05:58:56.535Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Login.Designer.cs",
+              "DocumentMoniker": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\Login.Designer.cs",
+              "RelativeDocumentMoniker": "NilkanthApplication\\Login.Designer.cs",
+              "ToolTip": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\Login.Designer.cs",
+              "RelativeToolTip": "NilkanthApplication\\Login.Designer.cs",
+              "ViewState": "AQIAADYAAAAAAAAAAAAAABMAAABCAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001384|",
+              "WhenOpened": "2025-10-14T05:58:56.536Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ActualFault.cs",
+              "DocumentMoniker": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\ActualFault.cs",
+              "RelativeDocumentMoniker": "NilkanthApplication\\ActualFault.cs",
+              "ToolTip": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\ActualFault.cs",
+              "RelativeToolTip": "NilkanthApplication\\ActualFault.cs",
+              "ViewState": "AQIAAHoCAAAAaDMzM7MSwIoCAAAlAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2025-10-14T05:58:56.537Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "ActualFault.cs [Design]",
+              "DocumentMoniker": "C:\\SK-SINGH\\Project\\Nilkanth_All_Project\\NILKANTH\\NilkanthApplication\\NilkanthApplication\\NilkanthApplication\\ActualFault.cs",
+              "RelativeDocumentMoniker": "NilkanthApplication\\ActualFault.cs",
+              "ToolTip": "D:\\Nishant\\Projects\\NilkanthApplication\\Final Projects\\Updated1\\NilkanthApplication\\NilkanthApplication\\ActualFault.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003525|",
+              "WhenOpened": "2025-10-14T05:58:56.538Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
