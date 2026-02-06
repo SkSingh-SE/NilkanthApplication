@@ -82,7 +82,9 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System" />
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.2\System.dll</HintPath>
+    </Reference>
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
     </Reference>
@@ -282,6 +284,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>TripDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="TripDataSet2.cs">
+      <DependentUpon>TripDataSet2.xsd</DependentUpon>
     </Compile>
     <Compile Include="TripDataSet2.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -562,9 +567,9 @@
       <DependentUpon>TripDataSet3.xsd</DependentUpon>
     </None>
     <None Include="TripDataSet3.xsd">
-      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>TripDataSet3.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="TripDataSet3.xss">
       <DependentUpon>TripDataSet3.xsd</DependentUpon>

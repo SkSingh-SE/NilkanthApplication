@@ -53,6 +53,22 @@
           <DataField>Date</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
+        <Field Name="CompanyName">
+          <DataField>CompanyName</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyAddress">
+          <DataField>CompanyAddress</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyMobileNo">
+          <DataField>CompanyMobileNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyGstNo">
+          <DataField>CompanyGstNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="ModelNo">
           <DataField>ModelNo</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -63,6 +79,14 @@
         </Field>
         <Field Name="ShowActCUMInTrip">
           <DataField>ShowActCUMInTrip</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="ShowVarPInKg">
+          <DataField>ShowVarPInKg</DataField>
+          <rd:TypeName>System.Boolean</rd:TypeName>
+        </Field>
+        <Field Name="ShowHeader">
+          <DataField>ShowHeader</DataField>
           <rd:TypeName>System.Boolean</rd:TypeName>
         </Field>
         <Field Name="Field1Label">
@@ -92,7 +116,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>TripDataSet3</rd:DataSetName>
-        <rd:SchemaPath>D:\Nishant\Projects\NilkanthApplication\Final Projects\Updated1\NilkanthApplication\NilkanthApplication\TripDataSet3.xsd</rd:SchemaPath>
+        <rd:SchemaPath>C:\SK-SINGH\Project\Nilkanth_All_Project\NILKANTH\NilkanthApplication\NilkanthApplication\NilkanthApplication\TripDataSet3.xsd</rd:SchemaPath>
         <rd:TableName>TripReportData_Select3</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -1148,7 +1172,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1441,7 +1464,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>2.33498in</Height>
+        <Height>2.55998in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -1456,7 +1479,7 @@
       <Width>10.5576in</Width>
       <Page>
         <PageHeader>
-          <Height>0.97468cm</Height>
+          <Height>3.76589cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
@@ -1481,7 +1504,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>0.03175cm</Top>
+              <Top>2.88925cm</Top>
               <Height>0.86458cm</Height>
               <Width>10cm</Width>
               <Style>
@@ -1516,7 +1539,7 @@
                 </Paragraph>
               </Paragraphs>
               <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>0.04381cm</Top>
+              <Top>2.90131cm</Top>
               <Left>18.11443cm</Left>
               <Height>0.86458cm</Height>
               <Width>8.60663cm</Width>
@@ -1532,6 +1555,168 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
+            <Rectangle Name="Rectangle1">
+              <ReportItems>
+                <Textbox Name="Textbox2">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=First(Fields!CompanyName.Value, "TripDS3")</Value>
+                          <Style>
+                            <FontFamily>Tahoma</FontFamily>
+                            <FontSize>13pt</FontSize>
+                            <FontWeight>Bold</FontWeight>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>Textbox2</rd:DefaultName>
+                  <Top>0.14817cm</Top>
+                  <Left>0.71966cm</Left>
+                  <Height>0.727cm</Height>
+                  <Width>10.86083cm</Width>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <VerticalAlign>Middle</VerticalAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="Textbox8">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=First(Fields!CompanyAddress.Value, "TripDS3")</Value>
+                          <Style>
+                            <FontFamily>Tahoma</FontFamily>
+                          </Style>
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>Textbox8</rd:DefaultName>
+                  <Top>0.981cm</Top>
+                  <Left>1.03716cm</Left>
+                  <Height>0.6cm</Height>
+                  <Width>10.26816cm</Width>
+                  <ZIndex>1</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <VerticalAlign>Middle</VerticalAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="Textbox10">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=IIF(
+    IsNothing(First(Fields!CompanyMobileNo.Value, "TripDS3")) 
+    OR Trim(First(Fields!CompanyMobileNo.Value, "TripDS3")) = "",
+    "",
+    "Mobile : " &amp; First(Fields!CompanyMobileNo.Value, "TripDS3")
+)</Value>
+                          <Style />
+                        </TextRun>
+                      </TextRuns>
+                      <Style>
+                        <TextAlign>Right</TextAlign>
+                      </Style>
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>Textbox10</rd:DefaultName>
+                  <Top>1.72211cm</Top>
+                  <Left>1.03716cm</Left>
+                  <Height>0.6cm</Height>
+                  <Width>3.77cm</Width>
+                  <ZIndex>2</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <VerticalAlign>Middle</VerticalAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+                <Textbox Name="Textbox14">
+                  <CanGrow>true</CanGrow>
+                  <KeepTogether>true</KeepTogether>
+                  <Paragraphs>
+                    <Paragraph>
+                      <TextRuns>
+                        <TextRun>
+                          <Value>=IIF(
+    IsNothing(First(Fields!CompanyGstNo.Value, "TripDS3")) 
+    OR Trim(First(Fields!CompanyGstNo.Value, "TripDS3")) = "",
+    "",
+    "GST No : " &amp; First(Fields!CompanyGstNo.Value, "TripDS3")
+)</Value>
+                          <Style />
+                        </TextRun>
+                      </TextRuns>
+                      <Style />
+                    </Paragraph>
+                  </Paragraphs>
+                  <rd:DefaultName>Textbox14</rd:DefaultName>
+                  <Top>1.72211cm</Top>
+                  <Left>5.37634cm</Left>
+                  <Height>0.6cm</Height>
+                  <Width>6.20416cm</Width>
+                  <ZIndex>3</ZIndex>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                    <VerticalAlign>Middle</VerticalAlign>
+                    <PaddingLeft>2pt</PaddingLeft>
+                    <PaddingRight>2pt</PaddingRight>
+                    <PaddingTop>2pt</PaddingTop>
+                    <PaddingBottom>2pt</PaddingBottom>
+                  </Style>
+                </Textbox>
+              </ReportItems>
+              <KeepTogether>true</KeepTogether>
+              <Left>8.1407cm</Left>
+              <Height>2.53378cm</Height>
+              <Width>12.35851cm</Width>
+              <ZIndex>2</ZIndex>
+              <Visibility>
+                <Hidden>=IIF(Fields!ShowHeader.Value = 0, True, False)</Hidden>
+              </Visibility>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+              </Style>
+            </Rectangle>
           </ReportItems>
           <Style>
             <Border>
