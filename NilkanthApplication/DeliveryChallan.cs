@@ -89,10 +89,11 @@ namespace NilkanthApplication
                         dataRow = dataTableClientDetails.NewRow();
                         dataRow[0] = Convert.ToInt32(dataTable.Rows[a]["ID"]);
                         string clientDetails = dataTable.Rows[a]["CompanyName"].ToString() + "-" +
-                                dataTable.Rows[a]["PersonName"].ToString() + "-" +
-                                dataTable.Rows[a]["MobileNo"].ToString();
+                                dataTable.Rows[a]["PersonName"].ToString();
+                        //+ "-" +
+                        //        dataTable.Rows[a]["MobileNo"].ToString();
                         dataRow[1] = clientDetails;
-                        dataRow[2] = dataTable.Rows[a]["MobileNo"];
+                        //dataRow[2] = dataTable.Rows[a]["MobileNo"];
                         dataTableClientDetails.Rows.InsertAt(dataRow, (a + 1));
                     }
                 }
@@ -191,10 +192,10 @@ namespace NilkanthApplication
         {
             try
             {
-                DeliveryChallanList deliveryChallanList = new DeliveryChallanList();
+                TripReport tripReport = new TripReport();
                 base.Hide();
-                deliveryChallanList.Show();
-                deliveryChallanList.BringToFront();
+                tripReport.Show();
+                tripReport.BringToFront();
             }
             catch (Exception ex)
             {
@@ -285,15 +286,15 @@ namespace NilkanthApplication
             txtQtyInBatch.Text = "";
         }
 
-        private void txtTotalOrderQty_TextChanged(object sender, EventArgs e)
-        {
-            if(txtTotalOrderQty.Text != "" && Convert.ToDouble(txtTotalOrderQty.Text) > 0)
-            {
-                double QtyInBatch = Convert.ToDouble(txtQtyInBatch.Text);
-                double TotalOrderQty = Convert.ToDouble(txtTotalOrderQty.Text);
-                txtRemainingQty.Text = (TotalOrderQty - QtyInBatch).ToString();
-            }
-        }
+        //private void txtTotalOrderQty_TextChanged(object sender, EventArgs e)
+        //{
+        //    if(txtTotalOrderQty.Text != "" && Convert.ToDouble(txtTotalOrderQty.Text) > 0)
+        //    {
+        //        double QtyInBatch = Convert.ToDouble(txtQtyInBatch.Text);
+        //        double TotalOrderQty = Convert.ToDouble(txtTotalOrderQty.Text);
+        //        txtRemainingQty.Text = (TotalOrderQty - QtyInBatch).ToString();
+        //    }
+        //}
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -303,17 +304,20 @@ namespace NilkanthApplication
                 SQLHelper._objCmd.Parameters.Clear();
                 SQLHelper._objCmd.Parameters.AddWithValue("@DeliveryChallanNo", txtChallanNo.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@PartyID", cmbClientDetails.SelectedValue);
-                SQLHelper._objCmd.Parameters.AddWithValue("@TotalOrderQty", Convert.ToDouble(txtTotalOrderQty.Text.ToString()));
+                //SQLHelper._objCmd.Parameters.AddWithValue("@TotalOrderQty", Convert.ToDouble(txtTotalOrderQty.Text.ToString()));
                 SQLHelper._objCmd.Parameters.AddWithValue("@SetCUM", Convert.ToDouble(txtQtyInBatch.Text.ToString()));
-                SQLHelper._objCmd.Parameters.AddWithValue("@RemainingQty", Convert.ToDouble(txtRemainingQty.Text.ToString()));
+                //SQLHelper._objCmd.Parameters.AddWithValue("@RemainingQty", Convert.ToDouble(txtRemainingQty.Text.ToString()));
                 SQLHelper._objCmd.Parameters.AddWithValue("@CompanyName", txtCompanyName.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@ClientName", txtClientName.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@SiteName", txtSiteName.Text.ToString().Trim());
-                SQLHelper._objCmd.Parameters.AddWithValue("@RecipeName", txtRecipeName.Text.ToString().Trim());
+                SQLHelper._objCmd.Parameters.AddWithValue("@RecipeName", txtRecipeName.Text.ToString().Trim()); 
                 SQLHelper._objCmd.Parameters.AddWithValue("@DeliveryChallanDate", dtDate.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@BatchNo", txtBatchNo.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@TruckNo", txtTruckNo.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@DriverName", txtDriverName.Text.ToString().Trim());
+                SQLHelper._objCmd.Parameters.AddWithValue("@AdmixtureType", textBoxAdmixtureType.Text.ToString());
+                SQLHelper._objCmd.Parameters.AddWithValue("@WCRatio", textBoxWCRatio.Text.ToString());
+                SQLHelper._objCmd.Parameters.AddWithValue("@CementType", textBoxCementType.Text.ToString());
 
                 string text2;
 
@@ -338,10 +342,10 @@ namespace NilkanthApplication
                 }
                 else
                 {
-                    DeliveryChallanList deliveryChallanList = new DeliveryChallanList();
+                    DeliveryChallanList deliveryList = new DeliveryChallanList();
                     base.Hide();
-                    deliveryChallanList.Show();
-                    deliveryChallanList.BringToFront();
+                    deliveryList.Show();
+                    deliveryList.BringToFront();
 
                     //if (lblId.Text.Trim() == "0")
                     //    MessageBox.Show("Data Inserted Successfully");
@@ -373,8 +377,11 @@ namespace NilkanthApplication
                     txtTruckNo.Text = tableData.Rows[0]["TruckNo"].ToString();
                     txtDriverName.Text = tableData.Rows[0]["DriverName"].ToString();
                     txtQtyInBatch.Text = tableData.Rows[0]["SetCUM"].ToString();
-                    txtTotalOrderQty.Text = tableData.Rows[0]["TotalOrderQty"].ToString();
-                    txtRemainingQty.Text = tableData.Rows[0]["RemainingQty"].ToString();
+                    textBoxAdmixtureType.Text = tableData.Rows[0]["AdmixtureType"].ToString();
+                    textBoxWCRatio.Text = tableData.Rows[0]["WCRatio"].ToString();
+                    textBoxCementType.Text = tableData.Rows[0]["CementType"].ToString();
+                    //txtTotalOrderQty.Text = tableData.Rows[0]["TotalOrderQty"].ToString();
+                    //txtRemainingQty.Text = tableData.Rows[0]["RemainingQty"].ToString();
                     cmbClientDetails.SelectedValue = tableData.Rows[0]["PartyID"].ToString();
                     DateTime date_ = Convert.ToDateTime(dtDate.Text);
                     string batchDetails = txtBatchNo.Text + " (" + date_.ToString("dd-MM-yyyy") + ")";
@@ -386,5 +393,7 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+
+        
     }
 }

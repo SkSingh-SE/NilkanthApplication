@@ -144,6 +144,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConsumptionDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="MaterialStock.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaterialStock.Designer.cs">
+      <DependentUpon>MaterialStock.cs</DependentUpon>
+    </Compile>
     <Compile Include="DeliveryChallan.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -172,6 +178,12 @@
     </Compile>
     <Compile Include="HelpDocuments.Designer.cs">
       <DependentUpon>HelpDocuments.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MaterialStockList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MaterialStockList.Designer.cs">
+      <DependentUpon>MaterialStockList.cs</DependentUpon>
     </Compile>
     <Compile Include="NilkanthApplicationDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -373,6 +385,9 @@
     <EmbeddedResource Include="ConsumptionReport.resx">
       <DependentUpon>ConsumptionReport.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MaterialStock.resx">
+      <DependentUpon>MaterialStock.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DeliveryChallan.resx">
       <DependentUpon>DeliveryChallan.cs</DependentUpon>
     </EmbeddedResource>
@@ -392,6 +407,9 @@
       <DependentUpon>MainScreen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Aaryaman_MultipalTrip.rdlc" />
+    <EmbeddedResource Include="MaterialStockList.resx">
+      <DependentUpon>MaterialStockList.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Notes.resx">
       <DependentUpon>Notes.cs</DependentUpon>
     </EmbeddedResource>
