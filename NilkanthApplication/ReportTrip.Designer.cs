@@ -30,24 +30,14 @@ namespace NilkanthApplication
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.TripReportData_Select3BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.TripDataSet3 = new NilkanthApplication.TripDataSet3();
             this.reportViewer1 = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.TripReportData_Select3TableAdapter = new NilkanthApplication.TripDataSet3TableAdapters.TripReportData_Select3TableAdapter();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.TripReportData_Select3BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.TripReportData_Select3TableAdapter = new NilkanthApplication.TripDataSet3TableAdapters.TripReportData_Select3TableAdapter();
+            this.tripDataSet31 = new NilkanthApplication.TripDataSet3();
             ((System.ComponentModel.ISupportInitialize)(this.TripReportData_Select3BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TripDataSet3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tripDataSet31)).BeginInit();
             this.SuspendLayout();
-            // 
-            // TripReportData_Select3BindingSource
-            // 
-            this.TripReportData_Select3BindingSource.DataMember = "TripReportData_Select3";
-            this.TripReportData_Select3BindingSource.DataSource = this.TripDataSet3;
-            // 
-            // TripDataSet3
-            // 
-            this.TripDataSet3.DataSetName = "TripDataSet3";
-            this.TripDataSet3.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // reportViewer1
             // 
@@ -58,10 +48,6 @@ namespace NilkanthApplication
             this.reportViewer1.ServerReport.BearerToken = null;
             this.reportViewer1.Size = new System.Drawing.Size(1431, 1055);
             this.reportViewer1.TabIndex = 0;
-            // 
-            // TripReportData_Select3TableAdapter
-            // 
-            this.TripReportData_Select3TableAdapter.ClearBeforeFill = true;
             // 
             // btnCancel
             // 
@@ -81,6 +67,15 @@ namespace NilkanthApplication
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // TripReportData_Select3TableAdapter
+            // 
+            this.TripReportData_Select3TableAdapter.ClearBeforeFill = true;
+            // 
+            // tripDataSet31
+            // 
+            this.tripDataSet31.DataSetName = "TripDataSet3";
+            this.tripDataSet31.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // ReportTrip
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -96,7 +91,7 @@ namespace NilkanthApplication
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.ReportTrip_Load);
             ((System.ComponentModel.ISupportInitialize)(this.TripReportData_Select3BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.TripDataSet3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tripDataSet31)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -106,9 +101,9 @@ namespace NilkanthApplication
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer1;
        
         private System.Windows.Forms.BindingSource TripReportData_Select3BindingSource;
-        private TripDataSet3 TripDataSet3;
        
         private TripDataSet3TableAdapters.TripReportData_Select3TableAdapter TripReportData_Select3TableAdapter;
         private System.Windows.Forms.Button btnCancel;
+        private TripDataSet3 tripDataSet31;
     }
 }

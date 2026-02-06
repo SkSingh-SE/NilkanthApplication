@@ -18,6 +18,7 @@ namespace NilkanthApplication
         string batches = "";
         //string tobatch = "";
         string date = "";
+        DataTable dt3Global;
         //public ReportTrip(string[] BatchDateDetails)
         public ReportTrip(string batchnos,string selecteddate)
         {
@@ -34,6 +35,8 @@ namespace NilkanthApplication
                 //DataTable dt1 = GetSPResult1();
                 //DataTable dt2 = GetSPResult2();
                 DataTable dt3 = GetSPResult3();
+                dt3Global = dt3;
+
 
                 reportViewer1.Visible = true;
                 reportViewer1.ProcessingMode = ProcessingMode.Local;
@@ -101,15 +104,27 @@ namespace NilkanthApplication
 
         void prcProcessSubreport(object sender, SubreportProcessingEventArgs e)
         {
-            if(e.ReportPath == "MultipalTripSub")
+            int showVarPInKg = 0;
+
+            if (dt3Global != null && dt3Global.Rows.Count > 0)
+            {
+                // assuming same flag for all batches
+                showVarPInKg = Convert.ToInt32(dt3Global.Rows[0]["ShowVarPInKg"]);
+            }
+
+            if (e.ReportPath == "MultipalTripSub")
             {
                 var mainSource = ((LocalReport)sender).DataSources["TripDS3"];
                 string batchNo = e.Parameters["BatchNo"].Values.First();
+
+                
                 //var subSource = ((List<TripReportData>)mainSource.Value).Single(a => a.BatchNo == batchNo);
                 DataTable dt1 = GetSPResult1(batchNo);
                 e.DataSources.Add(new ReportDataSource("TripDS1", dt1));
                 DataTable dt2 = GetSPResult2(batchNo);
                 e.DataSources.Add(new ReportDataSource("TripDS2", dt2));
+                DataTable dt3 = dt3Global;
+                e.DataSources.Add(new ReportDataSource("TripDS3", dt3));
                 //string BatchNo = e.Parameters["BatchNo"].Values[0].ToString();
                 //DataTable dt = GetSPResult(BatchNo);
                 //e.DataSources.Add(new Microsoft.Reporting.WinForms.ReportDataSource("TripDS1", dt));

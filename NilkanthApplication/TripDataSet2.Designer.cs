@@ -303,6 +303,8 @@ namespace NilkanthApplication {
             
             private global::System.Data.DataColumn columnTotal;
             
+            private global::System.Data.DataColumn columnShowVarPInKg;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public TripReportData_Select2DataTable() {
@@ -434,6 +436,14 @@ namespace NilkanthApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ShowVarPInKgColumn {
+                get {
+                    return this.columnShowVarPInKg;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -469,7 +479,7 @@ namespace NilkanthApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public TripReportData_Select2Row AddTripReportData_Select2Row(string Title, int BIN1, int BIN2, int BIN3, int BIN4, int Cement, int Flyash, int Water, decimal Aditive, int Silica, int GGBS, decimal Total) {
+            public TripReportData_Select2Row AddTripReportData_Select2Row(string Title, int BIN1, int BIN2, int BIN3, int BIN4, int Cement, int Flyash, int Water, decimal Aditive, int Silica, int GGBS, decimal Total, bool ShowVarPInKg) {
                 TripReportData_Select2Row rowTripReportData_Select2Row = ((TripReportData_Select2Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Title,
@@ -483,7 +493,8 @@ namespace NilkanthApplication {
                         Aditive,
                         Silica,
                         GGBS,
-                        Total};
+                        Total,
+                        ShowVarPInKg};
                 rowTripReportData_Select2Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTripReportData_Select2Row);
                 return rowTripReportData_Select2Row;
@@ -518,6 +529,7 @@ namespace NilkanthApplication {
                 this.columnSilica = base.Columns["Silica"];
                 this.columnGGBS = base.Columns["GGBS"];
                 this.columnTotal = base.Columns["Total"];
+                this.columnShowVarPInKg = base.Columns["ShowVarPInKg"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -547,6 +559,8 @@ namespace NilkanthApplication {
                 base.Columns.Add(this.columnGGBS);
                 this.columnTotal = new global::System.Data.DataColumn("Total", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotal);
+                this.columnShowVarPInKg = new global::System.Data.DataColumn("ShowVarPInKg", typeof(bool), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnShowVarPInKg);
                 this.columnTitle.MaxLength = 20;
             }
             
@@ -882,6 +896,22 @@ namespace NilkanthApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool ShowVarPInKg {
+                get {
+                    try {
+                        return ((bool)(this[this.tableTripReportData_Select2.ShowVarPInKgColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ShowVarPInKg\' in table \'TripReportData_Select2\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTripReportData_Select2.ShowVarPInKgColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsTitleNull() {
                 return this.IsNull(this.tableTripReportData_Select2.TitleColumn);
             }
@@ -1022,6 +1052,18 @@ namespace NilkanthApplication {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetTotalNull() {
                 this[this.tableTripReportData_Select2.TotalColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsShowVarPInKgNull() {
+                return this.IsNull(this.tableTripReportData_Select2.ShowVarPInKgColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetShowVarPInKgNull() {
+                this[this.tableTripReportData_Select2.ShowVarPInKgColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -1196,6 +1238,7 @@ namespace NilkanthApplication.TripDataSet2TableAdapters {
             tableMapping.ColumnMappings.Add("Silica", "Silica");
             tableMapping.ColumnMappings.Add("GGBS", "GGBS");
             tableMapping.ColumnMappings.Add("Total", "Total");
+            tableMapping.ColumnMappings.Add("ShowVarPInKg", "ShowVarPInKg");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1212,23 +1255,30 @@ namespace NilkanthApplication.TripDataSet2TableAdapters {
             this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "dbo.TripReportData_Select2";
+            this._commandCollection[0].CommandText = "TripReportData_Select2";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.StoredProcedure;
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@RETURN_VALUE", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.ReturnValue, 10, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
             this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@BatchNo", global::System.Data.SqlDbType.Decimal, 9, global::System.Data.ParameterDirection.Input, 18, 2, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
+            this._commandCollection[0].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@Date", global::System.Data.SqlDbType.VarChar, 15, global::System.Data.ParameterDirection.Input, 0, 0, null, global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(TripDataSet2.TripReportData_Select2DataTable dataTable, global::System.Nullable<decimal> BatchNo) {
+        public virtual int Fill(TripDataSet2.TripReportData_Select2DataTable dataTable, global::System.Nullable<decimal> BatchNo, string Date) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((BatchNo.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((decimal)(BatchNo.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((Date == null)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(Date));
             }
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1241,13 +1291,19 @@ namespace NilkanthApplication.TripDataSet2TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual TripDataSet2.TripReportData_Select2DataTable GetData(global::System.Nullable<decimal> BatchNo) {
+        public virtual TripDataSet2.TripReportData_Select2DataTable GetData(global::System.Nullable<decimal> BatchNo, string Date) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((BatchNo.HasValue == true)) {
                 this.Adapter.SelectCommand.Parameters[1].Value = ((decimal)(BatchNo.Value));
             }
             else {
                 this.Adapter.SelectCommand.Parameters[1].Value = global::System.DBNull.Value;
+            }
+            if ((Date == null)) {
+                this.Adapter.SelectCommand.Parameters[2].Value = global::System.DBNull.Value;
+            }
+            else {
+                this.Adapter.SelectCommand.Parameters[2].Value = ((string)(Date));
             }
             TripDataSet2.TripReportData_Select2DataTable dataTable = new TripDataSet2.TripReportData_Select2DataTable();
             this.Adapter.Fill(dataTable);
