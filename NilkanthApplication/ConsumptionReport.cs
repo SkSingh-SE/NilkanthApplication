@@ -26,6 +26,7 @@ namespace NilkanthApplication
                 this.BindSite("");
                 this.BindRecipe("");
                 this.BindTruck("");
+                this.BindComparisonGrid();
                 this.BindYear();
                 this.BindClientMaster();
                 this.ShowWhatsapp();
@@ -789,6 +790,74 @@ namespace NilkanthApplication
                 lblClient.Visible = false;
                 cmbClientDetails.Visible = false;
                 btnSendWhatsApp.Visible = false;
+            }
+        }
+
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MaterialStockList materialList = new MaterialStockList();
+                base.Hide();
+                materialList.Show();
+                materialList.BringToFront();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+        private void BindComparisonGrid()
+        {
+            try
+            {
+                DataTable dtComparison = new DataTable();
+                dtComparison = Functions.GetTableDataBySP("MaterialActualComparison");
+
+                BindingSource bsComparison = new BindingSource();
+                bsComparison.DataSource = dtComparison;
+
+                dgvComparison.DataSource = null;
+                dgvComparison.DataSource = bsComparison;
+
+                dgvComparison.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+                foreach (DataGridViewRow row in dgvComparison.Rows)
+                {
+                    row.ReadOnly = true;
+                }
+
+                // Column Settings
+                dgvComparison.Columns["SrNo"].HeaderText = "Sr No";
+                dgvComparison.Columns["MaterialName"].HeaderText = "Material Name";
+                dgvComparison.Columns["ActualStock"].HeaderText = "Actual Stock";
+                dgvComparison.Columns["AddedStock"].HeaderText = "Added Stock";
+                dgvComparison.Columns["AvailableStock"].HeaderText = "Available Stock";
+
+                // Header Style Same as First Grid
+                dgvComparison.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
+                dgvComparison.ColumnHeadersHeight = 40;
+                dgvComparison.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
+                dgvComparison.ColumnHeadersDefaultCellStyle.Font =
+                    new Font("Microsoft Sans Serif", 11.25F, FontStyle.Bold);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private void dgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                if(dgvList.Columns[e.ColumnIndex].Name == "MaterialName")
+                {
+                string materialName = dgvList.Rows[e.RowIndex].Cells["MaterialName"].Value.ToString();
+                MaterialStock materialStock = new MaterialStock(materialName);
+                materialStock.ShowDialog();
+                }
             }
         }
     }
