@@ -192,10 +192,10 @@ namespace NilkanthApplication
         {
             try
             {
-                TripReport tripReport = new TripReport();
+                DeliveryChallanList deliveryChallanList = new DeliveryChallanList();
                 base.Hide();
-                tripReport.Show();
-                tripReport.BringToFront();
+                deliveryChallanList.Show();
+                deliveryChallanList.BringToFront();
             }
             catch (Exception ex)
             {
@@ -385,7 +385,19 @@ namespace NilkanthApplication
                     cmbClientDetails.SelectedValue = tableData.Rows[0]["PartyID"].ToString();
                     DateTime date_ = Convert.ToDateTime(dtDate.Text);
                     string batchDetails = txtBatchNo.Text + " (" + date_.ToString("dd-MM-yyyy") + ")";
-                    cmbBatchNo.SelectedText = batchDetails;
+                    
+
+                    for (int i = 0; i < cmbBatchNo.Items.Count; i++)
+                    {
+                        string displayText = cmbBatchNo.GetItemText(cmbBatchNo.Items[i]);
+
+                        // Example displayText: "B-102 (06-02-2026)"
+                        if (displayText.StartsWith(batchDetails + " "))
+                        {
+                            cmbBatchNo.SelectedIndex = i;
+                            break;
+                        }
+                    }
                 }
             }
             catch (Exception ex)

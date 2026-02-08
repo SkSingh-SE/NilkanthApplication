@@ -90,6 +90,8 @@ namespace NilkanthApplication
             this.labelMobileNo = new System.Windows.Forms.Label();
             this.labelGstNo = new System.Windows.Forms.Label();
             this.textGstNo = new System.Windows.Forms.TextBox();
+            this.txtReportFooDesc = new System.Windows.Forms.RichTextBox();
+            this.labelRptFDesc = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -254,7 +256,7 @@ namespace NilkanthApplication
             // 
             this.lblUserName.AutoSize = true;
             this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserName.Location = new System.Drawing.Point(9, 910);
+            this.lblUserName.Location = new System.Drawing.Point(9, 988);
             this.lblUserName.Name = "lblUserName";
             this.lblUserName.Size = new System.Drawing.Size(83, 17);
             this.lblUserName.TabIndex = 49;
@@ -395,7 +397,7 @@ namespace NilkanthApplication
             // 
             this.label16.AutoSize = true;
             this.label16.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label16.Location = new System.Drawing.Point(9, 931);
+            this.label16.Location = new System.Drawing.Point(9, 1009);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(87, 17);
             this.label16.TabIndex = 104;
@@ -506,7 +508,7 @@ namespace NilkanthApplication
             this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Image = global::NilkanthApplication.Properties.Resources.Logout;
-            this.btnLogout.Location = new System.Drawing.Point(1266, 899);
+            this.btnLogout.Location = new System.Drawing.Point(1266, 977);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(81, 64);
             this.btnLogout.TabIndex = 50;
@@ -516,7 +518,7 @@ namespace NilkanthApplication
             // pictureBox1
             // 
             this.pictureBox1.Image = global::NilkanthApplication.Properties.Resources.Line;
-            this.pictureBox1.Location = new System.Drawing.Point(9, 870);
+            this.pictureBox1.Location = new System.Drawing.Point(9, 948);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(1348, 10);
             this.pictureBox1.TabIndex = 48;
@@ -563,7 +565,7 @@ namespace NilkanthApplication
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSave.Image = global::NilkanthApplication.Properties.Resources.Save;
-            this.btnSave.Location = new System.Drawing.Point(904, 789);
+            this.btnSave.Location = new System.Drawing.Point(904, 867);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(132, 42);
             this.btnSave.TabIndex = 4;
@@ -656,13 +658,36 @@ namespace NilkanthApplication
             this.textGstNo.Size = new System.Drawing.Size(604, 30);
             this.textGstNo.TabIndex = 119;
             // 
+            // txtReportFooDesc
+            // 
+            this.txtReportFooDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txtReportFooDesc.Location = new System.Drawing.Point(432, 779);
+            this.txtReportFooDesc.Name = "txtReportFooDesc";
+            this.txtReportFooDesc.Size = new System.Drawing.Size(604, 56);
+            this.txtReportFooDesc.TabIndex = 124;
+            this.txtReportFooDesc.Text = "";
+            this.txtReportFooDesc.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // labelRptFDesc
+            // 
+            this.labelRptFDesc.AutoSize = true;
+            this.labelRptFDesc.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelRptFDesc.Location = new System.Drawing.Point(150, 781);
+            this.labelRptFDesc.Name = "labelRptFDesc";
+            this.labelRptFDesc.Size = new System.Drawing.Size(270, 25);
+            this.labelRptFDesc.TabIndex = 125;
+            this.labelRptFDesc.Text = "Report Footer Description :";
+            this.labelRptFDesc.Click += new System.EventHandler(this.label1_Click);
+            // 
             // CompanyMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1380, 960);
+            this.ClientSize = new System.Drawing.Size(1380, 1032);
+            this.Controls.Add(this.txtReportFooDesc);
+            this.Controls.Add(this.labelRptFDesc);
             this.Controls.Add(this.textMobileNo);
             this.Controls.Add(this.labelMobileNo);
             this.Controls.Add(this.textPanNo);
@@ -1042,5 +1067,7 @@ namespace NilkanthApplication
         private System.Windows.Forms.Label labelMobileNo;
         private System.Windows.Forms.Label labelGstNo;
         private System.Windows.Forms.TextBox textGstNo;
+        private RichTextBox txtReportFooDesc;
+        private Label labelRptFDesc;
     }
 }

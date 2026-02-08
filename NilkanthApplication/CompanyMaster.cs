@@ -132,6 +132,7 @@ namespace NilkanthApplication
                     SQLHelper._objCmd.Parameters.AddWithValue("@FlyashLabel", txtFlyashLabel.Text.ToString().Trim().ToUpper());
                     SQLHelper._objCmd.Parameters.AddWithValue("@SilicaLabel", txtSilicaLabel.Text.ToString().Trim().ToUpper());
                     SQLHelper._objCmd.Parameters.AddWithValue("@GGBSLabel", txtGGBSLabel.Text.ToString().Trim().ToUpper());
+                    SQLHelper._objCmd.Parameters.AddWithValue("@RptFooter", txtReportFooDesc.Text.ToString().Trim());
 
                     string Field1Label = txtField1Label.Text == null || txtField1Label.Text == "" ? "" : txtField1Label.Text.ToString().Trim().ToUpper();
                     string Field1Value = txtField1Value.Text == null || txtField1Value.Text == "" ? "" : txtField1Value.Text.ToString().Trim().ToUpper();
@@ -279,6 +280,8 @@ namespace NilkanthApplication
                     txtField2Label.Text = this.dataTable.Rows[0]["Field2Label"].ToString();
                     txtField2Value.Text = this.dataTable.Rows[0]["Field2Value"].ToString();
 
+                    txtReportFooDesc.Text = this.dataTable.Rows[0]["RptFooter"].ToString();
+
                 }
             }
             catch (Exception ex)
@@ -422,6 +425,16 @@ namespace NilkanthApplication
             {
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
         }
 
         private void txtModelNumber_DoubleClick(object sender, EventArgs e)

@@ -60,7 +60,7 @@ namespace NilkanthApplication
             // 
             // DeliveryChallanReportBindingSource
             // 
-            this.DeliveryChallanReportBindingSource.DataMember = "DeliveryChallanReport";
+            this.DeliveryChallanReportBindingSource.DataMember = "DeliveryChallan_Report";
             this.DeliveryChallanReportBindingSource.DataSource = this.DeliveryChallanReportDataSet;
             // 
             // ReportDeliveryChallan

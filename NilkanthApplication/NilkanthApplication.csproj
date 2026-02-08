@@ -146,6 +146,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ConsumptionDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="DeliveryChallanReportDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DeliveryChallanReportDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="MaterialStock.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -163,11 +168,6 @@
     </Compile>
     <Compile Include="DeliveryChallanList.Designer.cs">
       <DependentUpon>DeliveryChallanList.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DeliveryChallanReportDataSet.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DeliveryChallanReportDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="FaultType.cs">
       <SubType>Form</SubType>
@@ -502,9 +502,9 @@
       <DependentUpon>DeliveryChallanReportDataSet.xsd</DependentUpon>
     </None>
     <None Include="DeliveryChallanReportDataSet.xsd">
-      <SubType>Designer</SubType>
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>DeliveryChallanReportDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </None>
     <None Include="DeliveryChallanReportDataSet.xss">
       <DependentUpon>DeliveryChallanReportDataSet.xsd</DependentUpon>
