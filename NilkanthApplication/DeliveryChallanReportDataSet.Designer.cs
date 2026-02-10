@@ -333,6 +333,8 @@ namespace NilkanthApplication {
             
             private global::System.Data.DataColumn columnTotalDuration;
             
+            private global::System.Data.DataColumn columnClientPersonName;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DeliveryChallan_ReportDataTable() {
@@ -584,6 +586,14 @@ namespace NilkanthApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn ClientPersonNameColumn {
+                get {
+                    return this.columnClientPersonName;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -646,7 +656,8 @@ namespace NilkanthApplication {
                         string CementType, 
                         string CycleStartTime, 
                         string CycleEndTime, 
-                        string TotalDuration) {
+                        string TotalDuration, 
+                        string ClientPersonName) {
                 DeliveryChallan_ReportRow rowDeliveryChallan_ReportRow = ((DeliveryChallan_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CompanyName,
@@ -675,7 +686,8 @@ namespace NilkanthApplication {
                         CementType,
                         CycleStartTime,
                         CycleEndTime,
-                        TotalDuration};
+                        TotalDuration,
+                        ClientPersonName};
                 rowDeliveryChallan_ReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDeliveryChallan_ReportRow);
                 return rowDeliveryChallan_ReportRow;
@@ -725,6 +737,7 @@ namespace NilkanthApplication {
                 this.columnCycleStartTime = base.Columns["CycleStartTime"];
                 this.columnCycleEndTime = base.Columns["CycleEndTime"];
                 this.columnTotalDuration = base.Columns["TotalDuration"];
+                this.columnClientPersonName = base.Columns["ClientPersonName"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -784,6 +797,8 @@ namespace NilkanthApplication {
                 base.Columns.Add(this.columnCycleEndTime);
                 this.columnTotalDuration = new global::System.Data.DataColumn("TotalDuration", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTotalDuration);
+                this.columnClientPersonName = new global::System.Data.DataColumn("ClientPersonName", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnClientPersonName);
                 this.columnCompanyName.MaxLength = 200;
                 this.columnCompanyAddress.MaxLength = 2147483647;
                 this.columnCompanyMobileNo.MaxLength = 13;
@@ -809,6 +824,7 @@ namespace NilkanthApplication {
                 this.columnCycleEndTime.MaxLength = 30;
                 this.columnTotalDuration.ReadOnly = true;
                 this.columnTotalDuration.MaxLength = 30;
+                this.columnClientPersonName.MaxLength = 250;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1393,6 +1409,23 @@ namespace NilkanthApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public string ClientPersonName {
+                get {
+                    try {
+                        return ((string)(this[this.tableDeliveryChallan_Report.ClientPersonNameColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'ClientPersonName\' in table \'DeliveryChallan_Report\' is DBNu" +
+                                "ll.", e);
+                    }
+                }
+                set {
+                    this[this.tableDeliveryChallan_Report.ClientPersonNameColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsCompanyNameNull() {
                 return this.IsNull(this.tableDeliveryChallan_Report.CompanyNameColumn);
             }
@@ -1714,6 +1747,18 @@ namespace NilkanthApplication {
             public void SetTotalDurationNull() {
                 this[this.tableDeliveryChallan_Report.TotalDurationColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsClientPersonNameNull() {
+                return this.IsNull(this.tableDeliveryChallan_Report.ClientPersonNameColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetClientPersonNameNull() {
+                this[this.tableDeliveryChallan_Report.ClientPersonNameColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -1902,6 +1947,7 @@ namespace NilkanthApplication.DeliveryChallanReportDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("CycleStartTime", "CycleStartTime");
             tableMapping.ColumnMappings.Add("CycleEndTime", "CycleEndTime");
             tableMapping.ColumnMappings.Add("TotalDuration", "TotalDuration");
+            tableMapping.ColumnMappings.Add("ClientPersonName", "ClientPersonName");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

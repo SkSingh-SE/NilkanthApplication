@@ -48,8 +48,8 @@
                     <Value>=First(Fields!CompanyName.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -59,7 +59,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>1.00753cm</Top>
+            <Top>0.88054cm</Top>
             <Left>0.17569cm</Left>
             <Height>0.6cm</Height>
             <Width>12.7235cm</Width>
@@ -85,6 +85,7 @@
                     <Value>=First(Fields!CompanyAddress.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -92,7 +93,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox49</rd:DefaultName>
-            <Top>1.76953cm</Top>
+            <Top>1.57903cm</Top>
             <Left>0.17569cm</Left>
             <Height>0.6cm</Height>
             <Width>12.7235cm</Width>
@@ -111,9 +112,10 @@
             <Source>Embedded</Source>
             <Value>Logo</Value>
             <Sizing>Fit</Sizing>
-            <Left>14.95002cm</Left>
-            <Height>2.40128cm</Height>
-            <Width>4.79598cm</Width>
+            <Top>0cm</Top>
+            <Left>14.37322cm</Left>
+            <Height>2.30576cm</Height>
+            <Width>5.37278cm</Width>
             <ZIndex>3</ZIndex>
             <ToolTip>CompanyLogo</ToolTip>
             <Style>
@@ -124,7 +126,7 @@
             </Style>
           </Image>
           <Line Name="Line1">
-            <Top>2.52095cm</Top>
+            <Top>2.33045cm</Top>
             <Height>0cm</Height>
             <Width>20cm</Width>
             <ZIndex>4</ZIndex>
@@ -144,6 +146,8 @@
                     <Value>Challan No.      </Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -151,19 +155,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox50</rd:DefaultName>
-            <Top>2.62678cm</Top>
+            <Top>2.37278cm</Top>
             <Left>0.22578cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>2.46825cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox51">
@@ -176,6 +176,8 @@
                     <Value>Batch No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -183,19 +185,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox50</rd:DefaultName>
-            <Top>3.38553cm</Top>
+            <Top>3.00453cm</Top>
             <Left>0.24977cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>2.46825cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox52">
@@ -208,26 +206,26 @@
                     <Value>=First(Fields!DeliveryChallanNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>2.62678cm</Top>
+            <Top>2.37278cm</Top>
             <Left>3.16746cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.40057cm</Width>
+            <Height>0.50475cm</Height>
+            <Width>5.11457cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <VerticalAlign>Middle</VerticalAlign>
             </Style>
           </Textbox>
           <Textbox Name="Textbox53">
@@ -240,26 +238,26 @@
                     <Value>=First(Fields!BatchNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox53</rd:DefaultName>
-            <Top>3.42081cm</Top>
+            <Top>3.03981cm</Top>
             <Left>3.19145cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.40057cm</Width>
+            <Height>0.50475cm</Height>
+            <Width>5.11457cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <VerticalAlign>Middle</VerticalAlign>
             </Style>
           </Textbox>
           <Textbox Name="Textbox54">
@@ -272,6 +270,8 @@
                     <Value>Date</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -279,19 +279,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox54</rd:DefaultName>
-            <Top>2.66559cm</Top>
-            <Left>10.87544cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.00517cm</Width>
+            <Top>2.41159cm</Top>
+            <Left>10.2616cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>4.619cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox55">
@@ -304,6 +300,8 @@
                     <Value>Qty In Batch (Set Cu.M)</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -311,19 +309,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox55</rd:DefaultName>
-            <Top>3.42434cm</Top>
-            <Left>10.87544cm</Left>
-            <Height>0.56119cm</Height>
-            <Width>4.00517cm</Width>
+            <Top>3.04334cm</Top>
+            <Left>10.2616cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>4.619cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox56">
@@ -333,29 +327,29 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!DeliveryChallanDate.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>=Format(First(Fields!DeliveryChallanDate.Value, "DeliveryChallanReportDataSet"), "dd MMM yyyy")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox56</rd:DefaultName>
-            <Top>2.66559cm</Top>
+            <Top>2.41159cm</Top>
             <Left>15.24105cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>4.58459cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <VerticalAlign>Middle</VerticalAlign>
             </Style>
           </Textbox>
           <Textbox Name="Textbox57">
@@ -368,26 +362,26 @@
                     <Value>=Sum(Fields!SetCUM.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox56</rd:DefaultName>
-            <Top>3.37495cm</Top>
+            <Top>2.99395cm</Top>
             <Left>15.24105cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>4.58459cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <VerticalAlign>Middle</VerticalAlign>
             </Style>
           </Textbox>
           <Textbox Name="Textbox58">
@@ -400,6 +394,8 @@
                     <Value>Client</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -407,19 +403,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox58</rd:DefaultName>
-            <Top>4.12664cm</Top>
+            <Top>3.6504cm</Top>
             <Left>0.24977cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>2.46825cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox59">
@@ -432,6 +424,7 @@
                     <Value>=First(Fields!ClientName.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -439,19 +432,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox59</rd:DefaultName>
-            <Top>4.16192cm</Top>
+            <Top>3.68567cm</Top>
             <Left>3.18086cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>16.64478cm</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox60">
@@ -464,6 +453,8 @@
                     <Value>Site Address</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -471,19 +462,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox58</rd:DefaultName>
-            <Top>4.86776cm</Top>
+            <Top>4.29626cm</Top>
             <Left>0.24977cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>2.46825cm</Width>
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox61">
@@ -493,9 +480,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!SiteName.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>=First(Fields!ClientAddress.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -503,19 +491,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox59</rd:DefaultName>
-            <Top>4.86776cm</Top>
+            <Top>4.29626cm</Top>
             <Left>3.18086cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>16.64478cm</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox62">
@@ -528,6 +512,8 @@
                     <Value>Recipe (Grade)</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -535,19 +521,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>5.60887cm</Top>
-            <Left>0.22578cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.54233cm</Width>
+            <Top>5.59309cm</Top>
+            <Left>0.20179cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.77869cm</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox63">
@@ -560,6 +542,7 @@
                     <Value>=First(Fields!RecipeName.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -567,19 +550,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>5.60887cm</Top>
-            <Left>3.18086cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.47957cm</Width>
+            <Top>5.59309cm</Top>
+            <Left>3.15688cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.9125cm</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox64">
@@ -592,6 +571,8 @@
                     <Value>Cycle Start Time</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -599,19 +580,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>5.60887cm</Top>
-            <Left>7.81685cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.77517cm</Width>
+            <Top>4.94212cm</Top>
+            <Left>7.22419cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.98683cm</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox65">
@@ -624,6 +601,8 @@
                     <Value>Cycle End Time</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -631,19 +610,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>6.34276cm</Top>
-            <Left>7.83309cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.73494cm</Width>
+            <Top>5.61251cm</Top>
+            <Left>7.24042cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.94661cm</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox66">
@@ -656,6 +631,7 @@
                     <Value>=First(Fields!CycleStartTime.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -663,19 +639,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>5.60887cm</Top>
-            <Left>10.67435cm</Left>
-            <Height>0.6cm</Height>
+            <Top>4.94212cm</Top>
+            <Left>10.3886cm</Left>
+            <Height>0.50475cm</Height>
             <Width>3.07081cm</Width>
             <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox67">
@@ -688,6 +660,7 @@
                     <Value>=First(Fields!CycleEndTime.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -695,19 +668,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>6.32176cm</Top>
-            <Left>10.67435cm</Left>
-            <Height>0.6cm</Height>
+            <Top>5.59151cm</Top>
+            <Left>10.3886cm</Left>
+            <Height>0.50475cm</Height>
             <Width>3.04096cm</Width>
             <ZIndex>22</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox68">
@@ -720,6 +689,8 @@
                     <Value>Truck No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -727,19 +698,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>6.29686cm</Top>
-            <Left>0.21802cm</Left>
-            <Height>0.6cm</Height>
+            <Top>6.21759cm</Top>
+            <Left>0.19403cm</Left>
+            <Height>0.50475cm</Height>
             <Width>2.54233cm</Width>
             <ZIndex>23</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox69">
@@ -752,6 +719,7 @@
                     <Value>=First(Fields!TruckNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -759,19 +727,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>6.3147cm</Top>
-            <Left>3.19145cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.47957cm</Width>
+            <Top>6.23542cm</Top>
+            <Left>3.16746cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.9125cm</Width>
             <ZIndex>24</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox70">
@@ -781,9 +745,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Driver Name</Value>
+                    <Value>Person Name</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -791,19 +757,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>6.9707cm</Top>
-            <Left>0.17568cm</Left>
-            <Height>0.6cm</Height>
+            <Top>4.92404cm</Top>
+            <Left>0.24977cm</Left>
+            <Height>0.50475cm</Height>
             <Width>2.58467cm</Width>
             <ZIndex>25</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox71">
@@ -816,6 +778,8 @@
                     <Value>Admixture Type</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -823,19 +787,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>5.60545cm</Top>
-            <Left>13.85099cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.60467cm</Width>
+            <Top>4.9387cm</Top>
+            <Left>13.49236cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.9633cm</Width>
             <ZIndex>26</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox72">
@@ -845,9 +805,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!DriverName.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>=First(Fields!ClientPersonName.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -855,19 +816,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>6.98526cm</Top>
-            <Left>3.18086cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.47957cm</Width>
+            <Top>4.93859cm</Top>
+            <Left>3.16746cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.88034cm</Width>
             <ZIndex>27</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox73">
@@ -880,6 +837,7 @@
                     <Value>=First(Fields!AdmixtureType.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -887,19 +845,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>5.58445cm</Top>
+            <Top>4.9177cm</Top>
             <Left>16.53103cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>3.28686cm</Width>
             <ZIndex>28</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox74">
@@ -912,6 +866,8 @@
                     <Value>W/C Ratio</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -919,19 +875,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>6.30395cm</Top>
-            <Left>13.85874cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.4317cm</Width>
+            <Top>5.5737cm</Top>
+            <Left>13.50012cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.79033cm</Width>
             <ZIndex>29</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox75">
@@ -944,6 +896,7 @@
                     <Value>=First(Fields!WCRatio.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -951,19 +904,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>6.34645cm</Top>
+            <Top>5.6162cm</Top>
             <Left>16.53878cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>3.28686cm</Width>
             <ZIndex>30</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox76">
@@ -976,6 +925,8 @@
                     <Value>Cement Type</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -983,19 +934,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>7.00273cm</Top>
-            <Left>13.85099cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.4317cm</Width>
+            <Top>6.27248cm</Top>
+            <Left>13.49236cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.79033cm</Width>
             <ZIndex>31</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox77">
@@ -1008,6 +955,7 @@
                     <Value>=First(Fields!CementType.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1015,23 +963,19 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>7.04523cm</Top>
+            <Top>6.31498cm</Top>
             <Left>16.53103cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>3.29461cm</Width>
             <ZIndex>32</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Line Name="Line5">
-            <Top>10.30669cm</Top>
+            <Top>8.94144cm</Top>
             <Height>0cm</Height>
             <Width>20cm</Width>
             <ZIndex>33</ZIndex>
@@ -1051,6 +995,8 @@
                     <Value>Precautions</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1058,9 +1004,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox58</rd:DefaultName>
-            <Top>10.47984cm</Top>
-            <Left>0.26318cm</Left>
-            <Height>0.6cm</Height>
+            <Top>9.05433cm</Top>
+            <Left>0.17569cm</Left>
+            <Height>0.56825cm</Height>
             <Width>2.1825cm</Width>
             <ZIndex>34</ZIndex>
             <Style>
@@ -1083,6 +1029,7 @@
                     <Value>=First(Fields!FooterDescription.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1090,9 +1037,9 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox59</rd:DefaultName>
-            <Top>10.44036cm</Top>
-            <Left>3.17311cm</Left>
-            <Height>0.6cm</Height>
+            <Top>9.04661cm</Top>
+            <Left>3.18086cm</Left>
+            <Height>0.56825cm</Height>
             <Width>16.64478cm</Width>
             <ZIndex>35</ZIndex>
             <Style>
@@ -1109,7 +1056,7 @@
             </Style>
           </Textbox>
           <Line Name="Line6">
-            <Top>11.22744cm</Top>
+            <Top>9.70344cm</Top>
             <Height>0cm</Height>
             <Width>20cm</Width>
             <ZIndex>36</ZIndex>
@@ -1129,6 +1076,7 @@
                     <Value>Start Time In</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1136,19 +1084,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>11.33281cm</Top>
-            <Left>0.26318cm</Left>
-            <Height>0.6cm</Height>
+            <Top>9.74531cm</Top>
+            <Left>0.17569cm</Left>
+            <Height>0.5365cm</Height>
             <Width>2.47883cm</Width>
             <ZIndex>37</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox83">
@@ -1168,10 +1112,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>11.33281cm</Top>
-            <Left>3.17311cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.36598cm</Width>
+            <Top>9.74531cm</Top>
+            <Left>3.18086cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>3.13216cm</Width>
             <ZIndex>38</ZIndex>
             <Style>
               <Border>
@@ -1182,10 +1126,6 @@
                 <Style>Solid</Style>
                 <Width>1pt</Width>
               </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox84">
@@ -1198,6 +1138,8 @@
                     <Value>Start Time Out</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1205,19 +1147,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>11.33281cm</Top>
-            <Left>7.96009cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.52117cm</Width>
+            <Top>9.71356cm</Top>
+            <Left>6.73242cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>3.14559cm</Width>
             <ZIndex>39</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox85">
@@ -1230,6 +1168,8 @@
                     <Value>="For " &amp; First(Fields!CompanyName.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1239,19 +1179,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>11.36103cm</Top>
-            <Left>14.33712cm</Left>
-            <Height>0.6cm</Height>
-            <Width>5.48076cm</Width>
+            <Top>9.74178cm</Top>
+            <Left>12.94172cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>6.87616cm</Width>
             <ZIndex>40</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox86">
@@ -1271,10 +1207,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>11.33281cm</Top>
-            <Left>10.61651cm</Left>
-            <Height>0.6cm</Height>
-            <Width>3.5795cm</Width>
+            <Top>9.74531cm</Top>
+            <Left>10.14026cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>2.62508cm</Width>
             <ZIndex>41</ZIndex>
             <Style>
               <Border>
@@ -1285,10 +1221,6 @@
                 <Style>Solid</Style>
                 <Width>1pt</Width>
               </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox87">
@@ -1301,6 +1233,8 @@
                     <Value>Person Name</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1308,19 +1242,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>12.0437cm</Top>
-            <Left>0.26318cm</Left>
-            <Height>0.6cm</Height>
+            <Top>10.3927cm</Top>
+            <Left>0.17569cm</Left>
+            <Height>0.5365cm</Height>
             <Width>2.47883cm</Width>
             <ZIndex>42</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox88">
@@ -1340,10 +1270,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>12.0437cm</Top>
-            <Left>3.19921cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.28205cm</Width>
+            <Top>10.3927cm</Top>
+            <Left>3.18086cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>6.6788cm</Width>
             <ZIndex>43</ZIndex>
             <Style>
               <Border>
@@ -1352,10 +1282,6 @@
               <BottomBorder>
                 <Style>Solid</Style>
               </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox89">
@@ -1368,6 +1294,8 @@
                     <Value>Mobile No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1375,19 +1303,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>12.73169cm</Top>
-            <Left>0.25542cm</Left>
-            <Height>0.6cm</Height>
+            <Top>11.04894cm</Top>
+            <Left>0.17569cm</Left>
+            <Height>0.5365cm</Height>
             <Width>2.47883cm</Width>
             <ZIndex>44</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox90">
@@ -1407,10 +1331,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>12.73169cm</Top>
-            <Left>3.19921cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.27429cm</Width>
+            <Top>11.04894cm</Top>
+            <Left>3.18086cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>6.67104cm</Width>
             <ZIndex>45</ZIndex>
             <Style>
               <Border>
@@ -1419,10 +1343,6 @@
               <BottomBorder>
                 <Style>Solid</Style>
               </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox91">
@@ -1435,6 +1355,8 @@
                     <Value>Recieved By</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1442,19 +1364,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>13.46928cm</Top>
-            <Left>0.26318cm</Left>
-            <Height>0.6cm</Height>
+            <Top>11.72303cm</Top>
+            <Left>0.17569cm</Left>
+            <Height>0.5365cm</Height>
             <Width>2.47883cm</Width>
             <ZIndex>46</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox92">
@@ -1474,10 +1392,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>13.46928cm</Top>
-            <Left>3.19921cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.28205cm</Width>
+            <Top>11.69128cm</Top>
+            <Left>3.18086cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>6.6788cm</Width>
             <ZIndex>47</ZIndex>
             <Style>
               <Border>
@@ -1486,10 +1404,6 @@
               <BottomBorder>
                 <Style>Solid</Style>
               </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox138">
@@ -1499,9 +1413,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Authorizer's Signature</Value>
+                    <Value>Authorised Signatory</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1511,23 +1427,22 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox138</rd:DefaultName>
-            <Top>13.46928cm</Top>
-            <Left>14.37322cm</Left>
-            <Height>0.6cm</Height>
-            <Width>5.46737cm</Width>
+            <Top>11.72303cm</Top>
+            <Left>14.95002cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>4.89056cm</Width>
             <ZIndex>48</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <TopBorder>
+                <Style>Solid</Style>
+              </TopBorder>
             </Style>
           </Textbox>
           <Line Name="Line7">
-            <Top>14.21194cm</Top>
+            <Top>12.33869cm</Top>
             <Height>0cm</Height>
             <Width>20cm</Width>
             <ZIndex>49</ZIndex>
@@ -1538,7 +1453,7 @@
             </Style>
           </Line>
           <Line Name="Line8">
-            <Top>7.80203cm</Top>
+            <Top>6.94479cm</Top>
             <Height>0cm</Height>
             <Width>20cm</Width>
             <ZIndex>50</ZIndex>
@@ -1558,24 +1473,29 @@
                     <Value>Party Gst Details</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>12pt</FontSize>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox139</rd:DefaultName>
-            <Top>7.91845cm</Top>
+            <Top>6.96595cm</Top>
             <Left>0.17569cm</Left>
-            <Height>0.76933cm</Height>
-            <Width>5.19875cm</Width>
+            <Height>0.61058cm</Height>
+            <Width>8.4536cm</Width>
             <ZIndex>51</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -1593,24 +1513,29 @@
                     <Value>Client's Gst Details</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>12pt</FontSize>
+                      <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox139</rd:DefaultName>
-            <Top>7.91845cm</Top>
-            <Left>11.65908cm</Left>
-            <Height>0.76933cm</Height>
-            <Width>4.79659cm</Width>
+            <Top>6.96595cm</Top>
+            <Left>11.75433cm</Left>
+            <Height>0.61058cm</Height>
+            <Width>8.08692cm</Width>
             <ZIndex>52</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
               <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
@@ -1628,6 +1553,8 @@
                     <Value>GST No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1635,19 +1562,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>8.84323cm</Top>
-            <Left>0.31621cm</Left>
-            <Height>0.6cm</Height>
+            <Top>7.66848cm</Top>
+            <Left>0.17569cm</Left>
+            <Height>0.5365cm</Height>
             <Width>2.47883cm</Width>
             <ZIndex>53</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox94">
@@ -1660,6 +1583,7 @@
                     <Value>=First(Fields!CompanyGSTNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1667,19 +1591,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>8.84323cm</Top>
-            <Left>3.19921cm</Left>
-            <Height>0.6cm</Height>
+            <Top>7.66848cm</Top>
+            <Left>3.18086cm</Left>
+            <Height>0.5365cm</Height>
             <Width>5.85341cm</Width>
             <ZIndex>54</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox95">
@@ -1692,6 +1612,8 @@
                     <Value>PAN No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1699,19 +1621,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>9.53122cm</Top>
-            <Left>0.30845cm</Left>
-            <Height>0.6cm</Height>
+            <Top>8.32472cm</Top>
+            <Left>0.17569cm</Left>
+            <Height>0.5365cm</Height>
             <Width>2.47883cm</Width>
             <ZIndex>55</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox96">
@@ -1724,6 +1642,7 @@
                     <Value>=First(Fields!CompanyPANNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1731,19 +1650,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>9.53122cm</Top>
-            <Left>3.19145cm</Left>
-            <Height>0.6cm</Height>
+            <Top>8.32472cm</Top>
+            <Left>3.18086cm</Left>
+            <Height>0.5365cm</Height>
             <Width>5.86117cm</Width>
             <ZIndex>56</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox97">
@@ -1756,6 +1671,8 @@
                     <Value>GST No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1763,19 +1680,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>8.84323cm</Top>
+            <Top>7.66848cm</Top>
             <Left>11.93671cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.5365cm</Height>
             <Width>2.06608cm</Width>
             <ZIndex>57</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox98">
@@ -1788,6 +1701,7 @@
                     <Value>=First(Fields!ClientGSTNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1795,19 +1709,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>8.84323cm</Top>
+            <Top>7.66848cm</Top>
             <Left>14.37322cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.5365cm</Height>
             <Width>5.45243cm</Width>
             <ZIndex>58</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox99">
@@ -1820,6 +1730,8 @@
                     <Value>PAN No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1827,19 +1739,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>9.53122cm</Top>
+            <Top>8.32472cm</Top>
             <Left>11.92895cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.5365cm</Height>
             <Width>2.06608cm</Width>
             <ZIndex>59</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox100">
@@ -1852,6 +1760,7 @@
                     <Value>=First(Fields!ClientPANNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1859,25 +1768,21 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>9.53122cm</Top>
+            <Top>8.32472cm</Top>
             <Left>14.36546cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.5365cm</Height>
             <Width>5.45243cm</Width>
             <ZIndex>60</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Line Name="Line9">
-            <Top>7.88317cm</Top>
-            <Left>10.67435cm</Left>
-            <Height>2.24804cm</Height>
+            <Top>6.99417cm</Top>
+            <Left>10.2616cm</Left>
+            <Height>1.91552cm</Height>
             <Width>0cm</Width>
             <ZIndex>61</ZIndex>
             <Style>
@@ -1896,31 +1801,94 @@
                     <Value>Challan Generated by Nilkanth Engineering Works ERP System.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox149</rd:DefaultName>
-            <Top>14.35312cm</Top>
+            <Top>12.38462cm</Top>
             <Left>4.37303cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.5365cm</Height>
             <Width>10.50757cm</Width>
             <ZIndex>62</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox159">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Driver Name</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox64</rd:DefaultName>
+            <Top>6.28747cm</Top>
+            <Left>7.22293cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.94661cm</Width>
+            <ZIndex>63</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox160">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CycleEndTime.Value, "DeliveryChallanReportDataSet")First(Fields!DriverName.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox66</rd:DefaultName>
+            <Top>6.26647cm</Top>
+            <Left>10.37111cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.04096cm</Width>
+            <ZIndex>64</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Height>14.95312cm</Height>
+        <Height>13.0587cm</Height>
         <Width>20cm</Width>
         <Style>
           <Border>
@@ -1930,14 +1898,14 @@
       </Rectangle>
       <Rectangle Name="Rectangle3">
         <ReportItems>
-          <Textbox Name="Textbox101">
+          <Textbox Name="Textbox78">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Challan (Copy)</Value>
+                    <Value>Challan (Original)</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                     </Style>
@@ -1964,7 +1932,7 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox102">
+          <Textbox Name="Textbox82">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -1974,8 +1942,8 @@
                     <Value>=First(Fields!CompanyName.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1985,7 +1953,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox48</rd:DefaultName>
-            <Top>1.00753cm</Top>
+            <Top>0.88054cm</Top>
             <Left>0.17569cm</Left>
             <Height>0.6cm</Height>
             <Width>12.7235cm</Width>
@@ -2001,7 +1969,7 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox103">
+          <Textbox Name="Textbox101">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2011,6 +1979,7 @@
                     <Value>=First(Fields!CompanyAddress.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2018,7 +1987,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox49</rd:DefaultName>
-            <Top>1.76953cm</Top>
+            <Top>1.57903cm</Top>
             <Left>0.17569cm</Left>
             <Height>0.6cm</Height>
             <Width>12.7235cm</Width>
@@ -2037,9 +2006,9 @@
             <Source>Embedded</Source>
             <Value>Logo</Value>
             <Sizing>Fit</Sizing>
-            <Left>14.95002cm</Left>
-            <Height>2.40128cm</Height>
-            <Width>4.79598cm</Width>
+            <Left>14.37322cm</Left>
+            <Height>2.30576cm</Height>
+            <Width>5.37278cm</Width>
             <ZIndex>3</ZIndex>
             <ToolTip>CompanyLogo</ToolTip>
             <Style>
@@ -2050,7 +2019,7 @@
             </Style>
           </Image>
           <Line Name="Line2">
-            <Top>2.52095cm</Top>
+            <Top>2.33045cm</Top>
             <Height>0cm</Height>
             <Width>20cm</Width>
             <ZIndex>4</ZIndex>
@@ -2060,7 +2029,7 @@
               </Border>
             </Style>
           </Line>
-          <Textbox Name="Textbox104">
+          <Textbox Name="Textbox102">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2070,6 +2039,8 @@
                     <Value>Challan No.      </Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2077,22 +2048,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox50</rd:DefaultName>
-            <Top>2.62678cm</Top>
+            <Top>2.37278cm</Top>
             <Left>0.22578cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>2.46825cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox105">
+          <Textbox Name="Textbox103">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2102,6 +2069,8 @@
                     <Value>Batch No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2109,22 +2078,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox50</rd:DefaultName>
-            <Top>3.38553cm</Top>
-            <Left>0.24977cm</Left>
-            <Height>0.6cm</Height>
+            <Top>3.00453cm</Top>
+            <Left>0.22578cm</Left>
+            <Height>0.50475cm</Height>
             <Width>2.46825cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox106">
+          <Textbox Name="Textbox104">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2134,29 +2099,29 @@
                     <Value>=First(Fields!DeliveryChallanNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>2.62678cm</Top>
+            <Top>2.37278cm</Top>
             <Left>3.16746cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.40057cm</Width>
+            <Height>0.50475cm</Height>
+            <Width>5.11457cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <VerticalAlign>Middle</VerticalAlign>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox107">
+          <Textbox Name="Textbox105">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2166,29 +2131,29 @@
                     <Value>=First(Fields!BatchNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox53</rd:DefaultName>
-            <Top>3.42081cm</Top>
+            <Top>3.03981cm</Top>
             <Left>3.19145cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.40057cm</Width>
+            <Height>0.50475cm</Height>
+            <Width>5.11457cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <VerticalAlign>Middle</VerticalAlign>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox108">
+          <Textbox Name="Textbox106">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2198,6 +2163,8 @@
                     <Value>Date</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2205,22 +2172,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox54</rd:DefaultName>
-            <Top>2.66559cm</Top>
-            <Left>10.87544cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.00517cm</Width>
+            <Top>2.41159cm</Top>
+            <Left>10.2616cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>4.619cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox109">
+          <Textbox Name="Textbox107">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2230,6 +2193,8 @@
                     <Value>Qty In Batch (Set Cu.M)</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2237,54 +2202,50 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox55</rd:DefaultName>
-            <Top>3.42434cm</Top>
-            <Left>10.87544cm</Left>
-            <Height>0.56119cm</Height>
-            <Width>4.00517cm</Width>
+            <Top>3.04334cm</Top>
+            <Left>10.2616cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>4.619cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox110">
+          <Textbox Name="Textbox108">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!DeliveryChallanDate.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>=Format(First(Fields!DeliveryChallanDate.Value, "DeliveryChallanReportDataSet"), "dd MMM yyyy")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox56</rd:DefaultName>
-            <Top>2.66559cm</Top>
+            <Top>2.41159cm</Top>
             <Left>15.24105cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>4.58459cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <VerticalAlign>Middle</VerticalAlign>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox111">
+          <Textbox Name="Textbox109">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2294,29 +2255,29 @@
                     <Value>=Sum(Fields!SetCUM.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox56</rd:DefaultName>
-            <Top>3.37495cm</Top>
+            <Top>2.99395cm</Top>
             <Left>15.24105cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>4.58459cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <VerticalAlign>Middle</VerticalAlign>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox112">
+          <Textbox Name="Textbox110">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2326,6 +2287,8 @@
                     <Value>Client</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2333,22 +2296,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox58</rd:DefaultName>
-            <Top>4.12664cm</Top>
-            <Left>0.24977cm</Left>
-            <Height>0.6cm</Height>
+            <Top>3.6504cm</Top>
+            <Left>0.22578cm</Left>
+            <Height>0.50475cm</Height>
             <Width>2.46825cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox113">
+          <Textbox Name="Textbox111">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2358,6 +2317,7 @@
                     <Value>=First(Fields!ClientName.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2365,22 +2325,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox59</rd:DefaultName>
-            <Top>4.16192cm</Top>
+            <Top>3.68567cm</Top>
             <Left>3.18086cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>16.64478cm</Width>
             <ZIndex>14</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox114">
+          <Textbox Name="Textbox112">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -2390,6 +2346,8 @@
                     <Value>Site Address</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2397,31 +2355,28 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox58</rd:DefaultName>
-            <Top>4.86776cm</Top>
-            <Left>0.24977cm</Left>
-            <Height>0.6cm</Height>
+            <Top>4.29626cm</Top>
+            <Left>0.22578cm</Left>
+            <Height>0.50475cm</Height>
             <Width>2.46825cm</Width>
             <ZIndex>15</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox115">
+          <Textbox Name="Textbox113">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!SiteName.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>=First(Fields!ClientAddress.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2429,243 +2384,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox59</rd:DefaultName>
-            <Top>4.86776cm</Top>
+            <Top>4.29626cm</Top>
             <Left>3.18086cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.50475cm</Height>
             <Width>16.64478cm</Width>
             <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox116">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Recipe (Grade)</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>5.60887cm</Top>
-            <Left>0.22578cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.54233cm</Width>
-            <ZIndex>17</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox117">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!RecipeName.Value, "DeliveryChallanReportDataSet")</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>5.60887cm</Top>
-            <Left>3.18086cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.47957cm</Width>
-            <ZIndex>18</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox118">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Cycle Start Time</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>5.60887cm</Top>
-            <Left>7.81685cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.77517cm</Width>
-            <ZIndex>19</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox119">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Cycle End Time</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>6.34276cm</Top>
-            <Left>7.83309cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.73494cm</Width>
-            <ZIndex>20</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox120">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!CycleStartTime.Value, "DeliveryChallanReportDataSet")</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>5.60887cm</Top>
-            <Left>10.67435cm</Left>
-            <Height>0.6cm</Height>
-            <Width>3.07081cm</Width>
-            <ZIndex>21</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox121">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!CycleEndTime.Value, "DeliveryChallanReportDataSet")</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>6.32176cm</Top>
-            <Left>10.67435cm</Left>
-            <Height>0.6cm</Height>
-            <Width>3.04096cm</Width>
-            <ZIndex>22</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox122">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Truck No.</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>6.29686cm</Top>
-            <Left>0.21802cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.54233cm</Width>
-            <ZIndex>23</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox123">
@@ -2675,41 +2402,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TruckNo.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>Admixture Type</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>6.3147cm</Top>
-            <Left>3.19145cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.47957cm</Width>
-            <ZIndex>24</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox124">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Driver Name</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2717,19 +2414,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>6.9707cm</Top>
-            <Left>0.17568cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.58467cm</Width>
-            <ZIndex>25</ZIndex>
+            <Top>4.9387cm</Top>
+            <Left>13.49236cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.9633cm</Width>
+            <ZIndex>17</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox125">
@@ -2739,29 +2432,26 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Admixture Type</Value>
+                    <Value>=First(Fields!AdmixtureType.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>5.60545cm</Top>
-            <Left>13.85099cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.60467cm</Width>
-            <ZIndex>26</ZIndex>
+            <rd:DefaultName>Textbox66</rd:DefaultName>
+            <Top>4.9177cm</Top>
+            <Left>16.53103cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.28686cm</Width>
+            <ZIndex>18</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox126">
@@ -2771,29 +2461,27 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!DriverName.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>W/C Ratio</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>6.98526cm</Top>
-            <Left>3.18086cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.47957cm</Width>
-            <ZIndex>27</ZIndex>
+            <rd:DefaultName>Textbox64</rd:DefaultName>
+            <Top>5.5737cm</Top>
+            <Left>13.50012cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.79033cm</Width>
+            <ZIndex>19</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox127">
@@ -2803,9 +2491,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!AdmixtureType.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>=First(Fields!WCRatio.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2813,19 +2502,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>5.58445cm</Top>
-            <Left>16.53103cm</Left>
-            <Height>0.6cm</Height>
+            <Top>5.6162cm</Top>
+            <Left>16.53878cm</Left>
+            <Height>0.50475cm</Height>
             <Width>3.28686cm</Width>
-            <ZIndex>28</ZIndex>
+            <ZIndex>20</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox128">
@@ -2835,9 +2520,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>W/C Ratio</Value>
+                    <Value>Cement Type</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2845,19 +2532,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>6.30395cm</Top>
-            <Left>13.85874cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.4317cm</Width>
-            <ZIndex>29</ZIndex>
+            <Top>6.27248cm</Top>
+            <Left>13.49236cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.79033cm</Width>
+            <ZIndex>21</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox129">
@@ -2867,9 +2550,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!WCRatio.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>=First(Fields!CementType.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -2877,21 +2561,28 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>6.34645cm</Top>
-            <Left>16.53878cm</Left>
-            <Height>0.6cm</Height>
-            <Width>3.28686cm</Width>
-            <ZIndex>30</ZIndex>
+            <Top>6.31498cm</Top>
+            <Left>16.53103cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.29461cm</Width>
+            <ZIndex>22</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Line Name="Line10">
+            <Top>8.94144cm</Top>
+            <Height>0cm</Height>
+            <Width>20cm</Width>
+            <ZIndex>23</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
           <Textbox Name="Textbox130">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -2899,21 +2590,23 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Cement Type</Value>
+                    <Value>Precautions</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>7.00273cm</Top>
-            <Left>13.85099cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.4317cm</Width>
-            <ZIndex>31</ZIndex>
+            <rd:DefaultName>Textbox58</rd:DefaultName>
+            <Top>9.05433cm</Top>
+            <Left>0.28587cm</Left>
+            <Height>0.56825cm</Height>
+            <Width>2.1825cm</Width>
+            <ZIndex>24</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -2931,84 +2624,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CementType.Value, "DeliveryChallanReportDataSet")</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>7.04523cm</Top>
-            <Left>16.53103cm</Left>
-            <Height>0.6cm</Height>
-            <Width>3.29461cm</Width>
-            <ZIndex>32</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Line Name="Line10">
-            <Top>10.30669cm</Top>
-            <Height>0cm</Height>
-            <Width>20cm</Width>
-            <ZIndex>33</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Textbox Name="Textbox133">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Precautions</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox58</rd:DefaultName>
-            <Top>10.47984cm</Top>
-            <Left>0.26318cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.1825cm</Width>
-            <ZIndex>34</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox134">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
                     <Value>=First(Fields!FooterDescription.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3016,11 +2635,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox59</rd:DefaultName>
-            <Top>10.44036cm</Top>
-            <Left>3.17311cm</Left>
-            <Height>0.6cm</Height>
+            <Top>9.04661cm</Top>
+            <Left>3.1958cm</Left>
+            <Height>0.56825cm</Height>
             <Width>16.64478cm</Width>
-            <ZIndex>35</ZIndex>
+            <ZIndex>25</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3035,17 +2654,17 @@
             </Style>
           </Textbox>
           <Line Name="Line11">
-            <Top>11.22744cm</Top>
+            <Top>9.70344cm</Top>
             <Height>0cm</Height>
             <Width>20cm</Width>
-            <ZIndex>36</ZIndex>
+            <ZIndex>26</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
             </Style>
           </Line>
-          <Textbox Name="Textbox136">
+          <Textbox Name="Textbox132">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -3055,6 +2674,7 @@
                     <Value>Start Time In</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3062,22 +2682,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>11.33281cm</Top>
+            <Top>9.74531cm</Top>
             <Left>0.26318cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.5365cm</Height>
             <Width>2.47883cm</Width>
-            <ZIndex>37</ZIndex>
+            <ZIndex>27</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox137">
+          <Textbox Name="Textbox133">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -3094,11 +2710,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>11.33281cm</Top>
-            <Left>3.17311cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.36598cm</Width>
-            <ZIndex>38</ZIndex>
+            <Top>9.74531cm</Top>
+            <Left>3.20486cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>3.13216cm</Width>
+            <ZIndex>28</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3108,13 +2724,9 @@
                 <Style>Solid</Style>
                 <Width>1pt</Width>
               </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox141">
+          <Textbox Name="Textbox134">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -3124,6 +2736,8 @@
                     <Value>Start Time Out</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3131,22 +2745,18 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>11.33281cm</Top>
-            <Left>7.96009cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.52117cm</Width>
-            <ZIndex>39</ZIndex>
+            <Top>9.71356cm</Top>
+            <Left>6.73242cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>3.14559cm</Width>
+            <ZIndex>29</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox142">
+          <Textbox Name="Textbox135">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -3156,6 +2766,8 @@
                     <Value>="For " &amp; First(Fields!CompanyName.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3165,19 +2777,139 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox64</rd:DefaultName>
-            <Top>11.36103cm</Top>
-            <Left>14.33712cm</Left>
-            <Height>0.6cm</Height>
-            <Width>5.48076cm</Width>
-            <ZIndex>40</ZIndex>
+            <Top>9.74178cm</Top>
+            <Left>12.94172cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>6.87616cm</Width>
+            <ZIndex>30</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox136">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox66</rd:DefaultName>
+            <Top>9.74531cm</Top>
+            <Left>10.14026cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>2.62508cm</Width>
+            <ZIndex>31</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BottomBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1pt</Width>
+              </BottomBorder>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox137">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Person Name</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox62</rd:DefaultName>
+            <Top>10.3927cm</Top>
+            <Left>0.26318cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>2.47883cm</Width>
+            <ZIndex>32</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox141">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value />
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox63</rd:DefaultName>
+            <Top>10.3927cm</Top>
+            <Left>3.19921cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>6.6788cm</Width>
+            <ZIndex>33</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox142">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Mobile No.</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox62</rd:DefaultName>
+            <Top>11.04894cm</Top>
+            <Left>0.25542cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>2.47883cm</Width>
+            <ZIndex>34</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
             </Style>
           </Textbox>
           <Textbox Name="Textbox143">
@@ -3196,25 +2928,19 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox66</rd:DefaultName>
-            <Top>11.33281cm</Top>
-            <Left>10.61651cm</Left>
-            <Height>0.6cm</Height>
-            <Width>3.5795cm</Width>
-            <ZIndex>41</ZIndex>
+            <rd:DefaultName>Textbox63</rd:DefaultName>
+            <Top>11.04894cm</Top>
+            <Left>3.19921cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>6.67104cm</Width>
+            <ZIndex>35</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
               <BottomBorder>
-                <Color>Black</Color>
                 <Style>Solid</Style>
-                <Width>1pt</Width>
               </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox144">
@@ -3224,9 +2950,11 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Person Name</Value>
+                    <Value>Recieved By</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3234,19 +2962,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>12.0437cm</Top>
+            <Top>11.72303cm</Top>
             <Left>0.26318cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.5365cm</Height>
             <Width>2.47883cm</Width>
-            <ZIndex>42</ZIndex>
+            <ZIndex>36</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox145">
@@ -3266,11 +2990,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>12.0437cm</Top>
+            <Top>11.69128cm</Top>
             <Left>3.19921cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.28205cm</Width>
-            <ZIndex>43</ZIndex>
+            <Height>0.5365cm</Height>
+            <Width>6.6788cm</Width>
+            <ZIndex>37</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3278,10 +3002,6 @@
               <BottomBorder>
                 <Style>Solid</Style>
               </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox146">
@@ -3291,31 +3011,56 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Mobile No.</Value>
+                    <Value>Authorised Signatory</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>12.73169cm</Top>
-            <Left>0.25542cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.47883cm</Width>
-            <ZIndex>44</ZIndex>
+            <rd:DefaultName>Textbox138</rd:DefaultName>
+            <Top>11.72303cm</Top>
+            <Left>14.95002cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>4.89056cm</Width>
+            <ZIndex>38</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <TopBorder>
+                <Style>Solid</Style>
+              </TopBorder>
             </Style>
           </Textbox>
+          <Line Name="Line12">
+            <Top>12.33869cm</Top>
+            <Height>0cm</Height>
+            <Width>20cm</Width>
+            <ZIndex>39</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line13">
+            <Top>6.94479cm</Top>
+            <Height>0cm</Height>
+            <Width>20cm</Width>
+            <ZIndex>40</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
           <Textbox Name="Textbox147">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -3323,21 +3068,23 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value />
+                    <Value>Party Gst Details</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>12.73169cm</Top>
-            <Left>3.19921cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.27429cm</Width>
-            <ZIndex>45</ZIndex>
+            <rd:DefaultName>Textbox139</rd:DefaultName>
+            <Top>6.9977cm</Top>
+            <Left>0.17569cm</Left>
+            <Height>0.61058cm</Height>
+            <Width>8.4536cm</Width>
+            <ZIndex>41</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -3345,6 +3092,7 @@
               <BottomBorder>
                 <Style>Solid</Style>
               </BottomBorder>
+              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -3358,25 +3106,31 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Recieved By</Value>
+                    <Value>Client's Gst Details</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>11pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>13.46928cm</Top>
-            <Left>0.26318cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.47883cm</Width>
-            <ZIndex>46</ZIndex>
+            <rd:DefaultName>Textbox139</rd:DefaultName>
+            <Top>6.9977cm</Top>
+            <Left>11.65908cm</Left>
+            <Height>0.61058cm</Height>
+            <Width>8.08692cm</Width>
+            <ZIndex>42</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <BottomBorder>
+                <Style>Solid</Style>
+              </BottomBorder>
+              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
@@ -3390,32 +3144,27 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value />
+                    <Value>GST No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>13.46928cm</Top>
-            <Left>3.19921cm</Left>
-            <Height>0.6cm</Height>
-            <Width>7.28205cm</Width>
-            <ZIndex>47</ZIndex>
+            <rd:DefaultName>Textbox62</rd:DefaultName>
+            <Top>7.66848cm</Top>
+            <Left>0.31621cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>2.47883cm</Width>
+            <ZIndex>43</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <BottomBorder>
-                <Style>Solid</Style>
-              </BottomBorder>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox151">
@@ -3425,55 +3174,28 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Authorizer's Signature</Value>
+                    <Value>=First(Fields!CompanyGSTNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox138</rd:DefaultName>
-            <Top>13.46928cm</Top>
-            <Left>14.37322cm</Left>
-            <Height>0.6cm</Height>
-            <Width>5.46737cm</Width>
-            <ZIndex>48</ZIndex>
+            <rd:DefaultName>Textbox63</rd:DefaultName>
+            <Top>7.66848cm</Top>
+            <Left>3.19921cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>5.85341cm</Width>
+            <ZIndex>44</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Line Name="Line12">
-            <Top>14.21194cm</Top>
-            <Height>0cm</Height>
-            <Width>20cm</Width>
-            <ZIndex>49</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Line Name="Line13">
-            <Top>7.80203cm</Top>
-            <Height>0cm</Height>
-            <Width>20cm</Width>
-            <ZIndex>50</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
           <Textbox Name="Textbox152">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
@@ -3481,32 +3203,27 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Party Gst Details</Value>
+                    <Value>PAN No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox139</rd:DefaultName>
-            <Top>7.91845cm</Top>
-            <Left>0.17569cm</Left>
-            <Height>0.76933cm</Height>
-            <Width>5.19875cm</Width>
-            <ZIndex>51</ZIndex>
+            <rd:DefaultName>Textbox62</rd:DefaultName>
+            <Top>8.32472cm</Top>
+            <Left>0.30845cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>2.47883cm</Width>
+            <ZIndex>45</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox153">
@@ -3516,32 +3233,26 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Client's Gst Details</Value>
+                    <Value>=First(Fields!CompanyPANNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
-                      <FontSize>12pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox139</rd:DefaultName>
-            <Top>7.91845cm</Top>
-            <Left>11.65908cm</Left>
-            <Height>0.76933cm</Height>
-            <Width>4.79659cm</Width>
-            <ZIndex>52</ZIndex>
+            <rd:DefaultName>Textbox63</rd:DefaultName>
+            <Top>8.32472cm</Top>
+            <Left>3.19145cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>5.86117cm</Width>
+            <ZIndex>46</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <VerticalAlign>Middle</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox154">
@@ -3554,6 +3265,8 @@
                     <Value>GST No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3561,19 +3274,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>8.84323cm</Top>
-            <Left>0.31621cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.47883cm</Width>
-            <ZIndex>53</ZIndex>
+            <Top>7.66848cm</Top>
+            <Left>11.93671cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>2.06608cm</Width>
+            <ZIndex>47</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox155">
@@ -3583,9 +3292,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CompanyGSTNo.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Value>=First(Fields!ClientGSTNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3593,19 +3303,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>8.84323cm</Top>
-            <Left>3.19921cm</Left>
-            <Height>0.6cm</Height>
-            <Width>5.85341cm</Width>
-            <ZIndex>54</ZIndex>
+            <Top>7.66848cm</Top>
+            <Left>14.37322cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>5.45243cm</Width>
+            <ZIndex>48</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox156">
@@ -3618,6 +3324,8 @@
                     <Value>PAN No.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3625,19 +3333,15 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>9.53122cm</Top>
-            <Left>0.30845cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.47883cm</Width>
-            <ZIndex>55</ZIndex>
+            <Top>8.32472cm</Top>
+            <Left>11.92895cm</Left>
+            <Height>0.5365cm</Height>
+            <Width>2.06608cm</Width>
+            <ZIndex>49</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Textbox Name="Textbox157">
@@ -3647,137 +3351,10 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CompanyPANNo.Value, "DeliveryChallanReportDataSet")</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>9.53122cm</Top>
-            <Left>3.19145cm</Left>
-            <Height>0.6cm</Height>
-            <Width>5.86117cm</Width>
-            <ZIndex>56</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox158">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>GST No.</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>8.84323cm</Top>
-            <Left>11.93671cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.06608cm</Width>
-            <ZIndex>57</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox159">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!ClientGSTNo.Value, "DeliveryChallanReportDataSet")</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>8.84323cm</Top>
-            <Left>14.37322cm</Left>
-            <Height>0.6cm</Height>
-            <Width>5.45243cm</Width>
-            <ZIndex>58</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox160">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>PAN No.</Value>
-                    <Style>
-                      <FontFamily>Segoe UI</FontFamily>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox62</rd:DefaultName>
-            <Top>9.53122cm</Top>
-            <Left>11.92895cm</Left>
-            <Height>0.6cm</Height>
-            <Width>2.06608cm</Width>
-            <ZIndex>59</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox161">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
                     <Value>=First(Fields!ClientPANNo.Value, "DeliveryChallanReportDataSet")</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -3785,34 +3362,30 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox63</rd:DefaultName>
-            <Top>9.53122cm</Top>
+            <Top>8.32472cm</Top>
             <Left>14.36546cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.5365cm</Height>
             <Width>5.45243cm</Width>
-            <ZIndex>60</ZIndex>
+            <ZIndex>50</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
           <Line Name="Line14">
-            <Top>7.88317cm</Top>
-            <Left>10.67435cm</Left>
-            <Height>2.24804cm</Height>
+            <Top>6.99417cm</Top>
+            <Left>10.2616cm</Left>
+            <Height>1.91552cm</Height>
             <Width>0cm</Width>
-            <ZIndex>61</ZIndex>
+            <ZIndex>51</ZIndex>
             <Style>
               <Border>
                 <Style>Solid</Style>
               </Border>
             </Style>
           </Line>
-          <Textbox Name="Textbox162">
+          <Textbox Name="Textbox158">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
@@ -3822,33 +3395,390 @@
                     <Value>Challan Generated by Nilkanth Engineering Works ERP System.</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox149</rd:DefaultName>
-            <Top>14.35312cm</Top>
+            <Top>12.38462cm</Top>
             <Left>4.37303cm</Left>
-            <Height>0.6cm</Height>
+            <Height>0.5365cm</Height>
             <Width>10.50757cm</Width>
-            <ZIndex>62</ZIndex>
+            <ZIndex>52</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
+          <Textbox Name="Textbox114">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Recipe (Grade)</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox62</rd:DefaultName>
+            <Top>5.58698cm</Top>
+            <Left>0.22578cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.77869cm</Width>
+            <ZIndex>53</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox115">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!RecipeName.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox63</rd:DefaultName>
+            <Top>5.58698cm</Top>
+            <Left>3.15516cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.9125cm</Width>
+            <ZIndex>54</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox116">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cycle Start Time</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox64</rd:DefaultName>
+            <Top>4.93601cm</Top>
+            <Left>7.22247cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.98683cm</Width>
+            <ZIndex>55</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox117">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Cycle End Time</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox64</rd:DefaultName>
+            <Top>5.6064cm</Top>
+            <Left>7.2387cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.94661cm</Width>
+            <ZIndex>56</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox118">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CycleStartTime.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox66</rd:DefaultName>
+            <Top>4.93601cm</Top>
+            <Left>10.38688cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.07081cm</Width>
+            <ZIndex>57</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox119">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CycleEndTime.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox66</rd:DefaultName>
+            <Top>5.5854cm</Top>
+            <Left>10.38688cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.04096cm</Width>
+            <ZIndex>58</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox120">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Truck No.</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox62</rd:DefaultName>
+            <Top>6.21148cm</Top>
+            <Left>0.22578cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.54233cm</Width>
+            <ZIndex>59</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox121">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!TruckNo.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox63</rd:DefaultName>
+            <Top>6.22931cm</Top>
+            <Left>3.16574cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.9125cm</Width>
+            <ZIndex>60</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox122">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Person Name</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox64</rd:DefaultName>
+            <Top>4.91793cm</Top>
+            <Left>0.22578cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.58467cm</Width>
+            <ZIndex>61</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox124">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!ClientPersonName.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox66</rd:DefaultName>
+            <Top>4.93248cm</Top>
+            <Left>3.16574cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.88034cm</Width>
+            <ZIndex>62</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox161">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Driver Name</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>SemiBold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox64</rd:DefaultName>
+            <Top>6.28136cm</Top>
+            <Left>7.22121cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>2.94661cm</Width>
+            <ZIndex>63</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox162">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CycleEndTime.Value, "DeliveryChallanReportDataSet")First(Fields!DriverName.Value, "DeliveryChallanReportDataSet")</Value>
+                    <Style>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>9pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox66</rd:DefaultName>
+            <Top>6.26036cm</Top>
+            <Left>10.36939cm</Left>
+            <Height>0.50475cm</Height>
+            <Width>3.04096cm</Width>
+            <ZIndex>64</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+            </Style>
+          </Textbox>
         </ReportItems>
         <KeepTogether>true</KeepTogether>
-        <Top>15.18881cm</Top>
-        <Left>0.09968cm</Left>
-        <Height>15.10095cm</Height>
+        <Top>13.29712cm</Top>
+        <Height>12.97403cm</Height>
         <Width>20cm</Width>
         <ZIndex>1</ZIndex>
         <Style>
@@ -3857,10 +3787,10 @@
           </Border>
         </Style>
       </Rectangle>
-      <Line Name="Line16">
-        <Top>15.05155cm</Top>
+      <Line Name="Line44">
+        <Top>13.18895cm</Top>
         <Height>0cm</Height>
-        <Width>20.19935cm</Width>
+        <Width>20cm</Width>
         <ZIndex>2</ZIndex>
         <Style>
           <Border>
@@ -3869,7 +3799,7 @@
         </Style>
       </Line>
     </ReportItems>
-    <Height>31.4434cm</Height>
+    <Height>26.36195cm</Height>
     <Style>
       <Border>
         <Style>Solid</Style>
@@ -4010,6 +3940,10 @@
         </Field>
         <Field Name="TotalDuration">
           <DataField>TotalDuration</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="ClientPersonName">
+          <DataField>ClientPersonName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
       </Fields>

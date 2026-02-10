@@ -174,6 +174,8 @@ namespace NilkanthApplication
                 int marginRight = 20;
                 int spacing = 10;
                 int topY = 19;
+                int whatsappOffsetY = 8;
+
                 Button[] buttons = { btnDelete, btnNew, btnEdit, btnBack, btnPrint, btnSendWhatsApp };
 
                 int currentX = this.ClientSize.Width - marginRight;
@@ -181,7 +183,12 @@ namespace NilkanthApplication
                 foreach (Button btn in buttons)
                 {
                     currentX -= btn.Width;
-                    btn.Location = new Point(currentX, topY);
+
+                    if (btn == btnSendWhatsApp)
+                        btn.Location = new Point(currentX, topY + whatsappOffsetY); 
+                    else
+                        btn.Location = new Point(currentX, topY);
+
                     currentX -= spacing;
                 }
 

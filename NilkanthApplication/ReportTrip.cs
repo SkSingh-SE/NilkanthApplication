@@ -18,13 +18,15 @@ namespace NilkanthApplication
         string batches = "";
         //string tobatch = "";
         string date = "";
+        string toDate = "";
         DataTable dt3Global;
         //public ReportTrip(string[] BatchDateDetails)
-        public ReportTrip(string batchnos,string selecteddate)
+        public ReportTrip(string batchnos,string fromDate, string toDate = "")
         {
             InitializeComponent();
             this.batches = batchnos;
-            date = selecteddate;
+            date = fromDate;
+            this.toDate = toDate;
             //this.tobatch = tobatchno;
         }
 
@@ -179,6 +181,8 @@ namespace NilkanthApplication
                         BNo,
                         "',@Date='",
                         this.date,
+                         "',@Date2='",
+                        string.IsNullOrWhiteSpace(this.toDate) ? null : this.toDate,
                         "'"
                }));
             }
@@ -200,6 +204,8 @@ namespace NilkanthApplication
                          BNo,
                         "',@Date='",
                         this.date,
+                         "',@Date2='",
+                        string.IsNullOrWhiteSpace(this.toDate) ? null : this.toDate,
                         "'"
                }));
             }
@@ -221,10 +227,10 @@ namespace NilkanthApplication
                         this.batches,
                         "',@Date='",
                         this.date,
-                        "'"
-                        //"',@ToBatchNo='",
-                        //this.tobatch,
                         //"'"
+                        "',@Date2='",
+                        string.IsNullOrWhiteSpace(this.toDate) ? null : this.toDate,
+                        "'"
                }));
             }
             catch (Exception ex)

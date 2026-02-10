@@ -375,13 +375,17 @@ namespace NilkanthApplication
 
         private void cmbBatchNo_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.BindGrid();
-            if(cmbBatchNo.SelectedIndex > 0)
+            if (cmbBatchNo.Focused) // VERY IMPORTANT
             {
-                cmbFromBatch.SelectedIndex = 0;
-                cmbToBatch.SelectedIndex = 0;
+                BindGrid();
 
-                UncheckAllOptionsInCheckBoxList();
+                if (cmbBatchNo.SelectedIndex > 0)
+                {
+                    cmbFromBatch.SelectedIndex = 0;
+                    cmbToBatch.SelectedIndex = 0;
+                    chkLastBatch.Checked = false;
+                    UncheckAllOptionsInCheckBoxList();
+                }
             }
         }
 
@@ -415,7 +419,8 @@ namespace NilkanthApplication
                 string batchnos = "";
                 string[] BatchDateDetails;
                 string[] toBatchDetails;
-                string selecteddate = "";
+                string selectedFromDate = "";
+                string selectedToDate = "";
                 bool flag = false;
 
                 if (chkLstBatchNo.CheckedItems.Count > 0)
@@ -429,7 +434,7 @@ namespace NilkanthApplication
                     BatchDateDetails = cmbBatchNo.Text.Split(' ');
                     //BatchDateDetails = new string[1];
                     batchnos += BatchDateDetails[0] + ",";
-                    selecteddate = BatchDateDetails[1].Replace("(", "").Replace(")", "");
+                    selectedFromDate = BatchDateDetails[1].Replace("(", "").Replace(")", "");
                     //BatchDateDetails[0] = cmbBatchNo.Text;
                     this.lblErrorMsg.Visible = false;
                     flag = true;
@@ -437,8 +442,9 @@ namespace NilkanthApplication
                 else if (cmbFromBatch.SelectedIndex > 0 && cmbToBatch.SelectedIndex > 0)
                 {
                     BatchDateDetails = cmbFromBatch.Text.Split(' ');
-                    selecteddate = BatchDateDetails[1].Replace("(", "").Replace(")", "");
+                    selectedFromDate = BatchDateDetails[1].Replace("(", "").Replace(")", "");
                     toBatchDetails = cmbToBatch.Text.Split(' ');
+                    selectedToDate = toBatchDetails[1].Replace("(", "").Replace(")", "");
 
                     for (int i = Convert.ToInt32(BatchDateDetails[0]); i >= Convert.ToInt32(toBatchDetails[0]); i--)
                     {
@@ -488,7 +494,7 @@ namespace NilkanthApplication
                         BatchDateDetails = chkLstBatchNo.CheckedItems[a].ToString().Split(' ');
                         batchnos += BatchDateDetails[0] + ",";
                         if (a == 0)
-                            selecteddate = BatchDateDetails[1].Replace("(", "").Replace(")", "");
+                            selectedFromDate = BatchDateDetails[1].Replace("(", "").Replace(")", "");
                     }
 
                     this.lblErrorMsg.Visible = false;
@@ -535,7 +541,7 @@ namespace NilkanthApplication
 
                 if (flag == true)
                 {
-                    ReportTrip rpt = new ReportTrip(batchnos, selecteddate);
+                    ReportTrip rpt = new ReportTrip(batchnos, selectedFromDate,selectedToDate);
                     //ReportTrip rpt = new ReportTrip(BatchDateDetails);
                     rpt.Show();
                     rpt.BringToFront();
@@ -552,6 +558,7 @@ namespace NilkanthApplication
             bool @checked = this.chkLastBatch.Checked;
             if (@checked)
             {
+                UncheckAllOptionsInCheckBoxList();
                 this.dataTable = new DataTable();
 
                 this.dataTable = Functions.GetTableDataBySP("GetLastBatchNo");
@@ -665,12 +672,48 @@ namespace NilkanthApplication
 
         private void chkLstBatchNo_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            //if(chkLstBatchNo.CheckedItems.Count > 0)
-            //{
-            //    chkLastBatch.Checked = false;
-            //    cmbBatchNo.SelectedIndex = 0;
-            //}
+            if (e.NewValue != CheckState.Checked)
+                return;
+
+            // Allow ONLY one checked item
+            for (int i = 0; i < chkLstBatchNo.Items.Count; i++)
+            {
+                if (i != e.Index)
+                    chkLstBatchNo.SetItemChecked(i, false);
+            }
+
+            string selectedText = chkLstBatchNo.Items[e.Index].ToString();
+
+            // Format: "12 (14-11-2024)"
+            string[] parts = selectedText.Split(' ');
+
+            string batchNo = parts[0];
+            string date = parts[1].Replace("(", "").Replace(")", "");
+
+            // Disable other filters
+            chkLastBatch.Checked = false;
+            cmbFromBatch.SelectedIndex = 0;
+            cmbToBatch.SelectedIndex = 0;
+
+            // Select batch in dropdown
+            cmbBatchNo.SelectedIndexChanged -= cmbBatchNo_SelectedIndexChanged;
+
+            for (int i = 0; i < cmbBatchNo.Items.Count; i++)
+            {
+                DataRowView drv = cmbBatchNo.Items[i] as DataRowView;
+                if (drv != null && drv["BatchNoWithDate"].ToString().StartsWith(batchNo + " "))
+                {
+                    cmbBatchNo.SelectedIndex = i;
+                    break;
+                }
+            }
+
+            cmbBatchNo.SelectedIndexChanged += cmbBatchNo_SelectedIndexChanged;
+
+            // Update grid directly
+            BindGrid(batchNo, date);
         }
+
 
         private void UncheckAllOptionsInCheckBoxList()
         {

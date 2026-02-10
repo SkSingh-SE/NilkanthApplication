@@ -236,5 +236,10 @@ namespace NilkanthApplication
             }
             return true;
         }
+
+        private void textBoxMarginName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

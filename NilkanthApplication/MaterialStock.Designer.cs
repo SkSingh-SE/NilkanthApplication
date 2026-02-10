@@ -62,7 +62,7 @@ namespace NilkanthApplication
             this.lblId.AutoSize = true;
             this.lblId.Location = new System.Drawing.Point(662, 32);
             this.lblId.Name = "lblId";
-            this.lblId.Size = new System.Drawing.Size(16, 17);
+            this.lblId.Size = new System.Drawing.Size(14, 16);
             this.lblId.TabIndex = 152;
             this.lblId.Text = "0";
             this.lblId.Visible = false;
@@ -108,11 +108,11 @@ namespace NilkanthApplication
             // 
             this.labelAmount.AutoSize = true;
             this.labelAmount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.labelAmount.Location = new System.Drawing.Point(320, 210);
+            this.labelAmount.Location = new System.Drawing.Point(237, 210);
             this.labelAmount.Name = "labelAmount";
-            this.labelAmount.Size = new System.Drawing.Size(99, 25);
+            this.labelAmount.Size = new System.Drawing.Size(182, 25);
             this.labelAmount.TabIndex = 157;
-            this.labelAmount.Text = "Amount :";
+            this.labelAmount.Text = "Material Amount :";
             // 
             // lblVersion
             // 
@@ -214,6 +214,7 @@ namespace NilkanthApplication
             this.textBoxMarginName.Name = "textBoxMarginName";
             this.textBoxMarginName.Size = new System.Drawing.Size(409, 28);
             this.textBoxMarginName.TabIndex = 199;
+            this.textBoxMarginName.SelectedIndexChanged += new System.EventHandler(this.textBoxMarginName_SelectedIndexChanged);
             // 
             // MaterialStock
             // 

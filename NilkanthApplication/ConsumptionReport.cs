@@ -466,10 +466,12 @@ namespace NilkanthApplication
                         truckno,
                         "'"
                     }));
-
-                    for(int i = 0; i<dataTableMqube.Rows.Count; i++)
+                    if (dataTableMqube != null)
                     {
-                        MQube = MQube + Convert.ToDouble(dataTableMqube.Rows[i][0]);
+                        for (int i = 0; i < dataTableMqube.Rows.Count; i++)
+                        {
+                            MQube = MQube + Convert.ToDouble(dataTableMqube.Rows[i][0]);
+                        }
                     }
 
                     lblMQube.Text = string.Format("{0:0.00}", MQube).ToString();
@@ -830,9 +832,9 @@ namespace NilkanthApplication
                 // Column Settings
                 dgvComparison.Columns["SrNo"].HeaderText = "Sr No";
                 dgvComparison.Columns["MaterialName"].HeaderText = "Material Name";
-                dgvComparison.Columns["ActualStock"].HeaderText = "Actual Stock";
-                dgvComparison.Columns["AddedStock"].HeaderText = "Added Stock";
-                dgvComparison.Columns["AvailableStock"].HeaderText = "Available Stock";
+                dgvComparison.Columns["ActualStock"].HeaderText = "Actual In KG";
+                dgvComparison.Columns["AddedStock"].HeaderText = "Added Material";
+                dgvComparison.Columns["AvailableStock"].HeaderText = "Available Material";
 
                 // Header Style Same as First Grid
                 dgvComparison.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
@@ -850,13 +852,13 @@ namespace NilkanthApplication
 
         private void dgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
-                if(dgvList.Columns[e.ColumnIndex].Name == "MaterialName")
+                if (dgvList.Columns[e.ColumnIndex].Name == "MaterialName")
                 {
-                string materialName = dgvList.Rows[e.RowIndex].Cells["MaterialName"].Value.ToString();
-                MaterialStock materialStock = new MaterialStock(materialName);
-                materialStock.ShowDialog();
+                    string materialName = dgvList.Rows[e.RowIndex].Cells["MaterialName"].Value.ToString();
+                    MaterialStock materialStock = new MaterialStock(materialName);
+                    materialStock.ShowDialog();
                 }
             }
         }

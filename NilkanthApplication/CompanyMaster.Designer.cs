@@ -76,11 +76,6 @@ namespace NilkanthApplication
             this.txtField1Value = new System.Windows.Forms.TextBox();
             this.btnPartyDetails = new System.Windows.Forms.Button();
             this.chkShowWhatsapp = new System.Windows.Forms.CheckBox();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnHome = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.chkShowVarPInKg = new System.Windows.Forms.CheckBox();
             this.chkShowHeader = new System.Windows.Forms.CheckBox();
             this.labelTripReportFlag = new System.Windows.Forms.Label();
@@ -92,6 +87,11 @@ namespace NilkanthApplication
             this.textGstNo = new System.Windows.Forms.TextBox();
             this.txtReportFooDesc = new System.Windows.Forms.RichTextBox();
             this.labelRptFDesc = new System.Windows.Forms.Label();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnHome = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -498,80 +498,6 @@ namespace NilkanthApplication
             this.chkShowWhatsapp.Text = "Show Whatsapp";
             this.chkShowWhatsapp.UseVisualStyleBackColor = true;
             // 
-            // btnLogout
-            // 
-            this.btnLogout.CausesValidation = false;
-            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnLogout.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.btnLogout.FlatAppearance.BorderSize = 0;
-            this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Image = global::NilkanthApplication.Properties.Resources.Logout;
-            this.btnLogout.Location = new System.Drawing.Point(1266, 977);
-            this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(81, 64);
-            this.btnLogout.TabIndex = 50;
-            this.btnLogout.UseVisualStyleBackColor = true;
-            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::NilkanthApplication.Properties.Resources.Line;
-            this.pictureBox1.Location = new System.Drawing.Point(9, 948);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1348, 10);
-            this.pictureBox1.TabIndex = 48;
-            this.pictureBox1.TabStop = false;
-            // 
-            // btnBack
-            // 
-            this.btnBack.CausesValidation = false;
-            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnBack.FlatAppearance.BorderSize = 0;
-            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack.Image = global::NilkanthApplication.Properties.Resources.back;
-            this.btnBack.Location = new System.Drawing.Point(1116, 7);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(144, 64);
-            this.btnBack.TabIndex = 45;
-            this.btnBack.Text = "&Back";
-            this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnBack.UseVisualStyleBackColor = true;
-            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
-            // 
-            // btnHome
-            // 
-            this.btnHome.BackColor = System.Drawing.Color.White;
-            this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.btnHome.CausesValidation = false;
-            this.btnHome.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHome.FlatAppearance.BorderSize = 0;
-            this.btnHome.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHome.Image = global::NilkanthApplication.Properties.Resources.Home;
-            this.btnHome.Location = new System.Drawing.Point(12, 12);
-            this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(83, 61);
-            this.btnHome.TabIndex = 46;
-            this.btnHome.UseVisualStyleBackColor = false;
-            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-            // 
-            // btnSave
-            // 
-            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Image = global::NilkanthApplication.Properties.Resources.Save;
-            this.btnSave.Location = new System.Drawing.Point(904, 867);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(132, 42);
-            this.btnSave.TabIndex = 4;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
             // chkShowVarPInKg
             // 
             this.chkShowVarPInKg.AutoSize = true;
@@ -679,13 +605,87 @@ namespace NilkanthApplication
             this.labelRptFDesc.Text = "Report Footer Description :";
             this.labelRptFDesc.Click += new System.EventHandler(this.label1_Click);
             // 
+            // btnLogout
+            // 
+            this.btnLogout.CausesValidation = false;
+            this.btnLogout.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnLogout.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnLogout.FlatAppearance.BorderSize = 0;
+            this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnLogout.Image = global::NilkanthApplication.Properties.Resources.Logout;
+            this.btnLogout.Location = new System.Drawing.Point(1266, 977);
+            this.btnLogout.Name = "btnLogout";
+            this.btnLogout.Size = new System.Drawing.Size(81, 64);
+            this.btnLogout.TabIndex = 50;
+            this.btnLogout.UseVisualStyleBackColor = true;
+            this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::NilkanthApplication.Properties.Resources.Line;
+            this.pictureBox1.Location = new System.Drawing.Point(9, 948);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1348, 10);
+            this.pictureBox1.TabIndex = 48;
+            this.pictureBox1.TabStop = false;
+            // 
+            // btnBack
+            // 
+            this.btnBack.CausesValidation = false;
+            this.btnBack.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnBack.FlatAppearance.BorderSize = 0;
+            this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Image = global::NilkanthApplication.Properties.Resources.back;
+            this.btnBack.Location = new System.Drawing.Point(1116, 7);
+            this.btnBack.Name = "btnBack";
+            this.btnBack.Size = new System.Drawing.Size(144, 64);
+            this.btnBack.TabIndex = 45;
+            this.btnBack.Text = "&Back";
+            this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnBack.UseVisualStyleBackColor = true;
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+            // 
+            // btnHome
+            // 
+            this.btnHome.BackColor = System.Drawing.Color.White;
+            this.btnHome.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.btnHome.CausesValidation = false;
+            this.btnHome.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHome.FlatAppearance.BorderSize = 0;
+            this.btnHome.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnHome.Image = global::NilkanthApplication.Properties.Resources.Home;
+            this.btnHome.Location = new System.Drawing.Point(12, 12);
+            this.btnHome.Name = "btnHome";
+            this.btnHome.Size = new System.Drawing.Size(83, 61);
+            this.btnHome.TabIndex = 46;
+            this.btnHome.UseVisualStyleBackColor = false;
+            this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
+            // 
+            // btnSave
+            // 
+            this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSave.Image = global::NilkanthApplication.Properties.Resources.Save;
+            this.btnSave.Location = new System.Drawing.Point(904, 867);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(132, 42);
+            this.btnSave.TabIndex = 4;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // CompanyMaster
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1380, 1032);
+            this.ClientSize = new System.Drawing.Size(1443, 1032);
             this.Controls.Add(this.txtReportFooDesc);
             this.Controls.Add(this.labelRptFDesc);
             this.Controls.Add(this.textMobileNo);

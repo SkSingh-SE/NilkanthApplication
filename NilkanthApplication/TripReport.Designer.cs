@@ -36,6 +36,7 @@ namespace NilkanthApplication
             this.label4 = new System.Windows.Forms.Label();
             this.cmbClientDetails = new System.Windows.Forms.ComboBox();
             this.lblClient = new System.Windows.Forms.Label();
+            this.btnDeliveryChallan = new System.Windows.Forms.Button();
             this.btnSendWhatsApp = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnManualImport = new System.Windows.Forms.Button();
@@ -46,7 +47,6 @@ namespace NilkanthApplication
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
-            this.btnDeliveryChallan = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -258,6 +258,17 @@ namespace NilkanthApplication
             this.lblClient.TabIndex = 124;
             this.lblClient.Text = "Client";
             // 
+            // btnDeliveryChallan
+            // 
+            this.btnDeliveryChallan.BackColor = System.Drawing.Color.Blue;
+            this.btnDeliveryChallan.Location = new System.Drawing.Point(216, 641);
+            this.btnDeliveryChallan.Name = "btnDeliveryChallan";
+            this.btnDeliveryChallan.Size = new System.Drawing.Size(200, 62);
+            this.btnDeliveryChallan.TabIndex = 127;
+            this.btnDeliveryChallan.Text = "Delivery Challan";
+            this.btnDeliveryChallan.UseVisualStyleBackColor = false;
+            this.btnDeliveryChallan.Click += new System.EventHandler(this.btnDeliveryChallan_Click);
+            // 
             // btnSendWhatsApp
             // 
             this.btnSendWhatsApp.CausesValidation = false;
@@ -432,17 +443,6 @@ namespace NilkanthApplication
             this.btnHome.TabIndex = 5;
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-            // 
-            // btnDeliveryChallan
-            // 
-            this.btnDeliveryChallan.BackColor = System.Drawing.Color.Blue;
-            this.btnDeliveryChallan.Location = new System.Drawing.Point(216, 652);
-            this.btnDeliveryChallan.Name = "btnDeliveryChallan";
-            this.btnDeliveryChallan.Size = new System.Drawing.Size(228, 43);
-            this.btnDeliveryChallan.TabIndex = 127;
-            this.btnDeliveryChallan.Text = "Delivery Challan";
-            this.btnDeliveryChallan.UseVisualStyleBackColor = false;
-            this.btnDeliveryChallan.Click += new System.EventHandler(this.btnDeliveryChallan_Click);
             // 
             // TripReport
             // 
