@@ -141,6 +141,8 @@
       <DependentUpon>BreakdownList.cs</DependentUpon>
     </Compile>
     <Compile Include="Classes\EncryptDecryptClass.cs" />
+    <Compile Include="Classes\PLCJson.cs" />
+    <Compile Include="Classes\PlcSyncManager.cs" />
     <Compile Include="ConsumptionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -626,6 +628,9 @@
     <None Include="Resources\WhatsAppIcon-1.jpg" />
     <None Include="Resources\users_1.bmp" />
     <None Include="Resources\Clients.bmp" />
+    <None Include="Resources\Clients.png" />
+    <None Include="Resources\Delivery_Challan.png" />
+    <None Include="Resources\Materila_Stock.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

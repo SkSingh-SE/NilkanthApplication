@@ -327,6 +327,8 @@ namespace NilkanthApplication {
             
             private global::System.Data.DataColumn columnActCUM;
             
+            private global::System.Data.DataColumn columnCompanyLogo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public TripReportData_Select3DataTable() {
@@ -554,6 +556,14 @@ namespace NilkanthApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CompanyLogoColumn {
+                get {
+                    return this.columnCompanyLogo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -613,7 +623,8 @@ namespace NilkanthApplication {
                         string Field2Label, 
                         string Field2Value, 
                         decimal SetBatches, 
-                        decimal ActCUM) {
+                        decimal ActCUM, 
+                        byte[] CompanyLogo) {
                 TripReportData_Select3Row rowTripReportData_Select3Row = ((TripReportData_Select3Row)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Customer,
@@ -639,7 +650,8 @@ namespace NilkanthApplication {
                         Field2Label,
                         Field2Value,
                         SetBatches,
-                        ActCUM};
+                        ActCUM,
+                        CompanyLogo};
                 rowTripReportData_Select3Row.ItemArray = columnValuesArray;
                 this.Rows.Add(rowTripReportData_Select3Row);
                 return rowTripReportData_Select3Row;
@@ -686,6 +698,7 @@ namespace NilkanthApplication {
                 this.columnField2Value = base.Columns["Field2Value"];
                 this.columnSetBatches = base.Columns["SetBatches"];
                 this.columnActCUM = base.Columns["ActCUM"];
+                this.columnCompanyLogo = base.Columns["CompanyLogo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -739,6 +752,8 @@ namespace NilkanthApplication {
                 base.Columns.Add(this.columnSetBatches);
                 this.columnActCUM = new global::System.Data.DataColumn("ActCUM", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnActCUM);
+                this.columnCompanyLogo = new global::System.Data.DataColumn("CompanyLogo", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompanyLogo);
                 this.columnCustomer.ReadOnly = true;
                 this.columnCustomer.MaxLength = 300;
                 this.columnClientName.ReadOnly = true;
@@ -778,6 +793,7 @@ namespace NilkanthApplication {
                 this.columnField2Value.MaxLength = 50;
                 this.columnSetBatches.ReadOnly = true;
                 this.columnActCUM.ReadOnly = true;
+                this.columnCompanyLogo.ReadOnly = true;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1307,6 +1323,22 @@ namespace NilkanthApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public byte[] CompanyLogo {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableTripReportData_Select3.CompanyLogoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompanyLogo\' in table \'TripReportData_Select3\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableTripReportData_Select3.CompanyLogoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsCustomerNull() {
                 return this.IsNull(this.tableTripReportData_Select3.CustomerColumn);
             }
@@ -1592,6 +1624,18 @@ namespace NilkanthApplication {
             public void SetActCUMNull() {
                 this[this.tableTripReportData_Select3.ActCUMColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCompanyLogoNull() {
+                return this.IsNull(this.tableTripReportData_Select3.CompanyLogoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCompanyLogoNull() {
+                this[this.tableTripReportData_Select3.CompanyLogoColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -1777,6 +1821,7 @@ namespace NilkanthApplication.TripDataSet3TableAdapters {
             tableMapping.ColumnMappings.Add("Field2Value", "Field2Value");
             tableMapping.ColumnMappings.Add("SetBatches", "SetBatches");
             tableMapping.ColumnMappings.Add("ActCUM", "ActCUM");
+            tableMapping.ColumnMappings.Add("CompanyLogo", "CompanyLogo");
             this._adapter.TableMappings.Add(tableMapping);
         }
         

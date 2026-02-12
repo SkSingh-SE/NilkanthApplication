@@ -824,9 +824,23 @@ namespace NilkanthApplication
 
                 dgvComparison.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
 
-                foreach (DataGridViewRow row in dgvComparison.Rows)
+                
+                for (int i = 0; i < this.dgvComparison.Rows.Count; i++)
                 {
-                    row.ReadOnly = true;
+                    bool flag4 = (i + 1) % 2 != 0;
+                    if (flag4)
+                    {
+                        this.dgvComparison.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(255, 226, 239, 218);
+                    }
+                    else
+                    {
+                        this.dgvComparison.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                    }
+                    if (i == 0)
+                    {
+                        this.dgvComparison.CurrentCell = this.dgvComparison.Rows[0].Cells[1];
+                        this.dgvComparison.Rows[0].Selected = true;
+                    }
                 }
 
                 // Column Settings

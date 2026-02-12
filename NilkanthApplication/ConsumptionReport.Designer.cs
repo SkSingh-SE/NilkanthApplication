@@ -589,12 +589,15 @@ namespace NilkanthApplication
             // 
             // btnStock
             // 
-            this.btnStock.BackColor = System.Drawing.Color.Blue;
-            this.btnStock.Location = new System.Drawing.Point(168, 619);
+            this.btnStock.AutoSize = true;
+            this.btnStock.BackColor = System.Drawing.Color.Transparent;
+            this.btnStock.FlatAppearance.BorderSize = 0;
+            this.btnStock.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnStock.Image = global::NilkanthApplication.Properties.Resources.Materila_Stock;
+            this.btnStock.Location = new System.Drawing.Point(168, 613);
             this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(228, 43);
+            this.btnStock.Size = new System.Drawing.Size(210, 69);
             this.btnStock.TabIndex = 133;
-            this.btnStock.Text = "Material Stock";
             this.btnStock.UseVisualStyleBackColor = false;
             this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
             // 
@@ -719,6 +722,7 @@ namespace NilkanthApplication
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.dgvList);
+            this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ConsumptionReport";

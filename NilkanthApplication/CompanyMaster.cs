@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,14 @@ namespace NilkanthApplication
     public partial class CompanyMaster : Form
     {
         string AddEditPAges, ViewPAge, DeletePage;
+        string CompanyName, Location, PlantName;
         public CompanyMaster()
         {
             InitializeComponent();
         }
 
         public string textboxName = "";
+        byte[] companyLogoBytes = null;
 
         public bool rdonlModelNo
         {
@@ -109,6 +112,37 @@ namespace NilkanthApplication
                     return;
                 }
 
+                if (!string.IsNullOrWhiteSpace(txtReportFooDesc.Text) && txtReportFooDesc.Text.Trim().Length > 200)
+                {
+                    MessageBox.Show("Footer text should not exceed 200 characters.");
+                    txtReportFooDesc.Focus();
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(textLocation.Text))
+                {
+                    MessageBox.Show("Location should not blank.");
+                    textLocation.Focus();
+                    return;
+                }
+                if (string.IsNullOrWhiteSpace(textPlantName.Text))
+                {
+                    MessageBox.Show("Location should not blank.");
+                    textPlantName.Focus();
+                    return;
+                }
+                bool isUpdate = lblId.Text != "0";
+
+                if (isUpdate)
+                {
+                    if (CompanyName != txtCompanyName.Text.Trim() ||
+                        Location != textLocation.Text.Trim() ||
+                        PlantName != textPlantName.Text.Trim())
+                    {
+                        MessageBox.Show("Company Name, Location and Plant Name cannot be modified.");
+                        return;
+                    }
+                }
+
                 if (ErrMsg != "")
                     MessageBox.Show("Please Fill " + ErrMsg);
                 else
@@ -143,7 +177,11 @@ namespace NilkanthApplication
                     SQLHelper._objCmd.Parameters.AddWithValue("@Field1Value", Field1Value);
                     SQLHelper._objCmd.Parameters.AddWithValue("@Field2Label", Field2Label);
                     SQLHelper._objCmd.Parameters.AddWithValue("@Field2Value", Field2Value);
-                    
+
+                    SQLHelper._objCmd.Parameters.AddWithValue("@CompanyLogo",companyLogoBytes ?? (object)DBNull.Value);
+                    SQLHelper._objCmd.Parameters.AddWithValue("@Location", textLocation.Text.ToString().Trim());
+                    SQLHelper._objCmd.Parameters.AddWithValue("@PlantName", textPlantName.Text.ToString().Trim());
+
                     string text2;
 
                     if (lblId.Text.Trim() == "0")
@@ -281,7 +319,21 @@ namespace NilkanthApplication
                     txtField2Value.Text = this.dataTable.Rows[0]["Field2Value"].ToString();
 
                     txtReportFooDesc.Text = this.dataTable.Rows[0]["RptFooter"].ToString();
+                    textLocation.Text = this.dataTable.Rows[0]["Location"].ToString();
+                    textPlantName.Text = this.dataTable.Rows[0]["PlantName"].ToString();
+                    if (this.dataTable.Rows[0]["CompanyLogo"] != DBNull.Value)
+                    {
+                        byte[] imgBytes = (byte[])this.dataTable.Rows[0]["CompanyLogo"];
+                        companyLogoBytes = imgBytes;
 
+                        using (MemoryStream ms = new MemoryStream(imgBytes))
+                        {
+                            picCompanyLogo.Image = Image.FromStream(ms);
+                        }
+                    }
+                    CompanyName = txtCompanyName.Text;
+                    Location = textLocation.Text;
+                    PlantName = textPlantName.Text;
                 }
             }
             catch (Exception ex)
@@ -427,14 +479,16 @@ namespace NilkanthApplication
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void btnUploadLogo_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp";
 
-        }
-
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
-        {
-
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                companyLogoBytes = File.ReadAllBytes(ofd.FileName);
+                picCompanyLogo.Image = Image.FromFile(ofd.FileName);
+            }
         }
 
         private void txtModelNumber_DoubleClick(object sender, EventArgs e)

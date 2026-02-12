@@ -108,11 +108,11 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Image Name="Image2">
-            <Source>Embedded</Source>
-            <Value>Logo</Value>
+          <Image Name="CompanyLogo">
+            <Source>Database</Source>
+            <Value>=IIF(IsNothing(Fields!CompanyLogo.Value), Nothing, Fields!CompanyLogo.Value)</Value>
+            <MIMEType>image/png</MIMEType>
             <Sizing>Fit</Sizing>
-            <Top>0cm</Top>
             <Left>14.37322cm</Left>
             <Height>2.30576cm</Height>
             <Width>5.37278cm</Width>
@@ -1905,7 +1905,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Challan (Original)</Value>
+                    <Value>Challan (Copy)</Value>
                     <Style>
                       <FontFamily>Segoe UI</FontFamily>
                     </Style>
@@ -2002,9 +2002,10 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Image Name="Image3">
-            <Source>Embedded</Source>
-            <Value>Logo</Value>
+          <Image Name="CompanyLogoCopy">
+            <Source>Database</Source>
+            <Value>=IIF(IsNothing(Fields!CompanyLogo.Value), Nothing, Fields!CompanyLogo.Value)</Value>
+            <MIMEType>image/png</MIMEType>
             <Sizing>Fit</Sizing>
             <Left>14.37322cm</Left>
             <Height>2.30576cm</Height>
@@ -3945,6 +3946,10 @@
         <Field Name="ClientPersonName">
           <DataField>ClientPersonName</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="CompanyLogo">
+          <DataField>CompanyLogo</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>

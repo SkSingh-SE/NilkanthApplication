@@ -92,7 +92,15 @@ namespace NilkanthApplication
             this.btnBack = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
+            this.picCompanyLogo = new System.Windows.Forms.PictureBox();
+            this.labelCompanyLogo = new System.Windows.Forms.Label();
+            this.btnUploadLogo = new System.Windows.Forms.Button();
+            this.textPlantName = new System.Windows.Forms.TextBox();
+            this.labelPlantName = new System.Windows.Forms.Label();
+            this.textLocation = new System.Windows.Forms.TextBox();
+            this.labelLocation = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCompanyLogo)).BeginInit();
             this.SuspendLayout();
             // 
             // labelCompanyName
@@ -347,9 +355,9 @@ namespace NilkanthApplication
             // txtApiUrl
             // 
             this.txtApiUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtApiUrl.Location = new System.Drawing.Point(431, 377);
+            this.txtApiUrl.Location = new System.Drawing.Point(787, 374);
             this.txtApiUrl.Name = "txtApiUrl";
-            this.txtApiUrl.Size = new System.Drawing.Size(604, 30);
+            this.txtApiUrl.Size = new System.Drawing.Size(247, 30);
             this.txtApiUrl.TabIndex = 102;
             this.txtApiUrl.DoubleClick += new System.EventHandler(this.txtApiUrl_DoubleClick);
             // 
@@ -357,7 +365,7 @@ namespace NilkanthApplication
             // 
             this.labelApiUrl.AutoSize = true;
             this.labelApiUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.labelApiUrl.Location = new System.Drawing.Point(330, 379);
+            this.labelApiUrl.Location = new System.Drawing.Point(686, 376);
             this.labelApiUrl.Name = "labelApiUrl";
             this.labelApiUrl.Size = new System.Drawing.Size(90, 25);
             this.labelApiUrl.TabIndex = 101;
@@ -366,9 +374,9 @@ namespace NilkanthApplication
             // txtApiKey
             // 
             this.txtApiKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.txtApiKey.Location = new System.Drawing.Point(431, 345);
+            this.txtApiKey.Location = new System.Drawing.Point(787, 342);
             this.txtApiKey.Name = "txtApiKey";
-            this.txtApiKey.Size = new System.Drawing.Size(604, 30);
+            this.txtApiKey.Size = new System.Drawing.Size(247, 30);
             this.txtApiKey.TabIndex = 100;
             this.txtApiKey.DoubleClick += new System.EventHandler(this.txtApiKey_DoubleClick);
             // 
@@ -376,7 +384,7 @@ namespace NilkanthApplication
             // 
             this.labelApiKey.AutoSize = true;
             this.labelApiKey.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.labelApiKey.Location = new System.Drawing.Point(320, 347);
+            this.labelApiKey.Location = new System.Drawing.Point(676, 344);
             this.labelApiKey.Name = "labelApiKey";
             this.labelApiKey.Size = new System.Drawing.Size(101, 25);
             this.labelApiKey.TabIndex = 99;
@@ -477,13 +485,19 @@ namespace NilkanthApplication
             // 
             // btnPartyDetails
             // 
-            this.btnPartyDetails.BackColor = System.Drawing.Color.Blue;
+            this.btnPartyDetails.AutoSize = true;
+            this.btnPartyDetails.BackColor = System.Drawing.Color.Transparent;
+            this.btnPartyDetails.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPartyDetails.FlatAppearance.BorderSize = 0;
+            this.btnPartyDetails.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnPartyDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnPartyDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPartyDetails.ForeColor = System.Drawing.Color.White;
-            this.btnPartyDetails.Location = new System.Drawing.Point(521, 15);
+            this.btnPartyDetails.Image = ((System.Drawing.Image)(resources.GetObject("btnPartyDetails.Image")));
+            this.btnPartyDetails.Location = new System.Drawing.Point(571, 17);
             this.btnPartyDetails.Name = "btnPartyDetails";
-            this.btnPartyDetails.Size = new System.Drawing.Size(214, 58);
+            this.btnPartyDetails.Size = new System.Drawing.Size(188, 72);
             this.btnPartyDetails.TabIndex = 113;
-            this.btnPartyDetails.Text = "Clients";
             this.btnPartyDetails.UseVisualStyleBackColor = false;
             this.btnPartyDetails.Click += new System.EventHandler(this.btnPartyDetails_Click);
             // 
@@ -592,7 +606,6 @@ namespace NilkanthApplication
             this.txtReportFooDesc.Size = new System.Drawing.Size(604, 56);
             this.txtReportFooDesc.TabIndex = 124;
             this.txtReportFooDesc.Text = "";
-            this.txtReportFooDesc.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // labelRptFDesc
             // 
@@ -603,7 +616,6 @@ namespace NilkanthApplication
             this.labelRptFDesc.Size = new System.Drawing.Size(270, 25);
             this.labelRptFDesc.TabIndex = 125;
             this.labelRptFDesc.Text = "Report Footer Description :";
-            this.labelRptFDesc.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnLogout
             // 
@@ -614,7 +626,7 @@ namespace NilkanthApplication
             this.btnLogout.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnLogout.Image = global::NilkanthApplication.Properties.Resources.Logout;
+            this.btnLogout.Image = ((System.Drawing.Image)(resources.GetObject("btnLogout.Image")));
             this.btnLogout.Location = new System.Drawing.Point(1266, 977);
             this.btnLogout.Name = "btnLogout";
             this.btnLogout.Size = new System.Drawing.Size(81, 64);
@@ -624,10 +636,10 @@ namespace NilkanthApplication
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::NilkanthApplication.Properties.Resources.Line;
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(9, 948);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1348, 10);
+            this.pictureBox1.Size = new System.Drawing.Size(1400, 10);
             this.pictureBox1.TabIndex = 48;
             this.pictureBox1.TabStop = false;
             // 
@@ -640,7 +652,7 @@ namespace NilkanthApplication
             this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnBack.Image = global::NilkanthApplication.Properties.Resources.back;
+            this.btnBack.Image = ((System.Drawing.Image)(resources.GetObject("btnBack.Image")));
             this.btnBack.Location = new System.Drawing.Point(1116, 7);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(144, 64);
@@ -660,7 +672,7 @@ namespace NilkanthApplication
             this.btnHome.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnHome.Image = global::NilkanthApplication.Properties.Resources.Home;
+            this.btnHome.Image = ((System.Drawing.Image)(resources.GetObject("btnHome.Image")));
             this.btnHome.Location = new System.Drawing.Point(12, 12);
             this.btnHome.Name = "btnHome";
             this.btnHome.Size = new System.Drawing.Size(83, 61);
@@ -671,13 +683,79 @@ namespace NilkanthApplication
             // btnSave
             // 
             this.btnSave.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Image = global::NilkanthApplication.Properties.Resources.Save;
-            this.btnSave.Location = new System.Drawing.Point(904, 867);
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.Location = new System.Drawing.Point(904, 900);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(132, 42);
             this.btnSave.TabIndex = 4;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // picCompanyLogo
+            // 
+            this.picCompanyLogo.Location = new System.Drawing.Point(432, 841);
+            this.picCompanyLogo.Name = "picCompanyLogo";
+            this.picCompanyLogo.Size = new System.Drawing.Size(246, 101);
+            this.picCompanyLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCompanyLogo.TabIndex = 126;
+            this.picCompanyLogo.TabStop = false;
+            // 
+            // labelCompanyLogo
+            // 
+            this.labelCompanyLogo.AutoSize = true;
+            this.labelCompanyLogo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.labelCompanyLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelCompanyLogo.Location = new System.Drawing.Point(242, 853);
+            this.labelCompanyLogo.Name = "labelCompanyLogo";
+            this.labelCompanyLogo.Size = new System.Drawing.Size(171, 25);
+            this.labelCompanyLogo.TabIndex = 127;
+            this.labelCompanyLogo.Text = "Company Logo :";
+            // 
+            // btnUploadLogo
+            // 
+            this.btnUploadLogo.Location = new System.Drawing.Point(684, 853);
+            this.btnUploadLogo.Name = "btnUploadLogo";
+            this.btnUploadLogo.Size = new System.Drawing.Size(75, 42);
+            this.btnUploadLogo.TabIndex = 128;
+            this.btnUploadLogo.Text = "Upload";
+            this.btnUploadLogo.UseVisualStyleBackColor = true;
+            this.btnUploadLogo.Click += new System.EventHandler(this.btnUploadLogo_Click);
+            // 
+            // textPlantName
+            // 
+            this.textPlantName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textPlantName.Location = new System.Drawing.Point(430, 377);
+            this.textPlantName.Name = "textPlantName";
+            this.textPlantName.Size = new System.Drawing.Size(247, 30);
+            this.textPlantName.TabIndex = 132;
+            // 
+            // labelPlantName
+            // 
+            this.labelPlantName.AutoSize = true;
+            this.labelPlantName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelPlantName.Location = new System.Drawing.Point(285, 377);
+            this.labelPlantName.Name = "labelPlantName";
+            this.labelPlantName.Size = new System.Drawing.Size(136, 25);
+            this.labelPlantName.TabIndex = 131;
+            this.labelPlantName.Text = "Plant Name :";
+            // 
+            // textLocation
+            // 
+            this.textLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textLocation.Location = new System.Drawing.Point(430, 345);
+            this.textLocation.Name = "textLocation";
+            this.textLocation.Size = new System.Drawing.Size(247, 30);
+            this.textLocation.TabIndex = 130;
+            // 
+            // labelLocation
+            // 
+            this.labelLocation.AutoSize = true;
+            this.labelLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelLocation.Location = new System.Drawing.Point(314, 345);
+            this.labelLocation.Name = "labelLocation";
+            this.labelLocation.Size = new System.Drawing.Size(107, 25);
+            this.labelLocation.TabIndex = 129;
+            this.labelLocation.Text = "Location :";
             // 
             // CompanyMaster
             // 
@@ -686,6 +764,13 @@ namespace NilkanthApplication
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1443, 1032);
+            this.Controls.Add(this.textPlantName);
+            this.Controls.Add(this.labelPlantName);
+            this.Controls.Add(this.textLocation);
+            this.Controls.Add(this.labelLocation);
+            this.Controls.Add(this.btnUploadLogo);
+            this.Controls.Add(this.labelCompanyLogo);
+            this.Controls.Add(this.picCompanyLogo);
             this.Controls.Add(this.txtReportFooDesc);
             this.Controls.Add(this.labelRptFDesc);
             this.Controls.Add(this.textMobileNo);
@@ -753,6 +838,7 @@ namespace NilkanthApplication
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CompanyMaster_FormClosing);
             this.Load += new System.EventHandler(this.CompanyMaster_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picCompanyLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1069,5 +1155,12 @@ namespace NilkanthApplication
         private System.Windows.Forms.TextBox textGstNo;
         private RichTextBox txtReportFooDesc;
         private Label labelRptFDesc;
+        private PictureBox picCompanyLogo;
+        private Label labelCompanyLogo;
+        private Button btnUploadLogo;
+        private TextBox textPlantName;
+        private Label labelPlantName;
+        private TextBox textLocation;
+        private Label labelLocation;
     }
 }

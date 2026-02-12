@@ -149,6 +149,7 @@ namespace NilkanthApplication
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1353, 548);
             this.tabControl1.TabIndex = 38;
+
             // 
             // Home
             // 
@@ -291,7 +292,10 @@ namespace NilkanthApplication
             this.dgvProductionData.RowHeadersWidth = 50;
             this.dgvProductionData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductionData.RowsDefaultCellStyle = dataGridViewCellStyle4;
+            this.dgvProductionData.RowsDefaultCellStyle.BackColor = Color.White;
+
+            this.dgvProductionData.AlternatingRowsDefaultCellStyle.BackColor =
+                Color.FromArgb(226, 239, 218);
 
             this.dgvProductionData.RowTemplate.Height = 28;
             this.dgvProductionData.Dock = DockStyle.Fill;
@@ -305,18 +309,7 @@ namespace NilkanthApplication
             // -------------------------------
             // Highlight first row by default
             // -------------------------------
-            this.dgvProductionData.DataBindingComplete += (s, e) =>
-            {
-                if (this.dgvProductionData.Rows.Count > 0)
-                {
-                    var row = this.dgvProductionData.Rows[0];
-                    row.DefaultCellStyle.BackColor = Color.LightSeaGreen;
-                    row.DefaultCellStyle.ForeColor = Color.White;
-                    row.DefaultCellStyle.Font = new Font(
-                        this.dgvProductionData.Font, FontStyle.Bold);
-
-                }
-            };
+           
 
             // 
             // TotalProductionForMonth
@@ -445,21 +438,7 @@ namespace NilkanthApplication
             this.dgvTotalProdForSelectedMon.Size = new System.Drawing.Size(415, 415);
             this.dgvTotalProdForSelectedMon.TabIndex = 9;
 
-            // -------------------------------
-            // Highlight first row by default
-            // -------------------------------
-            this.dgvTotalProdForSelectedMon.DataBindingComplete += (s, e) =>
-            {
-                if (this.dgvTotalProdForSelectedMon.Rows.Count > 0)
-                {
-                    var row = this.dgvTotalProdForSelectedMon.Rows[0];
-                    row.DefaultCellStyle.BackColor = Color.LightSeaGreen;
-                    row.DefaultCellStyle.ForeColor = Color.White;
-                    row.DefaultCellStyle.Font = new Font(
-                        this.dgvTotalProdForSelectedMon.Font, FontStyle.Bold);
-
-                }
-            };
+           
             // 
             // btnPlcDataToCRM
             // 

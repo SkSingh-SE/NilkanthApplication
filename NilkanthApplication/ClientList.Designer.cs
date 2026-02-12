@@ -57,9 +57,9 @@ namespace NilkanthApplication
             // 
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(14, 780);
+            this.lblVersion.Location = new System.Drawing.Point(12, 624);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(95, 20);
+            this.lblVersion.Size = new System.Drawing.Size(87, 17);
             this.lblVersion.TabIndex = 111;
             this.lblVersion.Text = "Version : 2";
             // 
@@ -67,9 +67,9 @@ namespace NilkanthApplication
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold);
-            this.label12.Location = new System.Drawing.Point(99, 18);
+            this.label12.Location = new System.Drawing.Point(88, 14);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(302, 69);
+            this.label12.Size = new System.Drawing.Size(255, 58);
             this.label12.TabIndex = 109;
             this.label12.Text = "Client List";
             // 
@@ -78,17 +78,16 @@ namespace NilkanthApplication
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblFilterStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 852);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 681);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(1533, 32);
+            this.statusStrip1.Size = new System.Drawing.Size(1330, 26);
             this.statusStrip1.TabIndex = 108;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblFilterStatus
             // 
             this.lblFilterStatus.Name = "lblFilterStatus";
-            this.lblFilterStatus.Size = new System.Drawing.Size(78, 25);
+            this.lblFilterStatus.Size = new System.Drawing.Size(65, 20);
             this.lblFilterStatus.Text = "Filter By:";
             // 
             // btnCancel
@@ -101,10 +100,9 @@ namespace NilkanthApplication
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(688, 755);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnCancel.Location = new System.Drawing.Point(612, 604);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(125, 42);
+            this.btnCancel.Size = new System.Drawing.Size(111, 34);
             this.btnCancel.TabIndex = 107;
             this.btnCancel.TabStop = false;
             this.btnCancel.Text = "&Cancel";
@@ -114,9 +112,9 @@ namespace NilkanthApplication
             // 
             this.lblUserName.AutoSize = true;
             this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserName.Location = new System.Drawing.Point(14, 754);
+            this.lblUserName.Location = new System.Drawing.Point(12, 603);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(84, 20);
+            this.lblUserName.Size = new System.Drawing.Size(75, 17);
             this.lblUserName.TabIndex = 106;
             this.lblUserName.Text = "UerName";
             // 
@@ -148,8 +146,7 @@ namespace NilkanthApplication
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvList.EnableHeadersVisualStyles = false;
-            this.dgvList.Location = new System.Drawing.Point(14, 111);
-            this.dgvList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvList.Location = new System.Drawing.Point(12, 89);
             this.dgvList.MultiSelect = false;
             this.dgvList.Name = "dgvList";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -166,7 +163,7 @@ namespace NilkanthApplication
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvList.RowTemplate.Height = 28;
-            this.dgvList.Size = new System.Drawing.Size(1755, 710);
+            this.dgvList.Size = new System.Drawing.Size(1300, 474);
             this.dgvList.TabIndex = 104;
             // 
             // btnDelete
@@ -178,10 +175,9 @@ namespace NilkanthApplication
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Image = global::NilkanthApplication.Properties.Resources.Delete;
-            this.btnDelete.Location = new System.Drawing.Point(1340, 24);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDelete.Location = new System.Drawing.Point(1191, 19);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(173, 80);
+            this.btnDelete.Size = new System.Drawing.Size(154, 64);
             this.btnDelete.TabIndex = 110;
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -191,10 +187,9 @@ namespace NilkanthApplication
             // pictureBox1
             // 
             this.pictureBox1.Image = global::NilkanthApplication.Properties.Resources.Line;
-            this.pictureBox1.Location = new System.Drawing.Point(14, 711);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pictureBox1.Location = new System.Drawing.Point(12, 569);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1504, 12);
+            this.pictureBox1.Size = new System.Drawing.Size(1337, 10);
             this.pictureBox1.TabIndex = 105;
             this.pictureBox1.TabStop = false;
             // 
@@ -208,10 +203,9 @@ namespace NilkanthApplication
             this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Image = global::NilkanthApplication.Properties.Resources.Logout;
-            this.btnLogout.Location = new System.Drawing.Point(1424, 734);
-            this.btnLogout.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnLogout.Location = new System.Drawing.Point(1266, 587);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(91, 80);
+            this.btnLogout.Size = new System.Drawing.Size(81, 64);
             this.btnLogout.TabIndex = 103;
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
@@ -226,10 +220,9 @@ namespace NilkanthApplication
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.Image = global::NilkanthApplication.Properties.Resources.New;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(1190, 24);
-            this.btnNew.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnNew.Location = new System.Drawing.Point(1058, 19);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(164, 80);
+            this.btnNew.Size = new System.Drawing.Size(146, 64);
             this.btnNew.TabIndex = 99;
             this.btnNew.Text = "&New";
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -246,10 +239,9 @@ namespace NilkanthApplication
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Image = global::NilkanthApplication.Properties.Resources.Edit;
-            this.btnEdit.Location = new System.Drawing.Point(1012, 24);
-            this.btnEdit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnEdit.Location = new System.Drawing.Point(900, 19);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(156, 80);
+            this.btnEdit.Size = new System.Drawing.Size(139, 64);
             this.btnEdit.TabIndex = 100;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -266,10 +258,9 @@ namespace NilkanthApplication
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.Image = global::NilkanthApplication.Properties.Resources.back;
-            this.btnBack.Location = new System.Drawing.Point(844, 24);
-            this.btnBack.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnBack.Location = new System.Drawing.Point(750, 19);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(156, 80);
+            this.btnBack.Size = new System.Drawing.Size(139, 64);
             this.btnBack.TabIndex = 101;
             this.btnBack.Text = "&Back";
             this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -287,20 +278,19 @@ namespace NilkanthApplication
             this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHome.Image = global::NilkanthApplication.Properties.Resources.Home;
-            this.btnHome.Location = new System.Drawing.Point(14, 19);
-            this.btnHome.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnHome.Location = new System.Drawing.Point(12, 15);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(93, 76);
+            this.btnHome.Size = new System.Drawing.Size(83, 61);
             this.btnHome.TabIndex = 102;
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
             // 
             // ClientList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1533, 884);
+            this.ClientSize = new System.Drawing.Size(1330, 707);
             this.Controls.Add(this.lblVersion);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label12);
@@ -315,7 +305,6 @@ namespace NilkanthApplication
             this.Controls.Add(this.btnHome);
             this.Controls.Add(this.dgvList);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ClientList";
             this.Text = "PartyList";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

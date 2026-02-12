@@ -1,4 +1,5 @@
 ﻿
+using NilkanthApplication.Classes;
 using System;
 using System.ComponentModel;
 using System.Configuration;
@@ -20,11 +21,21 @@ namespace NilkanthApplication
         private int xpos = 0, ypos = 490;
         public string mode = "Left-to-Right";
         string currentyear = DateTime.Now.Year.ToString();
+
+        private System.Windows.Forms.Timer _syncTimer;
+        private PlcSyncManager _syncManager;
+        private bool _isSyncRunning = false;
         public MainScreen()
         {
             this.InitializeComponent();
             timer.Elapsed += new ElapsedEventHandler(timer_Elapsed);
             CheckForIllegalCrossThreadCalls = false;
+
+            tabControl1.SelectedIndexChanged += (s, e) =>
+            {
+                HighlightFirstRow(dgvProductionData);
+                HighlightFirstRow(dgvTotalProdForSelectedMon);
+            };
 
             //StartPosition = FormStartPosition.Manual;
             //Rectangle screen = Screen.FromPoint(System.Windows.Forms.Cursor.Position).WorkingArea;
@@ -57,6 +68,13 @@ namespace NilkanthApplication
         {
             try
             {
+                _syncManager = new PlcSyncManager();
+
+                _syncTimer = new System.Windows.Forms.Timer();
+                _syncTimer.Interval = 60000; // 60 seconds
+                _syncTimer.Tick += SyncTimer_Tick;
+                _syncTimer.Start();
+
                 //this.Location = new Point(0, 0);
                 //this.Size = Screen.PrimaryScreen.WorkingArea.Size;
                 this.Text = ConfigurationManager.AppSettings["CompanyName"];
@@ -179,6 +197,27 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error : MainScreen_Load", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+        private async void SyncTimer_Tick(object sender, EventArgs e)
+        {
+            if (_isSyncRunning)
+                return;
+
+            try
+            {
+                _isSyncRunning = true;
+                await _syncManager.ExecuteSyncAsync();
+            }
+            catch (Exception ex)
+            {
+                // Optional: log error
+                // File.WriteAllText("sync_error.txt", ex.ToString());
+            }
+            finally
+            {
+                _isSyncRunning = false;
+            }
+        }
+
         void BindYear()
         {
             try
@@ -291,7 +330,6 @@ namespace NilkanthApplication
                     {
                         column.SortMode = DataGridViewColumnSortMode.NotSortable;
                     }
-
                     string month = this.TotalProdForMonth_dataTable.Rows[0][0].ToString();
                     TotalProdForSelectedMonth(month, year);
                 }
@@ -509,29 +547,29 @@ namespace NilkanthApplication
                         column.SortMode = DataGridViewColumnSortMode.NotSortable;
                     }
 
-                    for (int i = 0; i < this.dgvProductionData.Rows.Count; i++)
-                    {
-                        bool flag4 = (i + 1) % 2 != 0;
-                        if (flag4)
-                        {
-                            this.dgvProductionData.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(255, 226, 239, 218);
-                        }
-                        else
-                        {
-                            this.dgvProductionData.Rows[i].DefaultCellStyle.BackColor = Color.White;
-                        }
+                    //for (int i = 0; i < this.dgvProductionData.Rows.Count; i++)
+                    //{
+                    //    bool flag4 = (i + 1) % 2 != 0;
+                    //    if (flag4)
+                    //    {
+                    //        this.dgvProductionData.Rows[i].DefaultCellStyle.BackColor = Color.FromArgb(255, 226, 239, 218);
+                    //    }
+                    //    else
+                    //    {
+                    //        this.dgvProductionData.Rows[i].DefaultCellStyle.BackColor = Color.White;
+                    //    }
 
-
-                        if (i == this.dgvProductionData.Rows.Count - 1)
-                            this.dgvProductionData.Rows[i].DefaultCellStyle.BackColor = Color.FromName("lightblue");
-                    }
+                    //    if (i == this.dgvProductionData.Rows.Count - 1)
+                    //        this.dgvProductionData.Rows[i].DefaultCellStyle.BackColor = Color.FromName("lightblue");
+                    //}
                     // Select 2nd row by default (fallback to first)
-                    if (this.dgvProductionData.Rows.Count > 0)
+                    HighlightFirstRow(dgvProductionData);
+
+                    if (dgvProductionData.Rows.Count > 1)
                     {
-                        int selectIndex = this.dgvProductionData.Rows.Count > 1 ? 1 : 0;
-                        this.dgvProductionData.CurrentCell =
-                            this.dgvProductionData.Rows[selectIndex].Cells[1];
-                        this.dgvProductionData.Rows[selectIndex].Selected = true;
+                        dgvProductionData.CurrentCell =
+                            dgvProductionData.Rows[1].Cells[1];
+                        dgvProductionData.Rows[1].Selected = true;
                     }
 
                     //this.dgvProductionData.Rows[this.dgvProductionData.Rows.Count - 1].DefaultCellStyle.BackColor = Color.FromName("Blue");
@@ -543,6 +581,23 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error : BindCurrentMonthTotalProd", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+        private void HighlightFirstRow(DataGridView dgv)
+        {
+            if (dgv.Rows.Count == 0) return;
+
+            var row = dgv.Rows[0];
+
+            row.DefaultCellStyle.BackColor = Color.FromArgb(48, 108, 207);
+            row.DefaultCellStyle.ForeColor = Color.White;
+            row.DefaultCellStyle.Font =
+                new Font(dgv.Font, FontStyle.Bold);
+
+            row.DefaultCellStyle.SelectionBackColor =
+                row.DefaultCellStyle.BackColor;
+            row.DefaultCellStyle.SelectionForeColor =
+                row.DefaultCellStyle.ForeColor;
+        }
+
         void GetTotalProductionMQube()
         {
             DataTable dataTableTotalMqube = new DataTable();
@@ -901,7 +956,7 @@ namespace NilkanthApplication
                 {
                     column.SortMode = DataGridViewColumnSortMode.NotSortable;
                 }
-
+                HighlightFirstRow(dgvTotalProdForSelectedMon);
             }
         }
 

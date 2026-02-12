@@ -260,12 +260,18 @@ namespace NilkanthApplication
             // 
             // btnDeliveryChallan
             // 
-            this.btnDeliveryChallan.BackColor = System.Drawing.Color.Blue;
+            this.btnDeliveryChallan.AutoSize = true;
+            this.btnDeliveryChallan.BackColor = System.Drawing.Color.Transparent;
+            this.btnDeliveryChallan.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeliveryChallan.FlatAppearance.BorderSize = 0;
+            this.btnDeliveryChallan.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnDeliveryChallan.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnDeliveryChallan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeliveryChallan.Image = global::NilkanthApplication.Properties.Resources.Delivery_Challan;
             this.btnDeliveryChallan.Location = new System.Drawing.Point(216, 641);
             this.btnDeliveryChallan.Name = "btnDeliveryChallan";
-            this.btnDeliveryChallan.Size = new System.Drawing.Size(200, 62);
+            this.btnDeliveryChallan.Size = new System.Drawing.Size(208, 69);
             this.btnDeliveryChallan.TabIndex = 127;
-            this.btnDeliveryChallan.Text = "Delivery Challan";
             this.btnDeliveryChallan.UseVisualStyleBackColor = false;
             this.btnDeliveryChallan.Click += new System.EventHandler(this.btnDeliveryChallan_Click);
             // 

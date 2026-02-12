@@ -113,6 +113,10 @@
           <DataField>ActCUM</DataField>
           <rd:TypeName>System.Decimal</rd:TypeName>
         </Field>
+        <Field Name="CompanyLogo">
+          <DataField>CompanyLogo</DataField>
+          <rd:TypeName>System.Byte[]</rd:TypeName>
+        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>TripDataSet3</rd:DataSetName>
@@ -132,13 +136,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>10cm</Width>
+                  <Width>10.29456cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>8.67548cm</Width>
+                  <Width>8.97004cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>8.14083cm</Width>
+                  <Width>8.43539cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -156,7 +160,7 @@
                                 <TextRun>
                                   <Value>CUSTOMER DETAIL</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -232,7 +236,7 @@
                                 <TextRun>
                                   <Value>BATCH DETAIL</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -273,9 +277,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>COMPANY NAME : </Value>
+                                  <Value>COMPANY NAME: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -283,7 +287,7 @@
                                 <TextRun>
                                   <Value>=Fields!Customer.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -351,9 +355,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>DATE : </Value>
+                                  <Value>DATE: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -361,7 +365,7 @@
                                 <TextRun>
                                   <Value>=Fields!Date.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -399,9 +403,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>CLIENT NAME : </Value>
+                                  <Value>CLIENT NAME: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -409,7 +413,7 @@
                                 <TextRun>
                                   <Value>=Fields!ClientName.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -479,7 +483,7 @@
                                 <TextRun>
                                   <Value>BATCH NO: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -487,7 +491,7 @@
                                 <TextRun>
                                   <Value>=Fields!BatchNo.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -525,7 +529,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>SITE NAME </Value>
+                                  <Value>SITE NAME</Value>
                                   <Style>
                                     <FontFamily>Tahoma</FontFamily>
                                     <FontSize>11pt</FontSize>
@@ -603,9 +607,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>TRUCK NO. : </Value>
+                                  <Value>TRUCK NO.: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -613,7 +617,7 @@
                                 <TextRun>
                                   <Value>=Fields!TruckNo.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -651,9 +655,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>RECIPE NAME : </Value>
+                                  <Value>RECIPE NAME: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -661,7 +665,7 @@
                                 <TextRun>
                                   <Value>=Fields!RecipeName.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -727,9 +731,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>DRIVER NAME : </Value>
+                                  <Value>DRIVER NAME: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -737,7 +741,7 @@
                                 <TextRun>
                                   <Value>=Fields!DriverName.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -775,9 +779,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>PLANT SERIAL NO : </Value>
+                                  <Value>PLANT SERIAL NO: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -785,7 +789,7 @@
                                 <TextRun>
                                   <Value>=Fields!SerialNo.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -851,9 +855,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>BATCH SIZE : </Value>
+                                  <Value>BATCH SIZE: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -861,7 +865,7 @@
                                 <TextRun>
                                   <Value>=Fields!BatchSize.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -899,9 +903,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>PLANT MODEL NO : </Value>
+                                  <Value>PLANT MODEL NO: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -909,7 +913,7 @@
                                 <TextRun>
                                   <Value>=Fields!ModelNo.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -975,9 +979,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>SET CU.M : </Value>
+                                  <Value>SET CU.M: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -985,7 +989,7 @@
                                 <TextRun>
                                   <Value>=Fields!SetBatches.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -1025,7 +1029,7 @@
                                 <TextRun>
                                   <Value>=Fields!Field1Label.Value + " : " + Fields!Field1Value.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -1094,9 +1098,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>ACT CU.M : </Value>
+                                  <Value>ACT CU.M: </Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -1104,7 +1108,7 @@
                                 <TextRun>
                                   <Value>=Fields!ActCUM.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -1147,7 +1151,7 @@
                                 <TextRun>
                                   <Value>=Fields!Field2Label.Value + " : " + Fields!Field2Value.Value</Value>
                                   <Style>
-                                    <FontFamily>Tahoma</FontFamily>
+                                    <FontFamily>Segoe UI</FontFamily>
                                     <FontSize>11pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
@@ -1269,6 +1273,7 @@
                             <Border>
                               <Style>None</Style>
                             </Border>
+                            <FontFamily>Segoe UI</FontFamily>
                           </Style>
                         </Subreport>
                         <ColSpan>3</ColSpan>
@@ -1313,28 +1318,27 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>TripDS3</DataSetName>
-            <Top>0.17639cm</Top>
+            <Top>0.93839cm</Top>
             <Height>5.38622cm</Height>
-            <Width>26.81631cm</Width>
+            <Width>27.7cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <FontFamily>Tahoma</FontFamily>
+              <FontFamily>Segoe UI</FontFamily>
               <FontSize>11pt</FontSize>
             </Style>
           </Tablix>
-          <Textbox Name="Textbox67">
-            <CanGrow>true</CanGrow>
+          <Textbox Name="Textbox1">
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>END OF REPORT</Value>
+                    <Value>BATCH REPORT</Value>
                     <Style>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>11pt</FontSize>
+                      <FontFamily>Segoe UI</FontFamily>
+                      <FontSize>12pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -1344,217 +1348,38 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox67</rd:DefaultName>
-            <Top>5.08742cm</Top>
-            <Left>11.66864cm</Left>
-            <Height>0.6cm</Height>
-            <Width>3.69706cm</Width>
+            <rd:DefaultName>Textbox1</rd:DefaultName>
+            <Top>0.127cm</Top>
+            <Left>11.94435cm</Left>
+            <Height>0.67908cm</Height>
+            <Width>3.3668cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <VerticalAlign>Top</VerticalAlign>
+              <VerticalAlign>Middle</VerticalAlign>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox68">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>11pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox67</rd:DefaultName>
-            <Top>5.30967cm</Top>
-            <Left>0.15875cm</Left>
-            <Height>0.6cm</Height>
-            <Width>11.27cm</Width>
-            <ZIndex>2</ZIndex>
-            <Style>
-              <Border>
-                <Color>LightGrey</Color>
-                <Style>Dotted</Style>
-              </Border>
-              <TopBorder>
-                <Color>LightGrey</Color>
-                <Style>Dotted</Style>
-              </TopBorder>
-              <BottomBorder>
-                <Style>None</Style>
-              </BottomBorder>
-              <LeftBorder>
-                <Style>None</Style>
-              </LeftBorder>
-              <RightBorder>
-                <Style>None</Style>
-              </RightBorder>
-              <VerticalAlign>Top</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox69">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value />
-                    <Style>
-                      <FontFamily>Tahoma</FontFamily>
-                      <FontSize>11pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox67</rd:DefaultName>
-            <Top>5.30967cm</Top>
-            <Left>15.57383cm</Left>
-            <Height>0.6cm</Height>
-            <Width>11.24248cm</Width>
-            <ZIndex>3</ZIndex>
-            <Style>
-              <Border>
-                <Color>LightGrey</Color>
-                <Style>Dotted</Style>
-              </Border>
-              <TopBorder>
-                <Color>LightGrey</Color>
-                <Style>Dotted</Style>
-              </TopBorder>
-              <BottomBorder>
-                <Style>None</Style>
-              </BottomBorder>
-              <LeftBorder>
-                <Style>None</Style>
-              </LeftBorder>
-              <RightBorder>
-                <Style>None</Style>
-              </RightBorder>
-              <VerticalAlign>Top</VerticalAlign>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
+              <PaddingBottom>4pt</PaddingBottom>
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>2.55998in</Height>
+        <Height>2.49in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
-          <TopBorder>
-            <Color>LightGrey</Color>
-            <Style>Dotted</Style>
-            <Width>1pt</Width>
-          </TopBorder>
         </Style>
       </Body>
-      <Width>10.5576in</Width>
+      <Width>10.93051in</Width>
       <Page>
         <PageHeader>
-          <Height>3.76589cm</Height>
+          <Height>3.14147cm</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Textbox Name="Textbox1">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>BATCH REPORT</Value>
-                      <Style>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>14pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Left</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
-              <Top>2.88925cm</Top>
-              <Height>0.86458cm</Height>
-              <Width>10cm</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <VerticalAlign>Bottom</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox3">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>Plant Mfg by: NILKANTH ENGG WORKS </Value>
-                      <Style>
-                        <FontFamily>Tahoma</FontFamily>
-                        <FontSize>9pt</FontSize>
-                        <FontWeight>Bold</FontWeight>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox2</rd:DefaultName>
-              <Top>2.90131cm</Top>
-              <Left>18.11443cm</Left>
-              <Height>0.86458cm</Height>
-              <Width>8.60663cm</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <VerticalAlign>Middle</VerticalAlign>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
             <Rectangle Name="Rectangle1">
               <ReportItems>
                 <Textbox Name="Textbox2">
@@ -1567,7 +1392,7 @@
                           <Value>=First(Fields!CompanyName.Value, "TripDS3")</Value>
                           <Style>
                             <FontFamily>Tahoma</FontFamily>
-                            <FontSize>13pt</FontSize>
+                            <FontSize>12pt</FontSize>
                             <FontWeight>Bold</FontWeight>
                           </Style>
                         </TextRun>
@@ -1579,7 +1404,7 @@
                   </Paragraphs>
                   <rd:DefaultName>Textbox2</rd:DefaultName>
                   <Top>0.14817cm</Top>
-                  <Left>0.71966cm</Left>
+                  <Left>8.28886cm</Left>
                   <Height>0.727cm</Height>
                   <Width>10.86083cm</Width>
                   <Style>
@@ -1613,7 +1438,7 @@
                   </Paragraphs>
                   <rd:DefaultName>Textbox8</rd:DefaultName>
                   <Top>0.981cm</Top>
-                  <Left>1.03716cm</Left>
+                  <Left>8.60636cm</Left>
                   <Height>0.6cm</Height>
                   <Width>10.26816cm</Width>
                   <ZIndex>1</ZIndex>
@@ -1641,19 +1466,21 @@
     "",
     "Mobile : " &amp; First(Fields!CompanyMobileNo.Value, "TripDS3")
 )</Value>
-                          <Style />
+                          <Style>
+                            <FontFamily>Tahoma</FontFamily>
+                          </Style>
                         </TextRun>
                       </TextRuns>
                       <Style>
-                        <TextAlign>Right</TextAlign>
+                        <TextAlign>Center</TextAlign>
                       </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox10</rd:DefaultName>
-                  <Top>1.72211cm</Top>
-                  <Left>1.03716cm</Left>
+                  <Top>2.35739cm</Top>
+                  <Left>8.60636cm</Left>
                   <Height>0.6cm</Height>
-                  <Width>3.77cm</Width>
+                  <Width>10.26816cm</Width>
                   <ZIndex>2</ZIndex>
                   <Style>
                     <Border>
@@ -1679,17 +1506,21 @@
     "",
     "GST No : " &amp; First(Fields!CompanyGstNo.Value, "TripDS3")
 )</Value>
-                          <Style />
+                          <Style>
+                            <FontFamily>Tahoma</FontFamily>
+                          </Style>
                         </TextRun>
                       </TextRuns>
-                      <Style />
+                      <Style>
+                        <TextAlign>Center</TextAlign>
+                      </Style>
                     </Paragraph>
                   </Paragraphs>
                   <rd:DefaultName>Textbox14</rd:DefaultName>
-                  <Top>1.72211cm</Top>
-                  <Left>5.37634cm</Left>
+                  <Top>1.69036cm</Top>
+                  <Left>8.60636cm</Left>
                   <Height>0.6cm</Height>
-                  <Width>6.20416cm</Width>
+                  <Width>10.26816cm</Width>
                   <ZIndex>3</ZIndex>
                   <Style>
                     <Border>
@@ -1702,12 +1533,29 @@
                     <PaddingBottom>2pt</PaddingBottom>
                   </Style>
                 </Textbox>
+                <Image Name="CompanyLogo">
+                  <Source>Database</Source>
+                  <Value>=IIF(IsNothing(Fields!CompanyLogo.Value), Nothing, Fields!CompanyLogo.Value)</Value>
+                  <MIMEType>image/png</MIMEType>
+                  <Sizing>Fit</Sizing>
+                  <Top>0.14817cm</Top>
+                  <Left>0.28787cm</Left>
+                  <Height>2.80922cm</Height>
+                  <Width>5.77567cm</Width>
+                  <ZIndex>4</ZIndex>
+                  <Visibility>
+                    <Hidden>=IIF(Fields!ShowHeader.Value = 0, True, False)</Hidden>
+                  </Visibility>
+                  <ToolTip>Logo</ToolTip>
+                  <Style>
+                    <Border>
+                      <Style>None</Style>
+                    </Border>
+                  </Style>
+                </Image>
               </ReportItems>
-              <KeepTogether>true</KeepTogether>
-              <Left>8.1407cm</Left>
-              <Height>2.53378cm</Height>
-              <Width>12.35851cm</Width>
-              <ZIndex>2</ZIndex>
+              <Height>2.99861cm</Height>
+              <Width>27.7cm</Width>
               <Visibility>
                 <Hidden>=IIF(Fields!ShowHeader.Value = 0, True, False)</Hidden>
               </Visibility>
@@ -1724,9 +1572,57 @@
             </Border>
           </Style>
         </PageHeader>
+        <PageFooter>
+          <Height>0.93133cm</Height>
+          <PrintOnFirstPage>true</PrintOnFirstPage>
+          <PrintOnLastPage>true</PrintOnLastPage>
+          <ReportItems>
+            <Textbox Name="Textbox3">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>="END OF REPORT"</Value>
+                      <Style>
+                        <FontFamily>Segoe UI</FontFamily>
+                        <FontSize>12pt</FontSize>
+                        <FontWeight>SemiBold</FontWeight>
+                      </Style>
+                    </TextRun>
+                  </TextRuns>
+                  <Style>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox3</rd:DefaultName>
+              <Top>0.10554cm</Top>
+              <Height>0.74817cm</Height>
+              <Width>27.7cm</Width>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
+                <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+          </ReportItems>
+          <Style>
+            <Border>
+              <Style>None</Style>
+            </Border>
+          </Style>
+        </PageFooter>
         <PageHeight>21cm</PageHeight>
         <PageWidth>29.7cm</PageWidth>
         <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
         <TopMargin>0.5cm</TopMargin>
         <BottomMargin>0.5cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>

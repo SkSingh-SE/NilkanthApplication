@@ -123,7 +123,19 @@ namespace NilkanthApplication
                 this.dgvList.Columns["PartyID"].Visible = false;
                 this.dgvList.Columns["IsDeleted"].Visible = false;
 
-                //dgvList.Height = 500;
+                //dgvList.Dock = DockStyle.Fill;
+                //dgvList.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
+
+                pictureBox1.Dock = DockStyle.Bottom;
+                pictureBox1.Height = 5;
+                pictureBox1.Width = this.ClientSize.Width;
+
+                lblUserName.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+                lblVersion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+
+                lblUserName.Location = new Point(12, this.ClientSize.Height - 70);
+                lblVersion.Location = new Point(12, this.ClientSize.Height - 50);
+
                 //Point point = new Point();
                 //point.X = 12;
                 //point.Y = 625;
@@ -193,16 +205,15 @@ namespace NilkanthApplication
                 }
 
                 // === Position Logout Button Dynamically ===
-                int dgvBottomY = dgvList.Location.Y + dgvList.Height;
-                int marginTop = 10;
-                int btnX = this.ClientSize.Width - btnLogout.Width - marginRight;
-                int btnY = dgvBottomY + marginTop;
-                btnLogout.Location = new Point(btnX, btnY);
 
+                btnLogout.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+                btnLogout.Location = new Point(
+                    this.ClientSize.Width - btnLogout.Width - 20,
+                    this.ClientSize.Height - btnLogout.Height - 40
+                );
 
                 dgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
                 dgvList.ColumnHeadersHeight = 40;
-                dgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
                 dgvList.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             }
             catch (Exception ex)

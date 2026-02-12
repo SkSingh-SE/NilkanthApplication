@@ -85,7 +85,7 @@ namespace NilkanthApplication
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvList.RowTemplate.Height = 28;
-            this.dgvList.Size = new System.Drawing.Size(1330, 530);
+            this.dgvList.Size = new System.Drawing.Size(1542, 530);
             this.dgvList.TabIndex = 7;
             this.dgvList.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellClick);
             this.dgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellDoubleClick);
@@ -104,7 +104,7 @@ namespace NilkanthApplication
             this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.Location = new System.Drawing.Point(12, 615);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(84, 20);
+            this.lblUserName.Size = new System.Drawing.Size(75, 17);
             this.lblUserName.TabIndex = 33;
             this.lblUserName.Text = "UerName";
             // 
@@ -146,16 +146,16 @@ namespace NilkanthApplication
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblFilterStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 659);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 658);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1358, 38);
+            this.statusStrip1.Size = new System.Drawing.Size(1344, 26);
             this.statusStrip1.TabIndex = 36;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblFilterStatus
             // 
             this.lblFilterStatus.Name = "lblFilterStatus";
-            this.lblFilterStatus.Size = new System.Drawing.Size(78, 31);
+            this.lblFilterStatus.Size = new System.Drawing.Size(65, 20);
             this.lblFilterStatus.Text = "Filter By:";
             // 
             // label12
@@ -164,7 +164,7 @@ namespace NilkanthApplication
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold);
             this.label12.Location = new System.Drawing.Point(70, 23);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(357, 69);
+            this.label12.Size = new System.Drawing.Size(301, 58);
             this.label12.TabIndex = 96;
             this.label12.Text = "Actual Fault";
             // 
@@ -293,17 +293,17 @@ namespace NilkanthApplication
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(12, 636);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(95, 20);
+            this.label1.Size = new System.Drawing.Size(87, 17);
             this.label1.TabIndex = 97;
             this.label1.Text = "Version : 2";
             // 
             // ActualFault
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCancel;
-            this.ClientSize = new System.Drawing.Size(1132, 581);
+            this.ClientSize = new System.Drawing.Size(1344, 684);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.statusStrip1);

@@ -112,51 +112,87 @@ namespace NilkanthApplication
                 this.dgvList.Columns["MobileNo"].HeaderText = "Mobile No";
                 this.dgvList.Columns["IsDeleted"].Visible = false;
 
-                dgvList.Height = 550;
-                Point point = new Point();
-                point.X = 12;
-                point.Y = 625;
-                pictureBox1.Location = point;
-                pictureBox1.Width = 1350;
+                
+                //dgvList.Height = 550;
 
-                Point point1 = new Point();
-                point1.X = 12;
-                point1.Y = 635;
-                lblUserName.Location = point1;
+                //Point point = new Point();
+                //point.X = 12;
+                //point.Y = 625;
+                //pictureBox1.Location = point;
+                //pictureBox1.Width = 1350;
 
-                Point point2 = new Point();
-                point2.X = 12;
-                point2.Y = 655;
-                lblVersion.Location = point2;
+                //Point point1 = new Point();
+                //point1.X = 12;
+                //point1.Y = 635;
+                //lblUserName.Location = point1;
 
-                Point point3 = new Point();
-                point3.X = 1300;
-                point3.Y = 635;
-                btnLogout.Location = point3;
+                //Point point2 = new Point();
+                //point2.X = 12;
+                //point2.Y = 655;
+                //lblVersion.Location = point2;
 
-                Point point4 = new Point();
-                point4.X = 1200;
-                point4.Y = 19;
-                btnDelete.Location = point4;
+                //Point point3 = new Point();
+                //point3.X = 1300;
+                //point3.Y = 635;
+                //btnLogout.Location = point3;
 
-                Point point5 = new Point();
-                point5.X = 1100;
-                point5.Y = 19;
-                btnNew.Location = point5;
+                //Point point4 = new Point();
+                //point4.X = 1200;
+                //point4.Y = 19;
+                //btnDelete.Location = point4;
 
-                Point point6 = new Point();
-                point6.X = 1000;
-                point6.Y = 19;
-                btnEdit.Location = point6;
+                //Point point5 = new Point();
+                //point5.X = 1100;
+                //point5.Y = 19;
+                //btnNew.Location = point5;
 
-                Point point7 = new Point();
-                point7.X = 900;
-                point7.Y = 19;
-                btnBack.Location = point7;
+                //Point point6 = new Point();
+                //point6.X = 1000;
+                //point6.Y = 19;
+                //btnEdit.Location = point6;
+
+                //Point point7 = new Point();
+                //point7.X = 900;
+                //point7.Y = 19;
+                //btnBack.Location = point7;
+
+
+                pictureBox1.Dock = DockStyle.Bottom;
+                pictureBox1.Height = 5;
+                pictureBox1.Width = this.ClientSize.Width;
+
+                lblUserName.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+                lblVersion.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
+
+                lblUserName.Location = new Point(12, this.ClientSize.Height - 70);
+                lblVersion.Location = new Point(12, this.ClientSize.Height - 50);
+
+                int marginRight = 20;
+                int spacing = 10;
+                int topY = 19;
+
+                Button[] buttons = { btnDelete, btnNew, btnEdit, btnBack };
+
+                int currentX = this.ClientSize.Width - marginRight;
+
+                foreach (Button btn in buttons)
+                {
+                    currentX -= btn.Width;
+                    btn.Location = new Point(currentX, topY);
+
+                    currentX -= spacing;
+                }
+
+                // === Position Logout Button Dynamically ===
+
+                btnLogout.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+                btnLogout.Location = new Point(
+                    this.ClientSize.Width - btnLogout.Width - 20,
+                    this.ClientSize.Height - btnLogout.Height - 40
+                );
 
                 dgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
                 dgvList.ColumnHeadersHeight = 40;
-                dgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
                 dgvList.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             }
             catch (Exception ex)

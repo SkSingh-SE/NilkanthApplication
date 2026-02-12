@@ -195,40 +195,40 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>4.04114cm</Width>
+                  <Width>4.00465cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12208cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12484cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12208cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12484cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12208cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12484cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12208cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12484cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12208cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12484cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.46075cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -1187,7 +1187,7 @@
             <DataSetName>TripDS2</DataSetName>
             <Top>1.0716cm</Top>
             <Height>1.03068cm</Height>
-            <Width>28.15444cm</Width>
+            <Width>27.7cm</Width>
             <Style>
               <Border>
                 <Color>LightGrey</Color>
@@ -1196,49 +1196,50 @@
               <TopBorder>
                 <Style>Dotted</Style>
               </TopBorder>
+              <FontFamily>Segoe UI</FontFamily>
             </Style>
           </Tablix>
           <Tablix Name="Tablix2">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>2.22483cm</Width>
+                  <Width>2.18987cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.81631cm</Width>
+                  <Width>1.78135cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.16133cm</Width>
+                  <Width>2.12637cm</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.5cm</Width>
+                  <Width>2.46504cm</Width>
                 </TablixColumn>
               </TablixColumns>
               <TablixRows>
@@ -2336,12 +2337,13 @@
             </TablixRowHierarchy>
             <DataSetName>TripDS1</DataSetName>
             <Height>1.03068cm</Height>
-            <Width>28.15444cm</Width>
+            <Width>27.7cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <FontFamily>Segoe UI</FontFamily>
             </Style>
           </Tablix>
           <Textbox Name="Textbox11">
@@ -2351,9 +2353,9 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>CYCLE START TIME  : </Value>
+                    <Value>CYCLE START TIME: </Value>
                     <Style>
-                      <FontFamily>Tahoma</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -2361,7 +2363,7 @@
                   <TextRun>
                     <Value>=First(Fields!Time.Value, "TripDS1")</Value>
                     <Style>
-                      <FontFamily>Tahoma</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -2393,9 +2395,9 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>CYCLE END TIME      : </Value>
+                    <Value>CYCLE END TIME: </Value>
                     <Style>
-                      <FontFamily>Tahoma</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -2403,7 +2405,7 @@
                   <TextRun>
                     <Value>=Last(Fields!Time.Value, "TripDS1")</Value>
                     <Style>
-                      <FontFamily>Tahoma</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -2414,7 +2416,7 @@
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
             <Top>2.28572cm</Top>
-            <Left>3.90367in</Left>
+            <Left>4.09117in</Left>
             <Height>0.6635cm</Height>
             <Width>8.3638cm</Width>
             <ZIndex>3</ZIndex>
@@ -2436,9 +2438,9 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>TOTAL DURATION    : </Value>
+                    <Value>TOTAL DURATION: </Value>
                     <Style>
-                      <FontFamily>Tahoma</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -2446,7 +2448,7 @@
                   <TextRun>
                     <Value>=TimeValue(Last(Fields!Time.Value, "TripDS1")) - TimeValue(First(Fields!Time.Value, "TripDS1"))</Value>
                     <Style>
-                      <FontFamily>Tahoma</FontFamily>
+                      <FontFamily>Segoe UI</FontFamily>
                       <FontSize>11pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -2457,9 +2459,9 @@
             </Paragraphs>
             <rd:DefaultName>Textbox11</rd:DefaultName>
             <Top>2.28572cm</Top>
-            <Left>7.72428in</Left>
+            <Left>7.42815in</Left>
             <Height>0.6635cm</Height>
-            <Width>8.3638cm</Width>
+            <Width>8.83251cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -2473,7 +2475,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>1.16111in</Height>
+        <Height>1.21111in</Height>
         <Style>
           <Border>
             <Style>None</Style>
@@ -2485,11 +2487,12 @@
           </TopBorder>
         </Style>
       </Body>
-      <Width>11.11035in</Width>
+      <Width>10.91035in</Width>
       <Page>
         <PageHeight>21cm</PageHeight>
         <PageWidth>29.7cm</PageWidth>
         <LeftMargin>1cm</LeftMargin>
+        <RightMargin>1cm</RightMargin>
         <TopMargin>0.5cm</TopMargin>
         <BottomMargin>0.5cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>

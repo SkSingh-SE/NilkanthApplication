@@ -335,6 +335,8 @@ namespace NilkanthApplication {
             
             private global::System.Data.DataColumn columnClientPersonName;
             
+            private global::System.Data.DataColumn columnCompanyLogo;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public DeliveryChallan_ReportDataTable() {
@@ -594,6 +596,14 @@ namespace NilkanthApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public global::System.Data.DataColumn CompanyLogoColumn {
+                get {
+                    return this.columnCompanyLogo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -657,7 +667,8 @@ namespace NilkanthApplication {
                         string CycleStartTime, 
                         string CycleEndTime, 
                         string TotalDuration, 
-                        string ClientPersonName) {
+                        string ClientPersonName, 
+                        byte[] CompanyLogo) {
                 DeliveryChallan_ReportRow rowDeliveryChallan_ReportRow = ((DeliveryChallan_ReportRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         CompanyName,
@@ -687,7 +698,8 @@ namespace NilkanthApplication {
                         CycleStartTime,
                         CycleEndTime,
                         TotalDuration,
-                        ClientPersonName};
+                        ClientPersonName,
+                        CompanyLogo};
                 rowDeliveryChallan_ReportRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowDeliveryChallan_ReportRow);
                 return rowDeliveryChallan_ReportRow;
@@ -738,6 +750,7 @@ namespace NilkanthApplication {
                 this.columnCycleEndTime = base.Columns["CycleEndTime"];
                 this.columnTotalDuration = base.Columns["TotalDuration"];
                 this.columnClientPersonName = base.Columns["ClientPersonName"];
+                this.columnCompanyLogo = base.Columns["CompanyLogo"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -799,6 +812,8 @@ namespace NilkanthApplication {
                 base.Columns.Add(this.columnTotalDuration);
                 this.columnClientPersonName = new global::System.Data.DataColumn("ClientPersonName", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnClientPersonName);
+                this.columnCompanyLogo = new global::System.Data.DataColumn("CompanyLogo", typeof(byte[]), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCompanyLogo);
                 this.columnCompanyName.MaxLength = 200;
                 this.columnCompanyAddress.MaxLength = 2147483647;
                 this.columnCompanyMobileNo.MaxLength = 13;
@@ -1426,6 +1441,22 @@ namespace NilkanthApplication {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public byte[] CompanyLogo {
+                get {
+                    try {
+                        return ((byte[])(this[this.tableDeliveryChallan_Report.CompanyLogoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'CompanyLogo\' in table \'DeliveryChallan_Report\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableDeliveryChallan_Report.CompanyLogoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
             public bool IsCompanyNameNull() {
                 return this.IsNull(this.tableDeliveryChallan_Report.CompanyNameColumn);
             }
@@ -1759,6 +1790,18 @@ namespace NilkanthApplication {
             public void SetClientPersonNameNull() {
                 this[this.tableDeliveryChallan_Report.ClientPersonNameColumn] = global::System.Convert.DBNull;
             }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public bool IsCompanyLogoNull() {
+                return this.IsNull(this.tableDeliveryChallan_Report.CompanyLogoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "17.0.0.0")]
+            public void SetCompanyLogoNull() {
+                this[this.tableDeliveryChallan_Report.CompanyLogoColumn] = global::System.Convert.DBNull;
+            }
         }
         
         /// <summary>
@@ -1948,6 +1991,7 @@ namespace NilkanthApplication.DeliveryChallanReportDataSetTableAdapters {
             tableMapping.ColumnMappings.Add("CycleEndTime", "CycleEndTime");
             tableMapping.ColumnMappings.Add("TotalDuration", "TotalDuration");
             tableMapping.ColumnMappings.Add("ClientPersonName", "ClientPersonName");
+            tableMapping.ColumnMappings.Add("CompanyLogo", "CompanyLogo");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
