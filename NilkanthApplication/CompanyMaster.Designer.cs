@@ -74,7 +74,6 @@ namespace NilkanthApplication
             this.txtField2Label = new System.Windows.Forms.TextBox();
             this.txtField2Value = new System.Windows.Forms.TextBox();
             this.txtField1Value = new System.Windows.Forms.TextBox();
-            this.btnPartyDetails = new System.Windows.Forms.Button();
             this.chkShowWhatsapp = new System.Windows.Forms.CheckBox();
             this.chkShowVarPInKg = new System.Windows.Forms.CheckBox();
             this.chkShowHeader = new System.Windows.Forms.CheckBox();
@@ -87,20 +86,24 @@ namespace NilkanthApplication
             this.textGstNo = new System.Windows.Forms.TextBox();
             this.txtReportFooDesc = new System.Windows.Forms.RichTextBox();
             this.labelRptFDesc = new System.Windows.Forms.Label();
-            this.btnLogout = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btnBack = new System.Windows.Forms.Button();
-            this.btnHome = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.picCompanyLogo = new System.Windows.Forms.PictureBox();
             this.labelCompanyLogo = new System.Windows.Forms.Label();
             this.btnUploadLogo = new System.Windows.Forms.Button();
             this.textPlantName = new System.Windows.Forms.TextBox();
             this.labelPlantName = new System.Windows.Forms.Label();
             this.textLocation = new System.Windows.Forms.TextBox();
             this.labelLocation = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.chkShowDlvChallan = new System.Windows.Forms.CheckBox();
+            this.picCompanyLogo = new System.Windows.Forms.PictureBox();
+            this.btnPartyDetails = new System.Windows.Forms.Button();
+            this.btnLogout = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnBack = new System.Windows.Forms.Button();
+            this.btnHome = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.chkIsMobileAppSync = new System.Windows.Forms.CheckBox();
+            this.btnRemoveLogo = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picCompanyLogo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelCompanyName
@@ -120,6 +123,7 @@ namespace NilkanthApplication
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.Size = new System.Drawing.Size(604, 30);
             this.txtCompanyName.TabIndex = 0;
+            this.txtCompanyName.DoubleClick += new System.EventHandler(this.txtCompanyName_DoubleClick);
             // 
             // labelModelNumber
             // 
@@ -409,7 +413,7 @@ namespace NilkanthApplication
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(87, 17);
             this.label16.TabIndex = 104;
-            this.label16.Text = "Version : 2";
+            this.label16.Text = "Version : 3";
             // 
             // labelField1Label
             // 
@@ -483,34 +487,17 @@ namespace NilkanthApplication
             this.txtField1Value.Size = new System.Drawing.Size(239, 30);
             this.txtField1Value.TabIndex = 111;
             // 
-            // btnPartyDetails
-            // 
-            this.btnPartyDetails.AutoSize = true;
-            this.btnPartyDetails.BackColor = System.Drawing.Color.Transparent;
-            this.btnPartyDetails.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnPartyDetails.FlatAppearance.BorderSize = 0;
-            this.btnPartyDetails.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnPartyDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnPartyDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPartyDetails.ForeColor = System.Drawing.Color.White;
-            this.btnPartyDetails.Image = ((System.Drawing.Image)(resources.GetObject("btnPartyDetails.Image")));
-            this.btnPartyDetails.Location = new System.Drawing.Point(571, 17);
-            this.btnPartyDetails.Name = "btnPartyDetails";
-            this.btnPartyDetails.Size = new System.Drawing.Size(188, 72);
-            this.btnPartyDetails.TabIndex = 113;
-            this.btnPartyDetails.UseVisualStyleBackColor = false;
-            this.btnPartyDetails.Click += new System.EventHandler(this.btnPartyDetails_Click);
-            // 
             // chkShowWhatsapp
             // 
             this.chkShowWhatsapp.AutoSize = true;
             this.chkShowWhatsapp.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            this.chkShowWhatsapp.Location = new System.Drawing.Point(795, 652);
+            this.chkShowWhatsapp.Location = new System.Drawing.Point(662, 652);
             this.chkShowWhatsapp.Name = "chkShowWhatsapp";
             this.chkShowWhatsapp.Size = new System.Drawing.Size(145, 21);
             this.chkShowWhatsapp.TabIndex = 114;
             this.chkShowWhatsapp.Text = "Show Whatsapp";
             this.chkShowWhatsapp.UseVisualStyleBackColor = true;
+            this.chkShowWhatsapp.CheckedChanged += new System.EventHandler(this.chkShowWhatsapp_CheckedChanged);
             // 
             // chkShowVarPInKg
             // 
@@ -527,12 +514,13 @@ namespace NilkanthApplication
             // 
             this.chkShowHeader.AutoSize = true;
             this.chkShowHeader.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
-            this.chkShowHeader.Location = new System.Drawing.Point(795, 679);
+            this.chkShowHeader.Location = new System.Drawing.Point(663, 679);
             this.chkShowHeader.Name = "chkShowHeader";
             this.chkShowHeader.Size = new System.Drawing.Size(126, 21);
             this.chkShowHeader.TabIndex = 116;
             this.chkShowHeader.Text = "Show Header";
             this.chkShowHeader.UseVisualStyleBackColor = true;
+            this.chkShowHeader.CheckedChanged += new System.EventHandler(this.chkShowHeader_CheckedChanged);
             // 
             // labelTripReportFlag
             // 
@@ -617,6 +605,105 @@ namespace NilkanthApplication
             this.labelRptFDesc.TabIndex = 125;
             this.labelRptFDesc.Text = "Report Footer Description :";
             // 
+            // labelCompanyLogo
+            // 
+            this.labelCompanyLogo.AutoSize = true;
+            this.labelCompanyLogo.Cursor = System.Windows.Forms.Cursors.Default;
+            this.labelCompanyLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelCompanyLogo.Location = new System.Drawing.Point(242, 853);
+            this.labelCompanyLogo.Name = "labelCompanyLogo";
+            this.labelCompanyLogo.Size = new System.Drawing.Size(171, 25);
+            this.labelCompanyLogo.TabIndex = 127;
+            this.labelCompanyLogo.Text = "Company Logo :";
+            // 
+            // btnUploadLogo
+            // 
+            this.btnUploadLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUploadLogo.Location = new System.Drawing.Point(684, 847);
+            this.btnUploadLogo.Name = "btnUploadLogo";
+            this.btnUploadLogo.Size = new System.Drawing.Size(110, 42);
+            this.btnUploadLogo.TabIndex = 128;
+            this.btnUploadLogo.Text = "Upload";
+            this.btnUploadLogo.UseVisualStyleBackColor = true;
+            this.btnUploadLogo.Click += new System.EventHandler(this.btnUploadLogo_Click);
+            // 
+            // textPlantName
+            // 
+            this.textPlantName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textPlantName.Location = new System.Drawing.Point(430, 377);
+            this.textPlantName.Name = "textPlantName";
+            this.textPlantName.Size = new System.Drawing.Size(247, 30);
+            this.textPlantName.TabIndex = 132;
+            this.textPlantName.DoubleClick += new System.EventHandler(this.textPlantName_DoubleClick);
+            // 
+            // labelPlantName
+            // 
+            this.labelPlantName.AutoSize = true;
+            this.labelPlantName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelPlantName.Location = new System.Drawing.Point(285, 377);
+            this.labelPlantName.Name = "labelPlantName";
+            this.labelPlantName.Size = new System.Drawing.Size(136, 25);
+            this.labelPlantName.TabIndex = 131;
+            this.labelPlantName.Text = "Plant Name :";
+            // 
+            // textLocation
+            // 
+            this.textLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.textLocation.Location = new System.Drawing.Point(430, 345);
+            this.textLocation.Name = "textLocation";
+            this.textLocation.Size = new System.Drawing.Size(247, 30);
+            this.textLocation.TabIndex = 130;
+            this.textLocation.DoubleClick += new System.EventHandler(this.textLocation_DoubleClick);
+            // 
+            // labelLocation
+            // 
+            this.labelLocation.AutoSize = true;
+            this.labelLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
+            this.labelLocation.Location = new System.Drawing.Point(314, 345);
+            this.labelLocation.Name = "labelLocation";
+            this.labelLocation.Size = new System.Drawing.Size(107, 25);
+            this.labelLocation.TabIndex = 129;
+            this.labelLocation.Text = "Location :";
+            // 
+            // chkShowDlvChallan
+            // 
+            this.chkShowDlvChallan.AutoSize = true;
+            this.chkShowDlvChallan.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.chkShowDlvChallan.Location = new System.Drawing.Point(844, 654);
+            this.chkShowDlvChallan.Name = "chkShowDlvChallan";
+            this.chkShowDlvChallan.Size = new System.Drawing.Size(191, 21);
+            this.chkShowDlvChallan.TabIndex = 133;
+            this.chkShowDlvChallan.Text = "Show Delivery Challan";
+            this.chkShowDlvChallan.UseVisualStyleBackColor = true;
+            this.chkShowDlvChallan.CheckedChanged += new System.EventHandler(this.chkShowDlvChallan_CheckedChanged);
+            // 
+            // picCompanyLogo
+            // 
+            this.picCompanyLogo.Location = new System.Drawing.Point(432, 841);
+            this.picCompanyLogo.Name = "picCompanyLogo";
+            this.picCompanyLogo.Size = new System.Drawing.Size(246, 101);
+            this.picCompanyLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picCompanyLogo.TabIndex = 126;
+            this.picCompanyLogo.TabStop = false;
+            // 
+            // btnPartyDetails
+            // 
+            this.btnPartyDetails.AutoSize = true;
+            this.btnPartyDetails.BackColor = System.Drawing.Color.Transparent;
+            this.btnPartyDetails.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnPartyDetails.FlatAppearance.BorderSize = 0;
+            this.btnPartyDetails.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnPartyDetails.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnPartyDetails.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPartyDetails.ForeColor = System.Drawing.Color.White;
+            this.btnPartyDetails.Image = ((System.Drawing.Image)(resources.GetObject("btnPartyDetails.Image")));
+            this.btnPartyDetails.Location = new System.Drawing.Point(571, 17);
+            this.btnPartyDetails.Name = "btnPartyDetails";
+            this.btnPartyDetails.Size = new System.Drawing.Size(188, 72);
+            this.btnPartyDetails.TabIndex = 113;
+            this.btnPartyDetails.UseVisualStyleBackColor = false;
+            this.btnPartyDetails.Click += new System.EventHandler(this.btnPartyDetails_Click);
+            // 
             // btnLogout
             // 
             this.btnLogout.CausesValidation = false;
@@ -691,71 +778,30 @@ namespace NilkanthApplication
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // picCompanyLogo
+            // chkIsMobileAppSync
             // 
-            this.picCompanyLogo.Location = new System.Drawing.Point(432, 841);
-            this.picCompanyLogo.Name = "picCompanyLogo";
-            this.picCompanyLogo.Size = new System.Drawing.Size(246, 101);
-            this.picCompanyLogo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picCompanyLogo.TabIndex = 126;
-            this.picCompanyLogo.TabStop = false;
+            this.chkIsMobileAppSync.AutoSize = true;
+            this.chkIsMobileAppSync.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold);
+            this.chkIsMobileAppSync.Location = new System.Drawing.Point(844, 679);
+            this.chkIsMobileAppSync.Name = "chkIsMobileAppSync";
+            this.chkIsMobileAppSync.Size = new System.Drawing.Size(187, 21);
+            this.chkIsMobileAppSync.TabIndex = 134;
+            this.chkIsMobileAppSync.Text = "Sync With Mobile App";
+            this.chkIsMobileAppSync.UseVisualStyleBackColor = true;
+            this.chkIsMobileAppSync.CheckedChanged += new System.EventHandler(this.chkAppSync_CheckedChanged);
             // 
-            // labelCompanyLogo
+            // btnRemoveLogo
             // 
-            this.labelCompanyLogo.AutoSize = true;
-            this.labelCompanyLogo.Cursor = System.Windows.Forms.Cursors.Default;
-            this.labelCompanyLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.labelCompanyLogo.Location = new System.Drawing.Point(242, 853);
-            this.labelCompanyLogo.Name = "labelCompanyLogo";
-            this.labelCompanyLogo.Size = new System.Drawing.Size(171, 25);
-            this.labelCompanyLogo.TabIndex = 127;
-            this.labelCompanyLogo.Text = "Company Logo :";
-            // 
-            // btnUploadLogo
-            // 
-            this.btnUploadLogo.Location = new System.Drawing.Point(684, 853);
-            this.btnUploadLogo.Name = "btnUploadLogo";
-            this.btnUploadLogo.Size = new System.Drawing.Size(75, 42);
-            this.btnUploadLogo.TabIndex = 128;
-            this.btnUploadLogo.Text = "Upload";
-            this.btnUploadLogo.UseVisualStyleBackColor = true;
-            this.btnUploadLogo.Click += new System.EventHandler(this.btnUploadLogo_Click);
-            // 
-            // textPlantName
-            // 
-            this.textPlantName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textPlantName.Location = new System.Drawing.Point(430, 377);
-            this.textPlantName.Name = "textPlantName";
-            this.textPlantName.Size = new System.Drawing.Size(247, 30);
-            this.textPlantName.TabIndex = 132;
-            // 
-            // labelPlantName
-            // 
-            this.labelPlantName.AutoSize = true;
-            this.labelPlantName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.labelPlantName.Location = new System.Drawing.Point(285, 377);
-            this.labelPlantName.Name = "labelPlantName";
-            this.labelPlantName.Size = new System.Drawing.Size(136, 25);
-            this.labelPlantName.TabIndex = 131;
-            this.labelPlantName.Text = "Plant Name :";
-            // 
-            // textLocation
-            // 
-            this.textLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.textLocation.Location = new System.Drawing.Point(430, 345);
-            this.textLocation.Name = "textLocation";
-            this.textLocation.Size = new System.Drawing.Size(247, 30);
-            this.textLocation.TabIndex = 130;
-            // 
-            // labelLocation
-            // 
-            this.labelLocation.AutoSize = true;
-            this.labelLocation.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold);
-            this.labelLocation.Location = new System.Drawing.Point(314, 345);
-            this.labelLocation.Name = "labelLocation";
-            this.labelLocation.Size = new System.Drawing.Size(107, 25);
-            this.labelLocation.TabIndex = 129;
-            this.labelLocation.Text = "Location :";
+            this.btnRemoveLogo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnRemoveLogo.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRemoveLogo.ForeColor = System.Drawing.SystemColors.Window;
+            this.btnRemoveLogo.Location = new System.Drawing.Point(684, 900);
+            this.btnRemoveLogo.Name = "btnRemoveLogo";
+            this.btnRemoveLogo.Size = new System.Drawing.Size(110, 42);
+            this.btnRemoveLogo.TabIndex = 135;
+            this.btnRemoveLogo.Text = "Remove";
+            this.btnRemoveLogo.UseVisualStyleBackColor = false;
+            this.btnRemoveLogo.Click += new System.EventHandler(this.btnRemoveLogo_Click);
             // 
             // CompanyMaster
             // 
@@ -763,7 +809,10 @@ namespace NilkanthApplication
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1443, 1032);
+            this.ClientSize = new System.Drawing.Size(1653, 1032);
+            this.Controls.Add(this.btnRemoveLogo);
+            this.Controls.Add(this.chkIsMobileAppSync);
+            this.Controls.Add(this.chkShowDlvChallan);
             this.Controls.Add(this.textPlantName);
             this.Controls.Add(this.labelPlantName);
             this.Controls.Add(this.textLocation);
@@ -837,8 +886,8 @@ namespace NilkanthApplication
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CompanyMaster_FormClosing);
             this.Load += new System.EventHandler(this.CompanyMaster_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picCompanyLogo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1162,5 +1211,8 @@ namespace NilkanthApplication
         private Label labelPlantName;
         private TextBox textLocation;
         private Label labelLocation;
+        private CheckBox chkShowDlvChallan;
+        private CheckBox chkIsMobileAppSync;
+        private Button btnRemoveLogo;
     }
 }

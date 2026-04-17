@@ -2,9 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +16,8 @@ namespace NilkanthApplication
 {
     public partial class DeliveryChallanList : Form
     {
+        private string whatsappApiKey;
+        private string apiKey;
         public DeliveryChallanList()
         {
             InitializeComponent();
@@ -69,6 +73,11 @@ namespace NilkanthApplication
         {
             try
             {
+                whatsappApiKey = ConfigurationManager.AppSettings["WhatsappKey"];
+                apiKey = ConfigurationManager.AppSettings["APIKey"];
+
+                ShowWhatsapp();
+                BindClientMaster();
                 this.btnNew.Focus();
                 this.lblUserName.Text = "User Name : " + Queries.UserName;
                 this.lblFilterStatus.Text = "Filter By : All Columns";
@@ -79,6 +88,7 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+
 
         private DataTable dataTable = null;
 
@@ -108,9 +118,9 @@ namespace NilkanthApplication
                 }
                 this.dgvList.Columns["ID"].Visible = false;
                 this.dgvList.Columns["DeliveryChallanNo"].HeaderText = "No";
-                this.dgvList.Columns["TotalOrderQty"].HeaderText = "Total Order Qty";
+                //this.dgvList.Columns["TotalOrderQty"].HeaderText = "Total Order Qty";
                 this.dgvList.Columns["SetCUM"].HeaderText = "Qty In Batch(Set CUM)";
-                this.dgvList.Columns["RemainingQty"].HeaderText = "Remaining Qty";
+                //this.dgvList.Columns["RemainingQty"].HeaderText = "Remaining Qty";
                 this.dgvList.Columns["CompanyName"].HeaderText = "Company Name";
                 this.dgvList.Columns["ClientName"].HeaderText = "Client Name";
                 this.dgvList.Columns["SiteName"].HeaderText = "Site Name";
@@ -197,12 +207,15 @@ namespace NilkanthApplication
                     currentX -= btn.Width;
 
                     if (btn == btnSendWhatsApp)
-                        btn.Location = new Point(currentX, topY + whatsappOffsetY); 
+                        btn.Location = new Point(currentX, topY + whatsappOffsetY);
                     else
                         btn.Location = new Point(currentX, topY);
 
                     currentX -= spacing;
                 }
+
+                this.cmbClientDetails.Location = new Point(btnSendWhatsApp.Location.X - cmbClientDetails.Width - spacing, btnSendWhatsApp.Location.Y + 10);
+                this.lblClient.Location = new Point(cmbClientDetails.Location.X - lblClient.Width - spacing, cmbClientDetails.Location.Y + 3);
 
                 // === Position Logout Button Dynamically ===
 
@@ -221,7 +234,77 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+        void BindClientMaster()
+        {
+            try
+            {
+                this.dataTable = new DataTable();
+                DataTable dataTableClientDetails = new DataTable();
+                DataColumn dtColumn1 = new DataColumn();
+                dtColumn1.DataType = typeof(string);
+                dtColumn1.ColumnName = "ID";
+                dtColumn1.Caption = "ID";
+                dataTableClientDetails.Columns.Add(dtColumn1);
 
+                DataColumn dtColumn2 = new DataColumn();
+                dtColumn2.DataType = typeof(string);
+                dtColumn2.ColumnName = "ClientDetails";
+                dtColumn2.Caption = "ClientDetails";
+                dataTableClientDetails.Columns.Add(dtColumn2);
+
+                DataColumn dtColumn3 = new DataColumn();
+                dtColumn3.DataType = typeof(string);
+                dtColumn3.ColumnName = "MobileNo";
+                dtColumn3.Caption = "MobileNo";
+                dataTableClientDetails.Columns.Add(dtColumn3);
+
+                this.dataTable = Functions.GetTableDataBySP("ClientMaster_SelectAll");
+                DataRow dataRow = dataTable.NewRow();
+                dataRow[0] = 0;
+                dataRow[1] = "Select Client";
+                dataTable.Rows.InsertAt(dataRow, 0);
+
+                if (this.dataTable != null && this.dataTable.Rows.Count > 0)
+                {
+                    for (int a = 0; a < dataTable.Rows.Count; a++)
+                    {
+                        dataRow = dataTableClientDetails.NewRow();
+                        dataRow[0] = Convert.ToInt32(dataTable.Rows[a]["ID"]);
+                        string clientDetails = dataTable.Rows[a]["CompanyName"].ToString() + "-" +
+                                dataTable.Rows[a]["PersonName"].ToString() + "-" +
+                                dataTable.Rows[a]["MobileNo"].ToString();
+                        dataRow[1] = clientDetails;
+                        dataRow[2] = dataTable.Rows[a]["MobileNo"];
+                        dataTableClientDetails.Rows.InsertAt(dataRow, (a + 1));
+                    }
+                }
+
+                this.cmbClientDetails.DataSource = dataTableClientDetails;
+                this.cmbClientDetails.DisplayMember = "ClientDetails";
+                this.cmbClientDetails.ValueMember = "MobileNo";
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+        void ShowWhatsapp()
+        {
+            bool IsShowWhatsapp = Convert.ToBoolean(Functions.GetSingleValue("select ShowWhatsapp from CompanyMaster"));
+            if (IsShowWhatsapp)
+            {
+                lblClient.Visible = true;
+                cmbClientDetails.Visible = true;
+                btnSendWhatsApp.Visible = true;
+            }
+            else
+            {
+                lblClient.Visible = false;
+                cmbClientDetails.Visible = false;
+                btnSendWhatsApp.Visible = false;
+            }
+        }
         private void btnNew_Click(object sender, EventArgs e)
         {
             try
@@ -269,21 +352,28 @@ namespace NilkanthApplication
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            bool hasCurrentRow = this.dgvList.CurrentRow != null;
-            if (hasCurrentRow)
+            try
             {
-                DataGridViewRow currentRow = this.dgvList.CurrentRow;
-                string deliveryId = currentRow.Cells["ID"].Value.ToString();
-                if (Convert.ToInt32(deliveryId) > 0)
+                bool hasCurrentRow = this.dgvList.CurrentRow != null;
+                if (hasCurrentRow)
                 {
-                    ReportDeliveryChallan challan = new ReportDeliveryChallan(Convert.ToInt32(deliveryId));
-                    challan.Show();
-                    challan.BringToFront();
+                    DataGridViewRow currentRow = this.dgvList.CurrentRow;
+                    string deliveryId = currentRow.Cells["ID"].Value.ToString();
+                    if (Convert.ToInt32(deliveryId) > 0)
+                    {
+                        ReportDeliveryChallan challan = new ReportDeliveryChallan(Convert.ToInt32(deliveryId));
+                        challan.Show();
+                        challan.BringToFront();
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Row Selected for delete.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    }
                 }
-                else
-                {
-                    MessageBox.Show("No Row Selected for delete.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-                }
+            }
+            catch (Exception ex)
+            {
+
             }
 
         }
@@ -334,6 +424,81 @@ namespace NilkanthApplication
             }
         }
 
-      
+        private async void btnSendWhatsApp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbClientDetails.SelectedIndex <= 0)
+                {
+                    MessageBox.Show("Please select client for WhatsApp.");
+                    return;
+                }
+                if (dgvList.CurrentRow == null)
+                {
+                    MessageBox.Show("Please select Delivery Challan.");
+                    return;
+                }
+
+                int deliveryId = Convert.ToInt32(dgvList.CurrentRow.Cells["ID"].Value);
+
+                string mobile = cmbClientDetails.SelectedValue.ToString();
+
+                // RDLC path
+                string rootPath = AppDomain.CurrentDomain.BaseDirectory;
+
+                while (rootPath.Contains("bin"))
+                    rootPath = Directory.GetParent(rootPath).Parent.FullName;
+
+                string rdlcPath = Path.Combine(rootPath, "rptDeliveryChallan.rdlc");
+
+                // Generate PDF
+                var pdfService = new ReportPdfService(rdlcPath);
+                var result = await pdfService.GenerateDeliveryChallanPdf(deliveryId);
+
+                // Upload file to server
+                string publicUrl = await FileUploadHelper.UploadFile(
+                    result.FilePath,
+                    Functions.GetUploadUrl()
+                );
+                // Extract client name for template parameter
+                if (cmbClientDetails.SelectedItem is DataRowView drv)
+                {
+                    var parts = drv["ClientDetails"].ToString().Split('-');
+                    result.ClientName = parts.Length > 0 ? parts[1].Trim() : "";
+                }
+                // Template parameters
+                string Safe(string v) => string.IsNullOrWhiteSpace(v) ? "-" : v;
+
+                var values = new Dictionary<int, string>
+                {
+                    {1, Safe(result.ClientName)},
+                    {2, Safe(result.Date)},
+                    {3, Safe(result.ChallanNo)},
+                    {4, Safe(result.BatchNo)},
+                    {5, Safe(result.DriverName)},
+                    {6, Safe(result.TruckNo)},
+                    {7, Safe(result.CycleStart)},
+                    {8, Safe(result.CycleEnd)},
+                    {9, Safe(result.CompanyName)}
+                };
+
+                var whatsappService = new WhatsAppService(whatsappApiKey);
+
+                bool sent = await whatsappService.SendTemplateWithDocument(
+                    mobile,
+                    "challan",
+                    publicUrl,
+                    values,
+                    "delivery-challan",
+                    $"Delivery_Challan_{result.ChallanNo}.pdf"
+                );
+
+                MessageBox.Show(sent ? "WhatsApp sent successfully!" : "Failed to send WhatsApp.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
     }
 }

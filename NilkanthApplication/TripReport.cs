@@ -1,16 +1,24 @@
-﻿using Org.BouncyCastle.Asn1.Cms;
+﻿using NilkanthApplication.Classes.DTO;
+using Org.BouncyCastle.Asn1.Cms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NilkanthApplication
 {
     public partial class TripReport : Form
     {
+        private string whatsappApiKey;
+        private string apiKey;
+
         public TripReport()
         {
             this.InitializeComponent();
@@ -21,6 +29,13 @@ namespace NilkanthApplication
         {
             try
             {
+                whatsappApiKey = ConfigurationManager.AppSettings["WhatsappKey"];
+                apiKey = ConfigurationManager.AppSettings["APIKey"];
+
+                DataTable dtCompany = Functions.GetTableData("select top 1 CompanyName, ShowDeliveryChallan from CompanyMaster");
+
+                btnDeliveryChallan.Visible = false;
+
                 this.lblErrorMsg.Visible = false;
                 this.cmbFromBatch.SelectedIndexChanged -= new EventHandler(cmbFromBatch_SelectedIndexChanged);
                 this.BindFromBatchNo("");
@@ -38,6 +53,11 @@ namespace NilkanthApplication
                 //this.BindGrid();
                 this.BindClient();
                 this.ShowWhatsapp();
+                if (dtCompany.Rows.Count > 0)
+                {
+                    bool showDelivery = Convert.ToBoolean(dtCompany.Rows[0]["ShowDeliveryChallan"]);
+                    btnDeliveryChallan.Visible = showDelivery;
+                }
 
             }
             catch (Exception ex)
@@ -45,6 +65,7 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+       
 
         void BindChkLstBatch(string ClientName)
         {
@@ -540,7 +561,7 @@ namespace NilkanthApplication
                 //}
 
                 if (flag == true)
-                {
+                    {
                     ReportTrip rpt = new ReportTrip(batchnos, selectedFromDate,selectedToDate);
                     //ReportTrip rpt = new ReportTrip(BatchDateDetails);
                     rpt.Show();
@@ -632,11 +653,12 @@ namespace NilkanthApplication
             chkLastBatch.Checked = true;
         }
 
-        private void btnImportCSV_Click(object sender, EventArgs e)
+        private async void btnImportCSV_Click(object sender, EventArgs e)
         {
             try
             {
-                Functions.ImportCSV();
+                this.Enabled = false;
+                await Task.Run(() => Functions.ImportCSV());
                 reloadBatchNo();
                 this.chkLastBatch.Checked = true;
                 chkLastBatch_CheckedChanged(sender, e);
@@ -645,13 +667,18 @@ namespace NilkanthApplication
             {
                 MessageBox.Show(ex.Message.ToString(), "Error : ImportCSV", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
+            finally
+            {
+                this.Enabled = true;
+            }
         }
 
-        private void btnManualImport_Click(object sender, EventArgs e)
+        private async void btnManualImport_Click(object sender, EventArgs e)
         {
             try
             {
-                Functions.ImportCSVManual();
+                this.Enabled = false;
+                await Task.Run(() => Functions.ImportCSVManual());
                 reloadBatchNo();
                 this.chkLastBatch.Checked = true;
                 chkLastBatch_CheckedChanged(sender, e);
@@ -659,6 +686,10 @@ namespace NilkanthApplication
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString(), "Error : ImportCSV", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+            finally
+            {
+                this.Enabled = true;
             }
         }
 
@@ -727,6 +758,7 @@ namespace NilkanthApplication
         {
             //this.Controls.Clear();
             //InitializeComponent();
+            
             this.TripReport_Load(sender, e);
             this.chkLastBatch_CheckedChanged(sender, e);
         }
@@ -787,12 +819,109 @@ namespace NilkanthApplication
             }
         }
 
-        private void btnSendWhatsApp_Click(object sender, EventArgs e)
+        private async void btnSendWhatsApp_Click(object sender, EventArgs e)
         {
-            string mobileno = cmbClientDetails.SelectedValue.ToString();
-            string selectedbatch = cmbBatchNo.SelectedValue.ToString();
-            MessageBox.Show(selectedbatch);
+            try
+            {
+                // Collect batch numbers and date(s) as in your UI logic
+                List<int> batchNumbers = new List<int>();
+                string fromDate = "", toDate = "";
+
+                if (cmbBatchNo.SelectedIndex > 0)
+                {
+                    string[] parts = cmbBatchNo.Text.Split(' ');
+                    batchNumbers.Add(Convert.ToInt32(parts[0]));
+                    fromDate = parts[1].Replace("(", "").Replace(")", "");
+                }
+                else if (cmbFromBatch.SelectedIndex > 0 && cmbToBatch.SelectedIndex > 0)
+                {
+                    string[] fromParts = cmbFromBatch.Text.Split(' ');
+                    string[] toParts = cmbToBatch.Text.Split(' ');
+                    int fromBatch = Convert.ToInt32(fromParts[0]);
+                    int toBatch = Convert.ToInt32(toParts[0]);
+                    fromDate = fromParts[1].Replace("(", "").Replace(")", "");
+                    toDate = toParts[1].Replace("(", "").Replace(")", "");
+                    for (int i = fromBatch; i >= toBatch; i--)
+                        batchNumbers.Add(i);
+                }
+                else if (chkLstBatchNo.CheckedItems.Count > 0)
+                {
+                    for (int i = 0; i < chkLstBatchNo.CheckedItems.Count; i++)
+                    {
+                        string[] parts = chkLstBatchNo.CheckedItems[i].ToString().Split(' ');
+                        batchNumbers.Add(Convert.ToInt32(parts[0]));
+                        if (i == 0)
+                            fromDate = parts[1].Replace("(", "").Replace(")", "");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please select a batch.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                var rootPath = AppDomain.CurrentDomain.BaseDirectory;
+                while (rootPath.Contains("bin"))
+                {
+                    rootPath = Directory.GetParent(rootPath).Parent.FullName;
+                }
+                string rdlcPath = Path.Combine(rootPath, "MultipalTrip.rdlc");
+                var pdfService = new ReportPdfService(rdlcPath);
+                TripReportResult result = await pdfService.GenerateTripReportPdfAsync(batchNumbers, fromDate, toDate);
+
+                string pdfPath = result.FilePath;
+               
+                string clientName = "";
+                if (cmbClientDetails.SelectedItem is DataRowView drv)
+                {
+                    
+                    var parts = drv["ClientDetails"].ToString().Split('-');
+                    clientName = parts.Length > 0 ? parts[1].Trim() : "";
+                    result.CustomerName = clientName;
+                }
+
+                var uploadUrl = Functions.GetUploadUrl();
+                // 2. Upload PDF to server
+                string publicPdfUrl = await FileUploadHelper.UploadFile(pdfPath, uploadUrl);
+
+                string clientMobileNo = cmbClientDetails.SelectedValue?.ToString() ?? "";
+
+                // 4. Send WhatsApp message using WhatsAppService
+                string apiKey = whatsappApiKey;
+
+                var whatsappService = new WhatsAppService(apiKey);
+
+                string Safe(string v) => string.IsNullOrWhiteSpace(v) ? "-" : v;
+                var values = new Dictionary<int, string>
+                {
+                    {1, Safe(result.CustomerName)},
+                    {2, Safe(result.Date)},
+                    {3, Safe(result.BatchNo)},
+                    {4, Safe(result.Site)},
+                    {5, Safe(result.DriverName)},
+                    {6, Safe(result.TruckNo)},
+                    {7, Safe(result.SetCuM)},
+                    {8, Safe(result.ActCuM)},
+                    {9, Safe(result.CompanyName)}
+                };
+
+                bool sent = await whatsappService.SendTemplateWithDocument(
+                    clientMobileNo,
+                    "trip",
+                    publicPdfUrl,
+                    values,
+                    "trip_report",
+                    "Trip_Report.pdf"
+                );
+
+
+                MessageBox.Show("PDF generated:\n" + pdfPath, "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error generating PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         void ShowWhatsapp()
         {
@@ -825,6 +954,7 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+        
     }
 }
 

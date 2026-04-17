@@ -2,6 +2,7 @@
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Globalization;
@@ -554,11 +555,17 @@ public class Functions : SQLHelper
             //MessageBox.Show("Inside import csv");
             //MessageBox.Show("FTP Check");
             FtpWebRequest reqFTP;
-            String ftpserver = "ftp://192.168.1.150/DAT0000/SAMPLE/SMP0000.CSV";
+            // Read FTP config from App.config, fallback to previous hard-coded values
+            string ftpserver = ConfigurationManager.AppSettings["FtpUrl"] ?? "ftp://192.168.1.150/DAT0000/SAMPLE/SMP0000.CSV";
+            string ftpUser = ConfigurationManager.AppSettings["FtpUser"] ?? "admin";
+            string ftpPass = ConfigurationManager.AppSettings["FtpPassword"] ?? "6982";
+            bool ftpUsePassive = false;
+            bool.TryParse(ConfigurationManager.AppSettings["FtpUsePassive"], out ftpUsePassive);
+
             reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpserver));
-            reqFTP.UsePassive = false;
+            reqFTP.UsePassive = ftpUsePassive;
             reqFTP.UseBinary = true;
-            reqFTP.Credentials = new NetworkCredential("admin", "6982");
+            reqFTP.Credentials = new NetworkCredential(ftpUser, ftpPass);
             reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
             reqFTP.Proxy = GlobalProxySelection.GetEmptyWebProxy();
             //MessageBox.Show("FTP Check");
@@ -814,89 +821,76 @@ public class Functions : SQLHelper
             DataTable dataTable = null;
             for (int a = 0; a < csvdt.Rows.Count; a++)
             {
-                int csvdtbatchno = Convert.ToInt32(csvdt.Rows[a][8].ToString());
-                int csvcycle = Convert.ToInt32(csvdt.Rows[a][10].ToString());
+                // Parse batch and cycle safely
+                int csvdtbatchno = 0;
+                int csvcycle = 0;
+                int.TryParse(csvdt.Rows[a][8].ToString(), out csvdtbatchno);
+                int.TryParse(csvdt.Rows[a][10].ToString(), out csvcycle);
 
-                //dataTable = new DataTable();
-                //dataTable = Functions.GetTableDataBySPWithParam("ImportCSVBatchno_Cycle_Select", string.Concat(new string[]
-                //        {
+                // Quick client-side existence check to avoid duplicate inserts
+                try
+                {
+                    var existsObj = Functions.GetSingleValue($"select count(1) from Trip_PLCData where BatchNo={csvdtbatchno} and Cycle={csvcycle}");
+                    int exists = 0;
+                    try { exists = Convert.ToInt32(existsObj); } catch { exists = 0; }
+                    if (exists > 0)
+                    {
+                        // Skip inserting this record
+                        continue;
+                    }
+                }
+                catch
+                {
+                    // If check fails, continue to attempt insert; server-side uniqueness should protect
+                }
 
-                //        "@BatchNo='",
-                //        csvdtbatchno.ToString(),
-                //        "',@Cycle='",
-                //        csvcycle.ToString(),
-                //        "'"
-                //    }));
-
-                //if (dataTable.Rows.Count == 0 && csvdt.Rows[a][0].ToString().Trim() != "")
-                //{
-                    SQLHelper._objCmd = new SqlCommand();
-                    SQLHelper._objCmd.Parameters.Clear();
-                    SQLHelper._objCmd.Parameters.AddWithValue("@PLCDate", Convert.ToDateTime(csvdt.Rows[a][0].ToString()));
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Customer", csvdt.Rows[a][1].ToString());
-                    SQLHelper._objCmd.Parameters.AddWithValue("@ClientName", csvdt.Rows[a][2].ToString());
-                    SQLHelper._objCmd.Parameters.AddWithValue("@SiteName", csvdt.Rows[a][3].ToString());
-                    SQLHelper._objCmd.Parameters.AddWithValue("@RecipeName", csvdt.Rows[a][4].ToString());
-                    SQLHelper._objCmd.Parameters.AddWithValue("@TruckNo", csvdt.Rows[a][5].ToString());
-                    SQLHelper._objCmd.Parameters.AddWithValue("@DriverName", csvdt.Rows[a][6].ToString());
-                    SQLHelper._objCmd.Parameters.AddWithValue("@BatchSize", csvdt.Rows[a][7].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][7].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@BatchNo", csvdt.Rows[a][8].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][8].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@SetCycle", csvdt.Rows[a][9].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][9].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Cycle", csvdt.Rows[a][10].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][10].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Bin1Set", csvdt.Rows[a][11].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][11].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Bin1Actual", csvdt.Rows[a][12].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][12].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Bin2Set", csvdt.Rows[a][13].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][13].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Bin2Actual", csvdt.Rows[a][14].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][14].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Bin3Set", csvdt.Rows[a][15].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][15].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Bin3Actual", csvdt.Rows[a][16].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][16].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Bin4Set", csvdt.Rows[a][17].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][17].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@Bin4Actual", csvdt.Rows[a][18].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][18].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@CementSet", csvdt.Rows[a][19].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][19].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@CementActual", csvdt.Rows[a][20].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][20].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@FlyashSet", csvdt.Rows[a][21].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][21].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@FlyashActual", csvdt.Rows[a][22].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][22].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@WaterSet", csvdt.Rows[a][23].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][23].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@WaterActual", csvdt.Rows[a][24].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][24].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@AdditiveSet", csvdt.Rows[a][25].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][25].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@AdditiveActual", csvdt.Rows[a][26].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][26].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@TotalActual", csvdt.Rows[a][27].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][27].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@SilicaSet", csvdt.Rows[a][28].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][28].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@SilicaActual", csvdt.Rows[a][29].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][29].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@GGBSSet", csvdt.Rows[a][30].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][30].ToString()) : 0);
-                    SQLHelper._objCmd.Parameters.AddWithValue("@GGBSActual", csvdt.Rows[a][31].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][31].ToString()) : 0);
+                SQLHelper._objCmd = new SqlCommand();
+                SQLHelper._objCmd.Parameters.Clear();
+                SQLHelper._objCmd.Parameters.AddWithValue("@PLCDate", Convert.ToDateTime(csvdt.Rows[a][0].ToString()));
+                SQLHelper._objCmd.Parameters.AddWithValue("@Customer", csvdt.Rows[a][1].ToString());
+                SQLHelper._objCmd.Parameters.AddWithValue("@ClientName", csvdt.Rows[a][2].ToString());
+                SQLHelper._objCmd.Parameters.AddWithValue("@SiteName", csvdt.Rows[a][3].ToString());
+                SQLHelper._objCmd.Parameters.AddWithValue("@RecipeName", csvdt.Rows[a][4].ToString());
+                SQLHelper._objCmd.Parameters.AddWithValue("@TruckNo", csvdt.Rows[a][5].ToString());
+                SQLHelper._objCmd.Parameters.AddWithValue("@DriverName", csvdt.Rows[a][6].ToString());
+                SQLHelper._objCmd.Parameters.AddWithValue("@BatchSize", csvdt.Rows[a][7].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][7].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@BatchNo", csvdt.Rows[a][8].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][8].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@SetCycle", csvdt.Rows[a][9].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][9].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@Cycle", csvdt.Rows[a][10].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][10].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@Bin1Set", csvdt.Rows[a][11].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][11].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@Bin1Actual", csvdt.Rows[a][12].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][12].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@Bin2Set", csvdt.Rows[a][13].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][13].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@Bin2Actual", csvdt.Rows[a][14].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][14].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@Bin3Set", csvdt.Rows[a][15].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][15].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@Bin3Actual", csvdt.Rows[a][16].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][16].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@Bin4Set", csvdt.Rows[a][17].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][17].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@Bin4Actual", csvdt.Rows[a][18].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][18].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@CementSet", csvdt.Rows[a][19].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][19].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@CementActual", csvdt.Rows[a][20].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][20].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@FlyashSet", csvdt.Rows[a][21].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][21].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@FlyashActual", csvdt.Rows[a][22].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][22].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@WaterSet", csvdt.Rows[a][23].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][23].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@WaterActual", csvdt.Rows[a][24].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][24].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@AdditiveSet", csvdt.Rows[a][25].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][25].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@AdditiveActual", csvdt.Rows[a][26].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][26].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@TotalActual", csvdt.Rows[a][27].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][27].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@SilicaSet", csvdt.Rows[a][28].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][28].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@SilicaActual", csvdt.Rows[a][29].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][29].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@GGBSSet", csvdt.Rows[a][30].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][30].ToString()) : 0);
+                SQLHelper._objCmd.Parameters.AddWithValue("@GGBSActual", csvdt.Rows[a][31].ToString().Trim() != "" ? Convert.ToDouble(csvdt.Rows[a][31].ToString()) : 0);
 
 
-                    string text2 = Queries.InsertBySP("ImportCSVTOPLCData");
+                string text2 = Queries.InsertBySP("ImportCSVTOPLCData");
 
-                    bool flag1 = text2 != "";
-                    if (flag1)
-                        MessageBox.Show(text2, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    else
-                        addCount++;
-                //}
-                //else
-                    //addCount++;
+                bool flag1 = text2 != "";
+                if (flag1)
+                    MessageBox.Show(text2, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                else
+                    addCount++;
             }
 
-            if (addCount == csvdt.Rows.Count)
-                flag = true;
-            else
-                flag = false;
-
-            /*connection();*/
-            //creating object of SqlBulkCopy    
-            /*SqlBulkCopy objbulk = new SqlBulkCopy(con);*/
-            //assigning Destination table name    
-            /*objbulk.DestinationTableName = "Employee";*/
-            //Mapping Table column    
-            /*objbulk.ColumnMappings.Add("Name", "Name");
-            objbulk.ColumnMappings.Add("City", "City");
-            objbulk.ColumnMappings.Add("Address", "Address");
-            objbulk.ColumnMappings.Add("Designation", "Designation");*/
-            //inserting Datatable Records to DataBase    
-            /*con.Open();
-            objbulk.WriteToServer(csvdt);
-            con.Close();*/
+            // If at least one row was inserted, return true so caller will update last-read timestamp
+            flag = (addCount > 0);
         }
         catch (Exception ex)
         {
@@ -904,5 +898,20 @@ public class Functions : SQLHelper
         }
 
         return flag;
+    }
+
+    public static string GetUploadUrl()
+    {
+        string baseUrl = ConfigurationManager.AppSettings["BaseUrl"];
+        string endpoint = ConfigurationManager.AppSettings["UploadEndpoint"];
+
+        // Remove trailing slash from BaseUrl if exists
+        baseUrl = baseUrl.TrimEnd('/');
+
+        // Ensure endpoint starts with slash
+        if (!endpoint.StartsWith("/"))
+            endpoint = "/" + endpoint;
+
+        return baseUrl + endpoint;
     }
 }

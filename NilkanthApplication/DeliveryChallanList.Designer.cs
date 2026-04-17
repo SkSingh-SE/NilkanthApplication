@@ -49,6 +49,8 @@ namespace NilkanthApplication
             this.lblFilterStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnSendWhatsApp = new System.Windows.Forms.Button();
+            this.cmbClientDetails = new System.Windows.Forms.ComboBox();
+            this.lblClient = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -62,7 +64,7 @@ namespace NilkanthApplication
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(87, 17);
             this.lblVersion.TabIndex = 122;
-            this.lblVersion.Text = "Version : 2";
+            this.lblVersion.Text = "Version : 3";
             // 
             // btnCancel
             // 
@@ -120,7 +122,7 @@ namespace NilkanthApplication
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvList.EnableHeadersVisualStyles = false;
-            this.dgvList.Location = new System.Drawing.Point(12, 106);
+            this.dgvList.Location = new System.Drawing.Point(12, 128);
             this.dgvList.MultiSelect = false;
             this.dgvList.Name = "dgvList";
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -137,7 +139,7 @@ namespace NilkanthApplication
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvList.RowTemplate.Height = 28;
-            this.dgvList.Size = new System.Drawing.Size(1337, 555);
+            this.dgvList.Size = new System.Drawing.Size(1337, 533);
             this.dgvList.TabIndex = 116;
             // 
             // btnDelete
@@ -316,12 +318,32 @@ namespace NilkanthApplication
             this.btnSendWhatsApp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSendWhatsApp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSendWhatsApp.Image = global::NilkanthApplication.Properties.Resources.WhatsAppIcon_1;
-            this.btnSendWhatsApp.Location = new System.Drawing.Point(613, 32);
+            this.btnSendWhatsApp.Location = new System.Drawing.Point(973, 84);
             this.btnSendWhatsApp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnSendWhatsApp.Name = "btnSendWhatsApp";
             this.btnSendWhatsApp.Size = new System.Drawing.Size(59, 49);
             this.btnSendWhatsApp.TabIndex = 127;
             this.btnSendWhatsApp.UseVisualStyleBackColor = true;
+            this.btnSendWhatsApp.Click += new System.EventHandler(this.btnSendWhatsApp_Click);
+            // 
+            // cmbClientDetails
+            // 
+            this.cmbClientDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.cmbClientDetails.FormattingEnabled = true;
+            this.cmbClientDetails.Location = new System.Drawing.Point(689, 94);
+            this.cmbClientDetails.Name = "cmbClientDetails";
+            this.cmbClientDetails.Size = new System.Drawing.Size(278, 28);
+            this.cmbClientDetails.TabIndex = 133;
+            // 
+            // lblClient
+            // 
+            this.lblClient.AutoSize = true;
+            this.lblClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
+            this.lblClient.Location = new System.Drawing.Point(631, 97);
+            this.lblClient.Name = "lblClient";
+            this.lblClient.Size = new System.Drawing.Size(52, 20);
+            this.lblClient.TabIndex = 132;
+            this.lblClient.Text = "Client";
             // 
             // DeliveryChallanList
             // 
@@ -329,6 +351,8 @@ namespace NilkanthApplication
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1361, 765);
+            this.Controls.Add(this.cmbClientDetails);
+            this.Controls.Add(this.lblClient);
             this.Controls.Add(this.btnSendWhatsApp);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.statusStrip1);
@@ -376,5 +400,7 @@ namespace NilkanthApplication
         private System.Windows.Forms.ToolStripStatusLabel lblFilterStatus;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnSendWhatsApp;
+        private System.Windows.Forms.ComboBox cmbClientDetails;
+        private System.Windows.Forms.Label lblClient;
     }
 }

@@ -24,7 +24,10 @@ namespace NilkanthApplication
 
         private System.Windows.Forms.Timer _syncTimer;
         private PlcSyncManager _syncManager;
+        private CsvImportManager _csvImporter;
         private bool _isSyncRunning = false;
+        private const int DefaultInterval = 60000;
+
         public MainScreen()
         {
             this.InitializeComponent();
@@ -35,7 +38,29 @@ namespace NilkanthApplication
             {
                 HighlightFirstRow(dgvProductionData);
                 HighlightFirstRow(dgvTotalProdForSelectedMon);
+                try { tabControl1.Invalidate(); } catch { }
             };
+
+            // Use owner-draw for tabs so active tab can be styled
+            try
+            {
+                tabControl1.DrawMode = TabDrawMode.OwnerDrawFixed;
+                // Make tabs wide enough to show full text by default
+                int maxWidth = 0;
+                foreach (TabPage tp in tabControl1.TabPages)
+                {
+                    var sz = TextRenderer.MeasureText(tp.Text, tabControl1.Font);
+                    if (sz.Width > maxWidth) maxWidth = sz.Width;
+                }
+                // add some padding
+                maxWidth += 32;
+                // set fixed size so each tab can show full text
+                tabControl1.SizeMode = TabSizeMode.Fixed;
+                tabControl1.ItemSize = new Size(Math.Max(maxWidth, 120), Math.Max(tabControl1.ItemSize.Height, 36));
+
+                tabControl1.DrawItem += TabControl1_DrawItem;
+            }
+            catch { }
 
             //StartPosition = FormStartPosition.Manual;
             //Rectangle screen = Screen.FromPoint(System.Windows.Forms.Cursor.Position).WorkingArea;
@@ -43,6 +68,56 @@ namespace NilkanthApplication
             //int h = Height >= screen.Height ? screen.Height : (screen.Height + Height) / 2;
             //Location = new Point(screen.Left + (screen.Width - w) / 2, screen.Top + (screen.Height - h) / 2);
             //Size = new Size(w, h);
+        }
+
+        private void TabControl1_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            try
+            {
+                var tabControl = sender as TabControl;
+                if (tabControl == null) return;
+
+                var g = e.Graphics;
+                var tabPage = tabControl.TabPages[e.Index];
+                var tabRect = tabControl.GetTabRect(e.Index);
+
+                bool isSelected = (tabControl.SelectedIndex == e.Index);
+
+                Color backColor = isSelected ? Color.FromArgb(48, 108, 207) : SystemColors.Control;
+                Color foreColor = isSelected ? Color.White : SystemColors.ControlText;
+
+                // Ensure padding so text is not clipped
+                var paddedRect = new Rectangle(tabRect.X + 4, tabRect.Y + 4, tabRect.Width - 8, tabRect.Height - 8);
+
+                using (var brush = new SolidBrush(backColor))
+                {
+                    g.FillRectangle(brush, tabRect);
+                }
+
+                // Draw a subtle border so tabs remain visible
+                using (var pen = new Pen(Color.Gray))
+                {
+                    g.DrawRectangle(pen, tabRect.X, tabRect.Y, tabRect.Width - 1, tabRect.Height - 1);
+                }
+
+                // Draw the text using TextRenderer for better compatibility
+                var flags = System.Windows.Forms.TextFormatFlags.HorizontalCenter | System.Windows.Forms.TextFormatFlags.VerticalCenter | System.Windows.Forms.TextFormatFlags.SingleLine | System.Windows.Forms.TextFormatFlags.EndEllipsis;
+                TextRenderer.DrawText(g, tabPage.Text, isSelected ? new Font(tabControl.Font, FontStyle.Bold) : tabControl.Font, paddedRect, foreColor, flags);
+            }
+            catch { }
+        }
+
+        // Thread-safe setter for notification label used by background workers
+        public void SetNotification(string message)
+        {
+            try
+            {
+                if (this.lblNotification.InvokeRequired)
+                    this.lblNotification.Invoke((MethodInvoker)(() => this.lblNotification.Text = message));
+                else
+                    this.lblNotification.Text = message;
+            }
+            catch { }
         }
 
         #region Timer Elapsed Event Handler
@@ -64,16 +139,42 @@ namespace NilkanthApplication
         }
         #endregion
 
+        private void InitializeSyncEngine()
+        {
+            _syncManager = new PlcSyncManager();
+
+            _csvImporter = new CsvImportManager();
+
+            _syncTimer = new System.Windows.Forms.Timer();
+            _syncTimer.Interval = DefaultInterval;
+            _syncTimer.Tick += SyncTimer_Tick;
+
+            // Optional: small delay before first run
+            Task.Delay(5000).ContinueWith(_ =>
+            {
+                this.Invoke((MethodInvoker)(() => _syncTimer.Start()));
+            });
+        }
+
         private void MainScreen_Load(object sender, EventArgs e)
         {
             try
             {
-                _syncManager = new PlcSyncManager();
+                string query = "select IsMobileAppSync from CompanyMaster";
+                DataTable dataTable = Functions.GetTableData(query);
 
-                _syncTimer = new System.Windows.Forms.Timer();
-                _syncTimer.Interval = 60000; // 60 seconds
-                _syncTimer.Tick += SyncTimer_Tick;
-                _syncTimer.Start();
+                bool isMobileAppSync = false;
+
+                if (dataTable.Rows.Count > 0 &&
+                    dataTable.Rows[0]["IsMobileAppSync"] != DBNull.Value)
+                {
+                    isMobileAppSync = Convert.ToBoolean(dataTable.Rows[0]["IsMobileAppSync"]);
+                }
+
+                if (isMobileAppSync)
+                {
+                    InitializeSyncEngine();
+                }
 
                 //this.Location = new Point(0, 0);
                 //this.Size = Screen.PrimaryScreen.WorkingArea.Size;
@@ -205,18 +306,34 @@ namespace NilkanthApplication
             try
             {
                 _isSyncRunning = true;
-                await _syncManager.ExecuteSyncAsync();
+
+                _syncTimer.Stop();
+
+                // First, try to import any new CSV records (non-blocking)
+                bool csvDidWork = false;
+                try
+                {
+                    csvDidWork = await _csvImporter.RunOnceAsync();
+                }
+                catch { }
+
+                // Then run sync manager to push data to remote
+                bool syncDidWork = await _syncManager.ExecuteSyncAsync();
+
+                // If either did work, keep faster interval
+                _syncTimer.Interval = (csvDidWork || syncDidWork) ? DefaultInterval : DefaultInterval * 2;
             }
             catch (Exception ex)
             {
-                // Optional: log error
-                // File.WriteAllText("sync_error.txt", ex.ToString());
+                _syncTimer.Interval = 60000;
             }
             finally
             {
                 _isSyncRunning = false;
+                _syncTimer.Start();
             }
         }
+
 
         void BindYear()
         {
@@ -1358,7 +1475,7 @@ namespace NilkanthApplication
 
         }
 
-        
+
 
         private void btnHelpDoc_Click(object sender, EventArgs e)
         {

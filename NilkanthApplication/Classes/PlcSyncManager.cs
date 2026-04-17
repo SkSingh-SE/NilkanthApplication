@@ -13,40 +13,117 @@ namespace NilkanthApplication.Classes
 {
     public class PlcSyncManager
     {
-        private readonly string _apiUrl = "http://192.168.1.82:8000";
-        private readonly string _apiKey = "nk-ingest-2026-secret-key";
+        private readonly string _apiUrl = "https://nilkantherp.com";
+        private readonly string _apiKey = "qThtrF6v+yzhjms+qKhy3sMddtuJ2aU1M1bNv9vEIsY=";
         private string _companyName = "YourCompany";
         private string _locationName = "YourLocation";
         private string _plantName = "Plant-1";
+        private static readonly HttpClient _httpClient = new HttpClient();
 
         public PlcSyncManager() { }
 
-        // 🔥 MAIN METHOD TO CALL FROM TIMER
-        public async Task ExecuteSyncAsync()
+        //  MAIN METHOD TO CALL FROM TIMER
+        public async Task<bool> ExecuteSyncAsync()
         {
-            if (!IsInternetAvailable())
-                return;
-
-            if (!UpdateCompanyInfo())
-                return;
-
-            var records = GetDataFromSP();
-
-            if (records == null || records.Count == 0)
-                return;
-
-            string payload = BuildPayload(records);
-
-            bool isSuccess = await SendToApi(payload);
-
-            if (isSuccess)
+            try
             {
-                foreach (var record in records)
-                {
-                    MarkAsSynced(record.Id); // or use your Primary Key
-                }
+                if (!await IsInternetAvailableAsync())
+                    return false;
+
+                if (!UpdateCompanyInfo())
+                    return false;
+
+                var results = await Task.WhenAll(
+                    SyncPLCData(),
+                    SyncBreakDown(),
+                    SyncNotes()
+                );
+
+                bool anySuccess = results.Any(r => r);
+                return anySuccess;
+            }
+            catch
+            {
+                return false;
             }
         }
+
+
+        private async Task<bool> SyncPLCData()
+        {
+            try
+            {
+                var records = GetDataFromSP();
+                if (records.Count == 0)
+                    return false;
+
+                bool success = await SendToApiAsync("/api/ingest/plc-data", records);
+
+                if (success)
+                {
+                    records.ForEach(r => MarkAsSynced(r.Id));
+                    return true;
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        private async Task<bool> SyncBreakDown()
+        {
+            try
+            {
+                var records = GetBreakdownForSync();
+                if (records.Count == 0)
+                    return false;
+
+                bool success = await SendToApiAsync("/api/ingest/breakdowns", records);
+
+                if (success)
+                {
+                    records.ForEach(r => MarkBreakdownSynced(r.Id));
+                    return true;
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
+        private async Task<bool> SyncNotes()
+        {
+            try
+            {
+                var records = GetNotesForSync();
+                if (records.Count == 0)
+                    return false;
+
+                bool success = await SendToApiAsync("/api/ingest/notes", records);
+
+                if (success)
+                {
+                    records.ForEach(r => MarkNotesSynced(r.Id));
+                    return true;
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+
 
         private bool UpdateCompanyInfo()
         {
@@ -134,58 +211,60 @@ namespace NilkanthApplication.Classes
             return list;
         }
 
-        // 🌐 INTERNET CHECK
-        private bool IsInternetAvailable()
+        private async Task<bool> IsInternetAvailableAsync()
         {
             try
             {
-                using (var client = new HttpClient())
-                {
-                    var response = client.GetAsync("http://192.168.1.82:8000/health").Result;
-                    return response.IsSuccessStatusCode;
-                }
+                var response = await _httpClient.GetAsync(_apiUrl);
+                return response.IsSuccessStatusCode;
             }
             catch
             {
                 return false;
             }
         }
-
-        // 🧾 BUILD JSON WRAPPER
-        private string BuildPayload(List<PlcJson> data)
+        private void AddHeaders()
         {
-            var wrapper = new
-            {
-                data = data
-            };
+            _httpClient.DefaultRequestHeaders.Remove("X-API-Key");
+            _httpClient.DefaultRequestHeaders.Remove("X-Company-Name");
+            _httpClient.DefaultRequestHeaders.Remove("X-Location-Name");
+            _httpClient.DefaultRequestHeaders.Remove("X-Plant-Name");
 
-            return JsonConvert.SerializeObject(wrapper);
+            _httpClient.DefaultRequestHeaders.Add("X-API-Key", _apiKey);
+            _httpClient.DefaultRequestHeaders.Add("X-Company-Name", _companyName);
+            _httpClient.DefaultRequestHeaders.Add("X-Location-Name", _locationName);
+            _httpClient.DefaultRequestHeaders.Add("X-Plant-Name", _plantName);
         }
 
-        // 🚀 SEND TO API WITH HEADERS
-        private async Task<bool> SendToApi(string payload)
+        private async Task<bool> SendToApiAsync(string endpoint, object data)
         {
             try
             {
-                using (var client = new HttpClient())
-                {
-                    client.DefaultRequestHeaders.Add("X-API-Key", _apiKey);
-                    client.DefaultRequestHeaders.Add("X-Company-Name", _companyName);
-                    client.DefaultRequestHeaders.Add("X-Location-Name", _locationName);
-                    client.DefaultRequestHeaders.Add("X-Plant-Name", _plantName);
+                AddHeaders();
 
-                    var content = new StringContent(payload, Encoding.UTF8, "application/json");
+                var payload = JsonConvert.SerializeObject(new { data }, Formatting.Indented);
 
-                    var response = await client.PostAsync(_apiUrl, content);
+                // 🔍 Print to Output Window (Visual Studio)
+                System.Diagnostics.Debug.WriteLine(payload);
 
-                    return response.IsSuccessStatusCode;
-                }
+                // 🔍 Optional: Save to file
+                System.IO.File.AppendAllText(
+                    "LastSyncPayload.json",
+                    $"[{DateTime.Now}]\n{payload}\n\n"
+                );
+                var content = new StringContent(payload, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PostAsync($"{_apiUrl}{endpoint}", content);
+
+                return response.IsSuccessStatusCode;
             }
-            catch
+            catch(Exception ex)
             {
+                System.Diagnostics.Debug.WriteLine(ex.ToString());
                 return false;
             }
         }
+
 
         //  MARK AS SYNCED USING SP
         private void MarkAsSynced(int PlcDataId)
@@ -199,5 +278,86 @@ namespace NilkanthApplication.Classes
                 Functions.DBKeyErrors(result);
             }
         }
+
+        private List<BreakdownDto> GetBreakdownForSync()
+        {
+            var list = new List<BreakdownDto>();
+
+            DataTable dt = Functions.GetTableDataBySP("GetBreakdownForSync");
+
+            if (dt == null || dt.Rows.Count == 0)
+                return list;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                var item = new BreakdownDto
+                {
+                    Id = Convert.ToInt32(row["ID"]),
+                    ModelNo = row["ModelNo"]?.ToString(),
+                    SerialNo = row["SerialNo"]?.ToString(),
+                    FaultStartDate = Convert.ToDateTime(row["FaultStartDate"]).ToString("yyyy-MM-dd"),
+                    FaultStopDate = Convert.ToDateTime(row["FaultStopDate"]).ToString("yyyy-MM-dd"),
+                    InchargeName = row["InchargeName"]?.ToString(),
+                    EngineerName = row["EngineerName"]?.ToString(),
+                    EngineerMobileNo = row["EngineerMobileNo"]?.ToString(),
+                    FaultTypeNames = row["FaultTypeNames"]?.ToString(),
+                    ActualFaultNames = row["ActualFaultNames"]?.ToString(),
+                    WorkCarriedOutNames = row["WorkCarriedOutNames"]?.ToString()
+                };
+
+                list.Add(item);
+            }
+
+            return list;
+        }
+        private void MarkBreakdownSynced(int id)
+        {
+            SQLHelper._objCmd = new SqlCommand();
+            SQLHelper._objCmd.Parameters.Clear();
+            SQLHelper._objCmd.Parameters.AddWithValue("@ID", id);
+            var result = Queries.UpdateBySP("MarkBreakdownSynced");
+            if (result != "")
+            {
+                Functions.DBKeyErrors(result);
+            }
+        }
+
+        private List<NotesDto> GetNotesForSync()
+        {
+            var list = new List<NotesDto>();
+
+            DataTable dt = Functions.GetTableDataBySP("GetNotesForSync");
+
+            if (dt == null || dt.Rows.Count == 0)
+                return list;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                var item = new NotesDto
+                {
+                    Id = Convert.ToInt32(row["ID"]),
+                    NoteDate = Convert.ToDateTime(row["NoteDate"]).ToString("yyyy-MM-dd"),
+                    NoteRemarks = row["NoteRemarks"]?.ToString()
+                };
+
+                list.Add(item);
+            }
+
+            return list;
+        }
+
+        private void MarkNotesSynced(int id)
+        {
+            SQLHelper._objCmd = new SqlCommand();
+            SQLHelper._objCmd.Parameters.Clear();
+            SQLHelper._objCmd.Parameters.AddWithValue("@ID", id);
+            var result = Queries.UpdateBySP("MarkNotesSynced");
+            if (result != "")
+            {
+                Functions.DBKeyErrors(result);
+            }
+        }
+
+
     }
 }

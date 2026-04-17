@@ -26,8 +26,8 @@ namespace NilkanthApplication.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-67VM5ML;Initial Catalog=NilkanthApplicationDB;Persist Securit" +
-            "y Info=True;User ID=sa;Password=sa@12345")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost;Initial Catalog=NilkanthApplicationDB;Persist Security Info" +
+            "=True;User ID=sa;Password=sa@12345;TrustServerCertificate=True")]
         public string NilkanthApplicationDBConnectionString {
             get {
                 return ((string)(this["NilkanthApplicationDBConnectionString"]));

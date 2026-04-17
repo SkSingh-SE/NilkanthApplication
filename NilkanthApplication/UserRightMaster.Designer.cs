@@ -288,7 +288,7 @@ namespace NilkanthApplication
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(87, 17);
             this.label1.TabIndex = 100;
-            this.label1.Text = "Version : 2";
+            this.label1.Text = "Version : 3";
             // 
             // UserRightMaster
             // 

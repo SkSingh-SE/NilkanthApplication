@@ -39,6 +39,9 @@ namespace NilkanthApplication
 
                 cm.rdonlApiKey = false;
                 cm.rdonlApiUrl = false;
+                cm.rdonCompanyName = false;
+                cm.rdonLocation = false;
+                cm.rdonPlantName = false;
             }
         }
 

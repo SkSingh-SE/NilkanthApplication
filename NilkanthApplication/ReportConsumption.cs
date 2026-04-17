@@ -77,6 +77,30 @@ namespace NilkanthApplication
                      fdate = Convert.ToDateTime(this.fromdate).Date.ToShortDateString();
                      tdate= Convert.ToDateTime(this.todate).Date.ToShortDateString();
                 }
+
+                DataTable dtCompany = Functions.GetTableData("select top 1 CompanyName, Address, MobileNo, GstNo, CompanyLogo, ShowHeader from CompanyMaster");
+                string companyName = "";
+                string companyAddress = "";
+                string companyMobile = "";
+                string companyGst = "";
+                byte[] logoBytes = null;
+                bool showHeader = false;
+
+                if (dtCompany.Rows.Count > 0)
+                {
+                    var row = dtCompany.Rows[0];
+
+                    companyName = row["CompanyName"].ToString();
+                    companyAddress = row["Address"].ToString();
+                    companyMobile = row["MobileNo"].ToString();
+                    companyGst = row["GstNo"].ToString();
+                    showHeader = Convert.ToBoolean(row["ShowHeader"]);
+                    if (row["CompanyLogo"] != DBNull.Value)
+                    {
+                        logoBytes = (byte[])row["CompanyLogo"];
+                    }
+                }
+
                 ReportParameter p1 = new ReportParameter("From_Date", fdate);
                 ReportParameter p2 = new ReportParameter("To_Date", tdate);
                 ReportParameter p3 = new ReportParameter("From_Time", fromtime);
@@ -88,6 +112,13 @@ namespace NilkanthApplication
                 ReportParameter p9 = new ReportParameter("Year", Aplyear);
                 ReportParameter p10 = new ReportParameter("Month", Aplmonth);
                 ReportParameter p11 = new ReportParameter("MQube", MQube.ToString());
+
+                ReportParameter p12 = new ReportParameter("CompanyAddress", companyAddress);
+                ReportParameter p13 = new ReportParameter("CompanyMobile", companyMobile);
+                ReportParameter p14 = new ReportParameter("CompanyGST", companyGst);
+                ReportParameter p15 = new ReportParameter("ShowHeader", showHeader.ToString());
+                ReportParameter p16 = new ReportParameter("CompanyName", companyName);
+                ReportParameter logoParam = new ReportParameter("CompanyLogo",logoBytes != null ? Convert.ToBase64String(logoBytes) : null,true);
 
                 reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p1 });
                 reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p2 });
@@ -101,6 +132,7 @@ namespace NilkanthApplication
                 reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p10 });
                 reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p11 });
 
+                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p12, p13, p14, p15, p16, logoParam });
                 this.reportViewer1.RefreshReport();
             }
             catch (Exception ex)

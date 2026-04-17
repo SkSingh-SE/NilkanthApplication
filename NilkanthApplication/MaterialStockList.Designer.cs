@@ -77,7 +77,7 @@ namespace NilkanthApplication
             this.lblVersion.Name = "lblVersion";
             this.lblVersion.Size = new System.Drawing.Size(87, 17);
             this.lblVersion.TabIndex = 139;
-            this.lblVersion.Text = "Version : 2";
+            this.lblVersion.Text = "Version : 3";
             // 
             // btnCancel
             // 

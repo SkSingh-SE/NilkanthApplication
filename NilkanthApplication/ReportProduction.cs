@@ -73,6 +73,31 @@ namespace NilkanthApplication
                     tdate = Convert.ToDateTime(this.todate).Date.ToShortDateString();
                 }
 
+                DataTable dtCompany = Functions.GetTableData("select top 1 CompanyName, Address, MobileNo, GstNo, CompanyLogo, ShowHeader from CompanyMaster");
+                string companyName = "";
+                string companyAddress = "";
+                string companyMobile = "";
+                string companyGst = "";
+                string companyLogoBase64 = "";
+                byte[] logoBytes = null;
+                bool showHeader = false;
+
+                if (dtCompany.Rows.Count > 0)
+                {
+                    var row = dtCompany.Rows[0];
+
+                    companyName = row["CompanyName"].ToString();
+                    companyAddress = row["Address"].ToString();
+                    companyMobile = row["MobileNo"].ToString();
+                    companyGst = row["GstNo"].ToString();
+                    showHeader = Convert.ToBoolean(row["ShowHeader"]);
+                    if (row["CompanyLogo"] != DBNull.Value)
+                    {
+                         logoBytes = (byte[])row["CompanyLogo"];
+                        companyLogoBase64 = Convert.ToBase64String(logoBytes);
+                    }
+                }
+
                 ReportParameter p1 = new ReportParameter("From_Date", fdate);
                 ReportParameter p2 = new ReportParameter("To_Date", tdate);
                 ReportParameter p3 = new ReportParameter("Client_Name", client);
@@ -84,16 +109,19 @@ namespace NilkanthApplication
                 ReportParameter p9 = new ReportParameter("Year", Aplyear);
                 ReportParameter p10 = new ReportParameter("Month", Aplmonth);
 
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p1 });
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p2 });
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p3 });
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p4 });
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p5 });
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p6 });
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p7 });
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p8 });
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p9 });
-                reportViewer1.LocalReport.SetParameters(new ReportParameter[] { p10 });
+                ReportParameter p11 = new ReportParameter("CompanyName", companyName);
+                ReportParameter p12 = new ReportParameter("CompanyAddress", companyAddress);
+                ReportParameter p13 = new ReportParameter("CompanyMobile", companyMobile);
+                ReportParameter p14 = new ReportParameter("CompanyGST", companyGst);
+                ReportParameter p15 = new ReportParameter("ShowHeader", showHeader.ToString());
+                ReportParameter logoParam = new ReportParameter("CompanyLogo", logoBytes != null ? Convert.ToBase64String(logoBytes) : null, true);
+
+                reportViewer1.LocalReport.SetParameters(new ReportParameter[]
+                {
+                    p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,
+                    p11,p12,p13,p14,p15
+                });
+                reportViewer1.LocalReport.SetParameters(logoParam);
 
 
                 this.reportViewer1.RefreshReport();

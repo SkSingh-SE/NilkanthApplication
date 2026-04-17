@@ -237,7 +237,7 @@ namespace NilkanthApplication
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 17);
             this.label4.TabIndex = 123;
-            this.label4.Text = "Version : 2";
+            this.label4.Text = "Version : 3";
             // 
             // cmbClientDetails
             // 

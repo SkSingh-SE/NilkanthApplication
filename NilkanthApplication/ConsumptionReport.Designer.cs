@@ -119,7 +119,7 @@ namespace NilkanthApplication
             dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvList.RowTemplate.Height = 28;
-            this.dgvList.Size = new System.Drawing.Size(751, 446);
+            this.dgvList.Size = new System.Drawing.Size(742, 446);
             this.dgvList.TabIndex = 7;
             this.dgvList.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellDoubleClick);
             // 
@@ -550,7 +550,7 @@ namespace NilkanthApplication
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(87, 17);
             this.label13.TabIndex = 100;
-            this.label13.Text = "Version : 2";
+            this.label13.Text = "Version : 3";
             // 
             // btnSendWhatsApp
             // 
@@ -567,6 +567,7 @@ namespace NilkanthApplication
             this.btnSendWhatsApp.Size = new System.Drawing.Size(35, 35);
             this.btnSendWhatsApp.TabIndex = 132;
             this.btnSendWhatsApp.UseVisualStyleBackColor = true;
+            this.btnSendWhatsApp.Click += new System.EventHandler(this.btnSendWhatsApp_Click);
             // 
             // cmbClientDetails
             // 
@@ -630,7 +631,7 @@ namespace NilkanthApplication
             this.dgvComparison.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvComparison.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvComparison.EnableHeadersVisualStyles = false;
-            this.dgvComparison.Location = new System.Drawing.Point(749, 167);
+            this.dgvComparison.Location = new System.Drawing.Point(771, 167);
             this.dgvComparison.Name = "dgvComparison";
             this.dgvComparison.ReadOnly = true;
             dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
@@ -647,8 +648,9 @@ namespace NilkanthApplication
             dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvComparison.RowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvComparison.RowTemplate.Height = 28;
-            this.dgvComparison.Size = new System.Drawing.Size(646, 440);
+            this.dgvComparison.Size = new System.Drawing.Size(586, 440);
             this.dgvComparison.TabIndex = 134;
+            this.dgvComparison.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvComparison_CellDoubleClick);
             // 
             // labelAmount
             // 

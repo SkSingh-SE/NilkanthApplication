@@ -72,7 +72,7 @@ namespace NilkanthApplication
             }*/
 
             this.lblUserName.Text = "User Name : " + Queries.UserName;
-            dgvList.ColumnCount = 5;
+            dgvList.ColumnCount = 2;
             dgvList.Columns[0].Name = "";
             dgvList.Columns[1].Name = "";
             dgvList.Columns[2].Name = "";
@@ -82,11 +82,11 @@ namespace NilkanthApplication
             string path = Application.StartupPath + "/HelpDoc/PDF";
             DirectoryInfo dir = new DirectoryInfo(path);
             FileInfo[] files = dir.GetFiles();
-            int rw = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(files.Length / 5.0)));
+            int rw = Convert.ToInt32(Math.Ceiling(Convert.ToDouble(files.Length / 2.0)));
             int index = 0;
             for(int a = 0; a< rw; a++)
             {
-                for(int b=0;b<5;b++)
+                for(int b=0;b<2;b++)
                 {
                     if (index < files.Length)
                     {

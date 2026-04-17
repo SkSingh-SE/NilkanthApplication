@@ -102,6 +102,7 @@ namespace NilkanthApplication
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Password";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PasswordToDeletePLCData_FormClosing);
+            this.Load += new System.EventHandler(this.PasswordToDeletePLCData_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

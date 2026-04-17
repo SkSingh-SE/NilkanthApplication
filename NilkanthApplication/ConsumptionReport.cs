@@ -1,9 +1,12 @@
 ﻿using Org.BouncyCastle.Asn1.Cms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,22 +14,28 @@ namespace NilkanthApplication
 {
     public partial class ConsumptionReport : Form
     {
+        private string whatsappApiKey;
+        private string apiKey;
         public ConsumptionReport()
         {
             this.InitializeComponent();
             this.contextMenuStrip1.ItemClicked += this.ContextMenuStrip1_ItemClicked;
+            this.Activated += this.ConsumptionReport_Activated;
         }
         bool isPageLoad = false;
         private void ConsumptionReport_Load(object sender, EventArgs e)
         {
             try
             {
+                whatsappApiKey = ConfigurationManager.AppSettings["WhatsappKey"];
+                apiKey = ConfigurationManager.AppSettings["APIKey"];
+
                 this.isPageLoad = true;
                 this.BindClient();
                 this.BindSite("");
                 this.BindRecipe("");
                 this.BindTruck("");
-                this.BindComparisonGrid();
+                //this.BindComparisonGrid();
                 this.BindYear();
                 this.BindClientMaster();
                 this.ShowWhatsapp();
@@ -478,6 +487,8 @@ namespace NilkanthApplication
 
                     //
 
+                    this.BindComparisonGrid();
+
                 }
                 catch (Exception ex)
                 {
@@ -866,14 +877,133 @@ namespace NilkanthApplication
 
         private void dgvList_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            if (e.RowIndex < 0) return;
+
+            var row = dgvList.Rows[e.RowIndex];
+
+            if (row.Cells["MaterialName"].Value != null)
             {
-                if (dgvList.Columns[e.ColumnIndex].Name == "MaterialName")
+                string materialName = row.Cells["MaterialName"].Value.ToString();
+
+                if (!string.IsNullOrWhiteSpace(materialName))
                 {
-                    string materialName = dgvList.Rows[e.RowIndex].Cells["MaterialName"].Value.ToString();
                     MaterialStock materialStock = new MaterialStock(materialName);
                     materialStock.ShowDialog();
                 }
+            }
+        }
+
+        private void ConsumptionReport_Activated(object sender, EventArgs e)
+        {
+            try
+            {
+                // Ensure the material stock / comparison data is up-to-date whenever
+                // this form becomes active (for example after editing/adding material stock)
+                this.BindComparisonGrid();
+                this.BindGrid();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private void dgvComparison_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex < 0) return;
+
+            var row = dgvComparison.Rows[e.RowIndex];
+
+            if (row.Cells["MaterialName"].Value != null)
+            {
+                string materialName = row.Cells["MaterialName"].Value.ToString();
+
+                if (!string.IsNullOrWhiteSpace(materialName))
+                {
+                    MaterialStock materialStock = new MaterialStock(materialName);
+                    materialStock.ShowDialog();
+                }
+            }
+        }
+
+        private async void btnSendWhatsApp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbClientDetails.SelectedIndex <= 0)
+                {
+                    MessageBox.Show("Please select client for WhatsApp.");
+                    return;
+                }
+
+                string mobile = cmbClientDetails.SelectedValue.ToString();
+
+                // same filter logic as Print button
+                string fromdate = $"{dtpFromDate.Value:yyyy-M-d} 00:00:00.000";
+                string todate = $"{dtpToDate.Value:yyyy-M-d} 00:00:00.000";
+
+                string client = cmbClient.SelectedIndex > 0 ? cmbClient.Text : "";
+                string site = cmbSite.SelectedIndex > 0 ? cmbSite.Text : "";
+                string recipe = cmbRecipe.SelectedIndex > 0 ? cmbRecipe.Text : "";
+                string truck = cmbTruckNo.SelectedIndex > 0 ? cmbTruckNo.Text : "";
+
+                string year = cmbYear.SelectedIndex > 0 ? cmbYear.Text : "";
+                string month = cmbMonth.SelectedIndex > 0 ? cmbMonth.Text : "";
+
+                string fromtime = dtpFromTime.Value.ToShortTimeString();
+                string totime = dtpToTime.Value.ToShortTimeString();
+
+                // Generate PDF
+                string rootPath = AppDomain.CurrentDomain.BaseDirectory;
+                while (rootPath.Contains("bin"))
+                    rootPath = Directory.GetParent(rootPath).Parent.FullName;
+
+                string rdlcPath = Path.Combine(rootPath, "Consumption.rdlc");
+
+                var pdfService = new ReportPdfService(rdlcPath);
+                var result = await pdfService.GenerateConsumptionPdf(
+                    chkApplyDateFilter.Checked.ToString(),
+                    chkApplyTimeFilter.Checked.ToString(),
+                    chkApplyYearMonth.Checked.ToString(),
+                    fromdate, todate, year, month, fromtime, totime,
+                    client, site, recipe, truck, lblMQube.Text);
+
+                // Upload PDF
+                string publicUrl = await FileUploadHelper.UploadFile(result.FilePath, Functions.GetUploadUrl());
+                string clientName;
+                if (cmbClientDetails.SelectedItem is DataRowView drv)
+                {
+
+                    var parts = drv["ClientDetails"].ToString().Split('-');
+                    clientName = parts.Length > 0 ? parts[1].Trim() : "";
+                    result.ClientName = clientName;
+                }
+                // Build template params
+                string Safe(string v) => string.IsNullOrWhiteSpace(v) ? "-" : v;
+                var values = new Dictionary<int, string>
+                {
+                    {1, Safe(result.ClientName)},
+                    {2, Convert.ToDateTime(result.FromDate).ToShortDateString() ?? "-"},
+                    {3, Convert.ToDateTime(result.ToDate).ToShortDateString() ?? "-"},
+                    {4, Safe(result.TotalCuM)},
+                    {5, Safe(result.CompanyName)}
+                };
+
+                // Send WhatsApp
+                var whatsappService = new WhatsAppService(whatsappApiKey);
+                bool sent = await whatsappService.SendTemplateWithDocument(
+                    mobile,
+                    "consumption_report",
+                    publicUrl,
+                    values,
+                    "consumption-report",
+                    "Consuption_Report.pdf");
+
+                MessageBox.Show(sent ? "WhatsApp sent successfully!" : "Failed to send WhatsApp.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

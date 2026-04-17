@@ -1,9 +1,12 @@
 ﻿using Org.BouncyCastle.Asn1.Cms;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -11,6 +14,9 @@ namespace NilkanthApplication
 {
     public partial class ProductionReport : Form
     {
+        private string whatsappApiKey;
+        private string apiKey;
+
         public ProductionReport()
         {
             this.InitializeComponent();
@@ -21,6 +27,9 @@ namespace NilkanthApplication
         {
             try
             {
+                whatsappApiKey = ConfigurationManager.AppSettings["WhatsappKey"];
+                apiKey = ConfigurationManager.AppSettings["APIKey"];
+
                 isPageLoad = true;
                 this.BindClient();
                 this.BindFromBatchNo("");
@@ -642,10 +651,6 @@ namespace NilkanthApplication
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void btnClearFilter_Click(object sender, EventArgs e)
         {
@@ -665,26 +670,6 @@ namespace NilkanthApplication
                 cmbClient.SelectedIndex = 0;
             
             this.BindGrid();
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label9_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void cmbYear_SelectedIndexChanged(object sender, EventArgs e)
@@ -792,6 +777,82 @@ namespace NilkanthApplication
                 lblClient.Visible = false;
                 cmbClientDetails.Visible = false;
                 btnSendWhatsApp.Visible = false;
+            }
+        }
+
+        private async void btnSendWhatsApp_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (cmbClientDetails.SelectedIndex <= 0)
+                {
+                    MessageBox.Show("Please select client for WhatsApp.");
+                    return;
+                }
+
+                string mobile = cmbClientDetails.SelectedValue.ToString();
+
+                string fromdate = $"{dtpFromDate.Value:yyyy-M-d} 00:00:00.000";
+                string todate = $"{dtpToDate.Value:yyyy-M-d} 00:00:00.000";
+
+                string client = cmbClient.SelectedIndex > 0 ? cmbClient.Text : "";
+                string site = cmbSite.SelectedIndex > 0 ? cmbSite.Text : "";
+                string recipe = cmbRecipe.SelectedIndex > 0 ? cmbRecipe.Text : "";
+                string truck = cmbTruckNo.SelectedIndex > 0 ? cmbTruckNo.Text : "";
+                string year = cmbYear.SelectedIndex > 0 ? cmbYear.Text : "";
+                string month = cmbMonth.SelectedIndex > 0 ? cmbMonth.Text : "";
+                string fromBatch = cmbFromBatch.SelectedIndex > 0 ? cmbFromBatch.Text : "0";
+                string toBatch = cmbToBatch.SelectedIndex > 0 ? cmbToBatch.Text : "0";
+
+                // Generate PDF
+                string rootPath = AppDomain.CurrentDomain.BaseDirectory;
+                while (rootPath.Contains("bin"))
+                    rootPath = Directory.GetParent(rootPath).Parent.FullName;
+
+                string rdlcPath = Path.Combine(rootPath, "Production.rdlc");
+
+                var pdfService = new ReportPdfService(rdlcPath);
+                var result = await pdfService.GenerateProductionReportPdf(
+                    chkApplyDateFilter.Checked.ToString(),
+                    chkApplyYearMonth.Checked.ToString(),
+                    fromdate, todate, year, month,
+                    fromBatch, toBatch, client, site, recipe, truck);
+
+                // Upload
+                string publicUrl = await FileUploadHelper.UploadFile(result.FilePath, Functions.GetUploadUrl());
+                if (cmbClientDetails.SelectedItem is DataRowView drv)
+                {
+
+                    var parts = drv["ClientDetails"].ToString().Split('-');
+                    result.ClientName = parts.Length > 0 ? parts[1].Trim() : "";
+                    
+                }
+                // Template params
+                string Safe(string v) => string.IsNullOrWhiteSpace(v) ? "-" : v;
+                var values = new Dictionary<int, string>
+                {
+                    {1, Safe(result.ClientName)},
+                    {2, Convert.ToDateTime(result.FromDate).ToShortDateString() ?? "-" },
+                    {3, Convert.ToDateTime(result.ToDate).ToShortDateString() ?? "-"},
+                    {4, Safe(result.TotalCuM)},
+                    {5, Safe(result.CompanyName)}
+                };
+
+                var whatsappService = new WhatsAppService(whatsappApiKey);
+
+                bool sent = await whatsappService.SendTemplateWithDocument(
+                    mobile,
+                    "production_report",
+                    publicUrl,
+                    values,
+                    "production-report",
+                    "Production_Report.pdf");
+
+                MessageBox.Show(sent ? "WhatsApp sent successfully!" : "Failed to send WhatsApp.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
     }

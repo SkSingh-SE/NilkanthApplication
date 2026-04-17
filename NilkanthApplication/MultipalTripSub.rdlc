@@ -2337,7 +2337,7 @@
             </TablixRowHierarchy>
             <DataSetName>TripDS1</DataSetName>
             <Height>1.03068cm</Height>
-            <Width>27.7cm</Width>
+            <Width>27.69996cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -2491,8 +2491,8 @@
       <Page>
         <PageHeight>21cm</PageHeight>
         <PageWidth>29.7cm</PageWidth>
-        <LeftMargin>1cm</LeftMargin>
-        <RightMargin>1cm</RightMargin>
+        <LeftMargin>0.7cm</LeftMargin>
+        <RightMargin>0.7cm</RightMargin>
         <TopMargin>0.5cm</TopMargin>
         <BottomMargin>0.5cm</BottomMargin>
         <ColumnSpacing>0.13cm</ColumnSpacing>

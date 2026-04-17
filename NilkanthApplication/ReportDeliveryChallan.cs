@@ -28,10 +28,14 @@ namespace NilkanthApplication
             reportViewer1.ProcessingMode = Microsoft.Reporting.WinForms.ProcessingMode.Local;
 
             ReportDataSource rds = new ReportDataSource("DeliveryChallanReportDataSet", dataTable);
-            string reportPath = Path.Combine(Application.StartupPath, @"..\..\rptDeliveryChallan.rdlc");
+
+
+            string exeFolder = Application.StartupPath;
+            string reportPath = Path.Combine(exeFolder, "rptDeliveryChallan.rdlc");
+
             this.reportViewer1.LocalReport.DataSources.Clear();
             this.reportViewer1.LocalReport.DataSources.Add(rds);
-            this.reportViewer1.LocalReport.ReportPath = reportPath;
+            //this.reportViewer1.LocalReport.ReportPath = reportPath;
             this.reportViewer1.RefreshReport();
         }
         private DataTable GetDeliveryReportBySP()

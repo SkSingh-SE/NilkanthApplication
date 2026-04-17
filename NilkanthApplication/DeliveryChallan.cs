@@ -114,7 +114,7 @@ namespace NilkanthApplication
             Object LastDeliveryChallanNo = Functions.GetSingleValue("select DeliveryChallanNo from DeliveryChallan order by ID desc");
             DateTime date_ = DateTime.Now;
 
-            if(LastDeliveryChallanNo == null)
+            if (LastDeliveryChallanNo == null)
                 txtChallanNo.Text = "DC/" + date_.Year + "/1";
             else
             {
@@ -133,7 +133,7 @@ namespace NilkanthApplication
                 this.lblUserName.Text = "User Name : " + Queries.UserName;
                 this.lblId.Text = this.editID.ToString();
                 this.GenerateDeliveryChallanNo();
-                
+
                 bool flag = this.lblId.Text.Trim() != "0";
                 if (flag)
                 {
@@ -241,20 +241,20 @@ namespace NilkanthApplication
         {
             try
             {
-               dataTable = Functions.GetTableDataBySPWithParam("TripReportData_Select3", string.Concat(new string[]
-               {
+                dataTable = Functions.GetTableDataBySPWithParam("TripReportData_Select3", string.Concat(new string[]
+                {
                         "@BatchNos='",
                         batchno,
                         "',@Date='",
                         date,
                         "'"
-                        //"',@ToBatchNo='",
-                        //this.tobatch,
-                        //"'"
-               }));
+                    //"',@ToBatchNo='",
+                    //this.tobatch,
+                    //"'"
+                }));
 
-               if(dataTable.Rows.Count > 0)
-               {
+                if (dataTable.Rows.Count > 0)
+                {
                     txtCompanyName.Text = dataTable.Rows[0]["Customer"].ToString();
                     txtClientName.Text = dataTable.Rows[0]["ClientName"].ToString();
                     txtSiteName.Text = dataTable.Rows[0]["SiteName"].ToString();
@@ -262,9 +262,12 @@ namespace NilkanthApplication
                     dtDate.Text = dataTable.Rows[0]["Date"].ToString();
                     txtBatchNo.Text = dataTable.Rows[0]["BatchNo"].ToString();
                     txtTruckNo.Text = dataTable.Rows[0]["TruckNo"].ToString();
-                    txtDriverName.Text = dataTable.Rows[0]["DriverName"].ToString();
+                    if (!string.IsNullOrWhiteSpace(dataTable.Rows[0]["DriverName"].ToString()))
+                    {
+                        txtDriverName.Text = dataTable.Rows[0]["DriverName"].ToString();
+                    }
                     txtQtyInBatch.Text = dataTable.Rows[0]["SetBatches"].ToString();
-                } 
+                }
             }
             catch (Exception ex)
             {
@@ -310,7 +313,7 @@ namespace NilkanthApplication
                 SQLHelper._objCmd.Parameters.AddWithValue("@CompanyName", txtCompanyName.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@ClientName", txtClientName.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@SiteName", txtSiteName.Text.ToString().Trim());
-                SQLHelper._objCmd.Parameters.AddWithValue("@RecipeName", txtRecipeName.Text.ToString().Trim()); 
+                SQLHelper._objCmd.Parameters.AddWithValue("@RecipeName", txtRecipeName.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@DeliveryChallanDate", dtDate.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@BatchNo", txtBatchNo.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@TruckNo", txtTruckNo.Text.ToString().Trim());
@@ -385,7 +388,7 @@ namespace NilkanthApplication
                     cmbClientDetails.SelectedValue = tableData.Rows[0]["PartyID"].ToString();
                     DateTime date_ = Convert.ToDateTime(dtDate.Text);
                     string batchDetails = txtBatchNo.Text + " (" + date_.ToString("dd-MM-yyyy") + ")";
-                    
+
 
                     for (int i = 0; i < cmbBatchNo.Items.Count; i++)
                     {
@@ -406,6 +409,6 @@ namespace NilkanthApplication
             }
         }
 
-        
+
     }
 }

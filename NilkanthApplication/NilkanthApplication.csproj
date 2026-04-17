@@ -29,7 +29,7 @@
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -37,6 +37,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -46,6 +47,25 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>7.3</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
@@ -140,9 +160,19 @@
     <Compile Include="BreakdownList.Designer.cs">
       <DependentUpon>BreakdownList.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\BreakdownDto.cs" />
+    <Compile Include="Classes\CsvImportManager.cs" />
+    <Compile Include="Classes\DTO\ConsumptionReportResult.cs" />
+    <Compile Include="Classes\DTO\DeliveryChallanResult.cs" />
+    <Compile Include="Classes\DTO\ProductionReportResult.cs" />
+    <Compile Include="Classes\DTO\TripReportResult.cs" />
     <Compile Include="Classes\EncryptDecryptClass.cs" />
+    <Compile Include="Classes\FileUploadHelper.cs" />
+    <Compile Include="Classes\NotesDto.cs" />
     <Compile Include="Classes\PLCJson.cs" />
     <Compile Include="Classes\PlcSyncManager.cs" />
+    <Compile Include="Classes\ReportPdfService.cs" />
+    <Compile Include="Classes\WhatsAppService.cs" />
     <Compile Include="ConsumptionDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -217,6 +247,12 @@
     </Compile>
     <Compile Include="ClientList.Designer.cs">
       <DependentUpon>ClientList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="PasswordDialog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PasswordDialog.Designer.cs">
+      <DependentUpon>PasswordDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="PasswordForUsersForm.cs">
       <SubType>Form</SubType>
@@ -378,6 +414,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AllTransaction.resx">
       <DependentUpon>AllTransaction.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Breakdown.resx">
       <DependentUpon>Breakdown.cs</DependentUpon>
@@ -388,7 +425,9 @@
     <EmbeddedResource Include="CompanyMaster.resx">
       <DependentUpon>CompanyMaster.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Consumption.rdlc" />
+    <EmbeddedResource Include="Consumption.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="ConsumptionReport.resx">
       <DependentUpon>ConsumptionReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -429,6 +468,9 @@
     <EmbeddedResource Include="ClientList.resx">
       <DependentUpon>ClientList.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="PasswordDialog.resx">
+      <DependentUpon>PasswordDialog.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PasswordForUsersForm.resx">
       <DependentUpon>PasswordForUsersForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -441,7 +483,9 @@
     <EmbeddedResource Include="PLCConnect.resx">
       <DependentUpon>PLCConnect.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Production.rdlc" />
+    <EmbeddedResource Include="Production.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProductionReport.resx">
       <DependentUpon>ProductionReport.cs</DependentUpon>
     </EmbeddedResource>
@@ -465,9 +509,15 @@
     <EmbeddedResource Include="ReportTrip.resx">
       <DependentUpon>ReportTrip.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MultipalTrip.rdlc" />
-    <EmbeddedResource Include="MultipalTripSub.rdlc" />
-    <EmbeddedResource Include="rptDeliveryChallan.rdlc" />
+    <EmbeddedResource Include="MultipalTrip.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MultipalTripSub.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptDeliveryChallan.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="Trip.rdlc" />
     <EmbeddedResource Include="TripReport.resx">
       <DependentUpon>TripReport.cs</DependentUpon>
@@ -631,6 +681,8 @@
     <None Include="Resources\Clients.png" />
     <None Include="Resources\Delivery_Challan.png" />
     <None Include="Resources\Materila_Stock.png" />
+    <Content Include="Resources\Helpline.png" />
+    <Content Include="Resources\user.png" />
     <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="SqlServerTypes\x64\msvcr120.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

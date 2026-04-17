@@ -211,6 +211,7 @@ namespace NilkanthApplication
                 this.dgvList.Columns["FaultStopDate"].HeaderText = "Fault Stop Date";
                 this.dgvList.Columns["InchargeName"].HeaderText = "Incharge Name";
                 this.dgvList.Columns["EngineerName"].HeaderText = "Engineer Name";
+                this.dgvList.Columns["EngineerMobileNo"].HeaderText = "Engineer Mobile No.";
                 this.dgvList.Columns["FaultTypeIDs"].Visible = false;
                 this.dgvList.Columns["ActualFaultIDs"].Visible = false;
                 this.dgvList.Columns["WorkCarriedOutIDs"].Visible = false;

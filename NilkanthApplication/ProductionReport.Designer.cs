@@ -148,7 +148,6 @@ namespace NilkanthApplication
             this.label6.Size = new System.Drawing.Size(69, 20);
             this.label6.TabIndex = 70;
             this.label6.Text = "To Date";
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // label5
             // 
@@ -211,7 +210,6 @@ namespace NilkanthApplication
             this.label7.Size = new System.Drawing.Size(38, 20);
             this.label7.TabIndex = 78;
             this.label7.Text = "Site";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // cmbSite
             // 
@@ -232,7 +230,6 @@ namespace NilkanthApplication
             this.label8.Size = new System.Drawing.Size(61, 20);
             this.label8.TabIndex = 80;
             this.label8.Text = "Recipe";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // cmbRecipe
             // 
@@ -253,7 +250,6 @@ namespace NilkanthApplication
             this.label9.Size = new System.Drawing.Size(72, 20);
             this.label9.TabIndex = 82;
             this.label9.Text = "TruckNo";
-            this.label9.Click += new System.EventHandler(this.label9_Click);
             // 
             // cmbTruckNo
             // 
@@ -346,7 +342,6 @@ namespace NilkanthApplication
             this.label1.Size = new System.Drawing.Size(446, 58);
             this.label1.TabIndex = 93;
             this.label1.Text = "Production Report";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // btnClearFilter
             // 
@@ -527,7 +522,7 @@ namespace NilkanthApplication
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(87, 17);
             this.label13.TabIndex = 100;
-            this.label13.Text = "Version : 2";
+            this.label13.Text = "Version : 3";
             // 
             // btnSendWhatsApp
             // 
@@ -544,6 +539,7 @@ namespace NilkanthApplication
             this.btnSendWhatsApp.Size = new System.Drawing.Size(35, 35);
             this.btnSendWhatsApp.TabIndex = 129;
             this.btnSendWhatsApp.UseVisualStyleBackColor = true;
+            this.btnSendWhatsApp.Click += new System.EventHandler(this.btnSendWhatsApp_Click);
             // 
             // cmbClientDetails
             // 

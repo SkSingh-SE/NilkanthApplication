@@ -16,6 +16,7 @@ namespace NilkanthApplication
     {
         string AddEditPAges, ViewPAge, DeletePage;
         string CompanyName, Location, PlantName;
+        private bool isFormLoading = true;
         public CompanyMaster()
         {
             InitializeComponent();
@@ -72,19 +73,43 @@ namespace NilkanthApplication
             }
         }
 
+        public bool rdonCompanyName
+        {
+            get
+            {
+                return txtCompanyName.ReadOnly;
+            }
+            set
+            {
+                txtCompanyName.ReadOnly = value;
+            }
+        }
+
+        public bool rdonLocation
+        {
+            get { return textLocation.ReadOnly; }
+            set { textLocation.ReadOnly = value; }
+        }
+
+        public bool rdonPlantName
+        {
+            get { return textPlantName.ReadOnly; }
+            set { textPlantName.ReadOnly = value; }
+        }
+
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
                 string ErrMsg = "";
-                if(txtField1Label.Text != "" && txtField1Value.Text == "")
+                if (txtField1Label.Text != "" && txtField1Value.Text == "")
                     ErrMsg += "Field1 Value,";
 
                 if (txtField2Label.Text != "" && txtField2Value.Text == "")
                     ErrMsg += "Field2 Value";
                 else
                 {
-                    if(ErrMsg.Length > 0)
+                    if (ErrMsg.Length > 0)
                         ErrMsg = ErrMsg.Substring(0, ErrMsg.Length - 1);
                 }
 
@@ -118,35 +143,75 @@ namespace NilkanthApplication
                     txtReportFooDesc.Focus();
                     return;
                 }
-                if (string.IsNullOrWhiteSpace(textLocation.Text))
-                {
-                    MessageBox.Show("Location should not blank.");
-                    textLocation.Focus();
-                    return;
-                }
-                if (string.IsNullOrWhiteSpace(textPlantName.Text))
-                {
-                    MessageBox.Show("Location should not blank.");
-                    textPlantName.Focus();
-                    return;
-                }
-                bool isUpdate = lblId.Text != "0";
 
-                if (isUpdate)
+                if (chkIsMobileAppSync.Checked)
                 {
-                    if (CompanyName != txtCompanyName.Text.Trim() ||
-                        Location != textLocation.Text.Trim() ||
-                        PlantName != textPlantName.Text.Trim())
+                    if (string.IsNullOrWhiteSpace(txtCompanyName.Text))
                     {
-                        MessageBox.Show("Company Name, Location and Plant Name cannot be modified.");
+                        MessageBox.Show("Company Name should not blank.");
+                        txtCompanyName.Focus();
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(textLocation.Text))
+                    {
+                        MessageBox.Show("Location should not blank.");
+                        textLocation.Focus();
+                        return;
+                    }
+                    if (string.IsNullOrWhiteSpace(textPlantName.Text))
+                    {
+                        MessageBox.Show("Plant Name should not blank.");
+                        textPlantName.Focus();
                         return;
                     }
                 }
+                bool isUpdate = lblId.Text != "0";
 
                 if (ErrMsg != "")
                     MessageBox.Show("Please Fill " + ErrMsg);
                 else
                 {
+                    // Validate that label fields are unique (ignore empty or '-' values)
+                    var labelMap = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+                    void AddLabel(string fieldName, string value)
+                    {
+                        if (string.IsNullOrWhiteSpace(value)) return;
+                        var v = value.Trim().ToUpper();
+                        if (v == "-") return;
+                        if (!labelMap.ContainsKey(v)) labelMap[v] = new List<string>();
+                        labelMap[v].Add(fieldName);
+                    }
+
+                    AddLabel("Bin1 Label", txtBin1Label.Text);
+                    AddLabel("Bin2 Label", txtBin2Label.Text);
+                    AddLabel("Bin3 Label", txtBin3Label.Text);
+                    AddLabel("Bin4 Label", txtBin4Label.Text);
+                    AddLabel("Cement Label", txtCementLabel.Text);
+                    AddLabel("Flyash Label", txtFlyashLabel.Text);
+                    AddLabel("Silica Label", txtSilicaLabel.Text);
+                    AddLabel("GGBS Label", txtGGBSLabel.Text);
+
+                    var duplicates = labelMap.Where(kvp => kvp.Value.Count > 1).ToList();
+                    if (duplicates.Count > 0)
+                    {
+                        var parts = new List<string>();
+                        foreach (var dup in duplicates)
+                        {
+                            parts.Add($"'{dup.Key}' used in ({string.Join(", ", dup.Value)})");
+                        }
+                        MessageBox.Show("Label values must be unique. Duplicate values found: " + string.Join("; ", parts), "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        // focus first duplicated field
+                        var firstField = duplicates[0].Value[0];
+                        if (firstField == "Bin1 Label") txtBin1Label.Focus();
+                        else if (firstField == "Bin2 Label") txtBin2Label.Focus();
+                        else if (firstField == "Bin3 Label") txtBin3Label.Focus();
+                        else if (firstField == "Bin4 Label") txtBin4Label.Focus();
+                        else if (firstField == "Cement Label") txtCementLabel.Focus();
+                        else if (firstField == "Flyash Label") txtFlyashLabel.Focus();
+                        else if (firstField == "Silica Label") txtSilicaLabel.Focus();
+                        else if (firstField == "GGBS Label") txtGGBSLabel.Focus();
+                        return;
+                    }
                     SQLHelper._objCmd = new SqlCommand();
                     SQLHelper._objCmd.Parameters.Clear();
                     SQLHelper._objCmd.Parameters.AddWithValue("@CompanyName", txtCompanyName.Text.ToString().Trim()); // Name to Company Name
@@ -178,9 +243,42 @@ namespace NilkanthApplication
                     SQLHelper._objCmd.Parameters.AddWithValue("@Field2Label", Field2Label);
                     SQLHelper._objCmd.Parameters.AddWithValue("@Field2Value", Field2Value);
 
-                    SQLHelper._objCmd.Parameters.AddWithValue("@CompanyLogo",companyLogoBytes ?? (object)DBNull.Value);
+                    // Ensure DBNull.Value is passed when there is no logo bytes.
+                    var logoParam = SQLHelper._objCmd.Parameters.Add("@CompanyLogo", SqlDbType.VarBinary, -1);
+                    logoParam.Value = companyLogoBytes ?? (object)DBNull.Value;
+
                     SQLHelper._objCmd.Parameters.AddWithValue("@Location", textLocation.Text.ToString().Trim());
                     SQLHelper._objCmd.Parameters.AddWithValue("@PlantName", textPlantName.Text.ToString().Trim());
+
+                    if (chkShowActCUMInTrip.Checked == true)
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowActCUMInTrip", 1);
+                    else
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowActCUMInTrip", 0);
+
+                    if (chkShowWhatsapp.Checked == true)
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowWhatsapp", 1);
+                    else
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowWhatsapp", 0);
+
+                    if (chkShowVarPInKg.Checked == true)
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowVarPInKg", 1);
+                    else
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowVarPInKg", 0);
+
+                    if (chkShowHeader.Checked == true)
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowHeader", 1);
+                    else
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowHeader", 0);
+
+                    if (chkShowDlvChallan.Checked == true)
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowDeliveryChallan", 1);
+                    else
+                        SQLHelper._objCmd.Parameters.AddWithValue("@ShowDeliveryChallan", 0);
+
+                    if (chkIsMobileAppSync.Checked == true)
+                        SQLHelper._objCmd.Parameters.AddWithValue("@IsMobileAppSync", 1);
+                    else
+                        SQLHelper._objCmd.Parameters.AddWithValue("@IsMobileAppSync", 0);
 
                     string text2;
 
@@ -191,26 +289,6 @@ namespace NilkanthApplication
                     else
                     {
                         SQLHelper._objCmd.Parameters.AddWithValue("@Id", lblId.Text.ToString().Trim());
-
-                        if (chkShowActCUMInTrip.Checked == true)
-                            SQLHelper._objCmd.Parameters.AddWithValue("@ShowActCUMInTrip", 1);
-                        else
-                            SQLHelper._objCmd.Parameters.AddWithValue("@ShowActCUMInTrip", 0);
-
-                        if (chkShowWhatsapp.Checked == true)
-                            SQLHelper._objCmd.Parameters.AddWithValue("@ShowWhatsapp", 1);
-                        else
-                            SQLHelper._objCmd.Parameters.AddWithValue("@ShowWhatsapp", 0);
-
-                        if (chkShowVarPInKg.Checked == true)
-                            SQLHelper._objCmd.Parameters.AddWithValue("@ShowVarPInKg", 1);
-                        else
-                            SQLHelper._objCmd.Parameters.AddWithValue("@ShowVarPInKg", 0);
-
-                        if (chkShowHeader.Checked == true)
-                            SQLHelper._objCmd.Parameters.AddWithValue("@ShowHeader", 1);
-                        else
-                            SQLHelper._objCmd.Parameters.AddWithValue("@ShowHeader", 0);
 
                         text2 = Queries.UpdateBySP("CompanyMaster_Update");
                     }
@@ -253,7 +331,7 @@ namespace NilkanthApplication
                     if (dt.Rows[i]["PageName"].ToString() == "Company")
                     {
                         if (dt.Rows[i]["PageAddEdit"].ToString() == "True")
-                        { 
+                        {
                             btnSave.Enabled = true;
                         }
                         else
@@ -271,6 +349,7 @@ namespace NilkanthApplication
                     }
                 }
             }
+            isFormLoading = false;
         }
 
 
@@ -286,6 +365,10 @@ namespace NilkanthApplication
                 {
                     lblId.Text = this.dataTable.Rows[0]["Id"].ToString();
                     txtCompanyName.Text = this.dataTable.Rows[0]["CompanyName"].ToString();
+                    if (!string.IsNullOrWhiteSpace(txtCompanyName.Text))
+                    {
+                        txtCompanyName.ReadOnly = true;
+                    }
                     txtModelNumber.Text = this.dataTable.Rows[0]["ModelNumber"].ToString();
                     //txtModelNumber.Enabled = false;
                     txtModelNumber.ReadOnly = true;
@@ -308,10 +391,13 @@ namespace NilkanthApplication
                     txtFlyashLabel.Text = this.dataTable.Rows[0]["FlyashLabel"].ToString();
                     txtSilicaLabel.Text = this.dataTable.Rows[0]["SilicaLabel"].ToString();
                     txtGGBSLabel.Text = this.dataTable.Rows[0]["GGBSLabel"].ToString();
-                    chkShowActCUMInTrip.Checked = Convert.ToBoolean(this.dataTable.Rows[0]["ShowActCUMInTrip"].ToString());
-                    chkShowWhatsapp.Checked = Convert.ToBoolean(this.dataTable.Rows[0]["ShowWhatsapp"].ToString());
-                    chkShowVarPInKg.Checked = Convert.ToBoolean(this.dataTable.Rows[0]["ShowVarPInKg"].ToString());
-                    chkShowHeader.Checked = Convert.ToBoolean(this.dataTable.Rows[0]["ShowHeader"].ToString());
+
+                    chkShowActCUMInTrip.Checked = GetBoolValue(dataTable.Rows[0]["ShowActCUMInTrip"]);
+                    chkShowWhatsapp.Checked = GetBoolValue(dataTable.Rows[0]["ShowWhatsapp"]);
+                    chkShowDlvChallan.Checked = GetBoolValue(dataTable.Rows[0]["ShowDeliveryChallan"]);
+                    chkShowVarPInKg.Checked = GetBoolValue(dataTable.Rows[0]["ShowVarPInKg"]);
+                    chkShowHeader.Checked = GetBoolValue(dataTable.Rows[0]["ShowHeader"]);
+                    chkIsMobileAppSync.Checked = GetBoolValue(dataTable.Rows[0]["IsMobileAppSync"]);
 
                     txtField1Label.Text = this.dataTable.Rows[0]["Field1Label"].ToString();
                     txtField1Value.Text = this.dataTable.Rows[0]["Field1Value"].ToString();
@@ -320,7 +406,16 @@ namespace NilkanthApplication
 
                     txtReportFooDesc.Text = this.dataTable.Rows[0]["RptFooter"].ToString();
                     textLocation.Text = this.dataTable.Rows[0]["Location"].ToString();
+                    if (!string.IsNullOrWhiteSpace(textLocation.Text))
+                    {
+                        textLocation.ReadOnly = true;
+                    }
                     textPlantName.Text = this.dataTable.Rows[0]["PlantName"].ToString();
+                    if (!string.IsNullOrWhiteSpace(textPlantName.Text))
+                    {
+                        textPlantName.ReadOnly = true;
+                    }
+
                     if (this.dataTable.Rows[0]["CompanyLogo"] != DBNull.Value)
                     {
                         byte[] imgBytes = (byte[])this.dataTable.Rows[0]["CompanyLogo"];
@@ -341,7 +436,13 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+        private bool GetBoolValue(object value)
+        {
+            if (value == DBNull.Value || value == null)
+                return false;
 
+            return Convert.ToBoolean(value);
+        }
         private void CompanyMaster_FormClosing(object sender, FormClosingEventArgs e)
         {
             try
@@ -464,6 +565,195 @@ namespace NilkanthApplication
             }
         }
 
+        private void chkShowWhatsapp_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isFormLoading)
+                return;
+            //1843
+            if (chkShowWhatsapp.Checked)
+            {
+                using (PasswordDialog dlg = new PasswordDialog("5l2NV3ZieMYSA=", "Enter password to enable Whatsapp"))
+                {
+                    if (dlg.ShowDialog() != DialogResult.OK || !dlg.IsAuthorized)
+                    {
+                        chkShowWhatsapp.Checked = false;
+                    }
+                }
+            }
+        }
+
+        private void chkShowHeader_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isFormLoading)
+                return;
+
+            if (chkShowHeader.Checked)
+            {
+                if (companyLogoBytes == null)
+                {
+                    MessageBox.Show("Please upload company logo before enabling Show Header.");
+                    chkShowHeader.Checked = false;
+                    return;
+                }
+            }
+        }
+
+        private void chkShowDlvChallan_CheckedChanged(object sender, EventArgs e)
+        {
+            if (isFormLoading)
+                return;
+            //1705
+            if (chkShowDlvChallan.Checked)
+            {
+                using (PasswordDialog dlg = new PasswordDialog("5l2NV3ZieMYSA=", "Enter password to enable Delivery Challan"))
+                {
+                    if (dlg.ShowDialog() != DialogResult.OK || !dlg.IsAuthorized)
+                    {
+                        chkShowDlvChallan.Checked = false;
+                    }
+                }
+            }
+        }
+
+        private void chkAppSync_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (isFormLoading)
+                    return;
+                //1843
+                if (chkIsMobileAppSync.Checked)
+                {
+                    // Validate required fields before showing password dialog so user can cancel and update them
+                    var missing = new List<string>();
+                    if (string.IsNullOrWhiteSpace(txtCompanyName.Text))
+                        missing.Add("Company Name");
+                    if (string.IsNullOrWhiteSpace(textLocation.Text))
+                        missing.Add("Location");
+                    if (string.IsNullOrWhiteSpace(textPlantName.Text))
+                        missing.Add("Plant Name");
+
+                    if (missing.Count > 0)
+                    {
+                        chkIsMobileAppSync.Checked = false;
+                        string msg = "Please add the following before enabling Mobile App Sync: " + string.Join(", ", missing) + ".";
+                        MessageBox.Show(msg, "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+
+                        string first = missing[0];
+                        if (first == "Company Name")
+                            txtCompanyName.Focus();
+                        else if (first == "Location")
+                            textLocation.Focus();
+                        else if (first == "Plant Name")
+                            textPlantName.Focus();
+
+                        return;
+                    }
+
+                    using (PasswordDialog dlg = new PasswordDialog("5l2NV3ZieMYSA=", "Enter password to enable sync data with mobile app."))
+                    {
+                        if (dlg.ShowDialog() != DialogResult.OK || !dlg.IsAuthorized)
+                        {
+                            chkIsMobileAppSync.Checked = false;
+                        }
+                        else
+                        {
+                            // Make sure these fields are not editable and warn the user
+                            txtCompanyName.ReadOnly = true;
+                            textLocation.ReadOnly = true;
+                            textPlantName.ReadOnly = true;
+
+                            MessageBox.Show("Make sure Company name, Location and Plant should not be editable.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        }
+                    }
+                }
+                else
+                {
+                    // When mobile sync is disabled make the fields editable again
+                    txtCompanyName.ReadOnly = false;
+                    textLocation.ReadOnly = false;
+                    textPlantName.ReadOnly = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private void txtCompanyName_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                this.textboxName = "CompanyName";
+                if (this.rdonCompanyName == true)
+                {
+                    if(this.chkIsMobileAppSync.Checked)
+                    {
+                        MessageBox.Show("Company Name cannot be modified when Mobile App Sync is enabled.");
+                        return;
+                    }
+                    PasswordToEdit passToEdit = new PasswordToEdit(textboxName);
+                    base.Hide();
+                    passToEdit.Show();
+                    passToEdit.BringToFront();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private void textLocation_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                this.textboxName = "Location";
+                if (this.rdonLocation == true)
+                {
+                    if (this.chkIsMobileAppSync.Checked)
+                    {
+                        MessageBox.Show("Location cannot be modified when Mobile App Sync is enabled.");
+                        return;
+                    }
+                    PasswordToEdit passToEdit = new PasswordToEdit(textboxName);
+                    base.Hide();
+                    passToEdit.Show();
+                    passToEdit.BringToFront();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private void textPlantName_DoubleClick(object sender, EventArgs e)
+        {
+            try
+            {
+                this.textboxName = "PlantName";
+                if (this.rdonPlantName == true)
+                {
+                    if (this.chkIsMobileAppSync.Checked)
+                    {
+                        MessageBox.Show("Plant Name cannot be modified when Mobile App Sync is enabled.");
+                        return;
+                    }
+                    PasswordToEdit passToEdit = new PasswordToEdit(textboxName);
+                    base.Hide();
+                    passToEdit.Show();
+                    passToEdit.BringToFront();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+
         private void btnPartyDetails_Click(object sender, EventArgs e)
         {
             try
@@ -489,6 +779,21 @@ namespace NilkanthApplication
                 companyLogoBytes = File.ReadAllBytes(ofd.FileName);
                 picCompanyLogo.Image = Image.FromFile(ofd.FileName);
             }
+        }
+
+        private void btnRemoveLogo_Click(object sender, EventArgs e)
+        {
+            // Clear byte data
+            companyLogoBytes = null;
+
+            // Remove image from PictureBox
+            picCompanyLogo.Image = null;
+
+            // Optional: Reset background / placeholder
+            picCompanyLogo.BackColor = Color.LightGray; // or default
+
+            // Optional: show message (UX)
+            MessageBox.Show("Logo will be removed successfully after save!", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void txtModelNumber_DoubleClick(object sender, EventArgs e)

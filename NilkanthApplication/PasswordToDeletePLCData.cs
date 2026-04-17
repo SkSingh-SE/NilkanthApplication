@@ -95,5 +95,10 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+
+        private void PasswordToDeletePLCData_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

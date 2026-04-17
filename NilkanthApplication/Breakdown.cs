@@ -36,11 +36,49 @@ namespace NilkanthApplication
                 this.SetEditValues();
             }
         }
+        private bool ValidateEngineerMobile()
+        {
+            string mobile = txtEngineerMobileNo.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(mobile))
+            {
+                MessageBox.Show("Engineer mobile number cannot be blank.",
+                                "Validation",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                txtEngineerMobileNo.Focus();
+                return false;
+            }
+
+            if (!mobile.All(char.IsDigit))
+            {
+                MessageBox.Show("Mobile number must contain digits only.",
+                                "Validation",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                txtEngineerMobileNo.Focus();
+                return false;
+            }
+
+            if (mobile.Length != 10)
+            {
+                MessageBox.Show("Mobile number must be exactly 10 digits.",
+                                "Validation",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                txtEngineerMobileNo.Focus();
+                return false;
+            }
+
+            return true;
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
             try
             {
+                if (!ValidateEngineerMobile())
+                    return;
 
                 SQLHelper._objCmd = new SqlCommand();
                 SQLHelper._objCmd.Parameters.Clear();
@@ -50,6 +88,7 @@ namespace NilkanthApplication
                 SQLHelper._objCmd.Parameters.AddWithValue("@FaultStopDate", dtFaultStopDate.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@InchargeName", txtInchargeName.Text.ToString().Trim());
                 SQLHelper._objCmd.Parameters.AddWithValue("@EngineerName", txtEngineerName.Text.ToString().Trim());
+                SQLHelper._objCmd.Parameters.AddWithValue("@EngineerMobileNo", txtEngineerMobileNo.Text.ToString().Trim());
                 //SQLHelper._objCmd.Parameters.AddWithValue("@FaultTypeID", cmbFaultType.SelectedValue.ToString().Trim());
                 //SQLHelper._objCmd.Parameters.AddWithValue("@ActualFaultID", cmbActualFault.SelectedValue.ToString().Trim());
                 //SQLHelper._objCmd.Parameters.AddWithValue("@WorkCarriedOutID", cmbWorkCarriedOut.SelectedValue.ToString().Trim());
@@ -164,6 +203,7 @@ namespace NilkanthApplication
                     this.dtFaultStopDate.Text = tableData.Rows[0]["FaultStopDate"].ToString();
                     this.txtInchargeName.Text = tableData.Rows[0]["InchargeName"].ToString();
                     this.txtEngineerName.Text = tableData.Rows[0]["EngineerName"].ToString();
+                    this.txtEngineerMobileNo.Text = tableData.Rows[0]["EngineerMobileNo"].ToString();
                     string FaultTypeIDs = tableData.Rows[0]["FaultTypeIDs"].ToString();
                     string[] FaultTypeIDsDetails_ = FaultTypeIDs.Split(',');
                     Int64[] FaultTypeIDs_ = Array.ConvertAll(FaultTypeIDsDetails_, s => Int64.Parse(s));
@@ -486,6 +526,7 @@ namespace NilkanthApplication
             }
             return obj;
         }
+
     }
     public class ListItem
     {

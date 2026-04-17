@@ -579,7 +579,7 @@ namespace NilkanthApplication
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(95, 20);
             this.label10.TabIndex = 123;
-            this.label10.Text = "Version : 2";
+            this.label10.Text = "Version : 3";
             // 
             // AllTransaction
             // 

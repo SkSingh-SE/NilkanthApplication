@@ -73,7 +73,7 @@ namespace NilkanthApplication
             this.lblMsg.ForeColor = System.Drawing.Color.Red;
             this.lblMsg.Location = new System.Drawing.Point(140, 141);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(128, 17);
+            this.lblMsg.Size = new System.Drawing.Size(121, 16);
             this.lblMsg.TabIndex = 38;
             this.lblMsg.Text = "Incorrect Password";
             this.lblMsg.Visible = false;

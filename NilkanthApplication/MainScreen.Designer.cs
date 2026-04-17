@@ -40,7 +40,6 @@ namespace NilkanthApplication
             this.chartTotalProdCurrentYear = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.Home = new System.Windows.Forms.TabPage();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.CurrentYearTotalProd = new System.Windows.Forms.TabPage();
             this.lblTotalProdMqube = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,12 +65,12 @@ namespace NilkanthApplication
             this.btnProductionRpt = new System.Windows.Forms.Button();
             this.btnAllData = new System.Windows.Forms.Button();
             this.btnTripRpt = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.btnLogout = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chartTotalProdCurrentYear)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.Home.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.CurrentYearTotalProd.SuspendLayout();
             this.CurrentMonthProduction.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductionData)).BeginInit();
@@ -79,6 +78,7 @@ namespace NilkanthApplication
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotalProdForMonth)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotalProdForSelectedMon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
@@ -149,7 +149,6 @@ namespace NilkanthApplication
             this.tabControl1.SelectedIndex = 0;
             this.tabControl1.Size = new System.Drawing.Size(1353, 548);
             this.tabControl1.TabIndex = 38;
-
             // 
             // Home
             // 
@@ -161,16 +160,6 @@ namespace NilkanthApplication
             this.Home.TabIndex = 3;
             this.Home.Text = "Home";
             this.Home.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
-            this.pictureBox1.Image = global::NilkanthApplication.Properties.Resources.homepage;
-            this.pictureBox1.Location = new System.Drawing.Point(17, 6);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1306, 495);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // CurrentYearTotalProd
             // 
@@ -236,33 +225,19 @@ namespace NilkanthApplication
             this.CurrentMonthProduction.TabIndex = 1;
             this.CurrentMonthProduction.Text = "Current Month Production";
             this.CurrentMonthProduction.UseVisualStyleBackColor = true;
-
-            // -------------------------------
-            // label1 (Header)
-            // -------------------------------
-            this.label1.Dock = DockStyle.Top;
-            this.label1.Height = 35;
-            this.label1.TextAlign = ContentAlignment.MiddleCenter;
-            this.label1.Name = "label1";
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Production";
             // 
             // dgvProductionData
             // 
             this.dgvProductionData.AllowUserToAddRows = false;
             this.dgvProductionData.AllowUserToDeleteRows = false;
-            this.dgvProductionData.AllowUserToResizeColumns = true;
-            this.dgvProductionData.AllowUserToResizeRows = true;
-
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(239)))), ((int)(((byte)(218)))));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
             dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-
             this.dgvProductionData.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvProductionData.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvProductionData.BackgroundColor = System.Drawing.SystemColors.Window;
-
             dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(173)))), ((int)(((byte)(71)))));
             dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
@@ -270,16 +245,16 @@ namespace NilkanthApplication
             dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-
             this.dgvProductionData.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvProductionData.ColumnHeadersHeight = 25;
             this.dgvProductionData.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+            this.dgvProductionData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvProductionData.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvProductionData.EnableHeadersVisualStyles = false;
-            //this.dgvProductionData.Location = new System.Drawing.Point(6, 39);
-            this.dgvProductionData.ReadOnly = true;
+            this.dgvProductionData.Location = new System.Drawing.Point(3, 38);
+            this.dgvProductionData.MultiSelect = false;
             this.dgvProductionData.Name = "dgvProductionData";
-
+            this.dgvProductionData.ReadOnly = true;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold);
@@ -287,30 +262,25 @@ namespace NilkanthApplication
             dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
             dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-
             this.dgvProductionData.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvProductionData.RowHeadersWidth = 50;
             this.dgvProductionData.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvProductionData.RowsDefaultCellStyle.BackColor = Color.White;
-
-            this.dgvProductionData.AlternatingRowsDefaultCellStyle.BackColor =
-                Color.FromArgb(226, 239, 218);
-
+            dataGridViewCellStyle4.BackColor = System.Drawing.Color.White;
+            this.dgvProductionData.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvProductionData.RowTemplate.Height = 28;
-            this.dgvProductionData.Dock = DockStyle.Fill;
+            this.dgvProductionData.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProductionData.Size = new System.Drawing.Size(1339, 465);
             this.dgvProductionData.TabIndex = 8;
-
-            // Optional polish
-            this.dgvProductionData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvProductionData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            this.dgvProductionData.MultiSelect = false;
-
-            // -------------------------------
-            // Highlight first row by default
-            // -------------------------------
-           
-
+            // 
+            // label1
+            // 
+            this.label1.Dock = System.Windows.Forms.DockStyle.Top;
+            this.label1.Location = new System.Drawing.Point(3, 3);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(1339, 35);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Production";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // TotalProductionForMonth
             // 
@@ -437,8 +407,6 @@ namespace NilkanthApplication
             this.dgvTotalProdForSelectedMon.RowTemplate.Height = 28;
             this.dgvTotalProdForSelectedMon.Size = new System.Drawing.Size(415, 415);
             this.dgvTotalProdForSelectedMon.TabIndex = 9;
-
-           
             // 
             // btnPlcDataToCRM
             // 
@@ -458,27 +426,29 @@ namespace NilkanthApplication
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(87, 17);
             this.label4.TabIndex = 52;
-            this.label4.Text = "Version : 2";
+            this.label4.Text = "Version : 3";
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Image = global::NilkanthApplication.Properties.Resources.HelplineNo;
+            this.pictureBox3.BackgroundImage = global::NilkanthApplication.Properties.Resources.Helpline;
+            this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.pictureBox3.Location = new System.Drawing.Point(1032, 647);
             this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(254, 75);
+            this.pictureBox3.Size = new System.Drawing.Size(254, 68);
             this.pictureBox3.TabIndex = 54;
             this.pictureBox3.TabStop = false;
             // 
             // btnNotes
             // 
+            this.btnNotes.BackgroundImage = global::NilkanthApplication.Properties.Resources.Notes;
+            this.btnNotes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnNotes.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnNotes.FlatAppearance.BorderSize = 0;
             this.btnNotes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnNotes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(60)))), ((int)(((byte)(213)))));
-            this.btnNotes.Image = global::NilkanthApplication.Properties.Resources.Notes1;
-            this.btnNotes.Location = new System.Drawing.Point(413, 647);
+            this.btnNotes.Location = new System.Drawing.Point(413, 650);
             this.btnNotes.Name = "btnNotes";
-            this.btnNotes.Size = new System.Drawing.Size(182, 67);
+            this.btnNotes.Size = new System.Drawing.Size(184, 65);
             this.btnNotes.TabIndex = 53;
             this.btnNotes.Text = "&N";
             this.btnNotes.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -505,6 +475,8 @@ namespace NilkanthApplication
             // 
             // btnHelpDoc
             // 
+            this.btnHelpDoc.BackgroundImage = global::NilkanthApplication.Properties.Resources.HelpDesk;
+            this.btnHelpDoc.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnHelpDoc.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnHelpDoc.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.btnHelpDoc.FlatAppearance.BorderSize = 0;
@@ -512,10 +484,9 @@ namespace NilkanthApplication
             this.btnHelpDoc.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnHelpDoc.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHelpDoc.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(60)))), ((int)(((byte)(213)))));
-            this.btnHelpDoc.Image = global::NilkanthApplication.Properties.Resources.HelpDesk;
-            this.btnHelpDoc.Location = new System.Drawing.Point(165, 646);
+            this.btnHelpDoc.Location = new System.Drawing.Point(165, 650);
             this.btnHelpDoc.Name = "btnHelpDoc";
-            this.btnHelpDoc.Size = new System.Drawing.Size(247, 67);
+            this.btnHelpDoc.Size = new System.Drawing.Size(247, 65);
             this.btnHelpDoc.TabIndex = 44;
             this.btnHelpDoc.Text = "&h";
             this.btnHelpDoc.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -563,17 +534,18 @@ namespace NilkanthApplication
             // 
             // btnUsers
             // 
+            this.btnUsers.BackgroundImage = global::NilkanthApplication.Properties.Resources.user1;
+            this.btnUsers.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnUsers.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnUsers.FlatAppearance.BorderSize = 0;
             this.btnUsers.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnUsers.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnUsers.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnUsers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(60)))), ((int)(((byte)(213)))));
-            this.btnUsers.Image = global::NilkanthApplication.Properties.Resources.users;
             this.btnUsers.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUsers.Location = new System.Drawing.Point(-3, 15);
+            this.btnUsers.Location = new System.Drawing.Point(9, 15);
             this.btnUsers.Name = "btnUsers";
-            this.btnUsers.Size = new System.Drawing.Size(187, 60);
+            this.btnUsers.Size = new System.Drawing.Size(174, 60);
             this.btnUsers.TabIndex = 30;
             this.btnUsers.Tag = "";
             this.btnUsers.UseVisualStyleBackColor = true;
@@ -634,6 +606,16 @@ namespace NilkanthApplication
             this.btnTripRpt.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnTripRpt.UseVisualStyleBackColor = true;
             this.btnTripRpt.Click += new System.EventHandler(this.btnTripRpt_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.BackColor = System.Drawing.Color.LightGray;
+            this.pictureBox1.Image = global::NilkanthApplication.Properties.Resources.homepage;
+            this.pictureBox1.Location = new System.Drawing.Point(17, 6);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(1306, 495);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
             // 
             // pictureBox2
             // 
@@ -701,17 +683,16 @@ namespace NilkanthApplication
             ((System.ComponentModel.ISupportInitialize)(this.chartTotalProdCurrentYear)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.Home.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.CurrentYearTotalProd.ResumeLayout(false);
             this.CurrentYearTotalProd.PerformLayout();
             this.CurrentMonthProduction.ResumeLayout(false);
-            this.CurrentMonthProduction.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductionData)).EndInit();
             this.TotalProductionForMonth.ResumeLayout(false);
             this.TotalProductionForMonth.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotalProdForMonth)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTotalProdForSelectedMon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -294,7 +294,7 @@ namespace NilkanthApplication
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(95, 20);
             this.label1.TabIndex = 97;
-            this.label1.Text = "Version : 2";
+            this.label1.Text = "Version : 3";
             // 
             // WorkCarriedOut
             // 

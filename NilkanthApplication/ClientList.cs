@@ -111,8 +111,9 @@ namespace NilkanthApplication
                 this.dgvList.Columns["PersonName"].HeaderText = "Person Name";
                 this.dgvList.Columns["MobileNo"].HeaderText = "Mobile No";
                 this.dgvList.Columns["IsDeleted"].Visible = false;
+                this.dgvList.Columns["CompanyLogo"].Visible = false;
 
-                
+
                 //dgvList.Height = 550;
 
                 //Point point = new Point();
