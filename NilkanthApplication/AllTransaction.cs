@@ -28,6 +28,8 @@ namespace NilkanthApplication
 
             this.contextMenuStrip1.ItemClicked += this.ContextMenuStrip1_ItemClicked;
         }
+
+        
         bool isPageLoad = false;
         private void AllTransaction_Load(object sender, EventArgs e)
         {
@@ -53,11 +55,11 @@ namespace NilkanthApplication
                         {
                             if (dt.Rows[i]["PageDelete"].ToString() == "True")
                             {
-                                btnDeletePLCData.Enabled = true;
+                                btnDeleteAllPLCData.Enabled = true;
                             }
                             else
                             {
-                                btnDeletePLCData.Enabled = false;
+                                btnDeleteAllPLCData.Enabled = false;
                             }
                         }
                     }
@@ -473,6 +475,10 @@ namespace NilkanthApplication
                 }));
 
                     this.dgvList.DataSource = this.dataTable;
+                    // Use default row selection (no checkbox column). Enable full-row selection and multi-select.
+                    this.dgvList.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    this.dgvList.MultiSelect = true;
+
                     //bool flag3 = this.dgvList.Rows.Count > 0;
                     //if (flag3)
                     //{
@@ -494,7 +500,23 @@ namespace NilkanthApplication
                     //        this.dgvList.Rows[i].DefaultCellStyle.BackColor = Color.White;
                     //    }
                     //}
-                    dgvList.Columns[2].Visible = false;
+                    try
+                    {
+                        // Keep grid read-only but allow row selection
+                        this.dgvList.ReadOnly = true;
+                        foreach (DataGridViewColumn col in this.dgvList.Columns)
+                        {
+                            col.ReadOnly = true;
+                        }
+
+                        // hide Id column if present (case-insensitive)
+                        var idCol = this.dgvList.Columns
+                            .Cast<DataGridViewColumn>()
+                            .FirstOrDefault(c => string.Equals(c.Name, "Id", StringComparison.OrdinalIgnoreCase) || string.Equals(c.Name, "ID", StringComparison.OrdinalIgnoreCase) || string.Equals(c.Name, "SrNo", StringComparison.OrdinalIgnoreCase) || string.Equals(c.Name, "PID", StringComparison.OrdinalIgnoreCase));
+                        if (idCol != null)
+                            idCol.Visible = false;
+                    }
+                    catch { }
 
                     dgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
                     dgvList.ColumnHeadersHeight = 40;
@@ -701,32 +723,24 @@ namespace NilkanthApplication
             this.BindGrid();
         }
 
-        private void btnDeletePLCData_Click(object sender, EventArgs e)
+       
+
+        private async void btnImportCSV_Click(object sender, EventArgs e)
         {
             try
             {
-
-                PasswordToDeletePLCData passToDelete = new PasswordToDeletePLCData();
-                base.Hide();
-                passToDelete.Show();
-                passToDelete.BringToFront();
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-            }
-        }
-
-        private void btnImportCSV_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Functions.ImportCSV();
+                this.Enabled = false;
+                await Task.Run(() => Functions.ImportCSV());
+                // optionally refresh grid after import
+                this.BindGrid();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString(), "Error : ImportCSV", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+            finally
+            {
+                this.Enabled = true;
             }
         }
 
@@ -878,6 +892,105 @@ namespace NilkanthApplication
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString(), "Error : ImportCSV", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private void btnDeleteAllPLCData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+
+                PasswordToDeletePLCData passToDelete = new PasswordToDeletePLCData();
+                base.Hide();
+                passToDelete.Show();
+                passToDelete.BringToFront();
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+        private void btnDeletePLCData_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Collect selected rows (FullRowSelect + MultiSelect)
+                var selectedRows = this.dgvList.SelectedRows;
+                if (selectedRows == null || selectedRows.Count == 0)
+                {
+                    MessageBox.Show("Please select at least one PLC record (Ctrl+Click or Shift+Click) to delete.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                var ids = new System.Collections.Generic.List<int>();
+                // find id column
+                int idIndex = -1;
+                for (int i = 0; i < this.dgvList.Columns.Count; i++)
+                {
+                    var n = this.dgvList.Columns[i].Name;
+                    if (string.Equals(n, "Id", StringComparison.OrdinalIgnoreCase) || string.Equals(n, "ID", StringComparison.OrdinalIgnoreCase)
+                        || string.Equals(n, "SrNo", StringComparison.OrdinalIgnoreCase) || string.Equals(n, "PID", StringComparison.OrdinalIgnoreCase))
+                    {
+                        idIndex = i; break;
+                    }
+                }
+
+                foreach (DataGridViewRow row in selectedRows)
+                {
+                    try
+                    {
+                        object v = null;
+                        if (idIndex != -1)
+                            v = row.Cells[idIndex].Value;
+                        else if (row.Cells.Count > 0)
+                            v = row.Cells[0].Value;
+
+                        if (v != null && int.TryParse(v.ToString(), out int id))
+                            ids.Add(id);
+                    }
+                    catch { }
+                }
+
+                if (ids.Count == 0)
+                {
+                    MessageBox.Show("No valid IDs found in selected rows.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+
+                
+                using (PasswordDialog dlg = new PasswordDialog("cHhpaobjTCc=", "Enter password to delete PLC Data."))
+                {
+                    if (dlg.ShowDialog() != DialogResult.OK || !dlg.IsAuthorized)
+                    {
+                        MessageBox.Show("Wrong password. Operation cancelled.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        return;
+                    }
+                }
+
+                var confirm = MessageBox.Show($"Are you sure you want to delete {ids.Count} selected record(s)?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (confirm != DialogResult.Yes) return;
+
+                string idsCsv = string.Join(",", ids);
+                SQLHelper._objCmd = new SqlCommand();
+                SQLHelper._objCmd.Parameters.Clear();
+                SQLHelper._objCmd.Parameters.AddWithValue("@Ids", idsCsv);
+
+                string result = Queries.DeleteBySP("PLCData_DeleteSelected");
+                if (!string.IsNullOrWhiteSpace(result))
+                {
+                    bool handled = Functions.DBKeyErrors(result);
+                    if (!handled) MessageBox.Show(result, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Selected PLC data deleted successfully", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    this.BindGrid();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 

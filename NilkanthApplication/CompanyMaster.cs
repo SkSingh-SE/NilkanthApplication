@@ -280,6 +280,10 @@ namespace NilkanthApplication
                     else
                         SQLHelper._objCmd.Parameters.AddWithValue("@IsMobileAppSync", 0);
 
+                    // When company is saved/updated locally mark it as not synced so sync process can send updates
+                    SQLHelper._objCmd.Parameters.AddWithValue("@IsSynced", 0);
+                    SQLHelper._objCmd.Parameters.AddWithValue("@SyncedOn", DBNull.Value);
+
                     string text2;
 
                     if (lblId.Text.Trim() == "0")
@@ -572,7 +576,7 @@ namespace NilkanthApplication
             //1843
             if (chkShowWhatsapp.Checked)
             {
-                using (PasswordDialog dlg = new PasswordDialog("5l2NV3ZieMYSA=", "Enter password to enable Whatsapp"))
+                using (PasswordDialog dlg = new PasswordDialog("5l2NV3ZieMYSA=", "Enter password to enable Whatsapp", showCancel: true))
                 {
                     if (dlg.ShowDialog() != DialogResult.OK || !dlg.IsAuthorized)
                     {

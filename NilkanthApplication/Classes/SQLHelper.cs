@@ -170,7 +170,8 @@ public class SQLHelper
             {
                 CloseConnection();
             }
-            if (val > 0)
+            // Some stored procedures return -1 when SET NOCOUNT ON is used
+            if (val > 0 || val == -1)
                 return "";
             else if (val == 0)
                 return "No Records Available";

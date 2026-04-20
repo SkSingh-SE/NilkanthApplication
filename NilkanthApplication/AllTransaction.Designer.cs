@@ -49,7 +49,7 @@ namespace NilkanthApplication
             this.cmbClient = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnImportCSV = new System.Windows.Forms.Button();
-            this.btnDeletePLCData = new System.Windows.Forms.Button();
+            this.btnDeleteAllPLCData = new System.Windows.Forms.Button();
             this.btnClearFilter = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btnLogout = new System.Windows.Forms.Button();
@@ -59,6 +59,7 @@ namespace NilkanthApplication
             this.btnUploadData = new System.Windows.Forms.Button();
             this.btnManualImport = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
+            this.btnDeletePLCData = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -120,7 +121,7 @@ namespace NilkanthApplication
             this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblUserName.Location = new System.Drawing.Point(12, 624);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(84, 20);
+            this.lblUserName.Size = new System.Drawing.Size(75, 17);
             this.lblUserName.TabIndex = 33;
             this.lblUserName.Text = "UerName";
             // 
@@ -147,16 +148,16 @@ namespace NilkanthApplication
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblFilterStatus});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 666);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 672);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1359, 32);
+            this.statusStrip1.Size = new System.Drawing.Size(1359, 26);
             this.statusStrip1.TabIndex = 37;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblFilterStatus
             // 
             this.lblFilterStatus.Name = "lblFilterStatus";
-            this.lblFilterStatus.Size = new System.Drawing.Size(78, 25);
+            this.lblFilterStatus.Size = new System.Drawing.Size(65, 20);
             this.lblFilterStatus.Text = "Filter By:";
             // 
             // chkApplyDateFilter
@@ -165,7 +166,7 @@ namespace NilkanthApplication
             this.chkApplyDateFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chkApplyDateFilter.Location = new System.Drawing.Point(28, 74);
             this.chkApplyDateFilter.Name = "chkApplyDateFilter";
-            this.chkApplyDateFilter.Size = new System.Drawing.Size(192, 29);
+            this.chkApplyDateFilter.Size = new System.Drawing.Size(166, 24);
             this.chkApplyDateFilter.TabIndex = 71;
             this.chkApplyDateFilter.Text = "Apply Date Filter :";
             this.chkApplyDateFilter.UseVisualStyleBackColor = true;
@@ -177,7 +178,7 @@ namespace NilkanthApplication
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label6.Location = new System.Drawing.Point(422, 76);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(82, 25);
+            this.label6.Size = new System.Drawing.Size(69, 20);
             this.label6.TabIndex = 70;
             this.label6.Text = "To Date";
             // 
@@ -187,7 +188,7 @@ namespace NilkanthApplication
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label5.Location = new System.Drawing.Point(190, 75);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(103, 25);
+            this.label5.Size = new System.Drawing.Size(89, 20);
             this.label5.TabIndex = 69;
             this.label5.Text = "From Date";
             // 
@@ -198,7 +199,7 @@ namespace NilkanthApplication
             this.dtpToDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpToDate.Location = new System.Drawing.Point(497, 73);
             this.dtpToDate.Name = "dtpToDate";
-            this.dtpToDate.Size = new System.Drawing.Size(122, 30);
+            this.dtpToDate.Size = new System.Drawing.Size(122, 26);
             this.dtpToDate.TabIndex = 68;
             this.dtpToDate.ValueChanged += new System.EventHandler(this.dtpToDate_ValueChanged);
             // 
@@ -209,7 +210,7 @@ namespace NilkanthApplication
             this.dtpFromDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtpFromDate.Location = new System.Drawing.Point(285, 73);
             this.dtpFromDate.Name = "dtpFromDate";
-            this.dtpFromDate.Size = new System.Drawing.Size(122, 30);
+            this.dtpFromDate.Size = new System.Drawing.Size(122, 26);
             this.dtpFromDate.TabIndex = 67;
             this.dtpFromDate.ValueChanged += new System.EventHandler(this.dtpFromDate_ValueChanged);
             // 
@@ -219,7 +220,7 @@ namespace NilkanthApplication
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold);
             this.label1.Location = new System.Drawing.Point(83, 8);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(296, 69);
+            this.label1.Size = new System.Drawing.Size(249, 58);
             this.label1.TabIndex = 72;
             this.label1.Text = "PLC Data";
             // 
@@ -229,7 +230,7 @@ namespace NilkanthApplication
             this.cmbMonth.FormattingEnabled = true;
             this.cmbMonth.Location = new System.Drawing.Point(495, 111);
             this.cmbMonth.Name = "cmbMonth";
-            this.cmbMonth.Size = new System.Drawing.Size(121, 33);
+            this.cmbMonth.Size = new System.Drawing.Size(121, 28);
             this.cmbMonth.TabIndex = 104;
             this.cmbMonth.SelectedIndexChanged += new System.EventHandler(this.cmbMonth_SelectedIndexChanged);
             // 
@@ -239,7 +240,7 @@ namespace NilkanthApplication
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label12.Location = new System.Drawing.Point(436, 114);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(67, 25);
+            this.label12.Size = new System.Drawing.Size(55, 20);
             this.label12.TabIndex = 103;
             this.label12.Text = "Month";
             // 
@@ -249,7 +250,7 @@ namespace NilkanthApplication
             this.cmbYear.FormattingEnabled = true;
             this.cmbYear.Location = new System.Drawing.Point(284, 111);
             this.cmbYear.Name = "cmbYear";
-            this.cmbYear.Size = new System.Drawing.Size(121, 33);
+            this.cmbYear.Size = new System.Drawing.Size(121, 28);
             this.cmbYear.TabIndex = 102;
             this.cmbYear.SelectedIndexChanged += new System.EventHandler(this.cmbYear_SelectedIndexChanged);
             // 
@@ -259,7 +260,7 @@ namespace NilkanthApplication
             this.label11.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label11.Location = new System.Drawing.Point(235, 113);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(53, 25);
+            this.label11.Size = new System.Drawing.Size(43, 20);
             this.label11.TabIndex = 101;
             this.label11.Text = "Year";
             // 
@@ -269,7 +270,7 @@ namespace NilkanthApplication
             this.chkApplyYearMonth.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.chkApplyYearMonth.Location = new System.Drawing.Point(29, 112);
             this.chkApplyYearMonth.Name = "chkApplyYearMonth";
-            this.chkApplyYearMonth.Size = new System.Drawing.Size(252, 29);
+            this.chkApplyYearMonth.Size = new System.Drawing.Size(215, 24);
             this.chkApplyYearMonth.TabIndex = 100;
             this.chkApplyYearMonth.Text = "Apply Year Month Filter :";
             this.chkApplyYearMonth.UseVisualStyleBackColor = true;
@@ -281,7 +282,7 @@ namespace NilkanthApplication
             this.cmbToBatch.FormattingEnabled = true;
             this.cmbToBatch.Location = new System.Drawing.Point(1227, 70);
             this.cmbToBatch.Name = "cmbToBatch";
-            this.cmbToBatch.Size = new System.Drawing.Size(122, 33);
+            this.cmbToBatch.Size = new System.Drawing.Size(122, 28);
             this.cmbToBatch.TabIndex = 116;
             this.cmbToBatch.SelectedIndexChanged += new System.EventHandler(this.cmbToBatch_SelectedIndexChanged);
             // 
@@ -291,7 +292,7 @@ namespace NilkanthApplication
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label3.Location = new System.Drawing.Point(1144, 74);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(91, 25);
+            this.label3.Size = new System.Drawing.Size(77, 20);
             this.label3.TabIndex = 115;
             this.label3.Text = "To Batch";
             // 
@@ -301,7 +302,7 @@ namespace NilkanthApplication
             this.cmbFromBatch.FormattingEnabled = true;
             this.cmbFromBatch.Location = new System.Drawing.Point(1005, 71);
             this.cmbFromBatch.Name = "cmbFromBatch";
-            this.cmbFromBatch.Size = new System.Drawing.Size(122, 33);
+            this.cmbFromBatch.Size = new System.Drawing.Size(122, 28);
             this.cmbFromBatch.TabIndex = 114;
             this.cmbFromBatch.SelectedIndexChanged += new System.EventHandler(this.cmbFromBatch_SelectedIndexChanged);
             // 
@@ -311,7 +312,7 @@ namespace NilkanthApplication
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label2.Location = new System.Drawing.Point(902, 74);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(112, 25);
+            this.label2.Size = new System.Drawing.Size(97, 20);
             this.label2.TabIndex = 113;
             this.label2.Text = "From Batch";
             // 
@@ -321,7 +322,7 @@ namespace NilkanthApplication
             this.cmbTruckNo.FormattingEnabled = true;
             this.cmbTruckNo.Location = new System.Drawing.Point(1227, 114);
             this.cmbTruckNo.Name = "cmbTruckNo";
-            this.cmbTruckNo.Size = new System.Drawing.Size(122, 33);
+            this.cmbTruckNo.Size = new System.Drawing.Size(122, 28);
             this.cmbTruckNo.TabIndex = 112;
             this.cmbTruckNo.SelectedIndexChanged += new System.EventHandler(this.cmbTruckNo_SelectedIndexChanged);
             // 
@@ -331,7 +332,7 @@ namespace NilkanthApplication
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label9.Location = new System.Drawing.Point(1151, 117);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(87, 25);
+            this.label9.Size = new System.Drawing.Size(72, 20);
             this.label9.TabIndex = 111;
             this.label9.Text = "TruckNo";
             // 
@@ -341,7 +342,7 @@ namespace NilkanthApplication
             this.cmbRecipe.FormattingEnabled = true;
             this.cmbRecipe.Location = new System.Drawing.Point(1005, 114);
             this.cmbRecipe.Name = "cmbRecipe";
-            this.cmbRecipe.Size = new System.Drawing.Size(122, 33);
+            this.cmbRecipe.Size = new System.Drawing.Size(122, 28);
             this.cmbRecipe.TabIndex = 110;
             this.cmbRecipe.SelectedIndexChanged += new System.EventHandler(this.cmbRecipe_SelectedIndexChanged);
             // 
@@ -351,7 +352,7 @@ namespace NilkanthApplication
             this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label8.Location = new System.Drawing.Point(938, 117);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(72, 25);
+            this.label8.Size = new System.Drawing.Size(61, 20);
             this.label8.TabIndex = 109;
             this.label8.Text = "Recipe";
             // 
@@ -361,7 +362,7 @@ namespace NilkanthApplication
             this.cmbSite.FormattingEnabled = true;
             this.cmbSite.Location = new System.Drawing.Point(759, 112);
             this.cmbSite.Name = "cmbSite";
-            this.cmbSite.Size = new System.Drawing.Size(122, 33);
+            this.cmbSite.Size = new System.Drawing.Size(122, 28);
             this.cmbSite.TabIndex = 108;
             this.cmbSite.SelectedIndexChanged += new System.EventHandler(this.cmbSite_SelectedIndexChanged);
             // 
@@ -371,7 +372,7 @@ namespace NilkanthApplication
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label7.Location = new System.Drawing.Point(715, 115);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 25);
+            this.label7.Size = new System.Drawing.Size(38, 20);
             this.label7.TabIndex = 107;
             this.label7.Text = "Site";
             // 
@@ -381,7 +382,7 @@ namespace NilkanthApplication
             this.cmbClient.FormattingEnabled = true;
             this.cmbClient.Location = new System.Drawing.Point(761, 70);
             this.cmbClient.Name = "cmbClient";
-            this.cmbClient.Size = new System.Drawing.Size(122, 33);
+            this.cmbClient.Size = new System.Drawing.Size(122, 28);
             this.cmbClient.TabIndex = 106;
             this.cmbClient.SelectedIndexChanged += new System.EventHandler(this.cmbClient_SelectedIndexChanged);
             // 
@@ -391,7 +392,7 @@ namespace NilkanthApplication
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.label4.Location = new System.Drawing.Point(699, 74);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(62, 25);
+            this.label4.Size = new System.Drawing.Size(52, 20);
             this.label4.TabIndex = 105;
             this.label4.Text = "Client";
             // 
@@ -405,33 +406,33 @@ namespace NilkanthApplication
             this.btnImportCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnImportCSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImportCSV.Image = global::NilkanthApplication.Properties.Resources.import_icon_1;
-            this.btnImportCSV.Location = new System.Drawing.Point(673, 4);
+            this.btnImportCSV.Location = new System.Drawing.Point(593, 4);
             this.btnImportCSV.Name = "btnImportCSV";
-            this.btnImportCSV.Size = new System.Drawing.Size(172, 64);
+            this.btnImportCSV.Size = new System.Drawing.Size(125, 64);
             this.btnImportCSV.TabIndex = 119;
             this.btnImportCSV.Text = "&Import CSV";
             this.btnImportCSV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnImportCSV.UseVisualStyleBackColor = true;
             this.btnImportCSV.Click += new System.EventHandler(this.btnImportCSV_Click);
             // 
-            // btnDeletePLCData
+            // btnDeleteAllPLCData
             // 
-            this.btnDeletePLCData.CausesValidation = false;
-            this.btnDeletePLCData.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnDeletePLCData.FlatAppearance.BorderSize = 0;
-            this.btnDeletePLCData.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
-            this.btnDeletePLCData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
-            this.btnDeletePLCData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeletePLCData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDeletePLCData.Image = global::NilkanthApplication.Properties.Resources.Delete;
-            this.btnDeletePLCData.Location = new System.Drawing.Point(843, 3);
-            this.btnDeletePLCData.Name = "btnDeletePLCData";
-            this.btnDeletePLCData.Size = new System.Drawing.Size(155, 64);
-            this.btnDeletePLCData.TabIndex = 118;
-            this.btnDeletePLCData.Text = "&Delete PLC Data";
-            this.btnDeletePLCData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.btnDeletePLCData.UseVisualStyleBackColor = true;
-            this.btnDeletePLCData.Click += new System.EventHandler(this.btnDeletePLCData_Click);
+            this.btnDeleteAllPLCData.CausesValidation = false;
+            this.btnDeleteAllPLCData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeleteAllPLCData.FlatAppearance.BorderSize = 0;
+            this.btnDeleteAllPLCData.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnDeleteAllPLCData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnDeleteAllPLCData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeleteAllPLCData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteAllPLCData.Image = global::NilkanthApplication.Properties.Resources.Delete;
+            this.btnDeleteAllPLCData.Location = new System.Drawing.Point(843, 3);
+            this.btnDeleteAllPLCData.Name = "btnDeleteAllPLCData";
+            this.btnDeleteAllPLCData.Size = new System.Drawing.Size(156, 64);
+            this.btnDeleteAllPLCData.TabIndex = 118;
+            this.btnDeleteAllPLCData.Text = "&Delete All";
+            this.btnDeleteAllPLCData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDeleteAllPLCData.UseVisualStyleBackColor = true;
+            this.btnDeleteAllPLCData.Click += new System.EventHandler(this.btnDeleteAllPLCData_Click);
             // 
             // btnClearFilter
             // 
@@ -487,9 +488,9 @@ namespace NilkanthApplication
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.Image = global::NilkanthApplication.Properties.Resources.Export;
-            this.btnExport.Location = new System.Drawing.Point(1224, -1);
+            this.btnExport.Location = new System.Drawing.Point(1227, -1);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(130, 64);
+            this.btnExport.Size = new System.Drawing.Size(127, 64);
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "E&xport";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -506,9 +507,9 @@ namespace NilkanthApplication
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.Image = global::NilkanthApplication.Properties.Resources.back;
-            this.btnBack.Location = new System.Drawing.Point(1112, 1);
+            this.btnBack.Location = new System.Drawing.Point(1111, 1);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(114, 64);
+            this.btnBack.Size = new System.Drawing.Size(115, 64);
             this.btnBack.TabIndex = 4;
             this.btnBack.Text = "&Back";
             this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -545,7 +546,7 @@ namespace NilkanthApplication
             this.btnUploadData.Image = global::NilkanthApplication.Properties.Resources.upload_icon;
             this.btnUploadData.Location = new System.Drawing.Point(329, 5);
             this.btnUploadData.Name = "btnUploadData";
-            this.btnUploadData.Size = new System.Drawing.Size(137, 64);
+            this.btnUploadData.Size = new System.Drawing.Size(133, 64);
             this.btnUploadData.TabIndex = 120;
             this.btnUploadData.Text = "&Upload Data";
             this.btnUploadData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -562,9 +563,9 @@ namespace NilkanthApplication
             this.btnManualImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnManualImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnManualImport.Image = global::NilkanthApplication.Properties.Resources.import_icon_1;
-            this.btnManualImport.Location = new System.Drawing.Point(468, 5);
+            this.btnManualImport.Location = new System.Drawing.Point(455, 5);
             this.btnManualImport.Name = "btnManualImport";
-            this.btnManualImport.Size = new System.Drawing.Size(206, 64);
+            this.btnManualImport.Size = new System.Drawing.Size(136, 64);
             this.btnManualImport.TabIndex = 122;
             this.btnManualImport.Text = "Manual Import";
             this.btnManualImport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -577,22 +578,42 @@ namespace NilkanthApplication
             this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label10.Location = new System.Drawing.Point(12, 645);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(95, 20);
+            this.label10.Size = new System.Drawing.Size(87, 17);
             this.label10.TabIndex = 123;
             this.label10.Text = "Version : 3";
             // 
+            // btnDeletePLCData
+            // 
+            this.btnDeletePLCData.CausesValidation = false;
+            this.btnDeletePLCData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDeletePLCData.FlatAppearance.BorderSize = 0;
+            this.btnDeletePLCData.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnDeletePLCData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnDeletePLCData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnDeletePLCData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeletePLCData.Image = global::NilkanthApplication.Properties.Resources.Delete;
+            this.btnDeletePLCData.Location = new System.Drawing.Point(716, 4);
+            this.btnDeletePLCData.Name = "btnDeletePLCData";
+            this.btnDeletePLCData.Size = new System.Drawing.Size(126, 64);
+            this.btnDeletePLCData.TabIndex = 124;
+            this.btnDeletePLCData.Text = "&Delete";
+            this.btnDeletePLCData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnDeletePLCData.UseVisualStyleBackColor = true;
+            this.btnDeletePLCData.Click += new System.EventHandler(this.btnDeletePLCData_Click);
+            // 
             // AllTransaction
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1359, 698);
+            this.Controls.Add(this.btnDeletePLCData);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btnManualImport);
             this.Controls.Add(this.btnUploadData);
             this.Controls.Add(this.btnImportCSV);
-            this.Controls.Add(this.btnDeletePLCData);
+            this.Controls.Add(this.btnDeleteAllPLCData);
             this.Controls.Add(this.btnClearFilter);
             this.Controls.Add(this.cmbToBatch);
             this.Controls.Add(this.label3);
@@ -693,10 +714,11 @@ namespace NilkanthApplication
         private System.Windows.Forms.ComboBox cmbClient;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnClearFilter;
-        private System.Windows.Forms.Button btnDeletePLCData;
+        private System.Windows.Forms.Button btnDeleteAllPLCData;
         private System.Windows.Forms.Button btnImportCSV;
         private System.Windows.Forms.Button btnUploadData;
         private System.Windows.Forms.Button btnManualImport;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Button btnDeletePLCData;
     }
 }

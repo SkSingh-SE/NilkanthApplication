@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -27,6 +28,9 @@ namespace NilkanthApplication.Classes
         {
             try
             {
+                if (!await IsMobileSyncOn())
+                    return false;
+
                 if (!await IsInternetAvailableAsync())
                     return false;
 
@@ -36,11 +40,37 @@ namespace NilkanthApplication.Classes
                 var results = await Task.WhenAll(
                     SyncPLCData(),
                     SyncBreakDown(),
-                    SyncNotes()
+                    SyncNotes(),
+                    SyncCompany()
                 );
 
                 bool anySuccess = results.Any(r => r);
                 return anySuccess;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        // Sync updated company records (uses same SP as CompanyMaster_Select to read rows)
+        private async Task<bool> SyncCompany()
+        {
+            try
+            {
+                var companies = GetCompanyForSync();
+                if (companies.Count == 0)
+                    return false;
+
+                bool success = await SendToApiAsync("/api/ingest/company", companies);
+
+                if (success)
+                {
+                    companies.ForEach(c => MarkCompanySynced(c.Id));
+                    return true;
+                }
+
+                return false;
             }
             catch
             {
@@ -223,6 +253,31 @@ namespace NilkanthApplication.Classes
                 return false;
             }
         }
+
+        private async Task<bool> IsMobileSyncOn()
+        {
+            try
+            {
+
+                string query = "select IsMobileAppSync from CompanyMaster";
+                DataTable dataTable =  Functions.GetTableData(query);
+
+                bool isMobileAppSync = false;
+
+                if (dataTable.Rows.Count > 0 &&
+                    dataTable.Rows[0]["IsMobileAppSync"] != DBNull.Value)
+                {
+                    isMobileAppSync = Convert.ToBoolean(dataTable.Rows[0]["IsMobileAppSync"]);
+                }
+
+                return isMobileAppSync;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
         private void AddHeaders()
         {
             _httpClient.DefaultRequestHeaders.Remove("X-API-Key");
@@ -356,6 +411,112 @@ namespace NilkanthApplication.Classes
             {
                 Functions.DBKeyErrors(result);
             }
+        }
+
+        // Company sync helpers
+        private List<CompanyDto> GetCompanyForSync()
+        {
+            var list = new List<CompanyDto>();
+
+            // Use same SP as CompanyMaster to load company details
+            DataTable dt = Functions.GetTableDataBySP("CompanyMaster_Select");
+
+            if (dt == null || dt.Rows.Count == 0)
+                return list;
+
+            foreach (DataRow row in dt.Rows)
+            {
+                // only include rows which are not yet synced
+                bool isSynced = false;
+                if (row.Table.Columns.Contains("IsSynced") && row["IsSynced"] != DBNull.Value)
+                    isSynced = Convert.ToBoolean(row["IsSynced"]);
+
+                if (isSynced)
+                    continue;
+
+                var item = new CompanyDto
+                {
+                    Id = row["Id"] != DBNull.Value ? Convert.ToInt32(row["Id"]) : 0,
+                    CompanyName = row["CompanyName"]?.ToString(),
+                    ModelNumber = row.Table.Columns.Contains("ModelNumber") ? row["ModelNumber"]?.ToString() : null,
+                    SerialNumber = row.Table.Columns.Contains("SerialNumber") ? row["SerialNumber"]?.ToString() : null,
+                    Address = row.Table.Columns.Contains("Address") ? row["Address"]?.ToString() : null,
+                    Bin1Label = row.Table.Columns.Contains("Bin1Label") ? row["Bin1Label"]?.ToString() : null,
+                    Bin2Label = row.Table.Columns.Contains("Bin2Label") ? row["Bin2Label"]?.ToString() : null,
+                    Bin3Label = row.Table.Columns.Contains("Bin3Label") ? row["Bin3Label"]?.ToString() : null,
+                    Bin4Label = row.Table.Columns.Contains("Bin4Label") ? row["Bin4Label"]?.ToString() : null,
+                    CementLabel = row.Table.Columns.Contains("CementLabel") ? row["CementLabel"]?.ToString() : null,
+                    FlyashLabel = row.Table.Columns.Contains("FlyashLabel") ? row["FlyashLabel"]?.ToString() : null,
+                    SilicaLabel = row.Table.Columns.Contains("SilicaLabel") && row["SilicaLabel"] != DBNull.Value ? row["SilicaLabel"].ToString() : null,
+                    GGBSLabel = row.Table.Columns.Contains("GGBSLabel") && row["GGBSLabel"] != DBNull.Value ? row["GGBSLabel"].ToString() : null,
+                    ApiKey = row.Table.Columns.Contains("ApiKey") ? row["ApiKey"]?.ToString() : null,
+                    ApiUrl = row.Table.Columns.Contains("ApiUrl") ? row["ApiUrl"]?.ToString() : null,
+                    ShowActCUMInTrip = row.Table.Columns.Contains("ShowActCUMInTrip") && row["ShowActCUMInTrip"] != DBNull.Value && Convert.ToBoolean(row["ShowActCUMInTrip"]),
+                    ShowWhatsapp = row.Table.Columns.Contains("ShowWhatsapp") && row["ShowWhatsapp"] != DBNull.Value && Convert.ToBoolean(row["ShowWhatsapp"]),
+                    ShowVarPInKg = row.Table.Columns.Contains("ShowVarPInKg") && row["ShowVarPInKg"] != DBNull.Value && Convert.ToBoolean(row["ShowVarPInKg"]),
+                    ShowHeader = row.Table.Columns.Contains("ShowHeader") && row["ShowHeader"] != DBNull.Value && Convert.ToBoolean(row["ShowHeader"]),
+                    ShowDeliveryChallan = row.Table.Columns.Contains("ShowDeliveryChallan") && row["ShowDeliveryChallan"] != DBNull.Value && Convert.ToBoolean(row["ShowDeliveryChallan"]),
+                    IsMobileAppSync = row.Table.Columns.Contains("IsMobileAppSync") && row["IsMobileAppSync"] != DBNull.Value && Convert.ToBoolean(row["IsMobileAppSync"]),
+                    GstNo = row.Table.Columns.Contains("GstNo") ? row["GstNo"]?.ToString() : null,
+                    PanNo = row.Table.Columns.Contains("PanNo") ? row["PanNo"]?.ToString() : null,
+                    MobileNo = row.Table.Columns.Contains("MobileNo") ? row["MobileNo"]?.ToString() : null,
+                    RptFooter = row.Table.Columns.Contains("RptFooter") ? row["RptFooter"]?.ToString() : null,
+                    CompanyLogo = row.Table.Columns.Contains("CompanyLogo") && row["CompanyLogo"] != DBNull.Value ? row["CompanyLogo"] : null,
+                    Location = row.Table.Columns.Contains("Location") ? row["Location"]?.ToString() : null,
+                    PlantName = row.Table.Columns.Contains("PlantName") ? row["PlantName"]?.ToString() : null
+                };
+
+                list.Add(item);
+            }
+
+            return list;
+        }
+
+        private void MarkCompanySynced(int id)
+        {
+            SQLHelper._objCmd = new SqlCommand();
+            SQLHelper._objCmd.Parameters.Clear();
+            SQLHelper._objCmd.Parameters.AddWithValue("@ID", id);
+            SQLHelper._objCmd.Parameters.AddWithValue("@IsSynced", 1);
+            SQLHelper._objCmd.Parameters.AddWithValue("@SyncedOn", DateTime.Now);
+            var result = Queries.UpdateBySP("MarkCompanySynced");
+            if (result != "")
+            {
+                Functions.DBKeyErrors(result);
+            }
+        }
+
+        // DTO for company payload
+        internal class CompanyDto
+        {
+            public int Id { get; set; }
+            public string CompanyName { get; set; }
+            public string ModelNumber { get; set; }
+            public string SerialNumber { get; set; }
+            public string Address { get; set; }
+            public string Bin1Label { get; set; }
+            public string Bin2Label { get; set; }
+            public string Bin3Label { get; set; }
+            public string Bin4Label { get; set; }
+            public string CementLabel { get; set; }
+            public string FlyashLabel { get; set; }
+            public string SilicaLabel { get; set; }
+            public string GGBSLabel { get; set; }
+            public string ApiKey { get; set; }
+            public string ApiUrl { get; set; }
+            public bool ShowActCUMInTrip { get; set; }
+            public bool ShowWhatsapp { get; set; }
+            public bool ShowVarPInKg { get; set; }
+            public bool ShowHeader { get; set; }
+            public bool ShowDeliveryChallan { get; set; }
+            public bool IsMobileAppSync { get; set; }
+            public string GstNo { get; set; }
+            public string PanNo { get; set; }
+            public string MobileNo { get; set; }
+            public string RptFooter { get; set; }
+            public object CompanyLogo { get; set; }
+            public string Location { get; set; }
+            public string PlantName { get; set; }
         }
 
 
