@@ -47,8 +47,12 @@ namespace NilkanthApplication
             this.btnLogout = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnHome = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslOperationStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tspbOperation = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvList
@@ -449,14 +453,46 @@ namespace NilkanthApplication
             this.btnHome.TabIndex = 5;
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
-            // 
+            //
+            // statusStrip1
+            //
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslOperationStatus,
+            this.tspbOperation});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 685);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1361, 26);
+            this.statusStrip1.TabIndex = 50;
+            this.statusStrip1.Text = "statusStrip1";
+            //
+            // tsslOperationStatus
+            //
+            this.tsslOperationStatus.Name = "tsslOperationStatus";
+            this.tsslOperationStatus.Size = new System.Drawing.Size(400, 20);
+            this.tsslOperationStatus.Spring = true;
+            this.tsslOperationStatus.Text = "";
+            this.tsslOperationStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsslOperationStatus.ForeColor = System.Drawing.Color.FromArgb(0, 120, 215);
+            this.tsslOperationStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.tsslOperationStatus.Visible = false;
+            //
+            // tspbOperation
+            //
+            this.tspbOperation.Name = "tspbOperation";
+            this.tspbOperation.Size = new System.Drawing.Size(120, 20);
+            this.tspbOperation.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.tspbOperation.MarqueeAnimationSpeed = 30;
+            this.tspbOperation.Visible = false;
+            //
             // TripReport
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1361, 711);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnDeliveryChallan);
             this.Controls.Add(this.btnSendWhatsApp);
             this.Controls.Add(this.cmbClientDetails);
@@ -494,6 +530,8 @@ namespace NilkanthApplication
             this.Load += new System.EventHandler(this.TripReport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -534,5 +572,8 @@ namespace NilkanthApplication
         private System.Windows.Forms.Label lblClient;
         private System.Windows.Forms.Button btnSendWhatsApp;
         private System.Windows.Forms.Button btnDeliveryChallan;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslOperationStatus;
+        private System.Windows.Forms.ToolStripProgressBar tspbOperation;
     }
 }

@@ -75,10 +75,10 @@ namespace NilkanthApplication
             dgvList.ColumnCount = 2;
             dgvList.Columns[0].Name = "";
             dgvList.Columns[1].Name = "";
-            dgvList.Columns[2].Name = "";
-            dgvList.Columns[3].Name = "";
-            dgvList.Columns[4].Name = "";
-            string[] row = new string[5];
+            dgvList.Columns[0].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dgvList.Columns[1].SortMode = DataGridViewColumnSortMode.NotSortable;
+            dgvList.RowTemplate.Height = 40;
+            string[] row = new string[2];
             string path = Application.StartupPath + "/HelpDoc/PDF";
             DirectoryInfo dir = new DirectoryInfo(path);
             FileInfo[] files = dir.GetFiles();
@@ -176,6 +176,7 @@ namespace NilkanthApplication
 
         private void dgvList_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex < 0 || e.ColumnIndex < 0) return;
             if (dgvList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != null && dgvList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value != "")
             {
                 string fileName = dgvList.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();

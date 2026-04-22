@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading;
+using System.Text;
 using System.Windows.Forms;
 
 public class Functions : SQLHelper
@@ -496,134 +497,70 @@ public class Functions : SQLHelper
         }
         return String.Join(" ", words);
     }
-    public static void ImportCSV()
+    public static (int inserted, int skipped) ImportCSV()
     {
-        Stream myStream = null;
         StreamReader reader = null;
-        DateTime lastreaddatetime_;
-        DataTable tblcsv = new DataTable();
-        DataTable importcsvlastread = new DataTable();
-        string dms1 = "";
+        FtpWebResponse response = null;
+        DataTable tblcsv = BuildCSVDataTable();
+
+        DataTable importcsvlastread = Functions.GetTableDataBySP("ImportCSVLastRead_Select");
+        if (importcsvlastread == null || importcsvlastread.Rows.Count == 0)
+            throw new Exception("Could not read last import date from database.");
+
+        DateTime lastReadDatetime = GetLastReadDateTime(importcsvlastread);
+
+        string ftpserver = ConfigurationManager.AppSettings["FtpUrl"] ?? "ftp://192.168.1.150/DAT0000/SAMPLE/SMP0000.CSV";
+        string ftpUser = ConfigurationManager.AppSettings["FtpUser"] ?? "admin";
+        string ftpPass = ConfigurationManager.AppSettings["FtpPassword"] ?? "6982";
+        bool ftpUsePassive = false;
+        bool.TryParse(ConfigurationManager.AppSettings["FtpUsePassive"], out ftpUsePassive);
+
         try
         {
-            //Creating object of datatable  
-            
-            
-            //creating columns  
-            tblcsv.Columns.Add("PLCDate");
-            //tblcsv.Columns.Add("ReadDataDateTime");
-            tblcsv.Columns.Add("Customer");
-            tblcsv.Columns.Add("ClientName");
-            tblcsv.Columns.Add("SiteName");
-            tblcsv.Columns.Add("RecipeName");
-            tblcsv.Columns.Add("TruckNo");
-            tblcsv.Columns.Add("DriverName");
-            tblcsv.Columns.Add("BatchSize");
-            tblcsv.Columns.Add("BatchNo");
-            tblcsv.Columns.Add("SetCycle");
-            tblcsv.Columns.Add("Cycle");
-            tblcsv.Columns.Add("Bin1Set");
-            tblcsv.Columns.Add("Bin1Actual");
-            tblcsv.Columns.Add("Bin2Set");
-            tblcsv.Columns.Add("Bin2Actual");
-            tblcsv.Columns.Add("Bin3Set");
-            tblcsv.Columns.Add("Bin3Actual");
-            tblcsv.Columns.Add("Bin4Set");
-            tblcsv.Columns.Add("Bin4Actual");
-            tblcsv.Columns.Add("CementSet");
-            tblcsv.Columns.Add("CementActual");
-            tblcsv.Columns.Add("FlyashSet");
-            tblcsv.Columns.Add("FlyashActual");
-            tblcsv.Columns.Add("WaterSet");
-            tblcsv.Columns.Add("WaterActual");
-            tblcsv.Columns.Add("AdditiveSet");
-            tblcsv.Columns.Add("AdditiveActual");
-            tblcsv.Columns.Add("TotalActual");
-            tblcsv.Columns.Add("SilicaSet");
-            tblcsv.Columns.Add("SilicaActual");
-            tblcsv.Columns.Add("GGBSSet");
-            tblcsv.Columns.Add("GGBSActual");
-
-            importcsvlastread = Functions.GetTableDataBySP("ImportCSVLastRead_Select");
-            DateTime lastreaddatetime = Convert.ToDateTime(importcsvlastread.Rows[0][2].ToString());
-            int dd = lastreaddatetime.Day;
-            int mm = lastreaddatetime.Month;
-            int yy = lastreaddatetime.Year;
-            //string dms = mm.ToString() + '-' + dd.ToString() + '-' + yy.ToString() + ' ' + lastreaddatetime.ToLongTimeString();
-            dms1 = dd.ToString() + '-' + mm.ToString() + '-' + yy.ToString() + ' ' + lastreaddatetime.ToLongTimeString();
-            lastreaddatetime_ = Convert.ToDateTime(dms1);
-            //MessageBox.Show("Inside import csv");
-            //MessageBox.Show("FTP Check");
-            FtpWebRequest reqFTP;
-            // Read FTP config from App.config, fallback to previous hard-coded values
-            string ftpserver = ConfigurationManager.AppSettings["FtpUrl"] ?? "ftp://192.168.1.150/DAT0000/SAMPLE/SMP0000.CSV";
-            string ftpUser = ConfigurationManager.AppSettings["FtpUser"] ?? "admin";
-            string ftpPass = ConfigurationManager.AppSettings["FtpPassword"] ?? "6982";
-            bool ftpUsePassive = false;
-            bool.TryParse(ConfigurationManager.AppSettings["FtpUsePassive"], out ftpUsePassive);
-
-            reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpserver));
+            FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpserver));
             reqFTP.UsePassive = ftpUsePassive;
             reqFTP.UseBinary = true;
             reqFTP.Credentials = new NetworkCredential(ftpUser, ftpPass);
             reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
             reqFTP.Proxy = GlobalProxySelection.GetEmptyWebProxy();
-            //MessageBox.Show("FTP Check");
-            FtpWebResponse response = (FtpWebResponse)reqFTP.GetResponse();
-            //MessageBox.Show(response.StatusDescription);
-            //MessageBox.Show("FTP Check completed");
+            reqFTP.Timeout = 15000;
 
-            Stream responseStream = response.GetResponseStream();
-            reader = new StreamReader(responseStream);
-            //MessageBox.Show("get response completed");
-            readFromCSV(reader, lastreaddatetime_,tblcsv);
-            
+            response = (FtpWebResponse)reqFTP.GetResponse();
+            reader = new StreamReader(response.GetResponseStream());
+            return readFromCSV(reader, lastReadDatetime, tblcsv);
         }
         catch (WebException ex)
         {
-            /*MessageBox.Show("In Catch");
-            MessageBox.Show(ex.Message.ToString());
-            MessageBox.Show(ex.Status.ToString());*/
-            FtpWebResponse response = (FtpWebResponse)ex.Response;
-            if (response.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
-            {
-                MessageBox.Show(ex.Message.ToString(), "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-            }
-
-            //if(ex.Status.ToString() == "ConnectFailure")
-            //{
-            //    OpenFileDialog ofd = new OpenFileDialog();
-            //    ofd.Multiselect = false;
-            //    if (ofd.ShowDialog() == DialogResult.OK)
-            //    {
-            //        if ((myStream = ofd.OpenFile()) != null)
-            //        {
-            //            myStream = ofd.OpenFile();
-            //            reader = new StreamReader(myStream);
-            //            lastreaddatetime_ = Convert.ToDateTime(dms1);
-            //            readFromCSV(reader, lastreaddatetime_, tblcsv);
-            //        }
-            //    }
-            //}
+            FtpWebResponse errResponse = ex.Response as FtpWebResponse;
+            if (errResponse != null && errResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                throw new Exception("CSV file not found on FTP server.\n\nPath: " + ftpserver);
+            if (ex.Status == WebExceptionStatus.ConnectFailure || ex.Status == WebExceptionStatus.Timeout)
+                throw new Exception("Cannot connect to FTP server. Please check network connection.\n\nServer: " + ftpserver);
+            throw new Exception("FTP error: " + ex.Message);
         }
-        catch (Exception ex)
+        finally
         {
-            MessageBox.Show(ex.Message.ToString(), "Error : ImportCSV", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            reader?.Dispose();
+            response?.Dispose();
         }
     }
 
-    public static void ImportCSVManual()
+    public static (int inserted, int skipped) ImportCSVManual(string filePath)
     {
-        
-        Stream myStream = null;
-        StreamReader reader = null;
-        DateTime lastreaddatetime_;
-        DataTable tblcsv = new DataTable();
-        DataTable importcsvlastread = new DataTable();
-        string dms1 = "";
+        DataTable tblcsv = BuildCSVDataTable();
 
+        // Manual import: process all rows from the file regardless of date.
+        // Duplicate detection is handled by BatchNo+Cycle+PLCDate check in InsertCSVRecordsWithCount.
+        using (StreamReader reader = new StreamReader(filePath))
+        {
+            return readFromCSV(reader, DateTime.MinValue, tblcsv);
+        }
+    }
+
+    private static DataTable BuildCSVDataTable()
+    {
+        DataTable tblcsv = new DataTable();
         tblcsv.Columns.Add("PLCDate");
-        //tblcsv.Columns.Add("ReadDataDateTime");
         tblcsv.Columns.Add("Customer");
         tblcsv.Columns.Add("ClientName");
         tblcsv.Columns.Add("SiteName");
@@ -655,198 +592,105 @@ public class Functions : SQLHelper
         tblcsv.Columns.Add("SilicaActual");
         tblcsv.Columns.Add("GGBSSet");
         tblcsv.Columns.Add("GGBSActual");
-
-        importcsvlastread = Functions.GetTableDataBySP("ImportCSVLastRead_Select");
-        DateTime lastreaddatetime = Convert.ToDateTime(importcsvlastread.Rows[0][2].ToString());
-        
-
-        int dd = lastreaddatetime.Day;
-        int mm = lastreaddatetime.Month;
-        int yy = lastreaddatetime.Year;
-        //string dms = mm.ToString() + '-' + dd.ToString() + '-' + yy.ToString() + ' ' + lastreaddatetime.ToLongTimeString();
-        dms1 = dd.ToString() + '-' + mm.ToString() + '-' + yy.ToString() + ' ' + lastreaddatetime.ToLongTimeString();
-        lastreaddatetime_ = Convert.ToDateTime(dms1);
-        
-        OpenFileDialog ofd = new OpenFileDialog();
-        ofd.Multiselect = false;
-        if (ofd.ShowDialog() == DialogResult.OK)
-        {
-            if ((myStream = ofd.OpenFile()) != null)
-            {
-                myStream = ofd.OpenFile();
-                reader = new StreamReader(myStream);
-                lastreaddatetime_ = Convert.ToDateTime(dms1);
-                readFromCSV(reader, lastreaddatetime_, tblcsv);
-            }
-        }
+        return tblcsv;
     }
 
-    static void readFromCSV(StreamReader reader, DateTime lastreaddatetime_, DataTable tblcsv)
+    private static DateTime GetLastReadDateTime(DataTable importcsvlastread)
     {
-        string[] allLines = reader.ReadToEnd().Split(Environment.NewLine.ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+        DateTime dt = Convert.ToDateTime(importcsvlastread.Rows[0][2].ToString());
+        string dms = dt.Day + "-" + dt.Month + "-" + dt.Year + " " + dt.ToLongTimeString();
+        return Convert.ToDateTime(dms);
+    }
+    static (int inserted, int skipped) readFromCSV(StreamReader reader, DateTime lastreaddatetime_, DataTable tblcsv)
+    {
+        string[] allLines = reader.ReadToEnd()
+    .Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.None) // handle all line endings
+    .Select(line => line.Trim())                                  // remove spaces + \r
+    .Where(line => !string.IsNullOrWhiteSpace(line))               // remove empty lines
+    .Where(line => line.Replace(",", "").Trim().Length > 0)        // remove junk rows (,,,,)
+    .ToArray();
 
-        //MessageBox.Show("read completed");
-        string readcsvfile = "";
+        int expectedColumns = tblcsv.Columns.Count;
+
         for (int a = 1; a < allLines.Length; a++)
         {
-            readcsvfile = allLines[a].ToString();
+            string readcsvfile = allLines[a].Trim();
+            if (string.IsNullOrEmpty(readcsvfile)) continue;
 
-            if (readcsvfile != "")
-            {
-                string[] csvRowArr = readcsvfile.Split(',');
-                if (csvRowArr.Length > 0)
-                {
-                    if (Convert.ToDateTime(csvRowArr[0].ToString()) <= lastreaddatetime_)
-                    {
-                        continue;
-                    }
-                    else
-                    {
+            string[] csvRowArr = readcsvfile.Split(',');
 
-                        //Adding each row into datatable  
-                        tblcsv.Rows.Add();
-                        int count = 0;
-                        foreach (string FileRec in readcsvfile.Split(','))
-                        {
-                            if (count == 0)
-                            {
-                                DateTime plcDate = Convert.ToDateTime(FileRec);
-                                tblcsv.Rows[tblcsv.Rows.Count - 1][count] = plcDate.ToString();
-                                count++;
-                            }
-                            else
-                            {
-                                tblcsv.Rows[tblcsv.Rows.Count - 1][count] = FileRec;
-                                count++;
-                            }
-                        }
+            if (csvRowArr.Length < expectedColumns) continue;
 
-                    }
-                }
-            }
+            DateTime rowDate;
+            if (!DateTime.TryParse(csvRowArr[0].Trim(), out rowDate)) continue;
+
+            if (rowDate <= lastreaddatetime_) continue;
+
+            DataRow newRow = tblcsv.NewRow();
+            newRow[0] = rowDate.ToString();
+            for (int col = 1; col < expectedColumns && col < csvRowArr.Length; col++)
+                newRow[col] = csvRowArr[col].Trim();
+
+            tblcsv.Rows.Add(newRow);
         }
 
-        /*if (allLines.Length > 0)
-            MessageBox.Show(allLines.Length.ToString());
+        if (tblcsv.Rows.Count == 0) return (0, 0);
 
-        return;
+        var result = InsertCSVRecordsWithCount(tblcsv);
 
-        //getting full file path of Uploaded file  
-        //string CSVFilePath = Path.GetFullPath(FileUpload1.PostedFile.FileName);
-        string CSVFilePath = @"ftp://192.168.1.150//DAT0000//SAMPLE//SMP0000.CSV";
-        //Reading All text  
-        string ReadCSV = File.ReadAllText(CSVFilePath);
-
-        importcsvlastread = Functions.GetTableDataBySP("ImportCSVLastRead_Select");
-        DateTime lastreaddatetime = Convert.ToDateTime(importcsvlastread.Rows[0][2].ToString());
-        int dd = lastreaddatetime.Day;
-        int mm = lastreaddatetime.Month;
-        int yy = lastreaddatetime.Year;
-        string dms = mm.ToString() + '-' + dd.ToString() + '-' + yy.ToString() + ' ' + lastreaddatetime.ToLongTimeString();
-        DateTime lastreaddatetime_ = Convert.ToDateTime(dms);
-
-        //spliting row after new line  
-        foreach (string csvRow in ReadCSV.Split('\n'))
+        if (result.inserted > 0 && result.maxInsertedDate.HasValue)
         {
-            if (csvRow != "")
-            {
-                string[] csvRowArr = csvRow.Split(',');
-                if (Convert.ToDateTime(csvRowArr[0].ToString()) <= lastreaddatetime_)
-                {
-                    continue;
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(csvRow))
-                    {
-                        //Adding each row into datatable  
-                        tblcsv.Rows.Add();
-                        int count = 0;
-                        foreach (string FileRec in csvRow.Split(','))
-                        {
-                            if (count == 0)
-                            {
-                                DateTime plcDate = Convert.ToDateTime(FileRec);
-                                tblcsv.Rows[tblcsv.Rows.Count - 1][count] = plcDate.ToString();
-                                count++;
-                            }
-                            else
-                            {
-                                tblcsv.Rows[tblcsv.Rows.Count - 1][count] = FileRec;
-                                count++;
-                            }
-                        }
-                    }
-                }
-            }
-        }*/
-
-        //Calling insert Functions
-        if (tblcsv != null)
-        {
-            DateTime UpdateDateTime = Convert.ToDateTime(tblcsv.Rows[tblcsv.Rows.Count - 1][0].ToString());
-            //string UpdateDateTime_ = (UpdateDateTime.Month.ToString() + '-' + UpdateDateTime.Day.ToString() + '-' +UpdateDateTime.Year.ToString() + ' ' + UpdateDateTime.ToLongTimeString()).ToString();
-            string UpdateDateTime_ = UpdateDateTime.ToString();
-
-            bool addFlag = InsertCSVRecords(tblcsv);
-            if (addFlag)
-            {
-                SQLHelper._objCmd = new SqlCommand();
-                SQLHelper._objCmd.Parameters.Clear();
-                SQLHelper._objCmd.Parameters.AddWithValue("@LastReadDateTime", Convert.ToDateTime(UpdateDateTime_));
-
-                string text3 = Queries.UpdateBySP("ImportCSVLastRead_Update");
-
-                bool flag4 = text3 != "";
-                if (flag4)
-                {
-                    bool flag5 = Functions.DBKeyErrors(text3);
-                    bool flag6 = !flag5;
-                    if (flag6)
-                    {
-                        MessageBox.Show(text3, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                    }
-                }
-                MessageBox.Show("CSV File Imported Successfully");
-            }
+            SQLHelper._objCmd = new SqlCommand();
+            SQLHelper._objCmd.Parameters.Clear();
+            SQLHelper._objCmd.Parameters.AddWithValue("@LastReadDateTime", result.maxInsertedDate.Value);
+            Queries.UpdateBySP("ImportCSVLastRead_Update");
         }
+
+        return (result.inserted, result.existing);
     }
 
-    static bool InsertCSVRecords(DataTable csvdt)
+    
+
+    // Returns (inserted, existing, maxInsertedDate)
+    static (int inserted, int existing, DateTime? maxInsertedDate) InsertCSVRecordsWithCount(DataTable csvdt)
     {
-        bool flag = false;
+        int addCount = 0;
+        int existingCount = 0;
+        DateTime? maxInsertedDate = null;
         try
         {
-            int addCount = 0;
-            DataTable dataTable = null;
             for (int a = 0; a < csvdt.Rows.Count; a++)
             {
-                // Parse batch and cycle safely
                 int csvdtbatchno = 0;
                 int csvcycle = 0;
                 int.TryParse(csvdt.Rows[a][8].ToString(), out csvdtbatchno);
                 int.TryParse(csvdt.Rows[a][10].ToString(), out csvcycle);
 
-                // Quick client-side existence check to avoid duplicate inserts
+                // Parse PLCDate first — needed for duplicate check and SP parameter
+                DateTime plcDt;
+                if (!DateTime.TryParse(csvdt.Rows[a][0].ToString(), out plcDt))
+                {
+                    existingCount++;
+                    continue;
+                }
+
+                // Skip if record already exists: BatchNo + Cycle + PLCDate (date only, ignore time)
                 try
                 {
-                    var existsObj = Functions.GetSingleValue($"select count(1) from Trip_PLCData where BatchNo={csvdtbatchno} and Cycle={csvcycle}");
+                    var existsObj = Functions.GetSingleValue(
+                        "select count(1) from PLCData where BatchNo=" + csvdtbatchno +
+                        " and Cycle=" + csvcycle +
+                        " and CAST(PLCDate AS DATE)='" + plcDt.ToString("yyyy-MM-dd") + "'");
                     int exists = 0;
-                    try { exists = Convert.ToInt32(existsObj); } catch { exists = 0; }
-                    if (exists > 0)
-                    {
-                        // Skip inserting this record
-                        continue;
-                    }
+                    int.TryParse(existsObj?.ToString(), out exists);
+                    if (exists > 0) { existingCount++; continue; }
                 }
-                catch
-                {
-                    // If check fails, continue to attempt insert; server-side uniqueness should protect
-                }
+                catch { }
 
                 SQLHelper._objCmd = new SqlCommand();
                 SQLHelper._objCmd.Parameters.Clear();
-                SQLHelper._objCmd.Parameters.AddWithValue("@PLCDate", Convert.ToDateTime(csvdt.Rows[a][0].ToString()));
+                // Pass as ISO format string so SP's TRY_CONVERT(DATETIME, @PLCDate, 120) always succeeds
+                SQLHelper._objCmd.Parameters.AddWithValue("@PLCDate", plcDt.ToString("yyyy-MM-dd HH:mm:ss"));
                 SQLHelper._objCmd.Parameters.AddWithValue("@Customer", csvdt.Rows[a][1].ToString());
                 SQLHelper._objCmd.Parameters.AddWithValue("@ClientName", csvdt.Rows[a][2].ToString());
                 SQLHelper._objCmd.Parameters.AddWithValue("@SiteName", csvdt.Rows[a][3].ToString());
@@ -882,22 +726,25 @@ public class Functions : SQLHelper
 
                 string text2 = Queries.InsertBySP("ImportCSVTOPLCData");
 
-                bool flag1 = text2 != "";
-                if (flag1)
-                    MessageBox.Show(text2, "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-                else
+                if (string.IsNullOrEmpty(text2))
+                {
                     addCount++;
+                    DateTime rowDate;
+                    if (DateTime.TryParse(csvdt.Rows[a][0].ToString(), out rowDate))
+                        if (maxInsertedDate == null || rowDate > maxInsertedDate.Value)
+                            maxInsertedDate = rowDate;
+                }
+                else
+                    existingCount++;
             }
 
-            // If at least one row was inserted, return true so caller will update last-read timestamp
-            flag = (addCount > 0);
         }
         catch (Exception ex)
         {
-            MessageBox.Show(ex.Message.ToString(), "Error : InsertCSVRecords", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            MessageBox.Show(ex.Message.ToString(), "Import Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
         }
 
-        return flag;
+        return (addCount, existingCount, maxInsertedDate);
     }
 
     public static string GetUploadUrl()
@@ -914,4 +761,5 @@ public class Functions : SQLHelper
 
         return baseUrl + endpoint;
     }
+
 }

@@ -49,6 +49,7 @@ namespace NilkanthApplication
             this.cmbClient = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnImportCSV = new System.Windows.Forms.Button();
+            this.btnResetImportDate = new System.Windows.Forms.Button();
             this.btnDeleteAllPLCData = new System.Windows.Forms.Button();
             this.btnClearFilter = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
@@ -60,6 +61,8 @@ namespace NilkanthApplication
             this.btnManualImport = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.btnDeletePLCData = new System.Windows.Forms.Button();
+            this.tsslOperationStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tspbOperation = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -147,7 +150,9 @@ namespace NilkanthApplication
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblFilterStatus});
+            this.lblFilterStatus,
+            this.tsslOperationStatus,
+            this.tspbOperation});
             this.statusStrip1.Location = new System.Drawing.Point(0, 672);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1359, 26);
@@ -159,7 +164,26 @@ namespace NilkanthApplication
             this.lblFilterStatus.Name = "lblFilterStatus";
             this.lblFilterStatus.Size = new System.Drawing.Size(65, 20);
             this.lblFilterStatus.Text = "Filter By:";
-            // 
+            //
+            // tsslOperationStatus
+            //
+            this.tsslOperationStatus.Name = "tsslOperationStatus";
+            this.tsslOperationStatus.Size = new System.Drawing.Size(400, 20);
+            this.tsslOperationStatus.Spring = true;
+            this.tsslOperationStatus.Text = "";
+            this.tsslOperationStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsslOperationStatus.ForeColor = System.Drawing.Color.FromArgb(0, 120, 215);
+            this.tsslOperationStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.tsslOperationStatus.Visible = false;
+            //
+            // tspbOperation
+            //
+            this.tspbOperation.Name = "tspbOperation";
+            this.tspbOperation.Size = new System.Drawing.Size(120, 20);
+            this.tspbOperation.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.tspbOperation.MarqueeAnimationSpeed = 30;
+            this.tspbOperation.Visible = false;
+            //
             // chkApplyDateFilter
             // 
             this.chkApplyDateFilter.AutoSize = true;
@@ -217,10 +241,10 @@ namespace NilkanthApplication
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(83, 8);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F, System.Drawing.FontStyle.Bold);
+            this.label1.Location = new System.Drawing.Point(83, 12);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(249, 58);
+            this.label1.Size = new System.Drawing.Size(173, 39);
             this.label1.TabIndex = 72;
             this.label1.Text = "PLC Data";
             // 
@@ -404,16 +428,39 @@ namespace NilkanthApplication
             this.btnImportCSV.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnImportCSV.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnImportCSV.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnImportCSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnImportCSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnImportCSV.Image = global::NilkanthApplication.Properties.Resources.import_icon_1;
-            this.btnImportCSV.Location = new System.Drawing.Point(593, 4);
+            this.btnImportCSV.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnImportCSV.Location = new System.Drawing.Point(527, 4);
+            this.btnImportCSV.Margin = new System.Windows.Forms.Padding(1);
             this.btnImportCSV.Name = "btnImportCSV";
-            this.btnImportCSV.Size = new System.Drawing.Size(125, 64);
+            this.btnImportCSV.Size = new System.Drawing.Size(118, 57);
             this.btnImportCSV.TabIndex = 119;
             this.btnImportCSV.Text = "&Import CSV";
             this.btnImportCSV.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnImportCSV.UseVisualStyleBackColor = true;
             this.btnImportCSV.Click += new System.EventHandler(this.btnImportCSV_Click);
+            // 
+            // btnResetImportDate
+            // 
+            this.btnResetImportDate.CausesValidation = false;
+            this.btnResetImportDate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnResetImportDate.FlatAppearance.BorderSize = 0;
+            this.btnResetImportDate.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
+            this.btnResetImportDate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
+            this.btnResetImportDate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnResetImportDate.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnResetImportDate.Image = global::NilkanthApplication.Properties.Resources.Refresh1;
+            this.btnResetImportDate.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnResetImportDate.Location = new System.Drawing.Point(646, 4);
+            this.btnResetImportDate.Margin = new System.Windows.Forms.Padding(1);
+            this.btnResetImportDate.Name = "btnResetImportDate";
+            this.btnResetImportDate.Size = new System.Drawing.Size(148, 57);
+            this.btnResetImportDate.TabIndex = 124;
+            this.btnResetImportDate.Text = "Reset CSV Date";
+            this.btnResetImportDate.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.btnResetImportDate.UseVisualStyleBackColor = true;
+            this.btnResetImportDate.Click += new System.EventHandler(this.btnResetImportDate_Click);
             // 
             // btnDeleteAllPLCData
             // 
@@ -423,11 +470,13 @@ namespace NilkanthApplication
             this.btnDeleteAllPLCData.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnDeleteAllPLCData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnDeleteAllPLCData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeleteAllPLCData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeleteAllPLCData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteAllPLCData.Image = global::NilkanthApplication.Properties.Resources.Delete;
-            this.btnDeleteAllPLCData.Location = new System.Drawing.Point(843, 3);
+            this.btnDeleteAllPLCData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnDeleteAllPLCData.Location = new System.Drawing.Point(924, 4);
+            this.btnDeleteAllPLCData.Margin = new System.Windows.Forms.Padding(1);
             this.btnDeleteAllPLCData.Name = "btnDeleteAllPLCData";
-            this.btnDeleteAllPLCData.Size = new System.Drawing.Size(156, 64);
+            this.btnDeleteAllPLCData.Size = new System.Drawing.Size(129, 57);
             this.btnDeleteAllPLCData.TabIndex = 118;
             this.btnDeleteAllPLCData.Text = "&Delete All";
             this.btnDeleteAllPLCData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -442,11 +491,13 @@ namespace NilkanthApplication
             this.btnClearFilter.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnClearFilter.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnClearFilter.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClearFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearFilter.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearFilter.Image = global::NilkanthApplication.Properties.Resources.ClearFilter;
-            this.btnClearFilter.Location = new System.Drawing.Point(995, 4);
+            this.btnClearFilter.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnClearFilter.Location = new System.Drawing.Point(1059, 4);
+            this.btnClearFilter.Margin = new System.Windows.Forms.Padding(1);
             this.btnClearFilter.Name = "btnClearFilter";
-            this.btnClearFilter.Size = new System.Drawing.Size(117, 64);
+            this.btnClearFilter.Size = new System.Drawing.Size(130, 57);
             this.btnClearFilter.TabIndex = 117;
             this.btnClearFilter.Text = "&Clear Filter";
             this.btnClearFilter.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -486,11 +537,13 @@ namespace NilkanthApplication
             this.btnExport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnExport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnExport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExport.Image = global::NilkanthApplication.Properties.Resources.Export;
-            this.btnExport.Location = new System.Drawing.Point(1227, -1);
+            this.btnExport.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnExport.Location = new System.Drawing.Point(1294, 4);
+            this.btnExport.Margin = new System.Windows.Forms.Padding(1);
             this.btnExport.Name = "btnExport";
-            this.btnExport.Size = new System.Drawing.Size(127, 64);
+            this.btnExport.Size = new System.Drawing.Size(110, 57);
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "E&xport";
             this.btnExport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -505,11 +558,13 @@ namespace NilkanthApplication
             this.btnBack.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnBack.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.Image = global::NilkanthApplication.Properties.Resources.back;
-            this.btnBack.Location = new System.Drawing.Point(1111, 1);
+            this.btnBack.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnBack.Location = new System.Drawing.Point(1183, 4);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(1);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(115, 64);
+            this.btnBack.Size = new System.Drawing.Size(114, 57);
             this.btnBack.TabIndex = 4;
             this.btnBack.Text = "&Back";
             this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -542,11 +597,13 @@ namespace NilkanthApplication
             this.btnUploadData.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnUploadData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnUploadData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnUploadData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUploadData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnUploadData.Image = global::NilkanthApplication.Properties.Resources.upload_icon;
-            this.btnUploadData.Location = new System.Drawing.Point(329, 5);
+            this.btnUploadData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnUploadData.Location = new System.Drawing.Point(266, 4);
+            this.btnUploadData.Margin = new System.Windows.Forms.Padding(1);
             this.btnUploadData.Name = "btnUploadData";
-            this.btnUploadData.Size = new System.Drawing.Size(133, 64);
+            this.btnUploadData.Size = new System.Drawing.Size(141, 57);
             this.btnUploadData.TabIndex = 120;
             this.btnUploadData.Text = "&Upload Data";
             this.btnUploadData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -561,11 +618,13 @@ namespace NilkanthApplication
             this.btnManualImport.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnManualImport.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnManualImport.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnManualImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnManualImport.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnManualImport.Image = global::NilkanthApplication.Properties.Resources.import_icon_1;
-            this.btnManualImport.Location = new System.Drawing.Point(455, 5);
+            this.btnManualImport.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnManualImport.Location = new System.Drawing.Point(388, 4);
+            this.btnManualImport.Margin = new System.Windows.Forms.Padding(1);
             this.btnManualImport.Name = "btnManualImport";
-            this.btnManualImport.Size = new System.Drawing.Size(136, 64);
+            this.btnManualImport.Size = new System.Drawing.Size(133, 57);
             this.btnManualImport.TabIndex = 122;
             this.btnManualImport.Text = "Manual Import";
             this.btnManualImport.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -590,19 +649,21 @@ namespace NilkanthApplication
             this.btnDeletePLCData.FlatAppearance.MouseDownBackColor = System.Drawing.Color.White;
             this.btnDeletePLCData.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnDeletePLCData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnDeletePLCData.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDeletePLCData.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeletePLCData.Image = global::NilkanthApplication.Properties.Resources.Delete;
-            this.btnDeletePLCData.Location = new System.Drawing.Point(716, 4);
+            this.btnDeletePLCData.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnDeletePLCData.Location = new System.Drawing.Point(796, 4);
+            this.btnDeletePLCData.Margin = new System.Windows.Forms.Padding(1);
             this.btnDeletePLCData.Name = "btnDeletePLCData";
-            this.btnDeletePLCData.Size = new System.Drawing.Size(126, 64);
+            this.btnDeletePLCData.Size = new System.Drawing.Size(122, 57);
             this.btnDeletePLCData.TabIndex = 124;
             this.btnDeletePLCData.Text = "&Delete";
             this.btnDeletePLCData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDeletePLCData.UseVisualStyleBackColor = true;
             this.btnDeletePLCData.Click += new System.EventHandler(this.btnDeletePLCData_Click);
-            // 
+            //
             // AllTransaction
-            // 
+            //
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
@@ -613,6 +674,7 @@ namespace NilkanthApplication
             this.Controls.Add(this.btnManualImport);
             this.Controls.Add(this.btnUploadData);
             this.Controls.Add(this.btnImportCSV);
+            this.Controls.Add(this.btnResetImportDate);
             this.Controls.Add(this.btnDeleteAllPLCData);
             this.Controls.Add(this.btnClearFilter);
             this.Controls.Add(this.cmbToBatch);
@@ -716,9 +778,12 @@ namespace NilkanthApplication
         private System.Windows.Forms.Button btnClearFilter;
         private System.Windows.Forms.Button btnDeleteAllPLCData;
         private System.Windows.Forms.Button btnImportCSV;
+        private System.Windows.Forms.Button btnResetImportDate;
         private System.Windows.Forms.Button btnUploadData;
         private System.Windows.Forms.Button btnManualImport;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Button btnDeletePLCData;
+        private System.Windows.Forms.ToolStripStatusLabel tsslOperationStatus;
+        private System.Windows.Forms.ToolStripProgressBar tspbOperation;
     }
 }

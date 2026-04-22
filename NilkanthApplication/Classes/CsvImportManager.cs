@@ -1,139 +1,75 @@
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Configuration;
 
 namespace NilkanthApplication.Classes
 {
-    // Lightweight CSV importer that downloads the PLC CSV from FTP, skips already-existing rows
-    // and inserts new records using the existing stored procedure. It reports status to MainScreen.lblNotification.
+    // Silently imports PLC CSV from FTP every tick.
+    // All DB work runs on a thread pool thread with its own SqlConnection —
+    // never touches SQLHelper statics, never blocks the UI thread.
     public class CsvImportManager
     {
+        private static readonly string _connStr =
+            ConfigurationManager.ConnectionStrings["DataConnectionString"].ToString();
+
         public CsvImportManager() { }
 
+        // Called from MainScreen timer tick (async void).
+        // FTP download is async; DB inserts run on Task.Run — UI is never blocked.
         public async Task<bool> RunOnceAsync()
         {
             try
             {
-                var importcsvlastread = Functions.GetTableDataBySP("ImportCSVLastRead_Select");
-                if (importcsvlastread == null || importcsvlastread.Rows.Count == 0)
+                // Read lastReadDateTime on calling thread (lightweight SP call)
+                DataTable lastReadDT = Functions.GetTableDataBySP("ImportCSVLastRead_Select");
+                if (lastReadDT == null || lastReadDT.Rows.Count == 0)
                     return false;
 
-                DateTime lastreaddatetime = Convert.ToDateTime(importcsvlastread.Rows[0][2].ToString());
+                DateTime lastRead = Convert.ToDateTime(lastReadDT.Rows[0][2].ToString());
 
-                // Read FTP settings from config (fallback to previous hard-coded values)
-                string ftpUrl = ConfigurationManager.AppSettings["FtpUrl"] ?? "ftp://192.168.1.150/DAT0000/SAMPLE/SMP0000.CSV";
-                string ftpUser = ConfigurationManager.AppSettings["FtpUser"] ?? "admin";
-                string ftpPass = ConfigurationManager.AppSettings["FtpPassword"] ?? "6982";
-                bool ftpUsePassive = false;
-                bool.TryParse(ConfigurationManager.AppSettings["FtpUsePassive"], out ftpUsePassive);
+                string ftpUrl      = ConfigurationManager.AppSettings["FtpUrl"]      ?? "ftp://192.168.1.150/DAT0000/SAMPLE/SMP0000.CSV";
+                string ftpUser     = ConfigurationManager.AppSettings["FtpUser"]     ?? "admin";
+                string ftpPass     = ConfigurationManager.AppSettings["FtpPassword"] ?? "6982";
+                bool   ftpPassive  = false;
+                bool.TryParse(ConfigurationManager.AppSettings["FtpUsePassive"], out ftpPassive);
 
-                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpUrl));
-                reqFTP.UsePassive = ftpUsePassive;
-                reqFTP.UseBinary = true;
-                reqFTP.Credentials = new NetworkCredential(ftpUser, ftpPass);
-                reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
-                reqFTP.Proxy = GlobalProxySelection.GetEmptyWebProxy();
+                FtpWebRequest req = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpUrl));
+                req.UsePassive   = ftpPassive;
+                req.UseBinary    = true;
+                req.Credentials  = new NetworkCredential(ftpUser, ftpPass);
+                req.Method       = WebRequestMethods.Ftp.DownloadFile;
+                req.Proxy        = GlobalProxySelection.GetEmptyWebProxy();
+                req.Timeout      = 15000;
 
-                // Download on background thread
-                using (var task = Task.Factory.FromAsync(reqFTP.BeginGetResponse, reqFTP.EndGetResponse, null))
-                using (FtpWebResponse response = (FtpWebResponse)await task)
-                using (Stream responseStream = response.GetResponseStream())
-                using (StreamReader reader = new StreamReader(responseStream))
+                // ── Async FTP download ──────────────────────────────────────
+                List<string[]> rowsToInsert;
+                using (var ftpTask = Task.Factory.FromAsync(req.BeginGetResponse, req.EndGetResponse, null))
+                using (FtpWebResponse response = (FtpWebResponse)await ftpTask)
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
                 {
                     string content = await reader.ReadToEndAsync();
-                    string[] allLines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
 
-                    var rowsToInsert = new List<string[]>();
+                    // Parse CSV lines — fast, no IO, stays on current context
+                    rowsToInsert = ParseRows(content, lastRead);
+                }
 
-                    for (int i = 1; i < allLines.Length; i++) // skip header
-                    {
-                        string line = allLines[i];
-                        if (string.IsNullOrWhiteSpace(line))
-                            continue;
+                if (rowsToInsert.Count == 0)
+                    return false;
 
-                        string[] cols = line.Split(',');
-                        if (cols.Length < 9)
-                            continue;
+                // ── All DB work on background thread with its own connection ─
+                int inserted = await Task.Run(() => InsertRows(rowsToInsert));
 
-                        DateTime plcDate = Convert.ToDateTime(cols[0]);
-                        if (plcDate <= lastreaddatetime)
-                            continue;
-
-                        rowsToInsert.Add(cols);
-                    }
-
-                    if (rowsToInsert.Count == 0)
-                        return false;
-
-                    int inserted = 0;
-                    foreach (var cols in rowsToInsert)
-                    {
-                        int batchNo = 0; int cycle = 0;
-                        int.TryParse(cols[8].Trim(), out batchNo);
-                        int.TryParse(cols[10].Trim(), out cycle);
-
-                        // Server-side uniqueness is best, but do a quick existence check here to avoid duplicates
-                        var existsObj = Functions.GetSingleValue($"select count(1) from Trip_PLCData where BatchNo={batchNo} and Cycle={cycle}");
-                        int exists = 0;
-                        try { exists = Convert.ToInt32(existsObj); } catch { exists = 0; }
-                        if (exists > 0)
-                            continue;
-
-                        SQLHelper._objCmd = new System.Data.SqlClient.SqlCommand();
-                        SQLHelper._objCmd.Parameters.Clear();
-                        SQLHelper._objCmd.Parameters.AddWithValue("@PLCDate", Convert.ToDateTime(cols[0].ToString()));
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Customer", cols[1].ToString());
-                        SQLHelper._objCmd.Parameters.AddWithValue("@ClientName", cols[2].ToString());
-                        SQLHelper._objCmd.Parameters.AddWithValue("@SiteName", cols[3].ToString());
-                        SQLHelper._objCmd.Parameters.AddWithValue("@RecipeName", cols[4].ToString());
-                        SQLHelper._objCmd.Parameters.AddWithValue("@TruckNo", cols[5].ToString());
-                        SQLHelper._objCmd.Parameters.AddWithValue("@DriverName", cols[6].ToString());
-                        SQLHelper._objCmd.Parameters.AddWithValue("@BatchSize", cols[7].ToString().Trim() != "" ? Convert.ToDouble(cols[7].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@BatchNo", cols[8].ToString().Trim() != "" ? Convert.ToDouble(cols[8].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@SetCycle", cols[9].ToString().Trim() != "" ? Convert.ToDouble(cols[9].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Cycle", cols[10].ToString().Trim() != "" ? Convert.ToDouble(cols[10].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Bin1Set", cols.Length > 11 && cols[11].ToString().Trim() != "" ? Convert.ToDouble(cols[11].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Bin1Actual", cols.Length > 12 && cols[12].ToString().Trim() != "" ? Convert.ToDouble(cols[12].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Bin2Set", cols.Length > 13 && cols[13].ToString().Trim() != "" ? Convert.ToDouble(cols[13].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Bin2Actual", cols.Length > 14 && cols[14].ToString().Trim() != "" ? Convert.ToDouble(cols[14].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Bin3Set", cols.Length > 15 && cols[15].ToString().Trim() != "" ? Convert.ToDouble(cols[15].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Bin3Actual", cols.Length > 16 && cols[16].ToString().Trim() != "" ? Convert.ToDouble(cols[16].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Bin4Set", cols.Length > 17 && cols[17].ToString().Trim() != "" ? Convert.ToDouble(cols[17].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@Bin4Actual", cols.Length > 18 && cols[18].ToString().Trim() != "" ? Convert.ToDouble(cols[18].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@CementSet", cols.Length > 19 && cols[19].ToString().Trim() != "" ? Convert.ToDouble(cols[19].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@CementActual", cols.Length > 20 && cols[20].ToString().Trim() != "" ? Convert.ToDouble(cols[20].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@FlyashSet", cols.Length > 21 && cols[21].ToString().Trim() != "" ? Convert.ToDouble(cols[21].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@FlyashActual", cols.Length > 22 && cols[22].ToString().Trim() != "" ? Convert.ToDouble(cols[22].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@WaterSet", cols.Length > 23 && cols[23].ToString().Trim() != "" ? Convert.ToDouble(cols[23].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@WaterActual", cols.Length > 24 && cols[24].ToString().Trim() != "" ? Convert.ToDouble(cols[24].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@AdditiveSet", cols.Length > 25 && cols[25].ToString().Trim() != "" ? Convert.ToDouble(cols[25].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@AdditiveActual", cols.Length > 26 && cols[26].ToString().Trim() != "" ? Convert.ToDouble(cols[26].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@TotalActual", cols.Length > 27 && cols[27].ToString().Trim() != "" ? Convert.ToDouble(cols[27].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@SilicaSet", cols.Length > 28 && cols[28].ToString().Trim() != "" ? Convert.ToDouble(cols[28].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@SilicaActual", cols.Length > 29 && cols[29].ToString().Trim() != "" ? Convert.ToDouble(cols[29].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@GGBSSet", cols.Length > 30 && cols[30].ToString().Trim() != "" ? Convert.ToDouble(cols[30].ToString()) : 0);
-                        SQLHelper._objCmd.Parameters.AddWithValue("@GGBSActual", cols.Length > 31 && cols[31].ToString().Trim() != "" ? Convert.ToDouble(cols[31].ToString()) : 0);
-
-                        string text2 = Queries.InsertBySP("ImportCSVTOPLCData");
-                        if (string.IsNullOrWhiteSpace(text2))
-                            inserted++;
-                    }
-
-                    if (inserted > 0)
-                    {
-                        DateTime lastInserted = Convert.ToDateTime(rowsToInsert[rowsToInsert.Count - 1][0]);
-                        SQLHelper._objCmd = new System.Data.SqlClient.SqlCommand();
-                        SQLHelper._objCmd.Parameters.Clear();
-                        SQLHelper._objCmd.Parameters.AddWithValue("@LastReadDateTime", lastInserted);
-                        string upd = Queries.UpdateBySP("ImportCSVLastRead_Update");
-                        NotifyMain($"Imported {inserted} new PLC records.");
-                        return true;
-                    }
+                if (inserted > 0)
+                {
+                    NotifyMain($"Auto-imported {inserted} new PLC records.");
+                    return true;
                 }
 
                 return false;
@@ -150,16 +86,140 @@ namespace NilkanthApplication.Classes
             }
         }
 
+        // ── Parse CSV content into filtered rows ────────────────────────────
+        private static List<string[]> ParseRows(string content, DateTime lastRead)
+        {
+            var rows = new List<string[]>();
+            string[] lines = content.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+
+            for (int i = 1; i < lines.Length; i++) // skip header row
+            {
+                string line = lines[i].Trim();
+                if (string.IsNullOrEmpty(line)) continue;
+
+                string[] cols = line.Split(',');
+                if (cols.Length < 9) continue;
+
+                DateTime plcDate;
+                if (!DateTime.TryParse(cols[0].Trim(), out plcDate)) continue;
+                if (plcDate <= lastRead) continue;
+
+                rows.Add(cols);
+            }
+
+            return rows;
+        }
+
+        // ── Runs entirely on thread pool — own SqlConnection, no SQLHelper ──
+        private static int InsertRows(List<string[]> rows)
+        {
+            int inserted = 0;
+            DateTime? maxInsertedDate = null;
+
+            using (SqlConnection conn = new SqlConnection(_connStr))
+            {
+                conn.Open();
+
+                foreach (var cols in rows)
+                {
+                    DateTime plcDate;
+                    if (!DateTime.TryParse(cols[0].Trim(), out plcDate)) continue;
+
+                    int batchNo = 0, cycle = 0;
+                    int.TryParse(cols[8].Trim(), out batchNo);
+                    if (cols.Length > 10) int.TryParse(cols[10].Trim(), out cycle);
+
+                    // Duplicate check: BatchNo + Cycle + PLCDate (date only)
+                    using (SqlCommand chk = new SqlCommand(
+                        "SELECT COUNT(1) FROM PLCData WHERE BatchNo=@b AND Cycle=@c AND CAST(PLCDate AS DATE)=@d",
+                        conn))
+                    {
+                        chk.Parameters.AddWithValue("@b", batchNo);
+                        chk.Parameters.AddWithValue("@c", cycle);
+                        chk.Parameters.AddWithValue("@d", plcDate.ToString("yyyy-MM-dd"));
+                        int exists = (int)chk.ExecuteScalar();
+                        if (exists > 0) continue;
+                    }
+
+                    // Insert via SP
+                    using (SqlCommand cmd = new SqlCommand("ImportCSVTOPLCData", conn))
+                    {
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@PLCDate",       plcDate.ToString("yyyy-MM-dd HH:mm:ss"));
+                        cmd.Parameters.AddWithValue("@Customer",       Col(cols, 1));
+                        cmd.Parameters.AddWithValue("@ClientName",     Col(cols, 2));
+                        cmd.Parameters.AddWithValue("@SiteName",       Col(cols, 3));
+                        cmd.Parameters.AddWithValue("@RecipeName",     Col(cols, 4));
+                        cmd.Parameters.AddWithValue("@TruckNo",        Col(cols, 5));
+                        cmd.Parameters.AddWithValue("@DriverName",     Col(cols, 6));
+                        cmd.Parameters.AddWithValue("@BatchSize",      Dbl(cols, 7));
+                        cmd.Parameters.AddWithValue("@BatchNo",        Dbl(cols, 8));
+                        cmd.Parameters.AddWithValue("@SetCycle",       Dbl(cols, 9));
+                        cmd.Parameters.AddWithValue("@Cycle",          Dbl(cols, 10));
+                        cmd.Parameters.AddWithValue("@Bin1Set",        Dbl(cols, 11));
+                        cmd.Parameters.AddWithValue("@Bin1Actual",     Dbl(cols, 12));
+                        cmd.Parameters.AddWithValue("@Bin2Set",        Dbl(cols, 13));
+                        cmd.Parameters.AddWithValue("@Bin2Actual",     Dbl(cols, 14));
+                        cmd.Parameters.AddWithValue("@Bin3Set",        Dbl(cols, 15));
+                        cmd.Parameters.AddWithValue("@Bin3Actual",     Dbl(cols, 16));
+                        cmd.Parameters.AddWithValue("@Bin4Set",        Dbl(cols, 17));
+                        cmd.Parameters.AddWithValue("@Bin4Actual",     Dbl(cols, 18));
+                        cmd.Parameters.AddWithValue("@CementSet",      Dbl(cols, 19));
+                        cmd.Parameters.AddWithValue("@CementActual",   Dbl(cols, 20));
+                        cmd.Parameters.AddWithValue("@FlyashSet",      Dbl(cols, 21));
+                        cmd.Parameters.AddWithValue("@FlyashActual",   Dbl(cols, 22));
+                        cmd.Parameters.AddWithValue("@WaterSet",       Dbl(cols, 23));
+                        cmd.Parameters.AddWithValue("@WaterActual",    Dbl(cols, 24));
+                        cmd.Parameters.AddWithValue("@AdditiveSet",    Dbl(cols, 25));
+                        cmd.Parameters.AddWithValue("@AdditiveActual", Dbl(cols, 26));
+                        cmd.Parameters.AddWithValue("@TotalActual",    Dbl(cols, 27));
+                        cmd.Parameters.AddWithValue("@SilicaSet",      Dbl(cols, 28));
+                        cmd.Parameters.AddWithValue("@SilicaActual",   Dbl(cols, 29));
+                        cmd.Parameters.AddWithValue("@GGBSSet",        Dbl(cols, 30));
+                        cmd.Parameters.AddWithValue("@GGBSActual",     Dbl(cols, 31));
+
+                        int affected = cmd.ExecuteNonQuery();
+                        if (affected > 0)
+                        {
+                            inserted++;
+                            if (maxInsertedDate == null || plcDate > maxInsertedDate.Value)
+                                maxInsertedDate = plcDate;
+                        }
+                    }
+                }
+
+                // Update last read timestamp after all inserts
+                if (inserted > 0 && maxInsertedDate.HasValue)
+                {
+                    using (SqlCommand upd = new SqlCommand("ImportCSVLastRead_Update", conn))
+                    {
+                        upd.CommandType = CommandType.StoredProcedure;
+                        upd.Parameters.AddWithValue("@LastReadDateTime", maxInsertedDate.Value);
+                        upd.ExecuteNonQuery();
+                    }
+                }
+            }
+
+            return inserted;
+        }
+
+        // ── Helpers ─────────────────────────────────────────────────────────
+        private static string Col(string[] cols, int i) =>
+            i < cols.Length ? cols[i].Trim() : "";
+
+        private static double Dbl(string[] cols, int i)
+        {
+            if (i >= cols.Length) return 0;
+            double v;
+            return double.TryParse(cols[i].Trim(), out v) ? v : 0;
+        }
+
         private void NotifyMain(string message)
         {
             try
             {
                 if (Application.OpenForms["MainScreen"] is MainScreen main)
-                {
                     main.SetNotification(message);
-                }
-                else
-                    MessageBox.Show(message, "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch { }
         }

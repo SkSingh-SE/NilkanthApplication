@@ -31,6 +31,37 @@ namespace NilkanthApplication
 
         
         bool isPageLoad = false;
+
+        private void SetBusy(bool busy, string message = "")
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => SetBusy(busy, message)));
+                return;
+            }
+            this.Enabled                = !busy;
+            Cursor.Current              = busy ? Cursors.WaitCursor : Cursors.Default;
+            statusStrip1.Enabled        = true;
+            tsslOperationStatus.Text    = message;
+            tsslOperationStatus.Visible = busy;
+            tspbOperation.Visible       = busy;
+        }
+
+        private void ShowTopMessage(string message, string title, MessageBoxIcon icon = MessageBoxIcon.Information)
+        {
+            // Always-on-top MessageBox using a hidden TopMost owner form
+            using (Form owner = new Form())
+            {
+                owner.TopMost        = true;
+                owner.ShowInTaskbar  = false;
+                owner.FormBorderStyle = FormBorderStyle.None;
+                owner.Size           = new System.Drawing.Size(1, 1);
+                owner.StartPosition  = FormStartPosition.CenterScreen;
+                owner.Show();
+                MessageBox.Show(owner, message, title, MessageBoxButtons.OK, icon);
+            }
+        }
+
         private void AllTransaction_Load(object sender, EventArgs e)
         {
             try
@@ -722,33 +753,45 @@ namespace NilkanthApplication
 
             this.BindGrid();
         }
-
+        
        
 
         private async void btnImportCSV_Click(object sender, EventArgs e)
         {
+            SetBusy(true, "Importing CSV from FTP, please wait...");
             try
             {
-                this.Enabled = false;
-                await Task.Run(() => Functions.ImportCSV());
-                // optionally refresh grid after import
-                this.BindGrid();
+                var result = await Task.Run(() => Functions.ImportCSV());
+                SetBusy(false);
+                ShowTopMessage("CSV import completed successfully.", "Import CSV");
+                if (result.inserted > 0) this.BindGrid();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString(), "Error : ImportCSV", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-            }
-            finally
-            {
-                this.Enabled = true;
+                SetBusy(false);
+                ShowTopMessage(ex.Message, "Import CSV - Error", MessageBoxIcon.Hand);
             }
         }
 
-        private void btnUploadData_Click(object sender, EventArgs e)
+        private async void btnUploadData_Click(object sender, EventArgs e)
         {
-            GetApiDetails();
-            PLCDataSendInAPI();
-            UpdateUserBasedOnFromToDate();
+            SetBusy(true, "Uploading data to server, please wait...");
+            try
+            {
+                await Task.Run(() =>
+                {
+                    GetApiDetails();
+                    PLCDataSendInAPI();
+                    UpdateUserBasedOnFromToDate();
+                });
+                SetBusy(false);
+                ShowTopMessage("Data uploaded successfully.", "Upload Data");
+            }
+            catch (Exception ex)
+            {
+                SetBusy(false);
+                ShowTopMessage(ex.Message, "Upload Data - Error", MessageBoxIcon.Hand);
+            }
         }
 
         public void GetApiDetails()
@@ -883,15 +926,155 @@ namespace NilkanthApplication
             this.Close();
         }
 
-        private void btnManualImport_Click(object sender, EventArgs e)
+        private void ResizeButtonIcons(int size)
         {
+            var sz = new Size(size, size);
+            foreach (System.Windows.Forms.Button btn in new[] {
+                btnUploadData, btnManualImport, btnImportCSV, btnResetImportDate,
+                btnDeletePLCData, btnDeleteAllPLCData, btnClearFilter, btnBack, btnExport })
+            {
+                if (btn.Image != null)
+                    btn.Image = new System.Drawing.Bitmap(btn.Image, sz);
+            }
+        }
+
+        private async void btnManualImport_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Select CSV File to Import";
+            ofd.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*";
+            ofd.Multiselect = false;
+
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            string filePath = ofd.FileName;
+            SetBusy(true, "Importing CSV file, please wait...");
             try
             {
-                Functions.ImportCSVManual();
+                var result = await Task.Run(() => Functions.ImportCSVManual(filePath));
+                SetBusy(false);
+                ShowTopMessage("CSV import completed successfully.", "Manual Import");
+                if (result.inserted > 0) this.BindGrid();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString(), "Error : ImportCSV", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                SetBusy(false);
+                ShowTopMessage(ex.Message, "Manual Import - Error", MessageBoxIcon.Hand);
+            }
+        }
+
+        private void btnResetImportDate_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Step 1: Password verification
+                PasswordDialog pwd = new PasswordDialog("cHhpaobjTCc=", "Enter Password to Reset Import Date", showCancel: true);
+                if (pwd.ShowDialog(this) != DialogResult.OK || !pwd.IsAuthorized)
+                    return;
+
+                // Step 2: Read current LastReadDateTime to pre-fill the picker
+                var importcsvlastread = Functions.GetTableDataBySP("ImportCSVLastRead_Select");
+                DateTime current = DateTime.Now;
+                if (importcsvlastread != null && importcsvlastread.Rows.Count > 0)
+                    DateTime.TryParse(importcsvlastread.Rows[0][2].ToString(), out current);
+
+                // Step 3: Show date picker dialog
+                DateTime selectedDate = current;
+                using (Form datePicker = new Form())
+                {
+                    // Same design as PasswordDialog
+                    datePicker.Text = "Reset CSV Import Date";
+                    datePicker.ClientSize = new System.Drawing.Size(413, 175);
+                    datePicker.StartPosition = FormStartPosition.CenterParent;
+                    datePicker.FormBorderStyle = FormBorderStyle.FixedDialog;
+                    datePicker.MaximizeBox = false;
+                    datePicker.MinimizeBox = false;
+                    datePicker.BackColor = System.Drawing.Color.White;
+                    datePicker.Icon = this.Icon;
+
+                    // Label — same font/position as PasswordDialog lblMessage
+                    var lbl = new System.Windows.Forms.Label
+                    {
+                        Text = "Select new Last Read Date & Time :",
+                        Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular),
+                        Location = new System.Drawing.Point(27, 20),
+                        AutoSize = true
+                    };
+
+                    // Input — same position/size as PasswordDialog txtPassword
+                    var dtp = new System.Windows.Forms.DateTimePicker
+                    {
+                        Format = DateTimePickerFormat.Custom,
+                        CustomFormat = "dd-MM-yyyy HH:mm:ss",
+                        Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular),
+                        CalendarFont = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular),
+                        Location = new System.Drawing.Point(30, 50),
+                        Size = new System.Drawing.Size(350, 26),
+                        Value = current
+                    };
+
+                    // OK button — same as PasswordDialog btnOk (Location: 177, 103)
+                    var btnOk = new System.Windows.Forms.Button
+                    {
+                        Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold),
+                        ForeColor = System.Drawing.Color.White,
+                        Image = Properties.Resources.OK,
+                        Location = new System.Drawing.Point(200, 103),
+                        Size = new System.Drawing.Size(110, 37),
+                        UseVisualStyleBackColor = false,
+                        DialogResult = DialogResult.OK
+                    };
+                    btnOk.FlatAppearance.BorderSize = 0;
+                    btnOk.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
+                    btnOk.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
+
+                    // Cancel button — same as PasswordDialog btnCancel (Location: 38, 103)
+                    var btnCancelPicker = new System.Windows.Forms.Button
+                    {
+                        Text = "Cancel",
+                        Font = new System.Drawing.Font("Calibri", 13.8F, System.Drawing.FontStyle.Bold),
+                        ForeColor = System.Drawing.Color.White,
+                        BackColor = System.Drawing.Color.FromArgb(255, 90, 10),
+                        TextAlign = System.Drawing.ContentAlignment.TopCenter,
+                        Padding = new System.Windows.Forms.Padding(0, 2, 0, 2),
+                        Size = new System.Drawing.Size(110, 37),
+                        Location = new System.Drawing.Point(68, 103),
+                        UseVisualStyleBackColor = false,
+                        Cursor = System.Windows.Forms.Cursors.Hand,
+                        CausesValidation = false,
+                        TabStop = false,
+                        DialogResult = DialogResult.Cancel
+                    };
+                    btnCancelPicker.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(220, 80, 0);
+                    btnCancelPicker.FlatAppearance.MouseDownBackColor = System.Drawing.Color.FromArgb(200, 70, 0);
+                    btnCancelPicker.FlatAppearance.MouseOverBackColor = System.Drawing.Color.FromArgb(255, 130, 20);
+
+                    datePicker.Controls.AddRange(new System.Windows.Forms.Control[] { lbl, dtp, btnCancelPicker, btnOk });
+                    datePicker.AcceptButton = btnOk;
+                    datePicker.CancelButton = btnCancelPicker;
+
+                    if (datePicker.ShowDialog(this) != DialogResult.OK)
+                        return;
+
+                    selectedDate = dtp.Value;
+                }
+
+                // Step 4: Update ImportCSVLastRead in DB
+                SQLHelper._objCmd = new System.Data.SqlClient.SqlCommand();
+                SQLHelper._objCmd.Parameters.Clear();
+                SQLHelper._objCmd.Parameters.AddWithValue("@LastReadDateTime", selectedDate);
+                string result = Queries.UpdateBySP("ImportCSVLastRead_Update");
+
+                if (!string.IsNullOrWhiteSpace(result) && !Functions.DBKeyErrors(result))
+                    MessageBox.Show(result, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                    MessageBox.Show(
+                        $"Import date reset to {selectedDate:dd-MM-yyyy HH:mm:ss}.\nNext import will fetch records from this date onwards.",
+                        "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error : Reset Import Date", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
 

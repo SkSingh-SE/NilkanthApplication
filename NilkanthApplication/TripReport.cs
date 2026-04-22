@@ -25,6 +25,21 @@ namespace NilkanthApplication
             this.contextMenuStrip1.ItemClicked += this.ContextMenuStrip1_ItemClicked;
         }
 
+        private void SetBusy(bool busy, string message = "")
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action(() => SetBusy(busy, message)));
+                return;
+            }
+            this.Enabled                = !busy;
+            Cursor.Current              = busy ? Cursors.WaitCursor : Cursors.Default;
+            statusStrip1.Enabled        = true;
+            tsslOperationStatus.Text    = message;
+            tsslOperationStatus.Visible = busy;
+            tspbOperation.Visible       = busy;
+        }
+
         private void TripReport_Load(object sender, EventArgs e)
         {
             try
@@ -655,41 +670,67 @@ namespace NilkanthApplication
 
         private async void btnImportCSV_Click(object sender, EventArgs e)
         {
+            SetBusy(true, "Importing CSV from FTP, please wait...");
             try
             {
-                this.Enabled = false;
-                await Task.Run(() => Functions.ImportCSV());
-                reloadBatchNo();
-                this.chkLastBatch.Checked = true;
-                chkLastBatch_CheckedChanged(sender, e);
+                var result = await Task.Run(() => Functions.ImportCSV());
+                SetBusy(false);
+                ShowTopMessage("CSV import completed successfully.", "Import CSV");
+                if (result.inserted > 0)
+                {
+                    reloadBatchNo();
+                    this.chkLastBatch.Checked = true;
+                    chkLastBatch_CheckedChanged(sender, e);
+                }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString(), "Error : ImportCSV", MessageBoxButtons.OK, MessageBoxIcon.Hand);
-            }
-            finally
-            {
-                this.Enabled = true;
+                SetBusy(false);
+                ShowTopMessage(ex.Message, "Import CSV - Error", MessageBoxIcon.Hand);
             }
         }
 
         private async void btnManualImport_Click(object sender, EventArgs e)
         {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Title = "Select CSV File to Import";
+            ofd.Filter = "CSV Files (*.csv)|*.csv|All Files (*.*)|*.*";
+            ofd.Multiselect = false;
+
+            if (ofd.ShowDialog() != DialogResult.OK) return;
+
+            string filePath = ofd.FileName;
+            SetBusy(true, "Importing CSV file, please wait...");
             try
             {
-                this.Enabled = false;
-                await Task.Run(() => Functions.ImportCSVManual());
-                reloadBatchNo();
-                this.chkLastBatch.Checked = true;
-                chkLastBatch_CheckedChanged(sender, e);
+                var result = await Task.Run(() => Functions.ImportCSVManual(filePath));
+                SetBusy(false);
+                ShowTopMessage("CSV import completed successfully.", "Manual Import");
+                if (result.inserted > 0)
+                {
+                    reloadBatchNo();
+                    this.chkLastBatch.Checked = true;
+                    chkLastBatch_CheckedChanged(sender, e);
+                }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show(ex.Message.ToString(), "Error : ImportCSV", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+                SetBusy(false);
+                ShowTopMessage(ex.Message, "Manual Import - Error", MessageBoxIcon.Hand);
             }
-            finally
+        }
+
+        private void ShowTopMessage(string message, string title, MessageBoxIcon icon = MessageBoxIcon.Information)
+        {
+            using (Form owner = new Form())
             {
-                this.Enabled = true;
+                owner.TopMost         = true;
+                owner.ShowInTaskbar   = false;
+                owner.FormBorderStyle = FormBorderStyle.None;
+                owner.Size            = new System.Drawing.Size(1, 1);
+                owner.StartPosition   = FormStartPosition.CenterScreen;
+                owner.Show();
+                MessageBox.Show(owner, message, title, MessageBoxButtons.OK, icon);
             }
         }
 

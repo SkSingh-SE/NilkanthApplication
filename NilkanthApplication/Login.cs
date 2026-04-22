@@ -21,8 +21,8 @@ namespace NilkanthApplication
             try
             {
                 this.Text = ConfigurationManager.AppSettings["CompanyName"];
-                this.txtUserName.Text = "OPP";
-                this.txtPassword.Text = "6982";
+                //this.txtUserName.Text = "OPP";
+                //this.txtPassword.Text = "6982";
                 this.btnLogin.Focus();
             }
             catch (Exception ex)

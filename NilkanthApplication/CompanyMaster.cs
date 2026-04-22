@@ -171,47 +171,6 @@ namespace NilkanthApplication
                     MessageBox.Show("Please Fill " + ErrMsg);
                 else
                 {
-                    // Validate that label fields are unique (ignore empty or '-' values)
-                    var labelMap = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
-                    void AddLabel(string fieldName, string value)
-                    {
-                        if (string.IsNullOrWhiteSpace(value)) return;
-                        var v = value.Trim().ToUpper();
-                        if (v == "-") return;
-                        if (!labelMap.ContainsKey(v)) labelMap[v] = new List<string>();
-                        labelMap[v].Add(fieldName);
-                    }
-
-                    AddLabel("Bin1 Label", txtBin1Label.Text);
-                    AddLabel("Bin2 Label", txtBin2Label.Text);
-                    AddLabel("Bin3 Label", txtBin3Label.Text);
-                    AddLabel("Bin4 Label", txtBin4Label.Text);
-                    AddLabel("Cement Label", txtCementLabel.Text);
-                    AddLabel("Flyash Label", txtFlyashLabel.Text);
-                    AddLabel("Silica Label", txtSilicaLabel.Text);
-                    AddLabel("GGBS Label", txtGGBSLabel.Text);
-
-                    var duplicates = labelMap.Where(kvp => kvp.Value.Count > 1).ToList();
-                    if (duplicates.Count > 0)
-                    {
-                        var parts = new List<string>();
-                        foreach (var dup in duplicates)
-                        {
-                            parts.Add($"'{dup.Key}' used in ({string.Join(", ", dup.Value)})");
-                        }
-                        MessageBox.Show("Label values must be unique. Duplicate values found: " + string.Join("; ", parts), "Validation", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        // focus first duplicated field
-                        var firstField = duplicates[0].Value[0];
-                        if (firstField == "Bin1 Label") txtBin1Label.Focus();
-                        else if (firstField == "Bin2 Label") txtBin2Label.Focus();
-                        else if (firstField == "Bin3 Label") txtBin3Label.Focus();
-                        else if (firstField == "Bin4 Label") txtBin4Label.Focus();
-                        else if (firstField == "Cement Label") txtCementLabel.Focus();
-                        else if (firstField == "Flyash Label") txtFlyashLabel.Focus();
-                        else if (firstField == "Silica Label") txtSilicaLabel.Focus();
-                        else if (firstField == "GGBS Label") txtGGBSLabel.Focus();
-                        return;
-                    }
                     SQLHelper._objCmd = new SqlCommand();
                     SQLHelper._objCmd.Parameters.Clear();
                     SQLHelper._objCmd.Parameters.AddWithValue("@CompanyName", txtCompanyName.Text.ToString().Trim()); // Name to Company Name
@@ -576,7 +535,7 @@ namespace NilkanthApplication
             //1843
             if (chkShowWhatsapp.Checked)
             {
-                using (PasswordDialog dlg = new PasswordDialog("5l2NV3ZieMYSA=", "Enter password to enable Whatsapp", showCancel: true))
+                using (PasswordDialog dlg = new PasswordDialog("5l2NV3ZieMYSA=", "Enter password to enable Whatsapp"))
                 {
                     if (dlg.ShowDialog() != DialogResult.OK || !dlg.IsAuthorized)
                     {
