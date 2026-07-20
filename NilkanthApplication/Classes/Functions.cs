@@ -677,15 +677,31 @@ public class Functions : SQLHelper
                 // Skip if record already exists: BatchNo + Cycle + PLCDate (date only, ignore time)
                 try
                 {
-                    var existsObj = Functions.GetSingleValue(
-                        "select count(1) from PLCData where BatchNo=" + csvdtbatchno +
-                        " and Cycle=" + csvcycle +
-                        " and CAST(PLCDate AS DATE)='" + plcDt.ToString("yyyy-MM-dd") + "'");
-                    int exists = 0;
-                    int.TryParse(existsObj?.ToString(), out exists);
-                    if (exists > 0) { existingCount++; continue; }
+                    // Use a parameterized query to avoid SQL injection and formatting issues.
+                    string connStr = ConfigurationManager.ConnectionStrings["DataConnectionString"].ToString();
+                    using (SqlConnection conn = new SqlConnection(connStr))
+                    {
+                        conn.Open();
+                        using (SqlCommand cmd = new SqlCommand("select count(1) from PLCData where BatchNo=@BatchNo and Cycle=@Cycle and CAST(PLCDate AS DATE)=@PLCDate", conn))
+                        {
+                            cmd.Parameters.Add("@BatchNo", SqlDbType.Int).Value = csvdtbatchno;
+                            cmd.Parameters.Add("@Cycle", SqlDbType.Int).Value = csvcycle;
+                            cmd.Parameters.Add("@PLCDate", SqlDbType.Date).Value = plcDt.Date;
+                            object existsObj = cmd.ExecuteScalar();
+                            int exists = 0;
+                            int.TryParse(existsObj?.ToString(), out exists);
+                            if (exists > 0)
+                            {
+                                existingCount++;
+                                continue;
+                            }
+                        }
+                    }
                 }
-                catch { }
+                catch
+                {
+                    // If duplicate check fails for any reason, fall through and let the Insert SP handle conflicts.
+                }
 
                 SQLHelper._objCmd = new SqlCommand();
                 SQLHelper._objCmd.Parameters.Clear();

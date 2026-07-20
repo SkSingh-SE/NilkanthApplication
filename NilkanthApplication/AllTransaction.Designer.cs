@@ -25,6 +25,8 @@ namespace NilkanthApplication
             this.btnCancel = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblFilterStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslOperationStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tspbOperation = new System.Windows.Forms.ToolStripProgressBar();
             this.chkApplyDateFilter = new System.Windows.Forms.CheckBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -61,8 +63,6 @@ namespace NilkanthApplication
             this.btnManualImport = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
             this.btnDeletePLCData = new System.Windows.Forms.Button();
-            this.tsslOperationStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.tspbOperation = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -164,26 +164,25 @@ namespace NilkanthApplication
             this.lblFilterStatus.Name = "lblFilterStatus";
             this.lblFilterStatus.Size = new System.Drawing.Size(65, 20);
             this.lblFilterStatus.Text = "Filter By:";
-            //
+            // 
             // tsslOperationStatus
-            //
-            this.tsslOperationStatus.Name = "tsslOperationStatus";
-            this.tsslOperationStatus.Size = new System.Drawing.Size(400, 20);
-            this.tsslOperationStatus.Spring = true;
-            this.tsslOperationStatus.Text = "";
-            this.tsslOperationStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.tsslOperationStatus.ForeColor = System.Drawing.Color.FromArgb(0, 120, 215);
+            // 
             this.tsslOperationStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.tsslOperationStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.tsslOperationStatus.Name = "tsslOperationStatus";
+            this.tsslOperationStatus.Size = new System.Drawing.Size(1157, 22);
+            this.tsslOperationStatus.Spring = true;
+            this.tsslOperationStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsslOperationStatus.Visible = false;
-            //
+            // 
             // tspbOperation
-            //
+            // 
+            this.tspbOperation.MarqueeAnimationSpeed = 30;
             this.tspbOperation.Name = "tspbOperation";
             this.tspbOperation.Size = new System.Drawing.Size(120, 20);
             this.tspbOperation.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
-            this.tspbOperation.MarqueeAnimationSpeed = 30;
             this.tspbOperation.Visible = false;
-            //
+            // 
             // chkApplyDateFilter
             // 
             this.chkApplyDateFilter.AutoSize = true;
@@ -661,9 +660,9 @@ namespace NilkanthApplication
             this.btnDeletePLCData.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDeletePLCData.UseVisualStyleBackColor = true;
             this.btnDeletePLCData.Click += new System.EventHandler(this.btnDeletePLCData_Click);
-            //
+            // 
             // AllTransaction
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
