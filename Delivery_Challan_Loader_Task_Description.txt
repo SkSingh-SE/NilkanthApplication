@@ -1,0 +1,27 @@
+TASK TITLE
+Delivery Challan List WhatsApp Loader UI Fix
+
+TASK DESCRIPTION
+Fix the WhatsApp sending loader displayed on the Delivery Challan List screen.
+The loader should appear in a compact layout, with the "Sending WhatsApp..."
+message and progress bar displayed together instead of being separated across
+the full width of the bottom status bar.
+
+REQUIREMENTS
+1. Show the loader only after a client and delivery challan have been selected.
+2. Display the "Sending WhatsApp..." message and progress bar next to each other.
+3. Disable the WhatsApp button while the send operation is running.
+4. Hide the loader and re-enable the WhatsApp button after success, failure,
+   validation return, or exception.
+5. Do not change delivery challan data, filtering, print, new, edit, delete,
+   navigation, PDF generation, upload, or WhatsApp sending logic.
+
+EXPECTED RESULT
+The Delivery Challan List screen shows a clean and compact loader while the
+WhatsApp operation is in progress. The loader always closes when the operation
+finishes, and all existing Delivery Challan functionality remains unchanged.
+
+FILES UPDATED
+NilkanthApplication\DeliveryChallanList.cs
+NilkanthApplication\DeliveryChallanList.Designer.cs
+
