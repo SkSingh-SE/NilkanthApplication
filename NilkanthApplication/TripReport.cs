@@ -25,21 +25,6 @@ namespace NilkanthApplication
             this.contextMenuStrip1.ItemClicked += this.ContextMenuStrip1_ItemClicked;
         }
 
-        private void SetBusy(bool busy, string message = "")
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action(() => SetBusy(busy, message)));
-                return;
-            }
-            this.Enabled                = !busy;
-            Cursor.Current              = busy ? Cursors.WaitCursor : Cursors.Default;
-            statusStrip1.Enabled        = true;
-            tsslOperationStatus.Text    = message;
-            tsslOperationStatus.Visible = busy;
-            tspbOperation.Visible       = busy;
-        }
-
         private void TripReport_Load(object sender, EventArgs e)
         {
             try
@@ -670,11 +655,11 @@ namespace NilkanthApplication
 
         private async void btnImportCSV_Click(object sender, EventArgs e)
         {
-            SetBusy(true, "Importing CSV from FTP, please wait...");
+            Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, true, "Importing CSV from FTP, please wait...");
             try
             {
                 var result = await Task.Run(() => Functions.ImportCSV());
-                SetBusy(false);
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false);
                 ShowTopMessage("CSV import completed successfully.", "Import CSV");
                 if (result.inserted > 0)
                 {
@@ -685,7 +670,7 @@ namespace NilkanthApplication
             }
             catch (Exception ex)
             {
-                SetBusy(false);
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false);
                 ShowTopMessage(ex.Message, "Import CSV - Error", MessageBoxIcon.Hand);
             }
         }
@@ -700,11 +685,11 @@ namespace NilkanthApplication
             if (ofd.ShowDialog() != DialogResult.OK) return;
 
             string filePath = ofd.FileName;
-            SetBusy(true, "Importing CSV file, please wait...");
+            Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, true, "Importing CSV file, please wait...");
             try
             {
                 var result = await Task.Run(() => Functions.ImportCSVManual(filePath));
-                SetBusy(false);
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false);
                 ShowTopMessage("CSV import completed successfully.", "Manual Import");
                 if (result.inserted > 0)
                 {
@@ -715,7 +700,7 @@ namespace NilkanthApplication
             }
             catch (Exception ex)
             {
-                SetBusy(false);
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false);
                 ShowTopMessage(ex.Message, "Manual Import - Error", MessageBoxIcon.Hand);
             }
         }
@@ -864,6 +849,8 @@ namespace NilkanthApplication
         {
             try
             {
+                // Show loader while processing
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, true, "Sending WhatsApp...", btnSendWhatsApp);
                 // Collect batch numbers and date(s) as in your UI logic
                 List<int> batchNumbers = new List<int>();
                 string fromDate = "", toDate = "";
@@ -960,6 +947,11 @@ namespace NilkanthApplication
             catch (Exception ex)
             {
                 MessageBox.Show("Error generating PDF: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                // Hide loader when finished (whether success or error)
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false, "", btnSendWhatsApp);
             }
         }
 

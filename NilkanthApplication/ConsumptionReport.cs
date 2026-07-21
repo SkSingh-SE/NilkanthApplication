@@ -930,6 +930,8 @@ namespace NilkanthApplication
         {
             try
             {
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, true, "Sending WhatsApp...", btnSendWhatsApp);
+
                 if (cmbClientDetails.SelectedIndex <= 0)
                 {
                     MessageBox.Show("Please select client for WhatsApp.");
@@ -1004,6 +1006,10 @@ namespace NilkanthApplication
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false, "", btnSendWhatsApp);
             }
         }
     }

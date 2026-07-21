@@ -439,6 +439,9 @@ namespace NilkanthApplication
                     return;
                 }
 
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, true, "Sending WhatsApp...", btnSendWhatsApp, lblFilterStatus);
+                await Task.Yield();
+
                 int deliveryId = Convert.ToInt32(dgvList.CurrentRow.Cells["ID"].Value);
 
                 string mobile = cmbClientDetails.SelectedValue.ToString();
@@ -498,6 +501,10 @@ namespace NilkanthApplication
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false, "", btnSendWhatsApp, lblFilterStatus);
             }
         }
     }

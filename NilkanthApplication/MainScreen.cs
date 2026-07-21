@@ -639,6 +639,13 @@ namespace NilkanthApplication
                         }
                     }
 
+                    // Monthly cell must show the same value as the prodect report
+                    if (this.CurMonData_dataTable.Rows.Count > 0)
+                    {
+                        this.CurMonData_dataTable.Rows[0]["Monthly"] =
+                            GetYearTotalProductionValue();
+                    }
+
                     this.dgvProductionData.DataSource = this.CurMonData_dataTable;
 
                     this.dgvProductionData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
@@ -698,6 +705,19 @@ namespace NilkanthApplication
                 MessageBox.Show(ex.Message.ToString(), "Error : BindCurrentMonthTotalProd", MessageBoxButtons.OK, MessageBoxIcon.Hand);
             }
         }
+        // add the helper with acess the product total
+        private double GetYearTotalProductionValue()
+        {
+            DataTable totalProduction =
+                Functions.GetTableDataBySP("Dashboard_GetTotalProdMQube");
+
+            if (totalProduction == null || totalProduction.Rows.Count == 0 ||
+                totalProduction.Rows[0][0] == DBNull.Value)
+                return 0.00;
+
+            return Convert.ToDouble(totalProduction.Rows[0][0]);
+        }
+
         private void HighlightFirstRow(DataGridView dgv)
         {
             if (dgv.Rows.Count == 0) return;
@@ -717,13 +737,8 @@ namespace NilkanthApplication
 
         void GetTotalProductionMQube()
         {
-            DataTable dataTableTotalMqube = new DataTable();
-            dataTableTotalMqube = Functions.GetTableDataBySP("Dashboard_GetTotalProdMQube");
-
-            if (dataTableTotalMqube != null && dataTableTotalMqube.Rows.Count > 0)
-            {
-                lblTotalProdMqube.Text = "Total Production M³ : " + dataTableTotalMqube.Rows[0][0].ToString();
-            }
+            lblTotalProdMqube.Text = "Total Production M³ : " +
+                GetYearTotalProductionValue().ToString("0.00");
         }
         private void btnCancel_Click(object sender, EventArgs e)
         {

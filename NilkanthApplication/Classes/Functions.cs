@@ -15,6 +15,55 @@ using System.Windows.Forms;
 
 public class Functions : SQLHelper
 {
+    public static void SetBusy(
+        Form form,
+        StatusStrip statusStrip,
+        ToolStripStatusLabel operationStatus,
+        ToolStripProgressBar operationProgress,
+        bool busy,
+        string message = "",
+        Control actionControl = null,
+        ToolStripItem normalStatus = null)
+    {
+        if (form.InvokeRequired)
+        {
+            form.Invoke(new Action(() => SetBusy(form, statusStrip, operationStatus, operationProgress, busy, message, actionControl, normalStatus)));
+            return;
+        }
+
+        if (actionControl == null)
+        {
+            if (!busy)
+                form.Enabled = true;
+        }
+        else
+        {
+            form.Enabled = true;
+            actionControl.Enabled = !busy;
+        }
+
+        statusStrip.Visible = true;
+        statusStrip.Enabled = true;
+        statusStrip.BringToFront();
+        if (normalStatus != null)
+            normalStatus.Visible = !busy;
+        operationStatus.Text = message;
+        operationStatus.Visible = busy;
+        operationProgress.Enabled = true;
+        operationProgress.Style = ProgressBarStyle.Marquee;
+        operationProgress.MarqueeAnimationSpeed = 30;
+        operationProgress.Visible = busy;
+        Cursor.Current = busy ? Cursors.WaitCursor : Cursors.Default;
+        form.UseWaitCursor = busy;
+
+        statusStrip.PerformLayout();
+        statusStrip.Refresh();
+        operationProgress.GetCurrentParent()?.Refresh();
+
+        if (busy && actionControl == null)
+            form.Enabled = false;
+    }
+
     public static void setFormBoarderStyle(Form frm)
     {
         frm.FormBorderStyle = FormBorderStyle.FixedDialog;

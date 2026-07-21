@@ -68,9 +68,13 @@ namespace NilkanthApplication
             this.dgvComparison = new System.Windows.Forms.DataGridView();
             this.labelAmount = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.tsslOperationStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tspbOperation = new System.Windows.Forms.ToolStripProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComparison)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgvList
@@ -672,6 +676,36 @@ namespace NilkanthApplication
             this.label14.Size = new System.Drawing.Size(426, 17);
             this.label14.TabIndex = 159;
             this.label14.Text = "Double-click Material Name to add stock for that material.";
+            //
+            // statusStrip1
+            //
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.tsslOperationStatus,
+            this.tspbOperation});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 659);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(1361, 22);
+            this.statusStrip1.TabIndex = 160;
+            this.statusStrip1.Text = "statusStrip1";
+            //
+            // tsslOperationStatus
+            //
+            this.tsslOperationStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.tsslOperationStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.tsslOperationStatus.Name = "tsslOperationStatus";
+            this.tsslOperationStatus.Size = new System.Drawing.Size(1224, 22);
+            this.tsslOperationStatus.Spring = true;
+            this.tsslOperationStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsslOperationStatus.Visible = false;
+            //
+            // tspbOperation
+            //
+            this.tspbOperation.MarqueeAnimationSpeed = 30;
+            this.tspbOperation.Name = "tspbOperation";
+            this.tspbOperation.Size = new System.Drawing.Size(120, 20);
+            this.tspbOperation.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.tspbOperation.Visible = false;
             // 
             // ConsumptionReport
             // 
@@ -680,6 +714,7 @@ namespace NilkanthApplication
             this.BackColor = System.Drawing.Color.White;
             this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(1361, 681);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label14);
             this.Controls.Add(this.labelAmount);
             this.Controls.Add(this.dgvComparison);
@@ -736,6 +771,8 @@ namespace NilkanthApplication
             ((System.ComponentModel.ISupportInitialize)(this.dgvList)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvComparison)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -798,5 +835,8 @@ namespace NilkanthApplication
         private System.Windows.Forms.DataGridView dgvComparison;
         private System.Windows.Forms.Label labelAmount;
         private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel tsslOperationStatus;
+        private System.Windows.Forms.ToolStripProgressBar tspbOperation;
     }
 }

@@ -47,6 +47,8 @@ namespace NilkanthApplication
             this.btnHome = new System.Windows.Forms.Button();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblFilterStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tsslOperationStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.tspbOperation = new System.Windows.Forms.ToolStripProgressBar();
             this.btnPrint = new System.Windows.Forms.Button();
             this.btnSendWhatsApp = new System.Windows.Forms.Button();
             this.cmbClientDetails = new System.Windows.Forms.ComboBox();
@@ -275,7 +277,9 @@ namespace NilkanthApplication
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lblFilterStatus});
+            this.lblFilterStatus,
+            this.tsslOperationStatus,
+            this.tspbOperation});
             this.statusStrip1.Location = new System.Drawing.Point(0, 739);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1361, 26);
@@ -288,6 +292,24 @@ namespace NilkanthApplication
             this.lblFilterStatus.Size = new System.Drawing.Size(65, 20);
             this.lblFilterStatus.Text = "Filter By:";
             // 
+            // tsslOperationStatus
+            //
+            this.tsslOperationStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
+            this.tsslOperationStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
+            this.tsslOperationStatus.Name = "tsslOperationStatus";
+            this.tsslOperationStatus.Size = new System.Drawing.Size(160, 22);
+            this.tsslOperationStatus.Spring = false;
+            this.tsslOperationStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.tsslOperationStatus.Visible = false;
+            //
+            // tspbOperation
+            //
+            this.tspbOperation.MarqueeAnimationSpeed = 30;
+            this.tspbOperation.Name = "tspbOperation";
+            this.tspbOperation.Size = new System.Drawing.Size(180, 20);
+            this.tspbOperation.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.tspbOperation.Visible = false;
+            //
             // btnPrint
             // 
             this.btnPrint.CausesValidation = false;
@@ -398,6 +420,8 @@ namespace NilkanthApplication
         private System.Windows.Forms.Button btnHome;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblFilterStatus;
+        private System.Windows.Forms.ToolStripStatusLabel tsslOperationStatus;
+        private System.Windows.Forms.ToolStripProgressBar tspbOperation;
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnSendWhatsApp;
         private System.Windows.Forms.ComboBox cmbClientDetails;
