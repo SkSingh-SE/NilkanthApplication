@@ -18,6 +18,12 @@ namespace NilkanthApplication
     {
         private string whatsappApiKey;
         private string apiKey;
+        private readonly Dictionary<string, ComboBox> filterComboBoxes = new Dictionary<string, ComboBox>();
+        private FlowLayoutPanel flpFilters;
+        private Button btnFilter;
+        private Button btnResetFilters;
+        private string sortColumn = "ID";
+        private bool sortDescending = true;
         public DeliveryChallanList()
         {
             InitializeComponent();
@@ -78,6 +84,7 @@ namespace NilkanthApplication
 
                 ShowWhatsapp();
                 BindClientMaster();
+                InitializeAdvancedFilters();
                 this.btnNew.Focus();
                 this.lblUserName.Text = "User Name : " + Queries.UserName;
                 this.lblFilterStatus.Text = "Filter By : All Columns";
@@ -98,8 +105,11 @@ namespace NilkanthApplication
         {
             try
             {
-                this.dataTable = new DataTable();
-                this.dataTable = Functions.GetTableDataBySP("DeliveryChallan_SelectAll");
+                long? selectedId = GetSelectedDeliveryChallanId();
+                if (!ValidateFilters())
+                    return;
+
+                this.dataTable = GetFilteredDeliveryChallans();
                 this.bindingSource = new BindingSource();
                 this.bindingSource.DataSource = this.dataTable;
                 this.dgvList.DataSource = null;
@@ -109,12 +119,6 @@ namespace NilkanthApplication
                 {
                     DataGridViewRow dataGridViewRow = (DataGridViewRow)obj;
                     dataGridViewRow.ReadOnly = true;
-                }
-                bool flag2 = this.dgvList.Rows.Count > 0;
-                if (flag2)
-                {
-                    this.dgvList.CurrentCell = this.dgvList.Rows[0].Cells[1];
-                    this.dgvList.Rows[0].Selected = true;
                 }
                 this.dgvList.Columns["ID"].Visible = false;
                 this.dgvList.Columns["DeliveryChallanNo"].HeaderText = "No";
@@ -132,6 +136,13 @@ namespace NilkanthApplication
                 this.dgvList.Columns["PartyName"].HeaderText = "Party Name";
                 this.dgvList.Columns["PartyID"].Visible = false;
                 this.dgvList.Columns["IsDeleted"].Visible = false;
+
+                foreach (DataGridViewColumn column in this.dgvList.Columns)
+                    column.SortMode = DataGridViewColumnSortMode.Programmatic;
+
+                RestoreSelectedDeliveryChallan(selectedId);
+                UpdateSortGlyph();
+                UpdateFilterStatus();
 
                 //dgvList.Dock = DockStyle.Fill;
                 //dgvList.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right | AnchorStyles.Bottom;
@@ -228,10 +239,380 @@ namespace NilkanthApplication
                 dgvList.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
                 dgvList.ColumnHeadersHeight = 40;
                 dgvList.ColumnHeadersDefaultCellStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                LayoutScreen();
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Hand);
+            }
+        }
+
+        private void InitializeAdvancedFilters()
+        {
+            flpFilters = new FlowLayoutPanel
+            {
+                Name = "flpFilters",
+                Location = new Point(12, 82),
+                Height = 49,
+                AutoScroll = false,
+                WrapContents = false,
+                Padding = new Padding(4, 2, 4, 2),
+                Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right
+            };
+
+            AddListFilter("FromBatchNo", "From Batch No.", "BatchNo");
+            AddListFilter("ToBatchNo", "To Batch No.", "BatchNo");
+            AddListFilter("ClientName", "Client Name", "ClientName");
+            AddListFilter("SiteName", "Site Name", "SiteName");
+            AddListFilter("RecipeName", "Recipe Name", "RecipeName");
+            AddListFilter("TruckNo", "Truck No", "TruckNo");
+            AddListFilter("DriverName", "Driver Name", "DriverName");
+            AddFilterButtons();
+
+            Controls.Add(flpFilters);
+            flpFilters.BringToFront();
+            dgvList.ColumnHeaderMouseClick += dgvList_ColumnHeaderMouseClick;
+            Resize += DeliveryChallanList_Resize;
+            LayoutScreen();
+        }
+
+        private void AddListFilter(string name, string caption, string databaseField)
+        {
+            Panel panel = CreateFilterPanel(caption, 205);
+            ComboBox comboBox = new ComboBox
+            {
+                Name = "cmb" + name,
+                Location = new Point(5, 19),
+                Width = 190,
+                Font = new Font("Microsoft Sans Serif", 9F),
+                DropDownStyle = ComboBoxStyle.DropDownList,
+                Tag = databaseField
+            };
+            comboBox.Items.Add("Selection");
+            comboBox.SelectedIndex = 0;
+            comboBox.DropDown += FilterComboBox_DropDown;
+            comboBox.KeyDown += FilterControl_KeyDown;
+            panel.Controls.Add(comboBox);
+            filterComboBoxes.Add(name, comboBox);
+            flpFilters.Controls.Add(panel);
+        }
+
+        private void FilterComboBox_DropDown(object sender, EventArgs e)
+        {
+            ComboBox comboBox = sender as ComboBox;
+            if (comboBox == null)
+                return;
+
+            try
+            {
+                string selectedValue = comboBox.SelectedIndex > 0 ? Convert.ToString(comboBox.SelectedItem) : null;
+                List<string> values = GetDeliveryChallanFilterValues(Convert.ToString(comboBox.Tag));
+                if (Convert.ToString(comboBox.Tag) == "DeliveryChallanNo" || Convert.ToString(comboBox.Tag) == "BatchNo")
+                    values.Sort((left, right) => CompareNaturalValues(left, right));
+
+                comboBox.BeginUpdate();
+                comboBox.Items.Clear();
+                comboBox.Items.Add("Selection");
+                comboBox.Items.AddRange(values.Cast<object>().ToArray());
+                int selectedIndex = string.IsNullOrEmpty(selectedValue) ? 0 : comboBox.FindStringExact(selectedValue);
+                comboBox.SelectedIndex = selectedIndex >= 0 ? selectedIndex : 0;
+                comboBox.EndUpdate();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Unable to load filter list", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private static Panel CreateFilterPanel(string caption, int width)
+        {
+            Panel panel = new Panel { Width = width, Height = 45, Margin = new Padding(3, 0, 3, 2) };
+            panel.Controls.Add(new Label
+            {
+                AutoSize = true,
+                Text = caption,
+                Location = new Point(3, 1),
+                Font = new Font("Microsoft Sans Serif", 8.5F, FontStyle.Regular)
+            });
+            return panel;
+        }
+
+        private void AddFilterButtons()
+        {
+            Panel panel = CreateFilterPanel("List Actions", 220);
+            btnFilter = CreateSmallButton("btnFilter", "Search ", 5, btnFilter_Click);
+            btnResetFilters = CreateSmallButton("btnResetFilters", "Reset / Clear", 112, btnResetFilters_Click);
+            panel.Controls.Add(btnFilter);
+            panel.Controls.Add(btnResetFilters);
+            flpFilters.Controls.Add(panel);
+        }
+
+        private static Button CreateSmallButton(string name, string text, int x, EventHandler clickHandler)
+        {
+            Button button = new Button
+            {
+                Name = name,
+                Text = text,
+                Location = new Point(x, 18),
+                Size = new Size(102, 27),
+                FlatStyle = FlatStyle.Flat,
+                BackColor = Color.FromArgb(112, 173, 71),
+                ForeColor = Color.White,
+                Font = new Font("Microsoft Sans Serif", 8.5F, FontStyle.Bold),
+                Cursor = Cursors.Hand
+            };
+            button.Click += clickHandler;
+            return button;
+        }
+
+        private void LayoutScreen()
+        {
+            if (flpFilters == null)
+                return;
+
+            flpFilters.Width = Math.Max(400, ClientSize.Width - 24);
+            ResizeFilterRow();
+            dgvList.Location = new Point(12, flpFilters.Bottom + 8);
+            dgvList.Width = Math.Max(400, ClientSize.Width - 24);
+            dgvList.Height = Math.Max(120, pictureBox1.Top - dgvList.Top - 6);
+        }
+
+        private void ResizeFilterRow()
+        {
+            const int filterCount = 7;
+            const int controlHorizontalMargin = 6;
+            const int minimumFilterWidth = 80;
+            const int minimumActionsWidth = 170;
+            const int preferredActionsWidth = 220;
+
+            int availableWidth = flpFilters.ClientSize.Width
+                - flpFilters.Padding.Horizontal
+                - ((filterCount + 1) * controlHorizontalMargin);
+            int actionsWidth = Math.Min(preferredActionsWidth,
+                Math.Max(minimumActionsWidth, availableWidth / 6));
+            int filterWidth = Math.Max(minimumFilterWidth,
+                (availableWidth - actionsWidth) / filterCount);
+
+            foreach (ComboBox comboBox in filterComboBoxes.Values)
+            {
+                Panel panel = comboBox.Parent as Panel;
+                if (panel == null)
+                    continue;
+
+                panel.Width = filterWidth;
+                comboBox.Width = Math.Max(60, panel.ClientSize.Width - 10);
+            }
+
+            Panel actionsPanel = btnFilter == null ? null : btnFilter.Parent as Panel;
+            if (actionsPanel == null)
+                return;
+
+            actionsPanel.Width = Math.Max(minimumActionsWidth,
+                availableWidth - (filterWidth * filterCount));
+
+            int buttonWidth = Math.Max(75, (actionsPanel.ClientSize.Width - 15) / 2);
+            btnFilter.Location = new Point(5, 18);
+            btnFilter.Width = buttonWidth;
+            btnResetFilters.Location = new Point(10 + buttonWidth, 18);
+            btnResetFilters.Width = buttonWidth;
+        }
+
+        private void DeliveryChallanList_Resize(object sender, EventArgs e)
+        {
+            LayoutScreen();
+        }
+
+        private bool ValidateFilters()
+        {
+            string fromBatch = GetFilterText("FromBatchNo");
+            string toBatch = GetFilterText("ToBatchNo");
+
+            if (!string.IsNullOrEmpty(fromBatch) && !string.IsNullOrEmpty(toBatch) &&
+                CompareNaturalValues(fromBatch, toBatch) > 0)
+            {
+                ShowRangeError("From Batch No. cannot be greater than To Batch No.", filterComboBoxes["FromBatchNo"]);
+                return false;
+            }
+
+            return true;
+        }
+
+        private DataTable GetFilteredDeliveryChallans()
+        {
+            DataTable dataTable = new DataTable();
+            string connectionString = ConfigurationManager.ConnectionStrings["DataConnectionString"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand("dbo.SP_GetFilteredDeliveryChallans", connection))
+            {
+                command.CommandType = CommandType.StoredProcedure;
+                AddNullableFilterParameter(command, "@FromBatchNo", GetFilterText("FromBatchNo"), 100);
+                AddNullableFilterParameter(command, "@ToBatchNo", GetFilterText("ToBatchNo"), 100);
+                AddNullableFilterParameter(command, "@ClientName", GetFilterText("ClientName"), 250);
+                AddNullableFilterParameter( command, "@SiteName", GetFilterText("SiteName"), 250);
+                AddNullableFilterParameter(command, "@RecipeName", GetFilterText("RecipeName"), 250);
+                AddNullableFilterParameter( command, "@TruckNo", GetFilterText("TruckNo"), 100);
+                AddNullableFilterParameter(command, "@DriverName", GetFilterText("DriverName"), 250);
+                command.Parameters.Add("@SortColumn", SqlDbType.NVarChar, 50).Value = string.IsNullOrWhiteSpace(sortColumn) ? "ID" : sortColumn;
+                command.Parameters.Add("@SortDescending", SqlDbType.Bit).Value = sortDescending;
+                using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                {
+                    adapter.Fill(dataTable);
+                }
+            }
+
+            return dataTable;
+        }
+
+        private List<string> GetDeliveryChallanFilterValues(string fieldName)
+        {
+            string columnName;
+            switch (fieldName)
+            {
+                case "ClientName": columnName = "d.ClientName"; break;
+                case "SiteName": columnName = "d.SiteName"; break;
+                case "RecipeName": columnName = "d.RecipeName"; break;
+                case "BatchNo": columnName = "d.BatchNo"; break;
+                case "TruckNo": columnName = "d.TruckNo"; break;
+                case "DriverName": columnName = "d.DriverName"; break;
+                default: throw new ArgumentException("Invalid Delivery Challan filter field.", "fieldName");
+            }
+
+            string sql = "SELECT DISTINCT " + columnName + " FROM DeliveryChallan d WHERE d.IsDeleted = 0 AND NULLIF(LTRIM(RTRIM(" + columnName + ")), '') IS NOT NULL ORDER BY " + columnName;
+            List<string> values = new List<string>();
+            string connectionString = ConfigurationManager.ConnectionStrings["DataConnectionString"].ConnectionString;
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SqlCommand command = new SqlCommand(sql, connection))
+            {
+                connection.Open();
+                using (SqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                        values.Add(Convert.ToString(reader[0]).Trim());
+                }
+            }
+            return values;
+        }
+
+        private static void AddNullableFilterParameter(SqlCommand command,string name,string value,int size)
+        {
+            string normalized = string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+            command.Parameters.Add(name, SqlDbType.NVarChar, size).Value = normalized == null ? (object)DBNull.Value : normalized;
+        }
+
+        private string GetFilterText(string name)
+        {
+            ComboBox comboBox;
+            if (!filterComboBoxes.TryGetValue(name, out comboBox) || comboBox.SelectedIndex <= 0)
+                return null;
+            string value = Convert.ToString(comboBox.SelectedItem).Trim();
+            return value.Length == 0 ? null : value;
+        }
+
+        private static int CompareNaturalValues(string left, string right)
+        {
+            decimal leftNumber;
+            decimal rightNumber;
+            if (decimal.TryParse(left, out leftNumber) && decimal.TryParse(right, out rightNumber))
+                return leftNumber.CompareTo(rightNumber);
+
+            int leftSlash = left.LastIndexOf('/');
+            int rightSlash = right.LastIndexOf('/');
+            if (leftSlash >= 0 && rightSlash >= 0 &&
+                string.Equals(left.Substring(0, leftSlash), right.Substring(0, rightSlash), StringComparison.OrdinalIgnoreCase) &&
+                decimal.TryParse(left.Substring(leftSlash + 1), out leftNumber) &&
+                decimal.TryParse(right.Substring(rightSlash + 1), out rightNumber))
+                return leftNumber.CompareTo(rightNumber);
+
+            return string.Compare(left, right, StringComparison.OrdinalIgnoreCase);
+        }
+
+        private static void ShowRangeError(string message, Control control)
+        {
+            MessageBox.Show(message, "Invalid Filter Range", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            control.Focus();
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+            BindGrid();
+        }
+
+        private void btnResetFilters_Click(object sender, EventArgs e)
+        {
+            foreach (ComboBox comboBox in filterComboBoxes.Values)
+                comboBox.SelectedIndex = 0;
+            sortColumn = "ID";
+            sortDescending = true;
+            BindGrid();
+        }
+
+        private void FilterControl_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;
+                btnFilter.PerformClick();
+            }
+        }
+
+        private void dgvList_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            if (e.ColumnIndex < 0)
+                return;
+            string clickedColumn = dgvList.Columns[e.ColumnIndex].Name;
+            if (string.Equals(sortColumn, clickedColumn, StringComparison.OrdinalIgnoreCase))
+                sortDescending = !sortDescending;
+            else
+            {
+                sortColumn = clickedColumn;
+                sortDescending = false;
+            }
+            BindGrid();
+        }
+
+        private void UpdateSortGlyph()
+        {
+            foreach (DataGridViewColumn column in dgvList.Columns)
+                column.HeaderCell.SortGlyphDirection = System.Windows.Forms.SortOrder.None;
+            if (dgvList.Columns.Contains(sortColumn))
+                dgvList.Columns[sortColumn].HeaderCell.SortGlyphDirection = sortDescending ? System.Windows.Forms.SortOrder.Descending : System.Windows.Forms.SortOrder.Ascending;
+        }
+
+        private void UpdateFilterStatus()
+        {
+            int activeCount = filterComboBoxes.Values.Count(c => c.SelectedIndex > 0);
+            lblFilterStatus.Text = activeCount == 0 ? "Filter By : All Columns" : string.Format("Filter By : {0} active filter(s)", activeCount);
+        }
+
+        private long? GetSelectedDeliveryChallanId()
+        {
+            if (dgvList.CurrentRow == null || !dgvList.Columns.Contains("ID"))
+                return null;
+            long id;
+            return long.TryParse(Convert.ToString(dgvList.CurrentRow.Cells["ID"].Value), out id) ? (long?)id : null;
+        }
+
+        private void RestoreSelectedDeliveryChallan(long? selectedId)
+        {
+            DataGridViewRow rowToSelect = null;
+            if (selectedId.HasValue)
+            {
+                foreach (DataGridViewRow row in dgvList.Rows)
+                {
+                    if (Convert.ToInt64(row.Cells["ID"].Value) == selectedId.Value)
+                    {
+                        rowToSelect = row;
+                        break;
+                    }
+                }
+            }
+            if (rowToSelect == null && dgvList.Rows.Count > 0)
+                rowToSelect = dgvList.Rows[0];
+            if (rowToSelect != null)
+            {
+                dgvList.ClearSelection();
+                dgvList.CurrentCell = rowToSelect.Cells["DeliveryChallanNo"];
+                rowToSelect.Selected = true;
             }
         }
         void BindClientMaster()
@@ -506,6 +887,11 @@ namespace NilkanthApplication
             {
                 Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false, "", btnSendWhatsApp, lblFilterStatus);
             }
+        }
+
+        private void dgvList_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -29,10 +29,10 @@ namespace NilkanthApplication
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.lblVersion = new System.Windows.Forms.Label();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblUserName = new System.Windows.Forms.Label();
@@ -62,9 +62,10 @@ namespace NilkanthApplication
             // 
             this.lblVersion.AutoSize = true;
             this.lblVersion.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblVersion.Location = new System.Drawing.Point(12, 713);
+            this.lblVersion.Location = new System.Drawing.Point(9, 579);
+            this.lblVersion.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblVersion.Name = "lblVersion";
-            this.lblVersion.Size = new System.Drawing.Size(87, 17);
+            this.lblVersion.Size = new System.Drawing.Size(68, 13);
             this.lblVersion.TabIndex = 122;
             this.lblVersion.Text = "Version : 3";
             // 
@@ -78,9 +79,10 @@ namespace NilkanthApplication
             this.btnCancel.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnCancel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnCancel.ForeColor = System.Drawing.Color.White;
-            this.btnCancel.Location = new System.Drawing.Point(613, 689);
+            this.btnCancel.Location = new System.Drawing.Point(460, 560);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(111, 34);
+            this.btnCancel.Size = new System.Drawing.Size(83, 28);
             this.btnCancel.TabIndex = 119;
             this.btnCancel.TabStop = false;
             this.btnCancel.Text = "&Cancel";
@@ -90,9 +92,10 @@ namespace NilkanthApplication
             // 
             this.lblUserName.AutoSize = true;
             this.lblUserName.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblUserName.Location = new System.Drawing.Point(12, 690);
+            this.lblUserName.Location = new System.Drawing.Point(9, 561);
+            this.lblUserName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblUserName.Name = "lblUserName";
-            this.lblUserName.Size = new System.Drawing.Size(75, 17);
+            this.lblUserName.Size = new System.Drawing.Size(59, 13);
             this.lblUserName.TabIndex = 118;
             this.lblUserName.Text = "UerName";
             // 
@@ -102,47 +105,49 @@ namespace NilkanthApplication
             this.dgvList.AllowUserToDeleteRows = false;
             this.dgvList.AllowUserToResizeColumns = false;
             this.dgvList.AllowUserToResizeRows = false;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvList.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvList.BackgroundColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(173)))), ((int)(((byte)(71)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.White;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(112)))), ((int)(((byte)(173)))), ((int)(((byte)(71)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvList.ColumnHeadersHeight = 25;
             this.dgvList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
             this.dgvList.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
             this.dgvList.EnableHeadersVisualStyles = false;
-            this.dgvList.Location = new System.Drawing.Point(12, 128);
+            this.dgvList.Location = new System.Drawing.Point(9, 104);
+            this.dgvList.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dgvList.MultiSelect = false;
             this.dgvList.Name = "dgvList";
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.Color.White;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.RowHeadersDefaultCellStyle = dataGridViewCellStyle7;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F);
+            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.RowHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.dgvList.RowHeadersWidth = 50;
             this.dgvList.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F);
+            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvList.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.dgvList.RowTemplate.Height = 28;
-            this.dgvList.Size = new System.Drawing.Size(1337, 533);
+            this.dgvList.Size = new System.Drawing.Size(1003, 433);
             this.dgvList.TabIndex = 116;
+            this.dgvList.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvList_CellContentClick);
             // 
             // btnDelete
             // 
@@ -153,9 +158,10 @@ namespace NilkanthApplication
             this.btnDelete.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDelete.Image = global::NilkanthApplication.Properties.Resources.Delete;
-            this.btnDelete.Location = new System.Drawing.Point(1188, 24);
+            this.btnDelete.Location = new System.Drawing.Point(891, 20);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(157, 64);
+            this.btnDelete.Size = new System.Drawing.Size(118, 52);
             this.btnDelete.TabIndex = 121;
             this.btnDelete.Text = "&Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -166,18 +172,20 @@ namespace NilkanthApplication
             // 
             this.label12.AutoSize = true;
             this.label12.Font = new System.Drawing.Font("Microsoft Sans Serif", 30F, System.Drawing.FontStyle.Bold);
-            this.label12.Location = new System.Drawing.Point(88, 19);
+            this.label12.Location = new System.Drawing.Point(66, 15);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(501, 58);
+            this.label12.Size = new System.Drawing.Size(403, 46);
             this.label12.TabIndex = 120;
             this.label12.Text = "Delivery Challan List";
             // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::NilkanthApplication.Properties.Resources.Line;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 667);
+            this.pictureBox1.Location = new System.Drawing.Point(9, 542);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(1337, 10);
+            this.pictureBox1.Size = new System.Drawing.Size(1003, 8);
             this.pictureBox1.TabIndex = 117;
             this.pictureBox1.TabStop = false;
             // 
@@ -191,9 +199,10 @@ namespace NilkanthApplication
             this.btnLogout.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnLogout.Image = global::NilkanthApplication.Properties.Resources.Logout;
-            this.btnLogout.Location = new System.Drawing.Point(1266, 674);
+            this.btnLogout.Location = new System.Drawing.Point(950, 548);
+            this.btnLogout.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnLogout.Name = "btnLogout";
-            this.btnLogout.Size = new System.Drawing.Size(81, 64);
+            this.btnLogout.Size = new System.Drawing.Size(61, 52);
             this.btnLogout.TabIndex = 115;
             this.btnLogout.UseVisualStyleBackColor = true;
             this.btnLogout.Click += new System.EventHandler(this.btnLogout_Click);
@@ -208,9 +217,10 @@ namespace NilkanthApplication
             this.btnNew.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnNew.Image = global::NilkanthApplication.Properties.Resources.New;
             this.btnNew.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnNew.Location = new System.Drawing.Point(1066, 24);
+            this.btnNew.Location = new System.Drawing.Point(800, 20);
+            this.btnNew.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(138, 64);
+            this.btnNew.Size = new System.Drawing.Size(104, 52);
             this.btnNew.TabIndex = 111;
             this.btnNew.Text = "&New";
             this.btnNew.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -227,9 +237,10 @@ namespace NilkanthApplication
             this.btnEdit.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnEdit.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnEdit.Image = global::NilkanthApplication.Properties.Resources.Edit;
-            this.btnEdit.Location = new System.Drawing.Point(919, 24);
+            this.btnEdit.Location = new System.Drawing.Point(689, 20);
+            this.btnEdit.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(140, 64);
+            this.btnEdit.Size = new System.Drawing.Size(105, 52);
             this.btnEdit.TabIndex = 112;
             this.btnEdit.Text = "&Edit";
             this.btnEdit.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -246,9 +257,10 @@ namespace NilkanthApplication
             this.btnBack.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnBack.Image = global::NilkanthApplication.Properties.Resources.back;
-            this.btnBack.Location = new System.Drawing.Point(785, 24);
+            this.btnBack.Location = new System.Drawing.Point(589, 20);
+            this.btnBack.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(170, 64);
+            this.btnBack.Size = new System.Drawing.Size(128, 52);
             this.btnBack.TabIndex = 113;
             this.btnBack.Text = "&Back";
             this.btnBack.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -266,9 +278,10 @@ namespace NilkanthApplication
             this.btnHome.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnHome.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnHome.Image = global::NilkanthApplication.Properties.Resources.Home;
-            this.btnHome.Location = new System.Drawing.Point(12, 20);
+            this.btnHome.Location = new System.Drawing.Point(9, 16);
+            this.btnHome.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnHome.Name = "btnHome";
-            this.btnHome.Size = new System.Drawing.Size(83, 61);
+            this.btnHome.Size = new System.Drawing.Size(62, 50);
             this.btnHome.TabIndex = 114;
             this.btnHome.UseVisualStyleBackColor = false;
             this.btnHome.Click += new System.EventHandler(this.btnHome_Click);
@@ -280,36 +293,36 @@ namespace NilkanthApplication
             this.lblFilterStatus,
             this.tsslOperationStatus,
             this.tspbOperation});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 739);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 600);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1361, 26);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1021, 22);
             this.statusStrip1.TabIndex = 123;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // lblFilterStatus
             // 
             this.lblFilterStatus.Name = "lblFilterStatus";
-            this.lblFilterStatus.Size = new System.Drawing.Size(65, 20);
+            this.lblFilterStatus.Size = new System.Drawing.Size(52, 17);
             this.lblFilterStatus.Text = "Filter By:";
             // 
             // tsslOperationStatus
-            //
+            // 
             this.tsslOperationStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
             this.tsslOperationStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(120)))), ((int)(((byte)(215)))));
             this.tsslOperationStatus.Name = "tsslOperationStatus";
-            this.tsslOperationStatus.Size = new System.Drawing.Size(160, 22);
-            this.tsslOperationStatus.Spring = false;
+            this.tsslOperationStatus.Size = new System.Drawing.Size(0, 17);
             this.tsslOperationStatus.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.tsslOperationStatus.Visible = false;
-            //
+            // 
             // tspbOperation
-            //
+            // 
             this.tspbOperation.MarqueeAnimationSpeed = 30;
             this.tspbOperation.Name = "tspbOperation";
-            this.tspbOperation.Size = new System.Drawing.Size(180, 20);
+            this.tspbOperation.Size = new System.Drawing.Size(135, 16);
             this.tspbOperation.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.tspbOperation.Visible = false;
-            //
+            // 
             // btnPrint
             // 
             this.btnPrint.CausesValidation = false;
@@ -320,10 +333,10 @@ namespace NilkanthApplication
             this.btnPrint.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnPrint.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnPrint.Image = global::NilkanthApplication.Properties.Resources.PrintIcon;
-            this.btnPrint.Location = new System.Drawing.Point(670, 23);
-            this.btnPrint.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnPrint.Location = new System.Drawing.Point(502, 19);
+            this.btnPrint.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(132, 65);
+            this.btnPrint.Size = new System.Drawing.Size(99, 53);
             this.btnPrint.TabIndex = 124;
             this.btnPrint.Text = "&Print";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -340,10 +353,10 @@ namespace NilkanthApplication
             this.btnSendWhatsApp.FlatAppearance.MouseOverBackColor = System.Drawing.Color.White;
             this.btnSendWhatsApp.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnSendWhatsApp.Image = global::NilkanthApplication.Properties.Resources.WhatsAppIcon_1;
-            this.btnSendWhatsApp.Location = new System.Drawing.Point(973, 84);
-            this.btnSendWhatsApp.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnSendWhatsApp.Location = new System.Drawing.Point(730, 68);
+            this.btnSendWhatsApp.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.btnSendWhatsApp.Name = "btnSendWhatsApp";
-            this.btnSendWhatsApp.Size = new System.Drawing.Size(59, 49);
+            this.btnSendWhatsApp.Size = new System.Drawing.Size(44, 40);
             this.btnSendWhatsApp.TabIndex = 127;
             this.btnSendWhatsApp.UseVisualStyleBackColor = true;
             this.btnSendWhatsApp.Click += new System.EventHandler(this.btnSendWhatsApp_Click);
@@ -352,27 +365,29 @@ namespace NilkanthApplication
             // 
             this.cmbClientDetails.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
             this.cmbClientDetails.FormattingEnabled = true;
-            this.cmbClientDetails.Location = new System.Drawing.Point(689, 94);
+            this.cmbClientDetails.Location = new System.Drawing.Point(517, 76);
+            this.cmbClientDetails.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbClientDetails.Name = "cmbClientDetails";
-            this.cmbClientDetails.Size = new System.Drawing.Size(278, 28);
+            this.cmbClientDetails.Size = new System.Drawing.Size(210, 24);
             this.cmbClientDetails.TabIndex = 133;
             // 
             // lblClient
             // 
             this.lblClient.AutoSize = true;
             this.lblClient.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F);
-            this.lblClient.Location = new System.Drawing.Point(631, 97);
+            this.lblClient.Location = new System.Drawing.Point(473, 79);
+            this.lblClient.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblClient.Name = "lblClient";
-            this.lblClient.Size = new System.Drawing.Size(52, 20);
+            this.lblClient.Size = new System.Drawing.Size(43, 17);
             this.lblClient.TabIndex = 132;
             this.lblClient.Text = "Client";
             // 
             // DeliveryChallanList
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(1361, 765);
+            this.ClientSize = new System.Drawing.Size(1021, 622);
             this.Controls.Add(this.cmbClientDetails);
             this.Controls.Add(this.lblClient);
             this.Controls.Add(this.btnSendWhatsApp);
@@ -390,6 +405,7 @@ namespace NilkanthApplication
             this.Controls.Add(this.btnEdit);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnHome);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "DeliveryChallanList";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "DeliveryChallanList";
