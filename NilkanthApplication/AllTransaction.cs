@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
 using System.ComponentModel;
@@ -762,9 +762,15 @@ namespace NilkanthApplication
             try
             {
                 var result = await Task.Run(() => Functions.ImportCSV());
+                
+                // Immediately refresh grid
+                this.BindGrid();
+
                 SetBusy(false);
-                ShowTopMessage("CSV import completed successfully.", "Import CSV");
-                if (result.inserted > 0) this.BindGrid();
+                string msg = result.inserted > 0
+                    ? $"Data imported successfully ({result.inserted} record(s) added)."
+                    : "Data is already up to date.";
+                ShowTopMessage(msg, "PLC Import");
             }
             catch (Exception ex)
             {
@@ -952,9 +958,15 @@ namespace NilkanthApplication
             try
             {
                 var result = await Task.Run(() => Functions.ImportCSVManual(filePath));
+                
+                // Immediately refresh grid
+                this.BindGrid();
+
                 SetBusy(false);
-                ShowTopMessage("CSV import completed successfully.", "Manual Import");
-                if (result.inserted > 0) this.BindGrid();
+                string msg = result.inserted > 0
+                    ? $"Data imported successfully ({result.inserted} record(s) added)."
+                    : "Data is already up to date.";
+                ShowTopMessage(msg, "Manual Import");
             }
             catch (Exception ex)
             {

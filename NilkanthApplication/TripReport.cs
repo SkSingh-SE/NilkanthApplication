@@ -1,4 +1,4 @@
-﻿using NilkanthApplication.Classes.DTO;
+using NilkanthApplication.Classes.DTO;
 using Org.BouncyCastle.Asn1.Cms;
 using System;
 using System.Collections.Generic;
@@ -659,19 +659,20 @@ namespace NilkanthApplication
             try
             {
                 var result = await Task.Run(() => Functions.ImportCSV());
+                
+                // Automatically refresh UI with newly imported batch data
+                RefreshData();
+
                 Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false);
-                ShowTopMessage("CSV import completed successfully.", "Import CSV");
-                if (result.inserted > 0)
-                {
-                    reloadBatchNo();
-                    this.chkLastBatch.Checked = true;
-                    chkLastBatch_CheckedChanged(sender, e);
-                }
+                string msg = result.inserted > 0
+                    ? $"Data imported successfully ({result.inserted} record(s) added)."
+                    : "Data is already up to date.";
+                ShowTopMessage(msg, "PLC Import");
             }
             catch (Exception ex)
             {
                 Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false);
-                ShowTopMessage(ex.Message, "Import CSV - Error", MessageBoxIcon.Hand);
+                ShowTopMessage(ex.Message, "PLC Import - Error", MessageBoxIcon.Hand);
             }
         }
 
@@ -689,14 +690,15 @@ namespace NilkanthApplication
             try
             {
                 var result = await Task.Run(() => Functions.ImportCSVManual(filePath));
+                
+                // Automatically refresh UI with newly imported batch data
+                RefreshData();
+
                 Functions.SetBusy(this, statusStrip1, tsslOperationStatus, tspbOperation, false);
-                ShowTopMessage("CSV import completed successfully.", "Manual Import");
-                if (result.inserted > 0)
-                {
-                    reloadBatchNo();
-                    this.chkLastBatch.Checked = true;
-                    chkLastBatch_CheckedChanged(sender, e);
-                }
+                string msg = result.inserted > 0
+                    ? $"Data imported successfully ({result.inserted} record(s) added)."
+                    : "Data is already up to date.";
+                ShowTopMessage(msg, "Manual Import");
             }
             catch (Exception ex)
             {
@@ -717,6 +719,15 @@ namespace NilkanthApplication
                 owner.Show();
                 MessageBox.Show(owner, message, title, MessageBoxButtons.OK, icon);
             }
+        }
+
+        private void RefreshData()
+        {
+            reloadBatchNo();
+            BindClient();
+            ShowWhatsapp();
+            chkLastBatch.Checked = true;
+            chkLastBatch_CheckedChanged(this, EventArgs.Empty);
         }
 
         private void reloadBatchNo()
@@ -782,11 +793,14 @@ namespace NilkanthApplication
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            //this.Controls.Clear();
-            //InitializeComponent();
-            
-            this.TripReport_Load(sender, e);
-            this.chkLastBatch_CheckedChanged(sender, e);
+            try
+            {
+                RefreshData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error refreshing data: " + ex.Message, "Refresh Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         void BindClient()

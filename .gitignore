@@ -4,3 +4,5 @@
 # Build output
 NilkanthApplication/bin/
 NilkanthApplication/obj/
+*.dll
+/NilkanthApplication/obj

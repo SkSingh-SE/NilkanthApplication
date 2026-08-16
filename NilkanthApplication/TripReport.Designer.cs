@@ -1,4 +1,4 @@
-﻿
+
 namespace NilkanthApplication
 {
     public partial class TripReport : global::System.Windows.Forms.Form
@@ -313,7 +313,6 @@ namespace NilkanthApplication
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Visible = false;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnManualImport

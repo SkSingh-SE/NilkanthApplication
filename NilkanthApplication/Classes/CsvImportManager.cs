@@ -42,10 +42,11 @@ namespace NilkanthApplication.Classes
                 FtpWebRequest req = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpUrl));
                 req.UsePassive   = ftpPassive;
                 req.UseBinary    = true;
+                req.KeepAlive    = false; // Ensure socket is released immediately for PLC/HMI
                 req.Credentials  = new NetworkCredential(ftpUser, ftpPass);
                 req.Method       = WebRequestMethods.Ftp.DownloadFile;
                 req.Proxy        = GlobalProxySelection.GetEmptyWebProxy();
-                req.Timeout      = 15000;
+                req.Timeout      = 10000;
 
                 // ── Async FTP download ──────────────────────────────────────
                 List<string[]> rowsToInsert;

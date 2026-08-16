@@ -1,4 +1,4 @@
-﻿using iTextSharp.text;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
@@ -548,8 +548,6 @@ public class Functions : SQLHelper
     }
     public static (int inserted, int skipped) ImportCSV()
     {
-        StreamReader reader = null;
-        FtpWebResponse response = null;
         DataTable tblcsv = BuildCSVDataTable();
 
         DataTable importcsvlastread = Functions.GetTableDataBySP("ImportCSVLastRead_Select");
@@ -564,34 +562,68 @@ public class Functions : SQLHelper
         bool ftpUsePassive = false;
         bool.TryParse(ConfigurationManager.AppSettings["FtpUsePassive"], out ftpUsePassive);
 
-        try
-        {
-            FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpserver));
-            reqFTP.UsePassive = ftpUsePassive;
-            reqFTP.UseBinary = true;
-            reqFTP.Credentials = new NetworkCredential(ftpUser, ftpPass);
-            reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
-            reqFTP.Proxy = GlobalProxySelection.GetEmptyWebProxy();
-            reqFTP.Timeout = 15000;
+        int maxRetries = 3;
+        Exception lastException = null;
 
-            response = (FtpWebResponse)reqFTP.GetResponse();
-            reader = new StreamReader(response.GetResponseStream());
-            return readFromCSV(reader, lastReadDatetime, tblcsv);
-        }
-        catch (WebException ex)
+        for (int attempt = 1; attempt <= maxRetries; attempt++)
         {
-            FtpWebResponse errResponse = ex.Response as FtpWebResponse;
-            if (errResponse != null && errResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
-                throw new Exception("CSV file not found on FTP server.\n\nPath: " + ftpserver);
-            if (ex.Status == WebExceptionStatus.ConnectFailure || ex.Status == WebExceptionStatus.Timeout)
-                throw new Exception("Cannot connect to FTP server. Please check network connection.\n\nServer: " + ftpserver);
-            throw new Exception("FTP error: " + ex.Message);
+            StreamReader reader = null;
+            FtpWebResponse response = null;
+
+            try
+            {
+                FtpWebRequest reqFTP = (FtpWebRequest)FtpWebRequest.Create(new Uri(ftpserver));
+                reqFTP.UsePassive = ftpUsePassive;
+                reqFTP.UseBinary = true;
+                reqFTP.KeepAlive = false; // Close socket immediately so PLC/HMI releases connection
+                reqFTP.Credentials = new NetworkCredential(ftpUser, ftpPass);
+                reqFTP.Method = WebRequestMethods.Ftp.DownloadFile;
+                reqFTP.Proxy = GlobalProxySelection.GetEmptyWebProxy();
+                reqFTP.Timeout = 10000; // 10 seconds per attempt
+
+                response = (FtpWebResponse)reqFTP.GetResponse();
+                reader = new StreamReader(response.GetResponseStream());
+                return readFromCSV(reader, lastReadDatetime, tblcsv);
+            }
+            catch (WebException ex)
+            {
+                lastException = ex;
+                FtpWebResponse errResponse = ex.Response as FtpWebResponse;
+
+                // If file is not found on server, no point retrying
+                if (errResponse != null && errResponse.StatusCode == FtpStatusCode.ActionNotTakenFileUnavailable)
+                    throw new Exception("CSV file not found on FTP server.\n\nPath: " + ftpserver);
+
+                // If attempts remain, wait 1 second before retrying
+                if (attempt < maxRetries)
+                {
+                    Thread.Sleep(1000);
+                    continue;
+                }
+
+                if (ex.Status == WebExceptionStatus.ConnectFailure || ex.Status == WebExceptionStatus.Timeout)
+                    throw new Exception($"Cannot connect to FTP server after {maxRetries} attempts. Please check network connection.\n\nServer: " + ftpserver);
+
+                throw new Exception("FTP error: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                lastException = ex;
+                if (attempt < maxRetries)
+                {
+                    Thread.Sleep(1000);
+                    continue;
+                }
+                throw;
+            }
+            finally
+            {
+                reader?.Dispose();
+                response?.Dispose();
+            }
         }
-        finally
-        {
-            reader?.Dispose();
-            response?.Dispose();
-        }
+
+        throw lastException ?? new Exception("FTP import failed after retries.");
     }
 
     public static (int inserted, int skipped) ImportCSVManual(string filePath)
