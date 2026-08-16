@@ -1,4 +1,4 @@
-﻿using NilkanthApplication.Classes;
+using NilkanthApplication.Classes;
 using System;
 using System.ComponentModel;
 using System.Configuration;
@@ -26,6 +26,64 @@ namespace NilkanthApplication
         private CsvImportManager _csvImporter;
         private bool _isSyncRunning = false;
         private const int DefaultInterval = 60000;
+
+        private static NotifyIcon _trayIcon;
+        private static ContextMenuStrip _trayMenu;
+
+        private void InitializeSystemTray()
+        {
+            try
+            {
+                if (_trayIcon != null)
+                {
+                    _trayIcon.Visible = true;
+                    return;
+                }
+
+                _trayMenu = new ContextMenuStrip();
+                _trayMenu.Items.Add("Open Nilkanth SCADA", null, (s, e) => RestoreFromTray());
+                _trayMenu.Items.Add("View FTP Sync Logs", null, (s, e) => FtpLogger.OpenLogFolder());
+                _trayMenu.Items.Add(new ToolStripSeparator());
+                _trayMenu.Items.Add("Exit Application", null, (s, e) => ExitApplication());
+
+                _trayIcon = new NotifyIcon();
+                _trayIcon.Text = "Nilkanth SCADA - PLC Sync Active";
+                _trayIcon.Icon = this.Icon ?? SystemIcons.Application;
+                _trayIcon.ContextMenuStrip = _trayMenu;
+                _trayIcon.Visible = true;
+                _trayIcon.DoubleClick += (s, e) => RestoreFromTray();
+            }
+            catch { }
+        }
+
+        private void RestoreFromTray()
+        {
+            try
+            {
+                this.Show();
+                if (this.WindowState == FormWindowState.Minimized)
+                    this.WindowState = FormWindowState.Normal;
+                this.BringToFront();
+                this.Activate();
+            }
+            catch { }
+        }
+
+        private void ExitApplication()
+        {
+            try
+            {
+                CsvImportManager.Instance.StopContinuousImport();
+                if (_trayIcon != null)
+                {
+                    _trayIcon.Visible = false;
+                    _trayIcon.Dispose();
+                    _trayIcon = null;
+                }
+            }
+            catch { }
+            Environment.Exit(0);
+        }
 
         public MainScreen()
         {
@@ -159,6 +217,14 @@ namespace NilkanthApplication
         {
             try
             {
+                // 1. ALWAYS start continuous 24x7 PLC CSV background polling (0% CPU load)
+                _csvImporter = CsvImportManager.Instance;
+                _csvImporter.StartContinuousImport(intervalSeconds: 10);
+
+                // 2. Initialize System Tray so app continues running in background
+                InitializeSystemTray();
+
+                // 3. Mobile App Cloud Sync (runs only if enabled in CompanyMaster)
                 string query = "select IsMobileAppSync from CompanyMaster";
                 DataTable dataTable = Functions.GetTableData(query);
 
@@ -777,10 +843,13 @@ namespace NilkanthApplication
                 bool flag = e.CloseReason == CloseReason.UserClosing;
                 if (flag)
                 {
-                    Login login = new Login();
+                    e.Cancel = true;
                     base.Hide();
-                    login.Show();
-                    login.BringToFront();
+                    if (_trayIcon != null)
+                    {
+                        _trayIcon.Visible = true;
+                        _trayIcon.ShowBalloonTip(2000, "Nilkanth SCADA", "Application is running in the background and syncing PLC data.", ToolTipIcon.Info);
+                    }
                 }
             }
             catch (Exception ex)

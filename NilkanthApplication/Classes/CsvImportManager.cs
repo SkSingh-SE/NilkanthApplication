@@ -5,25 +5,80 @@ using System.Data;
 using System.Data.SqlClient;
 using System.IO;
 using System.Net;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace NilkanthApplication.Classes
 {
-    // Silently imports PLC CSV from FTP every tick.
-    // All DB work runs on a thread pool thread with its own SqlConnection —
-    // never touches SQLHelper statics, never blocks the UI thread.
+    // Silently imports PLC CSV from FTP in the background.
+    // Runs 24x7 on background ThreadPool with zero CPU/UI load.
+    // All DB work uses its own isolated SqlConnection.
     public class CsvImportManager
     {
         private static readonly string _connStr =
             ConfigurationManager.ConnectionStrings["DataConnectionString"].ToString();
 
+        private static readonly SemaphoreSlim _importLock = new SemaphoreSlim(1, 1);
+        private CancellationTokenSource _cts;
+        private bool _isRunning = false;
+
+        public static CsvImportManager Instance { get; } = new CsvImportManager();
+
         public CsvImportManager() { }
+
+        // Starts continuous 24x7 background polling with 0% CPU load
+        public void StartContinuousImport(int intervalSeconds = 10)
+        {
+            if (_isRunning) return;
+            _isRunning = true;
+
+            _cts?.Cancel();
+            _cts = new CancellationTokenSource();
+            var token = _cts.Token;
+
+            Task.Run(async () =>
+            {
+                while (!token.IsCancellationRequested)
+                {
+                    try
+                    {
+                        await RunOnceAsync();
+                    }
+                    catch { /* Silent catch so the background loop never terminates */ }
+
+                    try
+                    {
+                        // Non-blocking kernel timer — 0% CPU usage, releases thread to pool
+                        await Task.Delay(TimeSpan.FromSeconds(intervalSeconds), token);
+                    }
+                    catch (TaskCanceledException)
+                    {
+                        break;
+                    }
+                }
+                _isRunning = false;
+            }, token);
+        }
+
+        public void StopContinuousImport()
+        {
+            _isRunning = false;
+            try
+            {
+                _cts?.Cancel();
+            }
+            catch { }
+        }
 
         // Called from MainScreen timer tick (async void).
         // FTP download is async; DB inserts run on Task.Run — UI is never blocked.
         public async Task<bool> RunOnceAsync()
         {
+            // Thread concurrency lock: strictly 1 import at a time
+            if (!await _importLock.WaitAsync(0))
+                return false;
+
             try
             {
                 // Read lastReadDateTime on calling thread (lightweight SP call)
@@ -62,13 +117,16 @@ namespace NilkanthApplication.Classes
                 }
 
                 if (rowsToInsert.Count == 0)
+                {
                     return false;
+                }
 
                 // ── All DB work on background thread with its own connection ─
                 int inserted = await Task.Run(() => InsertRows(rowsToInsert));
 
                 if (inserted > 0)
                 {
+                    FtpLogger.LogSuccess("Background Auto-Import", $"Successfully imported {inserted} new records from {ftpUrl}");
                     NotifyMain($"Auto-imported {inserted} new PLC records.");
                     return true;
                 }
@@ -77,13 +135,20 @@ namespace NilkanthApplication.Classes
             }
             catch (WebException wex)
             {
-                NotifyMain("FTP Error: " + wex.Message);
+                string ftpUrl = ConfigurationManager.AppSettings["FtpUrl"] ?? "ftp://192.168.1.150/DAT0000/SAMPLE/SMP0000.CSV";
+                FtpLogger.LogError("Background Auto-Import", "FTP Connection Failed / Refused", wex, ftpUrl);
+                NotifyMain("FTP Error: " + FtpLogger.DiagnoseError(wex));
                 return false;
             }
             catch (Exception ex)
             {
+                FtpLogger.LogError("Background Auto-Import", "CSV Import Process Error", ex);
                 NotifyMain("CSV Import Error: " + ex.Message);
                 return false;
+            }
+            finally
+            {
+                _importLock.Release();
             }
         }
 

@@ -12,6 +12,7 @@ using System.Net;
 using System.Threading;
 using System.Text;
 using System.Windows.Forms;
+using NilkanthApplication.Classes;
 
 public class Functions : SQLHelper
 {
@@ -588,6 +589,8 @@ public class Functions : SQLHelper
             catch (WebException ex)
             {
                 lastException = ex;
+                FtpLogger.LogError("Manual Import", $"Attempt {attempt}/{maxRetries} failed: {ex.Message}", ex, ftpserver);
+
                 FtpWebResponse errResponse = ex.Response as FtpWebResponse;
 
                 // If file is not found on server, no point retrying
@@ -601,14 +604,13 @@ public class Functions : SQLHelper
                     continue;
                 }
 
-                if (ex.Status == WebExceptionStatus.ConnectFailure || ex.Status == WebExceptionStatus.Timeout)
-                    throw new Exception($"Cannot connect to FTP server after {maxRetries} attempts. Please check network connection.\n\nServer: " + ftpserver);
-
-                throw new Exception("FTP error: " + ex.Message);
+                string diagnosis = FtpLogger.DiagnoseError(ex);
+                throw new Exception($"Cannot connect to FTP server after {maxRetries} attempts.\n\nReason: {diagnosis}\n\nServer: {ftpserver}");
             }
             catch (Exception ex)
             {
                 lastException = ex;
+                FtpLogger.LogError("Manual Import", $"Attempt {attempt}/{maxRetries} unexpected error: {ex.Message}", ex, ftpserver);
                 if (attempt < maxRetries)
                 {
                     Thread.Sleep(1000);
